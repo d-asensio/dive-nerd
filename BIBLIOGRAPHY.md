@@ -20,12 +20,15 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - [Ratio decompression](https://en.wikipedia.org/wiki/Ratio_decompression)
 
+- [In-water recompression](https://en.wikipedia.org/wiki/In-water_recompression)
+
 ## Dive planners
 
 - [MultiDeco](https://www.hhssoftware.com/multideco/)
 - [V-Planner](https://www.hhssoftware.com/v-planner/)
 - [TruDive Planner](http://getfreephase.com/trudive-planner/)
 - [iDeco Pro](https://apps.apple.com/us/app/ideco-pro/id329772936)
+- [Baltic deco planner](http://www.balticdecoplanner.com/)
 
 ## Videos
 
