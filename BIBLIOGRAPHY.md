@@ -25,6 +25,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 - [MultiDeco](https://www.hhssoftware.com/multideco/)
 - [V-Planner](https://www.hhssoftware.com/v-planner/)
 - [TruDive Planner](http://getfreephase.com/trudive-planner/)
+- [iDeco Pro](https://apps.apple.com/us/app/ideco-pro/id329772936)
 
 ## Videos
 
