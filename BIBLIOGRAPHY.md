@@ -1,5 +1,7 @@
 # Bibliography
 
+This bibliography gathers the resources I read through to learn about decompression theory and some notes I took along the process. Be advised that I don't have any physiology-related background or anything that relates, so my comments can be very wrong 😄.
+
 ## Papers
 
 - [ZH-L8ADT: A New Decompression Model To Increase Safety For
@@ -25,6 +27,13 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 ## Books
 
 - (PENDING) [Deco for Divers: A Diver's Guide to Decompression Theory and Physiology](https://www.amazon.es/Deco-Divers-Decompression-Theory-Physiology/dp/1905492294) - By: Mark Powell
+
+## Articles
+
+- (PENDING) [Decompression, Deep Stops and the Pursuit of Precision in a Complex World](https://gue.com/blog/decompression-deep-stops-and-the-pursuit-of-precision-in-a-complex-world/)
+    - [Part II](https://gue.com/blog/part-two-tech-divers-deep-stops-and-the-coming-apocalypse/)
+    - [Part III](https://gue.com/blog/part-three-bubble-wise-pound-foolish-are-deep-stops-dangerous/)
+    - [Part IV](https://gue.com/blog/decompression-series-part-four-finding-shelter-in-an-uncertain-world/)
 
 ## Physiology concepts
 
