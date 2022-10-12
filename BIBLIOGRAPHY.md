@@ -20,6 +20,12 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - [Ratio decompression](https://en.wikipedia.org/wiki/Ratio_decompression)
 
+## Dive planners
+
+- [MultiDeco](https://www.hhssoftware.com/multideco/)
+- [V-Planner](https://www.hhssoftware.com/v-planner/)
+- [TruDive Planner](http://getfreephase.com/trudive-planner/)
+
 ## Videos
 
 - [Mark Powell: Intro to Deco Theory & Deep Stops](https://www.youtube.com/watch?v=fhfNph3GKRw&list=PLdGfAkSUGpmFkT7d902_Wk8VZUNO-kgVhoi)
