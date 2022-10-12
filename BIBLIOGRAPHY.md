@@ -10,9 +10,13 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
             > This leads to much shorter nostop limits and a decompression schedule which begins with deeper decompression stops and which lasts longer.
         - **Adaptation to work:** Takes into account air consumption rate and skin temperature to barey calculate the workload of the diver. Original Bühlmann algorithm takes 50 Watts as a basis. The article doesn't really go deep into the how, but it is admitted that it's a very rough and simplifyed consideration.
 
-        - **Adaptation to cold water:** 
+        - **Adaptation to cold water:** The model is able to change the saturation speed and the critical supersaturation of the muscle and skin ompartments according to the diver's exertion and/or cooling.
 
         To my understanding, the adaptation (ADT) part of this algorithm is useful when the diver has taken risks (Non-Limit diving, extensive repetitive diving, "jojo" dives, fast ascents, missed deco stops, dived in very cold water, etc.) because it is able to rearange the stops taking into account this information. Other than that (if no risks are taken) it should be the same as the ZH-L8 (and friends) with no gradient factors.
+
+## Deco concepts
+
+- [Ratio decompression](https://en.wikipedia.org/wiki/Ratio_decompression)
 
 ## Videos
 
