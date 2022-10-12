@@ -35,6 +35,8 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
     - [Part III](https://gue.com/blog/part-three-bubble-wise-pound-foolish-are-deep-stops-dangerous/)
     - [Part IV](https://gue.com/blog/decompression-series-part-four-finding-shelter-in-an-uncertain-world/)
 
+- (PENDING) [Diving Computers & the Deco Algorithms Babylon](https://www.t101.ro/blog/diving-computers-the-deco-babylon/)
+
 ## Physiology concepts
 
 - [Shunt](https://en.wikipedia.org/wiki/Shunt_(medical))
