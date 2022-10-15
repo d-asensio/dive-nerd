@@ -1,0 +1,193 @@
+{
+  "gas_mixtures": {
+    "oxygen": 0.21,
+    "nitrogen": 0.79,
+    "helium": 0
+  },
+  "samples": [
+    {
+      "time": 0,
+      "depth": 1.57
+    },
+    {
+      "time": 20,
+      "depth": 4.16
+    },
+    {
+      "time": 40,
+      "depth": 3.22
+    },
+    {
+      "time": 60,
+      "depth": 4.73
+    },
+    {
+      "time": 80,
+      "depth": 7.72
+    },
+    {
+      "time": 100,
+      "depth": 11.12
+    },
+    {
+      "time": 120,
+      "depth": 14.04
+    },
+    {
+      "time": 140,
+      "depth": 15.56
+    },
+    {
+      "time": 160,
+      "depth": 15.63
+    },
+    {
+      "time": 180,
+      "depth": 15.99
+    },
+    {
+      "time": 200,
+      "depth": 16.36
+    },
+    {
+      "time": 220,
+      "depth": 17.12
+    },
+    {
+      "time": 240,
+      "depth": 17.12
+    },
+    {
+      "time": 260,
+      "depth": 17.14
+    },
+    {
+      "time": 280,
+      "depth": 18.14
+    },
+    {
+      "time": 300,
+      "depth": 18.48
+    },
+    {
+      "time": 320,
+      "depth": 18.44
+    },
+    {
+      "time": 340,
+      "depth": 18.38
+    },
+    {
+      "time": 360,
+      "depth": 17.79
+    },
+    {
+      "time": 380,
+      "depth": 17.31
+    },
+    {
+      "time": 400,
+      "depth": 16.87
+    },
+    {
+      "time": 420,
+      "depth": 17.24
+    },
+    {
+      "time": 440,
+      "depth": 16.64
+    },
+    {
+      "time": 460,
+      "depth": 16.2
+    },
+    {
+      "time": 480,
+      "depth": 16.02
+    },
+    {
+      "time": 500,
+      "depth": 15.59
+    },
+    {
+      "time": 520,
+      "depth": 15.53
+    },
+    {
+      "time": 540,
+      "depth": 15
+    },
+    {
+      "time": 560,
+      "depth": 14.65
+    },
+    {
+      "time": 580,
+      "depth": 13.81
+    },
+    {
+      "time": 600,
+      "depth": 12.5
+    },
+    {
+      "time": 620,
+      "depth": 11.03
+    },
+    {
+      "time": 640,
+      "depth": 11.24
+    },
+    {
+      "time": 660,
+      "depth": 11.49
+    },
+    {
+      "time": 680,
+      "depth": 11.64
+    },
+    {
+      "time": 700,
+      "depth": 12.08
+    },
+    {
+      "time": 720,
+      "depth": 12.21
+    },
+    {
+      "time": 740,
+      "depth": 11.4
+    },
+    {
+      "time": 760,
+      "depth": 10.57
+    },
+    {
+      "time": 780,
+      "depth": 10.45
+    },
+    {
+      "time": 800,
+      "depth": 9.18
+    },
+    {
+      "time": 820,
+      "depth": 6.61
+    },
+    {
+      "time": 840,
+      "depth": 5.11
+    },
+    {
+      "time": 860,
+      "depth": 4.71
+    },
+    {
+      "time": 880,
+      "depth": 4.25
+    },
+    {
+      "time": 900,
+      "depth": 2.61
+    }
+  ]
+}
