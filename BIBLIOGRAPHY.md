@@ -23,6 +23,10 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
         To my understanding, the adaptation (ADT) part of this algorithm is useful when the diver has taken risks (Non-Limit diving, extensive repetitive diving, "jojo" dives, fast ascents, missed deco stops, dived in very cold water, etc.) because it is able to rearange the stops taking into account this information. Other than that (if no risks are taken) it should be the same as the ZH-L8 (and friends) with no gradient factors.
 
+## Blogs
+
+- [The Theoretical Diver](https://thetheoreticaldiver.org/wordpress/)
+
 ## Deco concepts
 
 - [Ratio decompression](https://en.wikipedia.org/wiki/Ratio_decompression)
@@ -65,3 +69,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 - [Foramen Ovale](https://en.wikipedia.org/wiki/Foramen_ovale_(heart))
 
 - (PENDING) [Doppler Ultrasound](https://fetalmedicine.org/var/uploads/web/Doppler/Doppler%20Ultrasound%20-%20Principles%20and%20practice.pdf)
+
+## Other scuba diving software
+
+- [Subsurface Divelog](https://subsurface-divelog.org/documentation/subsurface-4-user-manual/)
