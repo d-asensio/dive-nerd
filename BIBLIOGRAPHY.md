@@ -4,6 +4,13 @@ This bibliography gathers the resources I read through to learn about decompress
 
 ## Papers
 
+- [Understanding M-Values](https://www.shearwater.com/wp-content/uploads/2019/05/understanding_m-values.pdf) - By Erik C. Baker (Really good one)
+
+- [Clearing Up The Confusion About “Deep Stops”](https://www.shearwater.com/wp-content/uploads/2012/08/Deep-Stops.pdf) - By Erik C. Baker
+- [Oxygen Toxicity Calculations](https://www.shearwater.com/wp-content/uploads/2012/08/Oxygen_Toxicity_Calculations.pdf) - By Erik C. Baker
+- [Introductory “Lessons” About Dissolved Gas Decompression Modeling](https://www.shearwater.com/wp-content/uploads/2012/08/Introductory-Deco-Lessons.pdf) - By Erik C. Baker
+- [Calculating the no-stop time](https://www.shearwater.com/wp-content/uploads/2012/08/No-Stop_Time.pdf) - By Erik C. Baker
+
 - [ZH-L8ADT: A New Decompression Model To Increase Safety For
 Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
     - **Summary:** This algorithm uses the original tissue models developed by Bülman in conjunction with some other considerations such as:
@@ -33,7 +40,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 ## Videos
 
 - [Mark Powell: Intro to Deco Theory & Deep Stops](https://www.youtube.com/watch?v=fhfNph3GKRw&list=PLdGfAkSUGpmFkT7d902_Wk8VZUNO-kgVhoi)
-
+- [RF3.0- Decompression Methods](https://www.youtube.com/watch?v=pH5zw_fi5RE)
 - [Rebreather Basics](https://www.youtube.com/watch?v=Bjm8lt96F4w)
 
 ## Books
