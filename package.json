@@ -2,6 +2,15 @@
   "name": "no-deco-time-app",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format:check": "prettier --check src",
+    "format:fix": "prettier --write src",
+    "markdown:generate-toc": "markdown-toc -i"
+  },
   "dependencies": {
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
@@ -12,16 +21,30 @@
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "styled-components": "^5.3.6",
     "styled-normalize": "^8.0.7",
     "web-vitals": "^2.1.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": ">=10",
+    "markdown-toc": "^1.2.0",
+    "prettier": "^2.7.1",
+    "react-scripts": "5.0.1"
+  },
+  "lint-staged": {
+    "./README.md": [
+      "yarn markdown:generate-toc"
+    ],
+    "packages/**/*.js": [
+      "prettier --write",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": [

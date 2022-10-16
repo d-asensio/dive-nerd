@@ -14,21 +14,18 @@ const Wrapper = styled.main`
   overflow: hidden;
 `
 
-const calculateChartAxis = (data_point) => {
+const calculateChartAxis = data_point => {
   const { time, depth } = data_point
 
   return {
     ...data_point,
     x: time,
-    y: depth,
+    y: depth
   }
 }
 
 const tranformDiveSamplesIntoChartData = map(
-  pipe(
-    ZHL16C.calculateDataPoint,
-    calculateChartAxis,
-  ),
+  pipe(ZHL16C.calculateDataPoint, calculateChartAxis)
 )
 
 const data = tranformDiveSamplesIntoChartData(dive.samples)

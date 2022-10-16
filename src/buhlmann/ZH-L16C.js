@@ -1,18 +1,18 @@
 const compartments = [
   {
     name: '1',
-    nitrogen: { half_time: 4.0, a: 1.2599, b: 0.5240 },
+    nitrogen: { half_time: 4.0, a: 1.2599, b: 0.524 },
     helium: { half_time: 1.51, a: 1.7424, b: 0.4245 }
   },
   {
     name: '1b',
     nitrogen: { half_time: 5.0, a: 1.1696, b: 0.5578 },
-    helium: { half_time: 1.88, a: 1.6189, b: 0.4770 }
+    helium: { half_time: 1.88, a: 1.6189, b: 0.477 }
   },
   {
     name: '2',
-    nitrogen: { half_time: 8.0, a: 1.0000, b: 0.6514 },
-    helium: { half_time: 3.02, a: 1.3830, b: 0.5747 }
+    nitrogen: { half_time: 8.0, a: 1.0, b: 0.6514 },
+    helium: { half_time: 3.02, a: 1.383, b: 0.5747 }
   },
   {
     name: '3',
@@ -27,7 +27,7 @@ const compartments = [
   {
     name: '5',
     nitrogen: { half_time: 27.0, a: 0.6491, b: 0.8126 },
-    helium: { half_time: 10.21, a: 0.9220, b: 0.7582 }
+    helium: { half_time: 10.21, a: 0.922, b: 0.7582 }
   },
   {
     name: '6',
@@ -41,13 +41,13 @@ const compartments = [
   },
   {
     name: '8',
-    nitrogen: { half_time: 77.0, a: 0.4301, b: 0.8910 },
+    nitrogen: { half_time: 77.0, a: 0.4301, b: 0.891 },
     helium: { half_time: 29.11, a: 0.6502, b: 0.8553 }
   },
   {
     name: '9',
     nitrogen: { half_time: 109.0, a: 0.4049, b: 0.9092 },
-    helium: { half_time: 41.20, a: 0.5950, b: 0.8757 }
+    helium: { half_time: 41.2, a: 0.595, b: 0.8757 }
   },
   {
     name: '10',
