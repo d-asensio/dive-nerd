@@ -1,4 +1,5 @@
 import { map, reduce } from 'ramda'
+import {pipeWithArgs} from './pipeWithArgs'
 import compartments from './compartments'
 
 /**
@@ -80,12 +81,6 @@ const initializeCompartments = data_point => {
     }), compartments)
   }
 }
-
-const pipeWithArgs = (...fns) => (first, ...rest) => reduce(
-  (result, next) => next(result, ...rest),
-  first,
-  fns
-)
 
 export const calculateDataPoint = pipeWithArgs(
   initializeCompartments,
