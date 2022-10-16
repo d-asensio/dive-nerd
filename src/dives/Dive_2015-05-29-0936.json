@@ -1,699 +1,1384 @@
 {
-  "gas_mixtures": {
-    "oxygen": 0.21,
-    "nitrogen": 0.79,
-    "helium": 0
-  },
   "samples": [
     {
       "time": 0,
       "depth": 1.84,
-      "temperature": 19
+      "temperature": 19,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 20,
       "depth": 4.46,
-      "temperature": 19
+      "temperature": 19,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 40,
       "depth": 4.24,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 60,
       "depth": 4.94,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 80,
       "depth": 6.14,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 100,
       "depth": 7.44,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 120,
       "depth": 8.19,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 140,
       "depth": 7.99,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 160,
       "depth": 8.32,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 180,
       "depth": 8.37,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 200,
       "depth": 8.64,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 220,
       "depth": 9.55,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 240,
       "depth": 11.24,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 260,
       "depth": 12.41,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 280,
       "depth": 12.92,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 300,
       "depth": 13.34,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 320,
       "depth": 15.59,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 340,
       "depth": 17.07,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 360,
       "depth": 17.74,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 380,
       "depth": 18.48,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 400,
       "depth": 18.39,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 420,
       "depth": 18.79,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 440,
       "depth": 18.74,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 460,
       "depth": 18.45,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 480,
       "depth": 18.67,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 500,
       "depth": 18.94,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 520,
       "depth": 18.56,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 540,
       "depth": 18.54,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 560,
       "depth": 18.44,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 580,
       "depth": 18.81,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 600,
       "depth": 18.74,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 620,
       "depth": 18.18,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 640,
       "depth": 18.34,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 660,
       "depth": 17.97,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 680,
       "depth": 17.4,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 700,
       "depth": 17.6,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 720,
       "depth": 17.68,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 740,
       "depth": 18.15,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 760,
       "depth": 18.18,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 780,
       "depth": 17.97,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 800,
       "depth": 17.54,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 820,
       "depth": 17.2,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 840,
       "depth": 16.61,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 860,
       "depth": 15.8,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 880,
       "depth": 15.82,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 900,
       "depth": 16.1,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 920,
       "depth": 16.63,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 940,
       "depth": 16.99,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 960,
       "depth": 17.95,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 980,
       "depth": 18.26,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1000,
       "depth": 18.23,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1020,
       "depth": 18.93,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1040,
       "depth": 18.82,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1060,
       "depth": 19.25,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1080,
       "depth": 19.08,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1100,
       "depth": 19.2,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1120,
       "depth": 19.29,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1140,
       "depth": 19.71,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1160,
       "depth": 20.25,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1180,
       "depth": 19.51,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1200,
       "depth": 19.05,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1220,
       "depth": 19.15,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1240,
       "depth": 19.13,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1260,
       "depth": 18.74,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1280,
       "depth": 19.23,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1300,
       "depth": 19.58,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1320,
       "depth": 20.03,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1340,
       "depth": 21.15,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1360,
       "depth": 21.85,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1380,
       "depth": 21.29,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1400,
       "depth": 21.42,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1420,
       "depth": 20.97,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1440,
       "depth": 21.82,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1460,
       "depth": 21.62,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1480,
       "depth": 21.88,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1500,
       "depth": 21.71,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1520,
       "depth": 21.3,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1540,
       "depth": 21.36,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1560,
       "depth": 20.03,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1580,
       "depth": 19.7,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1600,
       "depth": 19.73,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1620,
       "depth": 19.32,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1640,
       "depth": 18.57,
-      "temperature": 17
+      "temperature": 17,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1660,
       "depth": 18.36,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1680,
       "depth": 18.17,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1700,
       "depth": 17.87,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1720,
       "depth": 17.28,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1740,
       "depth": 16.95,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1760,
       "depth": 17.1,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1780,
       "depth": 17.25,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1800,
       "depth": 17.22,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1820,
       "depth": 17.19,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1840,
       "depth": 17.27,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1860,
       "depth": 17.25,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1880,
       "depth": 16.18,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1900,
       "depth": 15.72,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1920,
       "depth": 14.98,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1940,
       "depth": 15.38,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1960,
       "depth": 15.09,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 1980,
       "depth": 14.16,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2000,
       "depth": 14.18,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2020,
       "depth": 14.3,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2040,
       "depth": 13.07,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2060,
       "depth": 13.34,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2080,
       "depth": 13.29,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2100,
       "depth": 13.24,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2120,
       "depth": 12.6,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2140,
       "depth": 12.75,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2160,
       "depth": 12.65,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2180,
       "depth": 11.97,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2200,
       "depth": 11.28,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2220,
       "depth": 10.97,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2240,
       "depth": 10.39,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2260,
       "depth": 10.71,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2280,
       "depth": 10.69,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2300,
       "depth": 9.66,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2320,
       "depth": 10.56,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2340,
       "depth": 9,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2360,
       "depth": 8.34,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2380,
       "depth": 8.08,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2400,
       "depth": 7.38,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2420,
       "depth": 7.04,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2440,
       "depth": 7.39,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2460,
       "depth": 6.73,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2480,
       "depth": 5.97,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2500,
       "depth": 5.65,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2520,
       "depth": 5.16,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2540,
       "depth": 5.78,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2560,
       "depth": 5.3,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2580,
       "depth": 4.89,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2600,
       "depth": 4.6,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2620,
       "depth": 4.34,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2640,
       "depth": 4.35,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2660,
       "depth": 4.36,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2680,
       "depth": 4.1,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2700,
       "depth": 4.53,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2720,
       "depth": 4.22,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     },
     {
       "time": 2740,
       "depth": 2.22,
-      "temperature": 18
+      "temperature": 18,
+      "gas_mixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
     }
   ]
 }

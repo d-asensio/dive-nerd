@@ -29,10 +29,8 @@ const calculateAbmientPressure = data_point => {
   }
 }
 
-const { gas_mixtures } = dive
-
 const calculatePartialPressureO2 = (data_point) => {
-  const { pressure } = data_point
+  const { pressure, gas_mixtures } = data_point
 
   return {
     ...data_point,
@@ -41,7 +39,7 @@ const calculatePartialPressureO2 = (data_point) => {
 }
 
 const calculatePartialPressureN2 = (data_point) => {
-  const { pressure } = data_point
+  const { pressure, gas_mixtures } = data_point
 
   const surface_pressure_in_bars = 1
   const water_vapour_partial_pressure = 0.0567 // TODO: Validate this constant, should it change with depth?
