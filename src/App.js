@@ -98,9 +98,10 @@ const fromDepthToPressure = depth => {
 }
 
 const ppN2 = (ambient_pressure, nitrogen_percentage) => {
+  const surface_pressure_in_bars = 1
   const water_vapour_partial_pressure = 0.0567 // TODO: Validate this constant, should it change with depth?
 
-  return ambient_pressure * nitrogen_percentage * (1 - water_vapour_partial_pressure)
+  return ambient_pressure * nitrogen_percentage * (surface_pressure_in_bars - water_vapour_partial_pressure)
 }
 
 const tranformDiveIntoChartData = ({ samples, gas_mixtures }) => [{
