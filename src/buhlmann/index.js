@@ -85,7 +85,7 @@ const calculateDescentRate = data_point => {
 let compartments_gas = getInitialCompartmentsGas()
 
 const calculateCompartmentGasLoad = data_point => {
-  const { LN2, exp } = Math
+  const { exp } = Math
 
   const { descent_rate, time_delta, pressureN } = data_point
 
@@ -96,7 +96,7 @@ const calculateCompartmentGasLoad = data_point => {
 
   compartments_gas = compartments_gas.map(
     ({ gas_pressure: Po, ...rest }, index) => {
-      const k = LN2 / compartments[index].nitrogen.half_time
+      const k = compartments[index].nitrogen.k
       return {
         ...rest,
         gas_pressure: Pio + R * (t - 1 / k) - (Pio - Po - R / k) * exp(-k * t)
