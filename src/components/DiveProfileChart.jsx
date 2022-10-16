@@ -3,20 +3,27 @@ import { ResponsiveLine } from '@nivo/line'
 
 import { Tooltip } from './Tooltip'
 import { DatapointInfoPanel } from './DatapointInfoPanel'
+import { useCallback } from 'react'
 
 const Wrapper = styled.div`
   min-width: 0;
   min-height: 0;
 `
 
-export const DiveProfileChart = ({ data }) => (
-  <Wrapper>
+export const DiveProfileChart = ({ data, onDatapointHover }) => {
+  const handleMouseMove = useCallback(
+    ({ data }) => onDatapointHover(data),
+    [onDatapointHover]
+  )
+
+  return (
+    <Wrapper>
       <ResponsiveLine
         data={[
           {
             id: 'Dive Profile',
-            data
-          }
+            data,
+          },
         ]}
         colors={['#3daff7']}
         margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
@@ -26,7 +33,7 @@ export const DiveProfileChart = ({ data }) => (
           min: 'auto',
           max: 'auto',
           stacked: true,
-          reverse: true
+          reverse: true,
         }}
         yFormat=" >-.2f"
         animate={false}
@@ -39,7 +46,7 @@ export const DiveProfileChart = ({ data }) => (
           tickRotation: 0,
           legend: 'Time',
           legendOffset: 36,
-          legendPosition: 'middle'
+          legendPosition: 'middle',
         }}
         axisLeft={{
           orient: 'left',
@@ -48,7 +55,7 @@ export const DiveProfileChart = ({ data }) => (
           tickRotation: 0,
           legend: 'Depth',
           legendOffset: -40,
-          legendPosition: 'middle'
+          legendPosition: 'middle',
         }}
         pointSize={10}
         pointColor="white"
@@ -62,6 +69,8 @@ export const DiveProfileChart = ({ data }) => (
           </Tooltip>
         )}
         crosshairType="top"
+        onMouseMove={handleMouseMove}
       />
-  </Wrapper>
-)
+    </Wrapper>
+  )
+}

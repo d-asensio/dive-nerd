@@ -1,10 +1,13 @@
 import styled from 'styled-components'
-import { addIndex, map, pipe } from 'ramda'
+import { addIndex, map, pipe, sort } from 'ramda'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 import * as ZHL16C from './buhlmann'
 import { DiveProfileChart } from './components'
 
 import dive from './dives/Dive_2013-10-31-0957.json'
+import { CompartmentsGasChart } from './components/CompartmentsGasChart'
 
 const Wrapper = styled.main`
   width: 100%;
@@ -33,12 +36,38 @@ const tranformDiveSamplesIntoChartData = mapIndexed(
   pipe(ZHL16C.calculateDataPoint, calculateChartAxis)
 )
 
-const data = tranformDiveSamplesIntoChartData(dive.samples)
+const diveData = tranformDiveSamplesIntoChartData(dive.samples)
+
+const [maxDepthSample] = sort(
+  ({ depth: da }, { depth: db }) => db - da,
+  diveData
+)
 
 function App() {
+  const [compartmentsData, setCompartmentsData] = useState([])
+
+  const handleDatapointHover = useDebouncedCallback(
+    ({ compartments, pressure }) => {
+      const newCompartmentsData = compartments.map(
+        ({ name, gas_pressure }) => ({
+          id: name,
+          ranges: [pressure, maxDepthSample.pressure * 2],
+          measures: [gas_pressure]
+        })
+      )
+
+      setCompartmentsData(newCompartmentsData)
+    },
+    50
+  )
+
   return (
     <Wrapper>
-      <DiveProfileChart data={data} />
+      <DiveProfileChart
+        data={diveData}
+        onDatapointHover={handleDatapointHover}
+      />
+      <CompartmentsGasChart data={compartmentsData} />
     </Wrapper>
   )
 }
