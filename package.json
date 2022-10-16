@@ -38,8 +38,7 @@
       "yarn markdown:generate-toc"
     ],
     "*.{js}": [
-      "prettier --write",
-      "jest --bail --findRelatedTests"
+      "prettier --write"
     ]
   },
   "eslintConfig": {

@@ -79,19 +79,19 @@ export function DatapointInfoPanel({ data }) {
       <TextField
         readOnly
         id="ambient_pressure"
-        label="Ambient Pressure"
+        label="Ambient p."
         value={`${pressure.toFixed(2)} bar`}
       />
       <TextField
         readOnly
         id="oxygen_partial_pressure"
-        label="O2 Partial Pressure"
+        label="O2 p.p."
         value={`${pressureO2.toFixed(2)} bar`}
       />
       <TextField
         readOnly
         id="nitrogen_partial_pressure"
-        label="N2 Partial Pressure"
+        label="N2 p.p."
         value={`${pressureN.toFixed(2)} bar`}
       />
       <TextField

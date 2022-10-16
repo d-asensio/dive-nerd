@@ -1,4 +1,4 @@
-import { map, reduce } from 'ramda'
+import { map } from 'ramda'
 import { pipeWithArgs } from './pipeWithArgs'
 import compartments from './compartments'
 
@@ -6,6 +6,21 @@ import compartments from './compartments'
  * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
+
+const getInitialCompartmentsGas = () => {
+  const surface_pressure_in_bars = 1
+  const air_nitrogen_partial_pressure = 0.79
+
+  return map(
+    ({ name }) => ({
+      name,
+      gas_pressure:
+        air_nitrogen_partial_pressure *
+        (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+    }),
+    compartments
+  )
+}
 
 const calculateAbmientPressure = data_point => {
   const { depth } = data_point
@@ -67,30 +82,40 @@ const calculateDescentRate = data_point => {
   }
 }
 
-const initializeCompartments = data_point => {
-  const surface_pressure_in_bars = 1
-  const air_nitrogen_partial_pressure = 0.79
+let compartments_gas = getInitialCompartmentsGas()
+
+const calculateCompartmentGasLoad = data_point => {
+  const { log, exp } = Math
+
+  const { descent_rate, time_delta, pressureN } = data_point
+
+  const Pio = pressureN
+
+  const R = descent_rate * pressureN
+  const t = time_delta / 60 // In Minutes
+
+  compartments_gas = compartments_gas.map(
+    ({ gas_pressure: Po, ...rest }, index) => {
+      const k = log(2) / compartments[index].nitrogen.half_time
+      return {
+        ...rest,
+        gas_pressure: Pio + R * (t - 1 / k) - (Pio - Po - R / k) * exp(-k * t)
+      }
+    }
+  )
 
   return {
     ...data_point,
-    compartments: map(
-      ({ name }) => ({
-        name,
-        gas_pressure:
-          air_nitrogen_partial_pressure *
-          (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
-      }),
-      compartments
-    )
+    compartments: compartments_gas
   }
 }
 
 export const calculateDataPoint = pipeWithArgs(
-  initializeCompartments,
   calculateAbmientPressure,
   calculatePartialPressureO2,
   calculatePartialPressureN2,
   calculateTimeDelta,
   calculateDepthDelta,
-  calculateDescentRate
+  calculateDescentRate,
+  calculateCompartmentGasLoad
 )
