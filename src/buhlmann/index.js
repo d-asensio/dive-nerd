@@ -1,4 +1,4 @@
-import { map, pipe } from 'ramda'
+import { map, reduce } from 'ramda'
 import compartments from './compartments'
 
 /**
@@ -45,32 +45,33 @@ const calculatePartialPressureN2 = data_point => {
   }
 }
 
-const calculateDescentRate = (data_point, index, samples) => {
-  const previous_data_point = samples[index-1]
+const calculateTimeDelta = (data_point, index, samples) => ({
+  ...data_point,
+  time_delta: samples[index - 1]
+    ? data_point.time - samples[index - 1].time
+    : 0
+})
 
-  if (!previous_data_point) {
-    return {
-      ...data_point,
-      time_interval: 0,
-      depth_delta: 0,
-      descent_rate: 0
-    }
-  }
+const calculateDepthDelta = (data_point, index, samples) => ({
+  ...data_point,
+  depth_delta: samples[index - 1]
+    ? data_point.depth - samples[index - 1].depth
+    : 0
+})
 
-  const time_interval = data_point.time - previous_data_point.time
-  const depth_delta = data_point.depth - previous_data_point.depth
+const calculateDescentRate = data_point => {
+  const { time_delta, depth_delta } = data_point
 
   return {
     ...data_point,
-    time_interval,
-    depth_delta,
-    descent_rate: depth_delta/time_interval*60
+    descent_rate: depth_delta/time_delta*60 || 0
   }
 }
 
 const initializeCompartments = data_point => {
   const surface_pressure_in_bars = 1
   const air_nitrogen_partial_pressure = 0.79
+
   return {
     ...data_point,
     compartments: map(({ name }) => ({
@@ -80,10 +81,18 @@ const initializeCompartments = data_point => {
   }
 }
 
-export const calculateDataPoint = pipe(
-  calculateDescentRate,
+const pipeWithArgs = (...fns) => (first, ...rest) => reduce(
+  (result, next) => next(result, ...rest),
+  first,
+  fns
+)
+
+export const calculateDataPoint = pipeWithArgs(
   initializeCompartments,
   calculateAbmientPressure,
   calculatePartialPressureO2,
-  calculatePartialPressureN2
+  calculatePartialPressureN2,
+  calculateTimeDelta,
+  calculateDepthDelta,
+  calculateDescentRate
 )

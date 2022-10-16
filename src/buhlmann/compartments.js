@@ -1,4 +1,4 @@
-export default [
+const compartments =  [
   {
     name: '1',
     nitrogen: { half_time: 4.0, a: 1.2599, b: 0.524 },
@@ -85,3 +85,5 @@ export default [
     helium: { half_time: 240.03, a: 0.5119, b: 0.9267 }
   }
 ]
+
+export default compartments

@@ -66,7 +66,7 @@ export function DatapointInfoPanel({ data }) {
     pressureO2,
     pressureN,
     compartments,
-    time_interval,
+    time_delta,
     depth_delta,
     descent_rate,
   } = data
@@ -96,14 +96,14 @@ export function DatapointInfoPanel({ data }) {
       />
       <TextField
         readOnly
-        id="time_interval"
-        label="Time Interval"
-        value={`${time_interval.toFixed(2)} s`}
+        id="time_delta"
+        label="Time Δ"
+        value={`${time_delta.toFixed(2)} s`}
       />
       <TextField
         readOnly
         id="depth_delta"
-        label="Depth Delta"
+        label="Depth Δ"
         value={`${depth_delta.toFixed(2)} m`}
       />
       <TextField
