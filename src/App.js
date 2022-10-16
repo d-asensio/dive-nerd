@@ -29,27 +29,24 @@ const ppN2 = (ambient_pressure, nitrogen_percentage) => {
   return ambient_pressure * nitrogen_percentage * (surface_pressure_in_bars - water_vapour_partial_pressure)
 }
 
-const tranformDiveIntoChartData = ({ samples, gas_mixtures }) => [{
-  id: 'Dive Profile',
-  data: samples.map(
-    sample => {
-      const { depth, time } = sample
-      const pressure = fromDepthToPressure(depth)
-      const pressureO2 = pressure * gas_mixtures.oxygen
-      const pressureN = ppN2(pressure, gas_mixtures.nitrogen)
+const tranformDiveIntoChartData = ({ samples, gas_mixtures }) => samples.map(
+  sample => {
+    const { depth, time } = sample
+    const pressure = fromDepthToPressure(depth)
+    const pressureO2 = pressure * gas_mixtures.oxygen
+    const pressureN = ppN2(pressure, gas_mixtures.nitrogen)
 
-      return {
-        depth,
-        time,
-        pressure,
-        pressureO2,
-        pressureN,
-        x: time,
-        y: depth
-      }
+    return {
+      depth,
+      time,
+      pressure,
+      pressureO2,
+      pressureN,
+      x: time,
+      y: depth
     }
-  )
-}]
+  }
+)
 
 const data = tranformDiveIntoChartData(dive)
 

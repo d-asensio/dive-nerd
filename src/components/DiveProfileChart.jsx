@@ -4,7 +4,12 @@ import { DatapointInfoPanel } from './DatapointInfoPanel'
 
 export const DiveProfileChart = ({ data }) => (
   <ResponsiveLine
-    data={data}
+    data={[
+      {
+        id: 'Dive Profile',
+        data,
+      },
+    ]}
     colors={['#3daff7']}
     margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
     xScale={{ type: 'linear' }}
