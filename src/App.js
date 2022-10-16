@@ -5,8 +5,10 @@ import { DiveProfileChart } from './components'
 import dive from './dives/Dive_2013-10-31-0957.json'
 
 const Wrapper = styled.main`
-  width: 400vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+
+  padding: 1em;
 `
 
 const fromDepthToPressure = depth => {

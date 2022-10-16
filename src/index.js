@@ -8,6 +8,11 @@ import { normalize } from 'styled-normalize'
 const GlobalStyle = createGlobalStyle`
   ${normalize}
 
+  #root {
+    width: 100vw;
+    height: 100vh;
+  }
+
   * {
     box-sizing: border-box;
 
