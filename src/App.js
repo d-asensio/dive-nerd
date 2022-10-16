@@ -10,8 +10,11 @@ const Wrapper = styled.main`
   width: 100%;
   height: 100%;
 
-  padding: 1em;
   overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1em;
 `
 
 const calculateChartAxis = data_point => {
