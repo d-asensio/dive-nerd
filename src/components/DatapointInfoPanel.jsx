@@ -68,7 +68,7 @@ export function DatapointInfoPanel({ data }) {
     compartments,
     time_delta,
     depth_delta,
-    descent_rate,
+    descent_rate
   } = data
 
   return (

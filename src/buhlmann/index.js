@@ -1,5 +1,5 @@
 import { map, reduce } from 'ramda'
-import {pipeWithArgs} from './pipeWithArgs'
+import { pipeWithArgs } from './pipeWithArgs'
 import compartments from './compartments'
 
 /**
@@ -48,9 +48,7 @@ const calculatePartialPressureN2 = data_point => {
 
 const calculateTimeDelta = (data_point, index, samples) => ({
   ...data_point,
-  time_delta: samples[index - 1]
-    ? data_point.time - samples[index - 1].time
-    : 0
+  time_delta: samples[index - 1] ? data_point.time - samples[index - 1].time : 0
 })
 
 const calculateDepthDelta = (data_point, index, samples) => ({
@@ -65,7 +63,7 @@ const calculateDescentRate = data_point => {
 
   return {
     ...data_point,
-    descent_rate: depth_delta/time_delta*60 || 0
+    descent_rate: (depth_delta / time_delta) * 60 || 0
   }
 }
 
@@ -75,10 +73,15 @@ const initializeCompartments = data_point => {
 
   return {
     ...data_point,
-    compartments: map(({ name }) => ({
-      name,
-      gas_pressure: air_nitrogen_partial_pressure*(surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
-    }), compartments)
+    compartments: map(
+      ({ name }) => ({
+        name,
+        gas_pressure:
+          air_nitrogen_partial_pressure *
+          (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+      }),
+      compartments
+    )
   }
 }
 

@@ -1,4 +1,4 @@
-const compartments =  [
+const compartments = [
   {
     name: '1',
     nitrogen: { half_time: 4.0, a: 1.2599, b: 0.524 },
