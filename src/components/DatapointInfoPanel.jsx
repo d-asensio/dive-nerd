@@ -59,7 +59,7 @@ function TextField({ id, label, ...rest }) {
 }
 
 export function DatapointInfoPanel({ data }) {
-  const { time, depth, pressure, pressureO2, pressureN } = data
+  const { time, depth, pressure, pressureO2, pressureN, compartments } = data
 
   return (
     <Wrapper>
@@ -84,6 +84,17 @@ export function DatapointInfoPanel({ data }) {
         label="N2 Partial Pressure"
         value={`${pressureN.toFixed(2)} bar`}
       />
+      <hr />
+      <Text>Compartments</Text>
+      {compartments.map(({ name, gas_pressure }) => (
+        <TextField
+          readOnly
+          key={name}
+          id={name}
+          label={`Compartment ${name}`}
+          value={`${gas_pressure.toFixed(3)} bar`}
+        />
+      ))}
     </Wrapper>
   )
 }

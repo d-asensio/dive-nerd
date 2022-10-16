@@ -1,4 +1,10 @@
 import { map, pipe } from 'ramda'
+import compartments from './compartments'
+
+/**
+ * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
+ */
+const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
 
 const calculateAbmientPressure = data_point => {
   const { depth } = data_point
@@ -29,19 +35,31 @@ const calculatePartialPressureN2 = data_point => {
   const { pressure, gas_mixtures } = data_point
 
   const surface_pressure_in_bars = 1
-  const water_vapour_partial_pressure = 0.0567 // TODO: Validate this constant, should it change with depth?
 
   return {
     ...data_point,
     pressureN:
       pressure *
       gas_mixtures.nitrogen *
-      (surface_pressure_in_bars - water_vapour_partial_pressure)
+      (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+  }
+}
+
+const initializeCompartments = data_point => {
+  const surface_pressure_in_bars = 1
+  const air_nitrogen_partial_pressure = 0.79
+  return {
+    ...data_point,
+    compartments: map(({ name }) => ({
+      name,
+      gas_pressure: air_nitrogen_partial_pressure*(surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+    }), compartments)
   }
 }
 
 export const calculateDataPoint = pipe(
+  initializeCompartments,
   calculateAbmientPressure,
   calculatePartialPressureO2,
-  calculatePartialPressureN2
+  calculatePartialPressureN2,
 )
