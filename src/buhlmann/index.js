@@ -82,6 +82,7 @@ const calculateDescentRate = data_point => {
   }
 }
 
+// TODO: Refactor this to be a pure function
 let compartments_gas = getInitialCompartmentsGas()
 
 const calculateCompartmentGasLoad = data_point => {
