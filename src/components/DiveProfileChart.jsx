@@ -15,7 +15,7 @@ export const DiveProfileChart = ({ data }) => (
     data={data}
     colors={["#3daff7"]}
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-    xScale={{ type: 'point' }}
+    xScale={{ type: 'linear' }}
     yScale={{
       type: 'linear',
       min: 'auto',
