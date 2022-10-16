@@ -37,7 +37,7 @@
     "./README.md": [
       "yarn markdown:generate-toc"
     ],
-    "*.{js}": [
+    "*.js": [
       "prettier --write"
     ]
   },
