@@ -1,19 +1,11 @@
 import { ResponsiveLine } from '@nivo/line'
-
-const tooltipFn = ({ point: { data: { time, depth, pressure, pressureO2, pressureN } } }) => (
-    <ul>
-      <li>Time: <strong>{time} seconds</strong></li>
-      <li>Depth: <strong>{depth} meters</strong></li>
-      <li>Pressure: <strong>{pressure.toFixed(2)} bar</strong></li>
-      <li>P.P. Oxygen: <strong>{pressureO2.toFixed(2)} bar</strong></li>
-      <li>P.P. Nitrogen: <strong>{pressureN.toFixed(2)} bar</strong></li>
-    </ul>
-  )
+import { Tooltip } from './Tooltip'
+import { DatapointInfoPanel } from './DatapointInfoPanel'
 
 export const DiveProfileChart = ({ data }) => (
   <ResponsiveLine
     data={data}
-    colors={["#3daff7"]}
+    colors={['#3daff7']}
     margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
     xScale={{ type: 'linear' }}
     yScale={{
@@ -24,6 +16,7 @@ export const DiveProfileChart = ({ data }) => (
       reverse: true,
     }}
     yFormat=" >-.2f"
+    animate={false}
     axisTop={null}
     axisRight={null}
     axisBottom={{
@@ -50,7 +43,11 @@ export const DiveProfileChart = ({ data }) => (
     pointBorderColor={{ from: 'serieColor' }}
     pointLabelYOffset={-12}
     useMesh={true}
-    tooltip={tooltipFn}
+    tooltip={({ point }) => (
+      <Tooltip>
+        <DatapointInfoPanel data={point.data} />
+      </Tooltip>
+    )}
     crosshairType="top"
   />
 )

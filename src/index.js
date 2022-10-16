@@ -21,6 +21,10 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
     }
   }
+
+  body {
+    font-family: system-ui;
+  }
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
