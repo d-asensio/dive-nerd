@@ -7,471 +7,588 @@
   "samples": [
     {
       "time": 0,
-      "depth": 1.27
+      "depth": 1.27,
+      "temperature": 20
     },
     {
       "time": 20,
-      "depth": 5.84
+      "depth": 5.84,
+      "temperature": 20
     },
     {
       "time": 40,
-      "depth": 10.43
+      "depth": 10.43,
+      "temperature": 20
     },
     {
       "time": 60,
-      "depth": 12.92
+      "depth": 12.92,
+      "temperature": 20
     },
     {
       "time": 80,
-      "depth": 14.24
+      "depth": 14.24,
+      "temperature": 20
     },
     {
       "time": 100,
-      "depth": 18.24
+      "depth": 18.24,
+      "temperature": 20
     },
     {
       "time": 120,
-      "depth": 20.02
+      "depth": 20.02,
+      "temperature": 19
     },
     {
       "time": 140,
-      "depth": 19.61
+      "depth": 19.61,
+      "temperature": 19
     },
     {
       "time": 160,
-      "depth": 19.19
+      "depth": 19.19,
+      "temperature": 19
     },
     {
       "time": 180,
-      "depth": 19.01
+      "depth": 19.01,
+      "temperature": 19
     },
     {
       "time": 200,
-      "depth": 19.3
+      "depth": 19.3,
+      "temperature": 19
     },
     {
       "time": 220,
-      "depth": 18.99
+      "depth": 18.99,
+      "temperature": 19
     },
     {
       "time": 240,
-      "depth": 18.52
+      "depth": 18.52,
+      "temperature": 19
     },
     {
       "time": 260,
-      "depth": 19.75
+      "depth": 19.75,
+      "temperature": 19
     },
     {
       "time": 280,
-      "depth": 20.65
+      "depth": 20.65,
+      "temperature": 19
     },
     {
       "time": 300,
-      "depth": 20.84
+      "depth": 20.84,
+      "temperature": 19
     },
     {
       "time": 320,
-      "depth": 20.94
+      "depth": 20.94,
+      "temperature": 19
     },
     {
       "time": 340,
-      "depth": 21.57
+      "depth": 21.57,
+      "temperature": 19
     },
     {
       "time": 360,
-      "depth": 21.38
+      "depth": 21.38,
+      "temperature": 19
     },
     {
       "time": 380,
-      "depth": 22.2
+      "depth": 22.2,
+      "temperature": 19
     },
     {
       "time": 400,
-      "depth": 23.04
+      "depth": 23.04,
+      "temperature": 19
     },
     {
       "time": 420,
-      "depth": 22.98
+      "depth": 22.98,
+      "temperature": 19
     },
     {
       "time": 440,
-      "depth": 23.96
+      "depth": 23.96,
+      "temperature": 19
     },
     {
       "time": 460,
-      "depth": 24.81
+      "depth": 24.81,
+      "temperature": 19
     },
     {
       "time": 480,
-      "depth": 24.91
+      "depth": 24.91,
+      "temperature": 19
     },
     {
       "time": 500,
-      "depth": 26.03
+      "depth": 26.03,
+      "temperature": 19
     },
     {
       "time": 520,
-      "depth": 28.24
+      "depth": 28.24,
+      "temperature": 19
     },
     {
       "time": 540,
-      "depth": 29.7
+      "depth": 29.7,
+      "temperature": 19
     },
     {
       "time": 560,
-      "depth": 30.26
+      "depth": 30.26,
+      "temperature": 19
     },
     {
       "time": 580,
-      "depth": 31.01
+      "depth": 31.01,
+      "temperature": 19
     },
     {
       "time": 600,
-      "depth": 32.02
+      "depth": 32.02,
+      "temperature": 19
     },
     {
       "time": 620,
-      "depth": 33.71
+      "depth": 33.71,
+      "temperature": 19
     },
     {
       "time": 640,
-      "depth": 34.14
+      "depth": 34.14,
+      "temperature": 19
     },
     {
       "time": 660,
-      "depth": 34.14
+      "depth": 34.14,
+      "temperature": 19
     },
     {
       "time": 680,
-      "depth": 34.24
+      "depth": 34.24,
+      "temperature": 19
     },
     {
       "time": 700,
-      "depth": 34.18
+      "depth": 34.18,
+      "temperature": 19
     },
     {
       "time": 720,
-      "depth": 34.19
+      "depth": 34.19,
+      "temperature": 19
     },
     {
       "time": 740,
-      "depth": 34.29
+      "depth": 34.29,
+      "temperature": 19
     },
     {
       "time": 760,
-      "depth": 33.48
+      "depth": 33.48,
+      "temperature": 19
     },
     {
       "time": 780,
-      "depth": 33.52
+      "depth": 33.52,
+      "temperature": 19
     },
     {
       "time": 800,
-      "depth": 32.25
+      "depth": 32.25,
+      "temperature": 19
     },
     {
       "time": 820,
-      "depth": 32.05
+      "depth": 32.05,
+      "temperature": 19
     },
     {
       "time": 840,
-      "depth": 32.27
+      "depth": 32.27,
+      "temperature": 19
     },
     {
       "time": 860,
-      "depth": 31.86
+      "depth": 31.86,
+      "temperature": 19
     },
     {
       "time": 880,
-      "depth": 31.23
+      "depth": 31.23,
+      "temperature": 19
     },
     {
       "time": 900,
-      "depth": 29.5
+      "depth": 29.5,
+      "temperature": 19
     },
     {
       "time": 920,
-      "depth": 28.24
+      "depth": 28.24,
+      "temperature": 19
     },
     {
       "time": 940,
-      "depth": 28.06
+      "depth": 28.06,
+      "temperature": 19
     },
     {
       "time": 960,
-      "depth": 28.55
+      "depth": 28.55,
+      "temperature": 19
     },
     {
       "time": 980,
-      "depth": 26.47
+      "depth": 26.47,
+      "temperature": 19
     },
     {
       "time": 1000,
-      "depth": 25.44
+      "depth": 25.44,
+      "temperature": 19
     },
     {
       "time": 1020,
-      "depth": 23.89
+      "depth": 23.89,
+      "temperature": 19
     },
     {
       "time": 1040,
-      "depth": 24.42
+      "depth": 24.42,
+      "temperature": 19
     },
     {
       "time": 1060,
-      "depth": 23.5
+      "depth": 23.5,
+      "temperature": 19
     },
     {
       "time": 1080,
-      "depth": 23.14
+      "depth": 23.14,
+      "temperature": 19
     },
     {
       "time": 1100,
-      "depth": 22.79
+      "depth": 22.79,
+      "temperature": 19
     },
     {
       "time": 1120,
-      "depth": 22.35
+      "depth": 22.35,
+      "temperature": 19
     },
     {
       "time": 1140,
-      "depth": 21.1
+      "depth": 21.1,
+      "temperature": 19
     },
     {
       "time": 1160,
-      "depth": 20.71
+      "depth": 20.71,
+      "temperature": 19
     },
     {
       "time": 1180,
-      "depth": 21.11
+      "depth": 21.11,
+      "temperature": 19
     },
     {
       "time": 1200,
-      "depth": 20.65
+      "depth": 20.65,
+      "temperature": 19
     },
     {
       "time": 1220,
-      "depth": 19.5
+      "depth": 19.5,
+      "temperature": 19
     },
     {
       "time": 1240,
-      "depth": 18.82
+      "depth": 18.82,
+      "temperature": 19
     },
     {
       "time": 1260,
-      "depth": 18.71
+      "depth": 18.71,
+      "temperature": 19
     },
     {
       "time": 1280,
-      "depth": 18.58
+      "depth": 18.58,
+      "temperature": 19
     },
     {
       "time": 1300,
-      "depth": 18.67
+      "depth": 18.67,
+      "temperature": 19
     },
     {
       "time": 1320,
-      "depth": 18.85
+      "depth": 18.85,
+      "temperature": 19
     },
     {
       "time": 1340,
-      "depth": 18.94
+      "depth": 18.94,
+      "temperature": 19
     },
     {
       "time": 1360,
-      "depth": 19.03
+      "depth": 19.03,
+      "temperature": 19
     },
     {
       "time": 1380,
-      "depth": 19.16
+      "depth": 19.16,
+      "temperature": 19
     },
     {
       "time": 1400,
-      "depth": 19.44
+      "depth": 19.44,
+      "temperature": 19
     },
     {
       "time": 1420,
-      "depth": 19.59
+      "depth": 19.59,
+      "temperature": 19
     },
     {
       "time": 1440,
-      "depth": 19.48
+      "depth": 19.48,
+      "temperature": 19
     },
     {
       "time": 1460,
-      "depth": 19.73
+      "depth": 19.73,
+      "temperature": 19
     },
     {
       "time": 1480,
-      "depth": 19.47
+      "depth": 19.47,
+      "temperature": 19
     },
     {
       "time": 1500,
-      "depth": 19.41
+      "depth": 19.41,
+      "temperature": 19
     },
     {
       "time": 1520,
-      "depth": 18.47
+      "depth": 18.47,
+      "temperature": 19
     },
     {
       "time": 1540,
-      "depth": 17.87
+      "depth": 17.87,
+      "temperature": 19
     },
     {
       "time": 1560,
-      "depth": 17.08
+      "depth": 17.08,
+      "temperature": 19
     },
     {
       "time": 1580,
-      "depth": 16.76
+      "depth": 16.76,
+      "temperature": 19
     },
     {
       "time": 1600,
-      "depth": 16.85
+      "depth": 16.85,
+      "temperature": 20
     },
     {
       "time": 1620,
-      "depth": 16.83
+      "depth": 16.83,
+      "temperature": 20
     },
     {
       "time": 1640,
-      "depth": 16.93
+      "depth": 16.93,
+      "temperature": 20
     },
     {
       "time": 1660,
-      "depth": 17.23
+      "depth": 17.23,
+      "temperature": 20
     },
     {
       "time": 1680,
-      "depth": 16.76
+      "depth": 16.76,
+      "temperature": 20
     },
     {
       "time": 1700,
-      "depth": 17
+      "depth": 17,
+      "temperature": 20
     },
     {
       "time": 1720,
-      "depth": 16.45
+      "depth": 16.45,
+      "temperature": 20
     },
     {
       "time": 1740,
-      "depth": 16.15
+      "depth": 16.15,
+      "temperature": 20
     },
     {
       "time": 1760,
-      "depth": 16.05
+      "depth": 16.05,
+      "temperature": 20
     },
     {
       "time": 1780,
-      "depth": 16.24
+      "depth": 16.24,
+      "temperature": 20
     },
     {
       "time": 1800,
-      "depth": 17.44
+      "depth": 17.44,
+      "temperature": 20
     },
     {
       "time": 1820,
-      "depth": 18.56
+      "depth": 18.56,
+      "temperature": 19
     },
     {
       "time": 1840,
-      "depth": 17.83
+      "depth": 17.83,
+      "temperature": 19
     },
     {
       "time": 1860,
-      "depth": 17.29
+      "depth": 17.29,
+      "temperature": 19
     },
     {
       "time": 1880,
-      "depth": 17.53
+      "depth": 17.53,
+      "temperature": 19
     },
     {
       "time": 1900,
-      "depth": 17.03
+      "depth": 17.03,
+      "temperature": 19
     },
     {
       "time": 1920,
-      "depth": 15.36
+      "depth": 15.36,
+      "temperature": 20
     },
     {
       "time": 1940,
-      "depth": 14.83
+      "depth": 14.83,
+      "temperature": 20
     },
     {
       "time": 1960,
-      "depth": 13.65
+      "depth": 13.65,
+      "temperature": 20
     },
     {
       "time": 1980,
-      "depth": 13.39
+      "depth": 13.39,
+      "temperature": 20
     },
     {
       "time": 2000,
-      "depth": 13.45
+      "depth": 13.45,
+      "temperature": 20
     },
     {
       "time": 2020,
-      "depth": 12.6
+      "depth": 12.6,
+      "temperature": 20
     },
     {
       "time": 2040,
-      "depth": 9.63
+      "depth": 9.63,
+      "temperature": 20
     },
     {
       "time": 2060,
-      "depth": 5.5
+      "depth": 5.5,
+      "temperature": 20
     },
     {
       "time": 2080,
-      "depth": 4.63
+      "depth": 4.63,
+      "temperature": 20
     },
     {
       "time": 2100,
-      "depth": 4.37
+      "depth": 4.37,
+      "temperature": 20
     },
     {
       "time": 2120,
-      "depth": 6.29
+      "depth": 6.29,
+      "temperature": 20
     },
     {
       "time": 2140,
-      "depth": 5.45
+      "depth": 5.45,
+      "temperature": 20
     },
     {
       "time": 2160,
-      "depth": 4.91
+      "depth": 4.91,
+      "temperature": 20
     },
     {
       "time": 2180,
-      "depth": 5.48
+      "depth": 5.48,
+      "temperature": 20
     },
     {
       "time": 2200,
-      "depth": 4.4
+      "depth": 4.4,
+      "temperature": 20
     },
     {
       "time": 2220,
-      "depth": 4.78
+      "depth": 4.78,
+      "temperature": 20
     },
     {
       "time": 2240,
-      "depth": 4.98
+      "depth": 4.98,
+      "temperature": 20
     },
     {
       "time": 2260,
-      "depth": 4.82
+      "depth": 4.82,
+      "temperature": 20
     },
     {
       "time": 2280,
-      "depth": 4.83
+      "depth": 4.83,
+      "temperature": 20
     },
     {
       "time": 2300,
-      "depth": 5.12
+      "depth": 5.12,
+      "temperature": 20
     },
     {
       "time": 2320,
-      "depth": 3.58
+      "depth": 3.58,
+      "temperature": 20
     }
   ]
 }
