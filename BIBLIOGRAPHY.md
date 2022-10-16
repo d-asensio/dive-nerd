@@ -11,6 +11,8 @@ This bibliography gathers the resources I read through to learn about decompress
 - [Introductory “Lessons” About Dissolved Gas Decompression Modeling](https://www.shearwater.com/wp-content/uploads/2012/08/Introductory-Deco-Lessons.pdf) - By Erik C. Baker
 - [Calculating the no-stop time](https://www.shearwater.com/wp-content/uploads/2012/08/No-Stop_Time.pdf) - By Erik C. Baker
 
+- [Lizardland DIY Deco](http://www.lizardland.co.uk/DIYDeco.html)
+
 - [ZH-L8ADT: A New Decompression Model To Increase Safety For
 Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
     - **Summary:** This algorithm uses the original tissue models developed by Bülman in conjunction with some other considerations such as:
