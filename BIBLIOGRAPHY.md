@@ -53,6 +53,8 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - (PENDING) [Deco for Divers: A Diver's Guide to Decompression Theory and Physiology](https://www.amazon.es/Deco-Divers-Decompression-Theory-Physiology/dp/1905492294) - By: Mark Powell
 
+- (PENDING) [Deeper into Diving](https://www.amazon.com/Deeper-into-Diving-John-Lippmann/dp/0959030638) - By: John Lippmann
+
 ## Articles
 
 - (PENDING) [Decompression, Deep Stops and the Pursuit of Precision in a Complex World](https://gue.com/blog/decompression-deep-stops-and-the-pursuit-of-precision-in-a-complex-world/)
