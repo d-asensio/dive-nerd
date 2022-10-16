@@ -11,7 +11,6 @@ const Wrapper = styled.div`
 
 export const DiveProfileChart = ({ data }) => (
   <Wrapper>
-
       <ResponsiveLine
         data={[
           {

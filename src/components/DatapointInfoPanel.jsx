@@ -26,7 +26,7 @@ const Fieldset = styled.fieldset`
 const Label = styled.label`
   font-size: 13px;
   color: ${violet.violet11};
-  width: 125px;
+  width: 110px;
 `
 
 const Input = styled.input`
