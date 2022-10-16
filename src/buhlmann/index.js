@@ -45,6 +45,29 @@ const calculatePartialPressureN2 = data_point => {
   }
 }
 
+const calculateDescentRate = (data_point, index, samples) => {
+  const previous_data_point = samples[index-1]
+
+  if (!previous_data_point) {
+    return {
+      ...data_point,
+      time_interval: 0,
+      depth_delta: 0,
+      descent_rate: 0
+    }
+  }
+
+  const time_interval = data_point.time - previous_data_point.time
+  const depth_delta = data_point.depth - previous_data_point.depth
+
+  return {
+    ...data_point,
+    time_interval,
+    depth_delta,
+    descent_rate: depth_delta/time_interval*60
+  }
+}
+
 const initializeCompartments = data_point => {
   const surface_pressure_in_bars = 1
   const air_nitrogen_partial_pressure = 0.79
@@ -58,8 +81,9 @@ const initializeCompartments = data_point => {
 }
 
 export const calculateDataPoint = pipe(
+  calculateDescentRate,
   initializeCompartments,
   calculateAbmientPressure,
   calculatePartialPressureO2,
-  calculatePartialPressureN2,
+  calculatePartialPressureN2
 )

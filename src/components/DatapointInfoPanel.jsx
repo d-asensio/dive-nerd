@@ -59,7 +59,17 @@ function TextField({ id, label, ...rest }) {
 }
 
 export function DatapointInfoPanel({ data }) {
-  const { time, depth, pressure, pressureO2, pressureN, compartments } = data
+  const {
+    time,
+    depth,
+    pressure,
+    pressureO2,
+    pressureN,
+    compartments,
+    time_interval,
+    depth_delta,
+    descent_rate,
+  } = data
 
   return (
     <Wrapper>
@@ -83,6 +93,24 @@ export function DatapointInfoPanel({ data }) {
         id="nitrogen_partial_pressure"
         label="N2 Partial Pressure"
         value={`${pressureN.toFixed(2)} bar`}
+      />
+      <TextField
+        readOnly
+        id="time_interval"
+        label="Time Interval"
+        value={`${time_interval.toFixed(2)} s`}
+      />
+      <TextField
+        readOnly
+        id="depth_delta"
+        label="Depth Delta"
+        value={`${depth_delta.toFixed(2)} m`}
+      />
+      <TextField
+        readOnly
+        id="descent_rate"
+        label="Descent Rate"
+        value={`${descent_rate.toFixed(2)} m/min`}
       />
       <hr />
       <Text>Compartments</Text>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { map, pipe } from 'ramda'
+import { addIndex, map, pipe } from 'ramda'
 
 import * as ZHL16C from './buhlmann'
 import { DiveProfileChart } from './components'
@@ -24,7 +24,9 @@ const calculateChartAxis = data_point => {
   }
 }
 
-const tranformDiveSamplesIntoChartData = map(
+const mapIndexed = addIndex(map)
+
+const tranformDiveSamplesIntoChartData = mapIndexed(
   pipe(ZHL16C.calculateDataPoint, calculateChartAxis)
 )
 
