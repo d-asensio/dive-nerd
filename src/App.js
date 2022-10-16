@@ -7,12 +7,11 @@ const Wrapper = styled.main`
   height: 100vh;
 `
 
-const tooltipFn = ({ point: { data: { time, depth, pressure, pressureAccurate, pressureO2, pressureN } } }) => (
+const tooltipFn = ({ point: { data: { time, depth, pressure, pressureO2, pressureN } } }) => (
   <ul>
     <li>Time: <strong>{time} seconds</strong></li>
     <li>Depth: <strong>{depth} meters</strong></li>
     <li>Pressure: <strong>{pressure.toFixed(2)} bar</strong></li>
-    <li>Pressure (accurate): <strong>{pressureAccurate.toFixed(2)} bar</strong></li>
     <li>P.P. Oxygen: <strong>{pressureO2.toFixed(2)} bar</strong></li>
     <li>P.P. Nitrogen: <strong>{pressureN.toFixed(2)} bar</strong></li>
   </ul>
@@ -89,9 +88,10 @@ const DiveProfileChart = ({ data }) => (
 
 const fromDepthToPressure = depth => {
   const surface_pressure_in_bars = 1
-  const water_density = 997 // kg/m^3 (TODO account for temperature)
+  // const fresh_water_density = 997.0474 
+  const salt_water_density = 1023.6 // kg/m^3 (in salty water) TODO: account for temperature
   const gravity = 9.8 // m*s^2
-  const pressure_in_pascals = depth*water_density*gravity
+  const pressure_in_pascals = depth*salt_water_density*gravity
   const pressure_in_bars = pressure_in_pascals/100000
 
   return pressure_in_bars + surface_pressure_in_bars
@@ -103,7 +103,7 @@ const tranformDiveIntoChartData = ({ samples, gas_mixtures }) => [{
   data: samples.map(
     sample => {
       const { depth, time } = sample
-      const pressure = depth/10 + 1
+      const pressure = fromDepthToPressure(depth)
       const pressureO2 = pressure * gas_mixtures.oxygen
       const pressureN = pressure * gas_mixtures.nitrogen
 
@@ -111,7 +111,6 @@ const tranformDiveIntoChartData = ({ samples, gas_mixtures }) => [{
         depth,
         time,
         pressure,
-        pressureAccurate: fromDepthToPressure(depth),
         pressureO2,
         pressureN,
         x: time,
