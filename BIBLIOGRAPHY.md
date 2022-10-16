@@ -74,6 +74,10 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - (PENDING) [Doppler Ultrasound](https://fetalmedicine.org/var/uploads/web/Doppler/Doppler%20Ultrasound%20-%20Principles%20and%20practice.pdf)
 
+## Math
+
+- [Differential equations](https://www.khanacademy.org/math/differential-equations/first-order-differential-equations#homogeneous-equations)
+
 ## Other scuba diving software
 
 - [Subsurface Divelog](https://subsurface-divelog.org/documentation/subsurface-4-user-manual/)
