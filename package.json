@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "format:check": "prettier --check src",
     "format:fix": "prettier --write src",
-    "markdown:generate-toc": "markdown-toc -i"
+    "markdown:generate-toc": "markdown-toc -i",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nivo/core": "^0.80.0",
@@ -26,7 +27,7 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
+    "husky": ">=6",
     "lint-staged": ">=10",
     "markdown-toc": "^1.2.0",
     "prettier": "^2.7.1",
@@ -36,15 +37,10 @@
     "./README.md": [
       "yarn markdown:generate-toc"
     ],
-    "packages/**/*.js": [
+    "*.{js}": [
       "prettier --write",
       "jest --bail --findRelatedTests"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "eslintConfig": {
     "extends": [
