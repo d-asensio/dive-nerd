@@ -9,19 +9,19 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 `
 
-const MaxValuesLayer = ({ bars }) => {
+const CeilingValuesLayer = ({ bars, xScale }) => {
   return (
     <>
-      {bars.map(({ key, x, y, width, height }) => (
+      {bars.map(({ key, y, height, data }) => (
         <line
           key={key}
-          x1={x + width}
+          x1={xScale(data.data.ceiling)}
           y1={y}
-          x2={x + width}
+          x2={xScale(data.data.ceiling)}
           y2={y + height}
           style={{
-            stroke: 'rgb(255, 0, 0)',
-            strokeWidth: 2,
+            stroke: '#3daff7',
+            strokeWidth: 1,
           }}
         />
       ))}
@@ -55,7 +55,7 @@ export const CompartmentsGasChart = ({
         'markers',
         'legends',
         'annotations',
-        MaxValuesLayer,
+        CeilingValuesLayer,
       ]}
       markers={[
         {

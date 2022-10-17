@@ -52,12 +52,10 @@ function App() {
 
   const handleDatapointHover = useDebouncedCallback(
     ({ compartments, pressure }) => {
-      const newCompartmentsData = compartments.map(
-        ({ name, gas_pressure }) => ({
-          id: name,
-          gas_pressure
-        })
-      )
+      const newCompartmentsData = compartments.map(({ name, ...rest }) => ({
+        id: name,
+        ...rest
+      }))
 
       setCompartmentsData(newCompartmentsData)
       setAmbientPressure(pressure)

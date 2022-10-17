@@ -116,8 +116,34 @@ const calculateCompartmentGasLoad = data_point => {
   }
 }
 
-const calculateABCoefficients = data_point => {
-  return data_point
+const calculateCompartmentCeiling = data_point => {
+  return {
+    ...data_point,
+    compartments: data_point.compartments.map((compartment, index) => {
+      const { gas_pressure } = compartment
+      const { nitrogen, helium } = compartments[index]
+      const pressure_n2 = gas_pressure
+      const pressure_he = 0
+
+      const a_n2 = nitrogen.a
+      const b_n2 = nitrogen.b
+      const a_he = helium.a
+      const b_he = helium.b
+
+      const a_coefficient =
+        (a_n2 * pressure_n2 + a_he * pressure_he) / (pressure_n2 + pressure_he)
+      const b_coefficient =
+        (b_n2 * pressure_n2 + b_he * pressure_he) / (pressure_n2 + pressure_he)
+
+      const ceiling =
+        (pressure_n2 + pressure_he - a_coefficient) * b_coefficient
+
+      return {
+        ...compartment,
+        ceiling
+      }
+    })
+  }
 }
 
 export const calculateDataPoint = pipeWithArgs(
@@ -128,5 +154,5 @@ export const calculateDataPoint = pipeWithArgs(
   calculateDepthDelta,
   calculateDescentRate,
   calculateCompartmentGasLoad,
-  calculateABCoefficients
+  calculateCompartmentCeiling
 )
