@@ -3,6 +3,11 @@ import { pipeWithArgs } from './pipeWithArgs'
 import compartments from './compartments'
 
 /**
+ * IDEAS:
+ * - Use instantaneous equation to calculate ongass for the first data point
+ */
+
+/**
  * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
