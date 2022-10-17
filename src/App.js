@@ -45,18 +45,19 @@ const [maxDepthSample] = sort(
 
 function App() {
   const [compartmentsData, setCompartmentsData] = useState([])
+  const [ambientPressure, setAmbientPressure] = useState(1)
 
   const handleDatapointHover = useDebouncedCallback(
     ({ compartments, pressure }) => {
       const newCompartmentsData = compartments.map(
         ({ name, gas_pressure }) => ({
           id: name,
-          ranges: [pressure, maxDepthSample.pressure * 2],
-          measures: [gas_pressure]
+          gas_pressure
         })
       )
 
       setCompartmentsData(newCompartmentsData)
+      setAmbientPressure(pressure)
     },
     50
   )
@@ -67,7 +68,11 @@ function App() {
         data={diveData}
         onDatapointHover={handleDatapointHover}
       />
-      <CompartmentsGasChart data={compartmentsData} />
+      <CompartmentsGasChart
+        data={compartmentsData}
+        ambientPressure={ambientPressure}
+        maxAmbientPressure={maxDepthSample.pressure * 2}
+      />
     </Wrapper>
   )
 }
