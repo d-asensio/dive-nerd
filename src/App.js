@@ -71,7 +71,7 @@ function App() {
       <CompartmentsGasChart
         data={compartmentsData}
         ambientPressure={ambientPressure}
-        maxAmbientPressure={maxDepthSample.pressure * 2}
+        maxAmbientPressure={maxDepthSample.pressure}
       />
     </Wrapper>
   )
