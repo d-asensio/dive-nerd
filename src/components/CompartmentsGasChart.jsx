@@ -9,6 +9,26 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 `
 
+const MaxValuesLayer = ({ bars }) => {
+  return (
+    <>
+      {bars.map(({ key, x, y, width, height }) => (
+        <line
+          key={key}
+          x1={x + width}
+          y1={y}
+          x2={x + width}
+          y2={y + height}
+          style={{
+            stroke: 'rgb(255, 0, 0)',
+            strokeWidth: 2,
+          }}
+        />
+      ))}
+    </>
+  )
+}
+
 export const CompartmentsGasChart = ({
   data,
   ambientPressure,
@@ -28,6 +48,15 @@ export const CompartmentsGasChart = ({
       indexScale={{ type: 'band', round: true }}
       colors={{ scheme: 'blues' }}
       tooltip={always(null)}
+      layers={[
+        'grid',
+        'axes',
+        'bars',
+        'markers',
+        'legends',
+        'annotations',
+        MaxValuesLayer,
+      ]}
       markers={[
         {
           axis: 'x',

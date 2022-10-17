@@ -116,6 +116,10 @@ const calculateCompartmentGasLoad = data_point => {
   }
 }
 
+const calculateABCoefficients = data_point => {
+  return data_point
+}
+
 export const calculateDataPoint = pipeWithArgs(
   calculateAbmientPressure,
   calculatePartialPressureO2,
@@ -123,5 +127,6 @@ export const calculateDataPoint = pipeWithArgs(
   calculateTimeDelta,
   calculateDepthDelta,
   calculateDescentRate,
-  calculateCompartmentGasLoad
+  calculateCompartmentGasLoad,
+  calculateABCoefficients
 )
