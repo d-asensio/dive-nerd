@@ -25,7 +25,7 @@ const calculateChartAxis = data_point => {
 
   return {
     ...data_point,
-    x: time,
+    x: time / 60, // In minutes
     y: depth
   }
 }

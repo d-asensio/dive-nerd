@@ -41,7 +41,7 @@ export const CompartmentsGasChart = ({
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'Tissue Pressure Load (in bar)',
+        legend: 'Tissue Pressure Load (in bars)',
         legendPosition: 'middle',
         legendOffset: 32,
       }}

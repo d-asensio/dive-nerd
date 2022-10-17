@@ -44,7 +44,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'Time',
+          legend: 'Time (in minutes)',
           legendOffset: 36,
           legendPosition: 'middle',
         }}
@@ -53,7 +53,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'Depth',
+          legend: 'Depth (in meters)',
           legendOffset: -40,
           legendPosition: 'middle',
         }}
