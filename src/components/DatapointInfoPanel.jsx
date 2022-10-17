@@ -112,17 +112,6 @@ export function DatapointInfoPanel({ data }) {
         label="Descent Rate"
         value={`${descent_rate.toFixed(2)} m/min`}
       />
-      <hr />
-      <Text>Compartments</Text>
-      {compartments.map(({ name, gas_pressure }) => (
-        <TextField
-          readOnly
-          key={name}
-          id={name}
-          label={`Compartment ${name}`}
-          value={`${gas_pressure.toFixed(3)} bar`}
-        />
-      ))}
     </Wrapper>
   )
 }

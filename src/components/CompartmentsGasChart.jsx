@@ -17,12 +17,10 @@ export const CompartmentsGasChart = ({
     <ResponsiveBar
       data={data}
       keys={['gas_pressure']}
-      indexBy="id"
       margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
       padding={0.3}
       layout="horizontal"
       valueFormat=">-.2f"
-      label={({ formattedValue }) => `${formattedValue} bar`}
       minValue={0}
       maxValue={maxAmbientPressure}
       valueScale={{ type: 'linear' }}
@@ -42,7 +40,7 @@ export const CompartmentsGasChart = ({
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'Tissue Pressure Load',
+        legend: 'Tissue Pressure Load (in bar)',
         legendPosition: 'middle',
         legendOffset: 32,
       }}
