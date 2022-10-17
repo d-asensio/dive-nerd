@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { ResponsiveBar } from '@nivo/bar'
+import { always } from 'ramda'
 
 const Wrapper = styled.div`
   min-width: 0;
@@ -26,7 +27,7 @@ export const CompartmentsGasChart = ({
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={{ scheme: 'blues' }}
-      tooltip={false}
+      tooltip={always(null)}
       markers={[
         {
           axis: 'x',
