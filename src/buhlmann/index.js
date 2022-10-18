@@ -80,7 +80,7 @@ const calculateDepthDelta = (data_point, index, samples) => ({
 
 const calculateDescentRate = data_point => {
   const { time_delta, depth_delta } = data_point
-
+  // Correct descent rate, this should be in bar/min
   return {
     ...data_point,
     descent_rate: (depth_delta / time_delta) * 60 || 0
