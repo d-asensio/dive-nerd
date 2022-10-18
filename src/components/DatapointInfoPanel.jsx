@@ -65,7 +65,6 @@ export function DatapointInfoPanel({ data }) {
     pressure,
     pressureO2,
     pressureN,
-    compartments,
     time_delta,
     depth_delta,
     descent_rate
