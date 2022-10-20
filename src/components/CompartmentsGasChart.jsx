@@ -3,10 +3,19 @@ import { ResponsiveBar } from '@nivo/bar'
 import { always } from 'ramda'
 
 const Wrapper = styled.div`
-  min-width: 0;
-  min-height: 0;
+  position: relative;
+  width: 100%;
 
   overflow-y: scroll;
+
+  flex: 1;
+
+  > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+  }
 `
 
 const CeilingValuesLayer = ({ bars, xScale }) => {
@@ -21,7 +30,7 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
           y2={y + height}
           style={{
             stroke: '#3daff7',
-            strokeWidth: 1,
+            strokeWidth: 1
           }}
         />
       ))}
@@ -30,60 +39,61 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
 }
 
 export const CompartmentsGasChart = ({
-  data,
-  ambientPressure,
-  maxAmbientPressure,
+  data: { compartments, pressure },
+  maxAmbientPressure
 }) => (
   <Wrapper>
-    <ResponsiveBar
-      data={data}
-      keys={['gas_pressure']}
-      margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
-      padding={0.3}
-      layout="horizontal"
-      valueFormat=">-.2f"
-      minValue={0}
-      maxValue={maxAmbientPressure}
-      valueScale={{ type: 'linear' }}
-      indexScale={{ type: 'band', round: true }}
-      colors={{ scheme: 'blues' }}
-      tooltip={always(null)}
-      layers={[
-        'grid',
-        'axes',
-        'bars',
-        'markers',
-        'legends',
-        'annotations',
-        CeilingValuesLayer,
-      ]}
-      markers={[
-        {
-          axis: 'x',
-          value: ambientPressure,
-          lineStyle: { stroke: 'rgba(0, 0, 0, .35)', strokeWidth: 2 },
-          legend: `Ambient Pressure (${ambientPressure.toFixed(2)} bar)`,
-          legendOrientation: 'vertical',
-        },
-      ]}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'Tissue Pressure Load (in bars)',
-        legendPosition: 'middle',
-        legendOffset: 32,
-      }}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'Compartment',
-        legendPosition: 'middle',
-        legendOffset: -40,
-      }}
-      labelSkipWidth={12}
-      labelSkipHeight={12}
-    />
+    <div>
+      <ResponsiveBar
+        data={compartments}
+        keys={['gas_pressure']}
+        margin={{ top: 0, right: 60, bottom: 50, left: 60 }}
+        padding={0.3}
+        layout="horizontal"
+        valueFormat=">-.2f"
+        minValue={0}
+        maxValue={maxAmbientPressure}
+        valueScale={{ type: 'linear' }}
+        indexScale={{ type: 'band', round: true }}
+        colors={{ scheme: 'blues' }}
+        tooltip={always(null)}
+        layers={[
+          'grid',
+          'axes',
+          'bars',
+          'markers',
+          'legends',
+          'annotations',
+          CeilingValuesLayer
+        ]}
+        markers={[
+          {
+            axis: 'x',
+            value: pressure,
+            lineStyle: { stroke: 'rgba(0, 0, 0, .35)', strokeWidth: 2 },
+            legend: `Ambient Pressure (${pressure.toFixed(2)} bar)`,
+            legendOrientation: 'vertical'
+          }
+        ]}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: 'Tissue Pressure Load (in bars)',
+          legendPosition: 'middle',
+          legendOffset: 32
+        }}
+        axisLeft={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: 'Compartment',
+          legendPosition: 'middle',
+          legendOffset: -40
+        }}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+      />
+    </div>
   </Wrapper>
 )

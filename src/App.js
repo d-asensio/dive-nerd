@@ -71,6 +71,18 @@ const Wrapper = styled.main`
   gap: 1em;
 `
 
+const Sidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+`
+
+const Frame = styled.div`
+  padding: 1.5em 2em;
+  margin-bottom: 1em;
+`
+
 const calculateChartAxis = data_point => {
   const { time, depth } = data_point
 
@@ -95,17 +107,20 @@ const [maxDepthSample] = sort(
 )
 
 function App() {
-  const [compartmentsData, setCompartmentsData] = useState([])
-  const [ambientPressure, setAmbientPressure] = useState(1)
+  const [currentDatapoint, setData] = useState({
+    compartments: [],
+    pressure: 1,
+    time: 0,
+    depth: 0,
+    pressureO2: 0.21,
+    pressureN: 0.79,
+    time_delta: 0,
+    depth_delta: 0,
+    descent_rate: 0
+  })
 
-  const handleDatapointHover = useDebouncedCallback(data => {
-    const { compartments, pressure } = data
-
-    setCompartmentsData(compartments)
-    setAmbientPressure(pressure)
-  }, 50)
-
-  console.log(compartmentsData)
+  const handleDatapointHover = useDebouncedCallback(setData, 50)
+  console.log(currentDatapoint)
 
   return (
     <Wrapper>
@@ -113,12 +128,15 @@ function App() {
         data={diveData}
         onDatapointHover={handleDatapointHover}
       />
-      {/* <DatapointInfoPanel data={point.data} /> */}
-      <CompartmentsGasChart
-        data={compartmentsData}
-        ambientPressure={ambientPressure}
-        maxAmbientPressure={maxDepthSample.pressure}
-      />
+      <Sidebar>
+        <Frame>
+          <DatapointInfoPanel data={currentDatapoint} />
+        </Frame>
+        <CompartmentsGasChart
+          data={currentDatapoint}
+          maxAmbientPressure={maxDepthSample.pressure}
+        />
+      </Sidebar>
     </Wrapper>
   )
 }

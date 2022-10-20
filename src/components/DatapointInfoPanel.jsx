@@ -5,7 +5,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 220px;
 `
 
 const Text = styled.h3`
@@ -43,7 +42,9 @@ const Input = styled.input`
   color: ${violet.violet11};
   box-shadow: 0 0 0 1px ${violet.violet7};
   height: 25px;
-
+  min-width: 80px;
+  max-width: 90px;
+  
   &:focus {
     box-shadow: 0 0 0 2px ${violet.violet8};
   }
@@ -74,7 +75,7 @@ export function DatapointInfoPanel({ data }) {
     <Wrapper>
       <Text>Datapoint Information</Text>
       <TextField readOnly id="time" label="Time" value={`${time} s`} />
-      <TextField readOnly id="depth" label="Depth" value={`${depth} m`} />
+      <TextField readOnly id="depth" label="Depth" value={`${depth.toFixed(2)} m`} />
       <TextField
         readOnly
         id="ambient_pressure"
