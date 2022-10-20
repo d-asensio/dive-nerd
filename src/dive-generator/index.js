@@ -1,7 +1,10 @@
 import { flatten, last, map, pipe, range, reduce } from 'ramda'
+const { Noise } = require('noisejs')
+
+const noise = new Noise(Math.random())
 
 const specsExample = {
-  samplingIntervals: 20,
+  samplingIntervals: 50,
   initialDepth: 0,
   segments: [
     {
@@ -29,7 +32,7 @@ const specsExample = {
       endDepth: 20
     },
     {
-      duration: 15 * 60,
+      duration: 10 * 60,
       endDepth: 20
     },
     {
@@ -51,6 +54,12 @@ const specsExample = {
   ]
 }
 
+function perlin(x, y, distortion) {
+  const value = noise.simplex2(x / 100, y / 100)
+
+  return value * distortion
+}
+
 export const createDiveGenerator = ({
   initialDepth,
   samplingIntervals,
@@ -68,16 +77,26 @@ export const createDiveGenerator = ({
 
     const _generateSamples = pipe(
       range(0),
-      map(sampleIndex => ({
-        time: startTime + sampleIndex * samplingIntervals,
-        depth: _roundWithPrecision(startDepth + depthDelta * sampleIndex, 2),
-        temperature: 21,
-        gas_mixtures: {
-          oxygen: 0.21,
-          nitrogen: 0.79,
-          helium: 0
+      map(sampleIndex => {
+        const time = startTime + sampleIndex * samplingIntervals
+        const depth = _roundWithPrecision(
+          startDepth + depthDelta * sampleIndex,
+          2
+        )
+
+        const perlinDepth = perlin(time, depth, 0.9)
+
+        return {
+          time,
+          depth: depth + perlinDepth,
+          temperature: 21,
+          gas_mixtures: {
+            oxygen: 0.21,
+            nitrogen: 0.79,
+            helium: 0
+          }
         }
-      }))
+      })
     )
 
     return flatten([acc, _generateSamples(samplesToGenerate + 1)])

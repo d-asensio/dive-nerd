@@ -12,9 +12,9 @@ import { DiveProfileChart } from './components'
 
 import { CompartmentsGasChart } from './components/CompartmentsGasChart'
 
-// import dive from './dive-generator'
+import dive from './dive-generator'
 
-const dive = {
+const dive1 = {
   samples: [
     {
       time: 0,
