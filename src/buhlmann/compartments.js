@@ -5,7 +5,7 @@
  */
 const compartments = [
   {
-    name: '1',
+    id: '1',
     nitrogen: {
       half_time: 4,
       k: 0.17328679513998632,
@@ -20,7 +20,7 @@ const compartments = [
     }
   },
   {
-    name: '1b',
+    id: '1b',
     nitrogen: {
       half_time: 5,
       k: 0.13862943611198905,
@@ -35,7 +35,7 @@ const compartments = [
     }
   },
   {
-    name: '2',
+    id: '2',
     nitrogen: {
       half_time: 8,
       k: 0.08664339756999316,
@@ -50,7 +50,7 @@ const compartments = [
     }
   },
   {
-    name: '3',
+    id: '3',
     nitrogen: {
       half_time: 12.5,
       k: 0.055451774444795626,
@@ -65,7 +65,7 @@ const compartments = [
     }
   },
   {
-    name: '4',
+    id: '4',
     nitrogen: {
       half_time: 18.5,
       k: 0.037467415165402446,
@@ -80,7 +80,7 @@ const compartments = [
     }
   },
   {
-    name: '5',
+    id: '5',
     nitrogen: {
       half_time: 27,
       k: 0.025672117798516494,
@@ -95,7 +95,7 @@ const compartments = [
     }
   },
   {
-    name: '6',
+    id: '6',
     nitrogen: {
       half_time: 38.3,
       k: 0.01809783761253121,
@@ -110,7 +110,7 @@ const compartments = [
     }
   },
   {
-    name: '7',
+    id: '7',
     nitrogen: {
       half_time: 54.3,
       k: 0.012765141446776157,
@@ -125,7 +125,7 @@ const compartments = [
     }
   },
   {
-    name: '8',
+    id: '8',
     nitrogen: {
       half_time: 77,
       k: 0.009001911435843446,
@@ -140,7 +140,7 @@ const compartments = [
     }
   },
   {
-    name: '9',
+    id: '9',
     nitrogen: {
       half_time: 109,
       k: 0.006359148445504085,
@@ -155,7 +155,7 @@ const compartments = [
     }
   },
   {
-    name: '10',
+    id: '10',
     nitrogen: {
       half_time: 146,
       k: 0.004747583428492776,
@@ -170,7 +170,7 @@ const compartments = [
     }
   },
   {
-    name: '11',
+    id: '11',
     nitrogen: {
       half_time: 187,
       k: 0.0037066694147590657,
@@ -185,7 +185,7 @@ const compartments = [
     }
   },
   {
-    name: '12',
+    id: '12',
     nitrogen: {
       half_time: 239,
       k: 0.002900197408200608,
@@ -200,7 +200,7 @@ const compartments = [
     }
   },
   {
-    name: '13',
+    id: '13',
     nitrogen: {
       half_time: 305,
       k: 0.002272613706753919,
@@ -215,7 +215,7 @@ const compartments = [
     }
   },
   {
-    name: '14',
+    id: '14',
     nitrogen: {
       half_time: 390,
       k: 0.0017773004629742187,
@@ -230,7 +230,7 @@ const compartments = [
     }
   },
   {
-    name: '15',
+    id: '15',
     nitrogen: {
       half_time: 498,
       k: 0.0013918618083533039,
@@ -245,7 +245,7 @@ const compartments = [
     }
   },
   {
-    name: '16',
+    id: '16',
     nitrogen: {
       half_time: 635,
       k: 0.0010915703630865281,

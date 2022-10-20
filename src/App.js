@@ -13,6 +13,7 @@ import { DiveProfileChart } from './components'
 import { CompartmentsGasChart } from './components/CompartmentsGasChart'
 
 import dive from './dive-generator'
+import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 
 const dive1 = {
   samples: [
@@ -97,18 +98,14 @@ function App() {
   const [compartmentsData, setCompartmentsData] = useState([])
   const [ambientPressure, setAmbientPressure] = useState(1)
 
-  const handleDatapointHover = useDebouncedCallback(
-    ({ compartments, pressure }) => {
-      const newCompartmentsData = compartments.map(({ name, ...rest }) => ({
-        id: name,
-        ...rest
-      }))
+  const handleDatapointHover = useDebouncedCallback(data => {
+    const { compartments, pressure } = data
 
-      setCompartmentsData(newCompartmentsData)
-      setAmbientPressure(pressure)
-    },
-    50
-  )
+    setCompartmentsData(compartments)
+    setAmbientPressure(pressure)
+  }, 50)
+
+  console.log(compartmentsData)
 
   return (
     <Wrapper>
@@ -116,6 +113,7 @@ function App() {
         data={diveData}
         onDatapointHover={handleDatapointHover}
       />
+      {/* <DatapointInfoPanel data={point.data} /> */}
       <CompartmentsGasChart
         data={compartmentsData}
         ambientPressure={ambientPressure}

@@ -17,8 +17,8 @@ const getInitialCompartmentsGas = () => {
   const air_nitrogen_partial_pressure = 0.79
 
   return map(
-    ({ name }) => ({
-      name,
+    ({ id }) => ({
+      id,
       gas_pressure:
         air_nitrogen_partial_pressure *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
