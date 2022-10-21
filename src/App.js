@@ -7,58 +7,13 @@ import * as ZHL16C from './buhlmann'
 import { DiveProfileChart } from './components'
 
 // import dive from './dives/Dive_2013-10-31-0957.json'
-// import dive from './dives/Dive_2015-02-28-1040.json' // 50m
+import dive from './dives/Dive_2015-02-28-1040.json' // 50m
 // import dive from './dives/Dive_2015-05-31-0911.json'
 
 import { CompartmentsGasChart } from './components/CompartmentsGasChart'
 
-import dive from './dive-generator'
+// import dive from './dive-generator'
 import { DatapointInfoPanel } from './components/DatapointInfoPanel'
-
-const dive1 = {
-  samples: [
-    {
-      time: 0,
-      depth: 0,
-      temperature: 21,
-      gas_mixtures: {
-        oxygen: 0.21,
-        nitrogen: 0.79,
-        helium: 0
-      }
-    },
-    {
-      time: 1.5 * 60,
-      depth: 30,
-      temperature: 21,
-      gas_mixtures: {
-        oxygen: 0.21,
-        nitrogen: 0.79,
-        helium: 0
-      }
-    },
-    {
-      time: 21.5 * 60,
-      depth: 30,
-      temperature: 21,
-      gas_mixtures: {
-        oxygen: 0.21,
-        nitrogen: 0.79,
-        helium: 0
-      }
-    },
-    {
-      time: 23.5 * 60,
-      depth: 10,
-      temperature: 21,
-      gas_mixtures: {
-        oxygen: 0.21,
-        nitrogen: 0.79,
-        helium: 0
-      }
-    }
-  ]
-}
 
 const Wrapper = styled.main`
   width: 100%;
