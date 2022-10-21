@@ -114,13 +114,13 @@ function App() {
     depth: 0,
     pressureO2: 0.21,
     pressureN: 0.79,
+    ambient_pressure_delta: 0,
     time_delta: 0,
     depth_delta: 0,
     descent_rate: 0
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 50)
-  console.log(currentDatapoint)
 
   return (
     <Wrapper>

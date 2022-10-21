@@ -78,12 +78,28 @@ const calculateDepthDelta = (data_point, index, samples) => ({
     : 0
 })
 
-const calculateDescentRate = data_point => {
-  const { time_delta, depth_delta } = data_point
-  // Correct descent rate, this should be in bar/min
+const calculateAmbientPressureDelta = (data_point, index, samples) => ({
+  ...data_point,
+  ambient_pressure_delta: samples[index - 1]
+    ? data_point.pressure -
+      calculateAbmientPressure(samples[index - 1]).pressure
+    : 0
+})
+
+// const calculateDescentRate = data_point => {
+//   const { time_delta, depth_delta } = data_point
+//   // Correct descent rate, this should be in bar/min
+//   return {
+//     ...data_point,
+//     descent_rate: (depth_delta / time_delta) * 60 || 0
+//   }
+// }
+
+const calculateBarsPerMinutDescentRate = data_point => {
+  const { time_delta, ambient_pressure_delta } = data_point
   return {
     ...data_point,
-    descent_rate: (depth_delta / time_delta) * 60 || 0
+    descent_rate: (ambient_pressure_delta / time_delta) * 60 || 0
   }
 }
 
@@ -150,9 +166,11 @@ export const calculateDataPoint = pipeWithArgs(
   calculateAbmientPressure,
   calculatePartialPressureO2,
   calculatePartialPressureN2,
+  calculateAmbientPressureDelta,
   calculateTimeDelta,
   calculateDepthDelta,
-  calculateDescentRate,
+  // calculateDescentRate,
+  calculateBarsPerMinutDescentRate,
   calculateCompartmentGasLoad,
   calculateCompartmentCeiling
 )
