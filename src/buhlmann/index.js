@@ -136,6 +136,7 @@ const calculateCompartmentCeiling = data_point => {
   return {
     ...data_point,
     compartments: data_point.compartments.map((compartment, index) => {
+      const { max } = Math
       const { gas_pressure } = compartment
       const { nitrogen, helium } = compartments[index]
       const pressure_n2 = gas_pressure
@@ -156,7 +157,7 @@ const calculateCompartmentCeiling = data_point => {
 
       return {
         ...compartment,
-        ceiling
+        ceiling: max(0, ceiling)
       }
     })
   }

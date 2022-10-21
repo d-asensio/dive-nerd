@@ -21,19 +21,23 @@ const Wrapper = styled.div`
 const CeilingValuesLayer = ({ bars, xScale }) => {
   return (
     <>
-      {bars.map(({ key, y, height, data }) => (
-        <line
-          key={key}
-          x1={xScale(data.data.ceiling)}
-          y1={y}
-          x2={xScale(data.data.ceiling)}
-          y2={y + height}
-          style={{
-            stroke: '#3daff7',
-            strokeWidth: 1
-          }}
-        />
-      ))}
+      {bars.map(({ key, y, height, data }) => {
+        const scaledCeiling = xScale(data.data.ceiling)
+        
+        return (
+          <line
+            key={key}
+            x1={scaledCeiling}
+            y1={y}
+            x2={scaledCeiling}
+            y2={y + height}
+            style={{
+              stroke: '#3daff7',
+              strokeWidth: 1
+            }}
+          />
+        )
+      })}
     </>
   )
 }

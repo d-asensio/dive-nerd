@@ -7,12 +7,12 @@ import * as ZHL16C from './buhlmann'
 import { DiveProfileChart } from './components'
 
 // import dive from './dives/Dive_2013-10-31-0957.json'
-import dive from './dives/Dive_2015-02-28-1040.json' // 50m
+// import dive from './dives/Dive_2015-02-28-1040.json' // 50m
 // import dive from './dives/Dive_2015-05-31-0911.json'
 
 import { CompartmentsGasChart } from './components/CompartmentsGasChart'
 
-// import dive from './dive-generator'
+import dive from './dive-generator'
 import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 
 const Wrapper = styled.main`
