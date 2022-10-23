@@ -42,11 +42,11 @@ const Frame = styled.div`
   margin-bottom: 1em;
 `
 
-const calculateChartAxis = data_point => {
-  const { time, depth } = data_point
+const calculateChartAxis = sample => {
+  const { time, depth } = sample
 
   return {
-    ...data_point,
+    ...sample,
     x: time / 60, // In minutes
     y: depth
   }

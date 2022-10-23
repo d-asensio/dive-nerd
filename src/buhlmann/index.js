@@ -21,8 +21,8 @@ export const getInitialCompartmentsGas = () => {
   )
 }
 
-const calculateAbmientPressure = ([previous_data_point, data_point]) => {
-  const { depth } = data_point
+const calculateAbmientPressure = ([startSample, endSample]) => {
+  const { depth } = endSample
 
   const surface_pressure_in_bars = 1
   // const fresh_water_density = 997.0474
@@ -32,35 +32,35 @@ const calculateAbmientPressure = ([previous_data_point, data_point]) => {
   const pressure_in_bars = pressure_in_pascals / 100000
 
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
+      ...endSample,
       ambientPressure: pressure_in_bars + surface_pressure_in_bars
     }
   ]
 }
 
-const calculatePartialPressureO2 = ([previous_data_point, data_point]) => {
-  const { ambientPressure, gasMixtures } = data_point
+const calculatePartialPressureO2 = ([startSample, endSample]) => {
+  const { ambientPressure, gasMixtures } = endSample
 
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
+      ...endSample,
       pressureO2: ambientPressure * gasMixtures.oxygen
     }
   ]
 }
 
-const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
-  const { ambientPressure, gasMixtures } = data_point
+const calculatePartialPressureN2 = ([startSample, endSample]) => {
+  const { ambientPressure, gasMixtures } = endSample
 
   const surface_pressure_in_bars = 1
 
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
+      ...endSample,
       pressureN:
         ambientPressure *
         gasMixtures.nitrogen *
@@ -69,52 +69,49 @@ const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
   ]
 }
 
-const calculateTimeDelta = ([previous_data_point, data_point]) => [
-  previous_data_point,
+const calculateTimeDelta = ([startSample, endSample]) => [
+  startSample,
   {
-    ...data_point,
-    time_delta: data_point.time - previous_data_point?.time || 0
+    ...endSample,
+    time_delta: endSample.time - startSample?.time || 0
   }
 ]
 
-const calculateDepthDelta = ([previous_data_point, data_point]) => [
-  previous_data_point,
+const calculateDepthDelta = ([startSample, endSample]) => [
+  startSample,
   {
-    ...data_point,
-    depth_delta: data_point.depth - previous_data_point?.depth || 0
+    ...endSample,
+    depth_delta: endSample.depth - startSample?.depth || 0
   }
 ]
 
-const calculateAmbientPressureDelta = ([previous_data_point, data_point]) => [
-  previous_data_point,
+const calculateAmbientPressureDelta = ([startSample, endSample]) => [
+  startSample,
   {
-    ...data_point,
+    ...endSample,
     ambient_pressure_delta:
-      data_point.ambientPressure - previous_data_point?.ambientPressure || 0
+      endSample.ambientPressure - startSample?.ambientPressure || 0
   }
 ]
 
-const calculateBarsPerMinutDescentRate = ([
-  previous_data_point,
-  data_point
-]) => {
-  const { time_delta, ambient_pressure_delta } = data_point
+const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
+  const { time_delta, ambient_pressure_delta } = endSample
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
+      ...endSample,
       descent_rate: (ambient_pressure_delta / time_delta) * 60 || 0
     }
   ]
 }
 
-const calculateCompartmentGasLoad = ([previous_data_point, data_point]) => {
+const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   const { exp } = Math
 
-  const { descent_rate, time_delta, pressureN } = data_point
+  const { descent_rate, time_delta, pressureN } = endSample
 
   const compartments_gas =
-    previous_data_point?.compartments ?? getInitialCompartmentsGas()
+    startSample?.compartments ?? getInitialCompartmentsGas()
 
   const Pio = pressureN
 
@@ -122,9 +119,9 @@ const calculateCompartmentGasLoad = ([previous_data_point, data_point]) => {
   const t = time_delta / 60 // In Minutes
 
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
+      ...endSample,
       compartments: compartments_gas.map(
         ({ gas_pressure: Po, ...rest }, index) => {
           const k = compartments[index].nitrogen.k
@@ -139,12 +136,12 @@ const calculateCompartmentGasLoad = ([previous_data_point, data_point]) => {
   ]
 }
 
-const calculateCompartmentCeiling = ([previous_data_point, data_point]) => {
+const calculateCompartmentCeiling = ([startSample, endSample]) => {
   return [
-    previous_data_point,
+    startSample,
     {
-      ...data_point,
-      compartments: data_point.compartments.map((compartment, index) => {
+      ...endSample,
+      compartments: endSample.compartments.map((compartment, index) => {
         const { max } = Math
         const { gas_pressure } = compartment
         const { nitrogen, helium } = compartments[index]
@@ -175,7 +172,7 @@ const calculateCompartmentCeiling = ([previous_data_point, data_point]) => {
   ]
 }
 
-const extactDataPointFromInterval = ([_, data_point]) => data_point
+const extactDataPointFromInterval = ([_, endSample]) => endSample
 
 export const calculateDataPoint = pipe(
   calculateAbmientPressure,
