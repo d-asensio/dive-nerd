@@ -61,7 +61,7 @@ const calculatePartialPressureN2 = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      pressureN:
+      partialPressureN2:
         ambientPressure *
         gasMixtures.nitrogen *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
@@ -108,14 +108,14 @@ const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   const { exp } = Math
 
-  const { descent_rate, time_delta, pressureN } = endSample
+  const { descent_rate, time_delta, partialPressureN2 } = endSample
 
   const compartments_gas =
     startSample?.compartments ?? getInitialCompartmentsGas()
 
-  const Pio = pressureN
+  const Pio = partialPressureN2
 
-  const R = descent_rate * pressureN
+  const R = descent_rate * partialPressureN2
   const t = time_delta / 60 // In Minutes
 
   return [
