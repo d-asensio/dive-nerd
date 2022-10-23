@@ -1,4 +1,4 @@
-import { map } from 'ramda'
+import { last, map, pipe, reduce } from 'ramda'
 import { pipeWithArgs } from './pipeWithArgs'
 import compartments from './compartments'
 
@@ -34,7 +34,7 @@ export const resetTissues = () => {
   compartments_gas = getInitialCompartmentsGas()
 }
 
-const calculateAbmientPressure = data_point => {
+const calculateAbmientPressure = ([previous_data_point, data_point]) => {
   const { depth } = data_point
 
   const surface_pressure_in_bars = 1
@@ -44,73 +44,89 @@ const calculateAbmientPressure = data_point => {
   const pressure_in_pascals = depth * salt_water_density * gravity
   const pressure_in_bars = pressure_in_pascals / 100000
 
-  return {
-    ...data_point,
-    pressure: pressure_in_bars + surface_pressure_in_bars
-  }
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      pressure: pressure_in_bars + surface_pressure_in_bars
+    }
+  ]
 }
 
-const calculatePartialPressureO2 = data_point => {
+const calculatePartialPressureO2 = ([previous_data_point, data_point]) => {
   const { pressure, gas_mixtures } = data_point
 
-  return {
-    ...data_point,
-    pressureO2: pressure * gas_mixtures.oxygen
-  }
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      pressureO2: pressure * gas_mixtures.oxygen
+    }
+  ]
 }
 
-const calculatePartialPressureN2 = data_point => {
+const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
   const { pressure, gas_mixtures } = data_point
 
   const surface_pressure_in_bars = 1
 
-  return {
-    ...data_point,
-    pressureN:
-      pressure *
-      gas_mixtures.nitrogen *
-      (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
-  }
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      pressureN:
+        pressure *
+        gas_mixtures.nitrogen *
+        (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+    }
+  ]
 }
 
-const calculateTimeDelta = (data_point, index, samples) => ({
-  ...data_point,
-  time_delta: samples[index - 1] ? data_point.time - samples[index - 1].time : 0
-})
+const calculateTimeDelta = ([previous_data_point, data_point]) => [
+  previous_data_point,
+  {
+    ...data_point,
+    time_delta: previous_data_point
+      ? data_point.time - previous_data_point.time
+      : 0
+  }
+]
 
-const calculateDepthDelta = (data_point, index, samples) => ({
-  ...data_point,
-  depth_delta: samples[index - 1]
-    ? data_point.depth - samples[index - 1].depth
-    : 0
-})
+const calculateDepthDelta = ([previous_data_point, data_point]) => [
+  previous_data_point,
+  {
+    ...data_point,
+    depth_delta: previous_data_point
+      ? data_point.depth - previous_data_point.depth
+      : 0
+  }
+]
 
-const calculateAmbientPressureDelta = (data_point, index, samples) => ({
-  ...data_point,
-  ambient_pressure_delta: samples[index - 1]
-    ? data_point.pressure -
-      calculateAbmientPressure(samples[index - 1]).pressure
-    : 0
-})
+const calculateAmbientPressureDelta = ([previous_data_point, data_point]) => [
+  previous_data_point,
+  {
+    ...data_point,
+    ambient_pressure_delta: previous_data_point
+      ? data_point.pressure - previous_data_point.pressure
+      : 0
+  }
+]
 
-// const calculateDescentRate = data_point => {
-//   const { time_delta, depth_delta } = data_point
-//   // Correct descent rate, this should be in bar/min
-//   return {
-//     ...data_point,
-//     descent_rate: (depth_delta / time_delta) * 60 || 0
-//   }
-// }
-
-const calculateBarsPerMinutDescentRate = data_point => {
+const calculateBarsPerMinutDescentRate = ([
+  previous_data_point,
+  data_point
+]) => {
   const { time_delta, ambient_pressure_delta } = data_point
-  return {
-    ...data_point,
-    descent_rate: (ambient_pressure_delta / time_delta) * 60 || 0
-  }
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      descent_rate: (ambient_pressure_delta / time_delta) * 60 || 0
+    }
+  ]
 }
 
-const calculateCompartmentGasLoad = data_point => {
+const calculateCompartmentGasLoad = ([previous_data_point, data_point]) => {
   const { exp } = Math
 
   const { descent_rate, time_delta, pressureN } = data_point
@@ -130,52 +146,69 @@ const calculateCompartmentGasLoad = data_point => {
     }
   )
 
-  return {
-    ...data_point,
-    compartments: compartments_gas
-  }
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      compartments: compartments_gas
+    }
+  ]
 }
 
-const calculateCompartmentCeiling = data_point => {
-  return {
-    ...data_point,
-    compartments: data_point.compartments.map((compartment, index) => {
-      const { max } = Math
-      const { gas_pressure } = compartment
-      const { nitrogen, helium } = compartments[index]
-      const pressure_n2 = gas_pressure
-      const pressure_he = 0
+const calculateCompartmentCeiling = ([previous_data_point, data_point]) => {
+  return [
+    previous_data_point,
+    {
+      ...data_point,
+      compartments: data_point.compartments.map((compartment, index) => {
+        const { max } = Math
+        const { gas_pressure } = compartment
+        const { nitrogen, helium } = compartments[index]
+        const pressure_n2 = gas_pressure
+        const pressure_he = 0
 
-      const a_n2 = nitrogen.a
-      const b_n2 = nitrogen.b
-      const a_he = helium.a
-      const b_he = helium.b
+        const a_n2 = nitrogen.a
+        const b_n2 = nitrogen.b
+        const a_he = helium.a
+        const b_he = helium.b
 
-      const a_coefficient =
-        (a_n2 * pressure_n2 + a_he * pressure_he) / (pressure_n2 + pressure_he)
-      const b_coefficient =
-        (b_n2 * pressure_n2 + b_he * pressure_he) / (pressure_n2 + pressure_he)
+        const a_coefficient =
+          (a_n2 * pressure_n2 + a_he * pressure_he) /
+          (pressure_n2 + pressure_he)
+        const b_coefficient =
+          (b_n2 * pressure_n2 + b_he * pressure_he) /
+          (pressure_n2 + pressure_he)
 
-      const ceiling =
-        (pressure_n2 + pressure_he - a_coefficient) * b_coefficient
+        const ceiling =
+          (pressure_n2 + pressure_he - a_coefficient) * b_coefficient
 
-      return {
-        ...compartment,
-        ceiling: max(0, ceiling)
-      }
-    })
-  }
+        return {
+          ...compartment,
+          ceiling: max(0, ceiling)
+        }
+      })
+    }
+  ]
 }
 
-export const calculateDataPoint = pipeWithArgs(
+export const calculateDataInterval = pipe(
   calculateAbmientPressure,
   calculatePartialPressureO2,
   calculatePartialPressureN2,
   calculateAmbientPressureDelta,
   calculateTimeDelta,
   calculateDepthDelta,
-  // calculateDescentRate,
   calculateBarsPerMinutDescentRate,
   calculateCompartmentGasLoad,
   calculateCompartmentCeiling
 )
+
+export const calculateDataPointReducer = (acc, currentPoint) => {
+  const currentInterval = [last(acc), currentPoint]
+  const nextInterval = calculateDataInterval(currentInterval)
+  const [_, calculatedDataPoint] = nextInterval
+
+  return [...acc, calculatedDataPoint]
+}
+
+export const calculateDiveProfile = reduce(calculateDataPointReducer, [])
