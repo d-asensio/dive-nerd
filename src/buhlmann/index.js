@@ -174,7 +174,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
 
 const extactDataPointFromInterval = ([_, endSample]) => endSample
 
-export const calculateDataPoint = pipe(
+export const calculateDataPointFromInterval = pipe(
   calculateAbmientPressure,
   calculatePartialPressureO2,
   calculatePartialPressureN2,
@@ -187,10 +187,9 @@ export const calculateDataPoint = pipe(
   extactDataPointFromInterval
 )
 
-export const calculateDataPointReducer = (acc, currentPoint) => {
-  const iterval = [last(acc), currentPoint]
-
-  return [...acc, calculateDataPoint(iterval)]
-}
+export const calculateDataPointReducer = (acc, currentPoint) => [
+  ...acc,
+  calculateDataPointFromInterval([last(acc), currentPoint])
+]
 
 export const calculateDiveProfile = reduce(calculateDataPointReducer, [])
