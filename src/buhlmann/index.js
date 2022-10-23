@@ -1,5 +1,5 @@
-import { divide, last, map, multiply, subtract, pipe, reduce, __ } from 'ramda'
-import compartments from './compartments'
+import { divide, last, map, pipe, reduce, __ } from 'ramda'
+import compartmentCoefficients from './compartments'
 
 /**
  * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
@@ -12,6 +12,7 @@ const GRAVITY = 9.8 // m*s2
  */
 const surfacePressure = 1 // bar
 const waterDensity = 1023.6 // kg/m3
+const gradientFactors = [0, 1]
 
 /**
  * Utility functions
@@ -32,7 +33,7 @@ export const getInitialCompartmentsGas = () => {
         surfacePressure
       )
     }),
-    compartments
+    compartmentCoefficients
   )
 }
 
@@ -130,7 +131,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
             inertGasAlveolarPressure: alveolarPressureN2,
             inertGasPressureRateChange,
             timeDelta: timeDeltaInMinutes,
-            comparmentDecayConstant: compartments[index].N2.k,
+            comparmentDecayConstant: compartmentCoefficients[index].N2.k,
             startInertGasCompartmentPressure: pressureLoadN2
           })
         })
@@ -149,44 +150,57 @@ const buhlmannCoefficientEquation = ({
 const buhlmannBakerCeilingEquation = ({
   inertGasCompartmentPressure: P,
   coefficientA: A,
-  coefficientB: B
-}) => (P - A) * B
+  coefficientB: B,
+  gradientFactor: gf
+}) => Math.max(0, (P - A * gf) / (gf / B + 1 - gf))
 
 const calculateCompartmentCeiling = ([startSample, endSample]) => {
+  const compartments = endSample.compartments.map((compartment, index) => {
+    const { pressureLoadN2, pressureLoadHe = 0 } = compartment
+    const { N2, He } = compartmentCoefficients[index]
+
+    const [lowGradientFactor, highGradientFactor] = gradientFactors
+
+    const coefficientA = buhlmannCoefficientEquation({
+      coefficientN2: N2.a,
+      coefficientHe: He.a,
+      startInertGasCompartmentPressureN2: pressureLoadN2,
+      startInertGasCompartmentPressureHe: pressureLoadHe
+    })
+
+    const coefficientB = buhlmannCoefficientEquation({
+      coefficientN2: N2.b,
+      coefficientHe: He.b,
+      startInertGasCompartmentPressureN2: pressureLoadN2,
+      startInertGasCompartmentPressureHe: pressureLoadHe
+    })
+
+    const lowCeiling = buhlmannBakerCeilingEquation({
+      inertGasCompartmentPressure: pressureLoadN2 + pressureLoadHe,
+      coefficientA,
+      coefficientB,
+      gradientFactor: lowGradientFactor
+    })
+
+    const highCeiling = buhlmannBakerCeilingEquation({
+      inertGasCompartmentPressure: pressureLoadN2 + pressureLoadHe,
+      coefficientA,
+      coefficientB,
+      gradientFactor: highGradientFactor
+    })
+
+    return {
+      ...compartment,
+      lowCeiling,
+      highCeiling
+    }
+  })
+
   return [
     startSample,
     {
       ...endSample,
-      compartments: endSample.compartments.map((compartment, index) => {
-        const { max } = Math
-        const { pressureLoadN2 } = compartment
-        const { N2, He } = compartments[index]
-        const pressureLoadHe = 0
-
-        const coefficientA = buhlmannCoefficientEquation({
-          coefficientN2: N2.a,
-          coefficientHe: He.a,
-          startInertGasCompartmentPressureN2: pressureLoadN2,
-          startInertGasCompartmentPressureHe: pressureLoadHe
-        })
-        const coefficientB = buhlmannCoefficientEquation({
-          coefficientN2: N2.b,
-          coefficientHe: He.b,
-          startInertGasCompartmentPressureN2: pressureLoadN2,
-          startInertGasCompartmentPressureHe: pressureLoadHe
-        })
-
-        const ceiling = buhlmannBakerCeilingEquation({
-          inertGasCompartmentPressure: pressureLoadN2 + pressureLoadHe,
-          coefficientA,
-          coefficientB
-        })
-
-        return {
-          ...compartment,
-          ceiling: max(0, ceiling)
-        }
-      })
+      compartments
     }
   ]
 }

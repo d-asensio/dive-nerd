@@ -22,7 +22,7 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
   return (
     <>
       {bars.map(({ key, y, height, data }) => {
-        const scaledCeiling = xScale(data.data.ceiling)
+        const scaledCeiling = xScale(data.data.lowCeiling)
 
         return (
           <line
@@ -32,7 +32,24 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
             x2={scaledCeiling}
             y2={y + height}
             style={{
-              stroke: '#3daff7',
+              stroke: '#e09f3e',
+              strokeWidth: 1
+            }}
+          />
+        )
+      })}
+      {bars.map(({ key, y, height, data }) => {
+        const scaledCeiling = xScale(data.data.highCeiling)
+
+        return (
+          <line
+            key={key}
+            x1={scaledCeiling}
+            y1={y}
+            x2={scaledCeiling}
+            y2={y + height}
+            style={{
+              stroke: '#9e2a2b',
               strokeWidth: 1
             }}
           />
