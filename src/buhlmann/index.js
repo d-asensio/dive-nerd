@@ -81,7 +81,7 @@ const calculateDepthDelta = ([startSample, endSample]) => [
   startSample,
   {
     ...endSample,
-    depth_delta: endSample.depth - startSample?.depth || 0
+    depthDelta: endSample.depth - startSample?.depth || 0
   }
 ]
 
