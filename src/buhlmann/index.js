@@ -91,7 +91,7 @@ const calculateDepthDelta = ([previous_data_point, data_point]) => [
     ...data_point,
     depth_delta: previous_data_point
       ? data_point.depth - previous_data_point.depth
-      : 0
+      : data_point.depth
   }
 ]
 
