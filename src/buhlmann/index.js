@@ -51,18 +51,6 @@ const calculateAbmientPressure = ([startSample, endSample]) => {
   ]
 }
 
-const calculatePartialPressureO2 = ([startSample, endSample]) => {
-  const { ambientPressure, gasMixtures } = endSample
-
-  return [
-    startSample,
-    {
-      ...endSample,
-      partialPressureO2: ambientPressure * gasMixtures.O2
-    }
-  ]
-}
-
 const calculatePartialPressureN2 = ([startSample, endSample]) => {
   const { ambientPressure, gasMixtures } = endSample
 
@@ -191,7 +179,6 @@ const extactDataPointFromInterval = ([_, endSample]) => endSample
 
 export const calculateDataPointFromInterval = pipe(
   calculateAbmientPressure,
-  calculatePartialPressureO2,
   calculatePartialPressureN2,
   calculateAmbientPressureDelta,
   calculateTimeDelta,
