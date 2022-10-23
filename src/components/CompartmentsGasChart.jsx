@@ -50,7 +50,7 @@ export const CompartmentsGasChart = ({
     <div>
       <ResponsiveBar
         data={compartments}
-        keys={['gas_pressure']}
+        keys={['pressureLoadN2']}
         margin={{ top: 0, right: 60, bottom: 50, left: 60 }}
         padding={0.3}
         layout="horizontal"
