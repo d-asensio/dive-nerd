@@ -12,7 +12,7 @@ const compartments = [
       a: 1.2599,
       b: 0.524
     },
-    helium: {
+    He: {
       halfTime: 1.51,
       k: 0.45903786792049356,
       a: 1.7424,
@@ -27,7 +27,7 @@ const compartments = [
       a: 1.1696,
       b: 0.5578
     },
-    helium: {
+    He: {
       halfTime: 1.88,
       k: 0.36869530880848156,
       a: 1.6189,
@@ -42,7 +42,7 @@ const compartments = [
       a: 1,
       b: 0.6514
     },
-    helium: {
+    He: {
       halfTime: 3.02,
       k: 0.22951893396024678,
       a: 1.383,
@@ -57,7 +57,7 @@ const compartments = [
       a: 0.8618,
       b: 0.7222
     },
-    helium: {
+    He: {
       halfTime: 4.72,
       k: 0.1468532162203274,
       a: 1.1919,
@@ -72,7 +72,7 @@ const compartments = [
       a: 0.7562,
       b: 0.7825
     },
-    helium: {
+    He: {
       halfTime: 6.99,
       k: 0.09916268677538559,
       a: 1.0458,
@@ -87,7 +87,7 @@ const compartments = [
       a: 0.6491,
       b: 0.8126
     },
-    helium: {
+    He: {
       halfTime: 10.21,
       k: 0.06788904804700736,
       a: 0.922,
@@ -102,7 +102,7 @@ const compartments = [
       a: 0.5316,
       b: 0.8434
     },
-    helium: {
+    He: {
       halfTime: 14.48,
       k: 0.04786928042541058,
       a: 0.8205,
@@ -117,7 +117,7 @@ const compartments = [
       a: 0.4681,
       b: 0.8693
     },
-    helium: {
+    He: {
       halfTime: 20.53,
       k: 0.03376264883389894,
       a: 0.7305,
@@ -132,7 +132,7 @@ const compartments = [
       a: 0.4301,
       b: 0.891
     },
-    helium: {
+    He: {
       halfTime: 29.11,
       k: 0.023811308160767614,
       a: 0.6502,
@@ -147,7 +147,7 @@ const compartments = [
       a: 0.4049,
       b: 0.9092
     },
-    helium: {
+    He: {
       halfTime: 41.2,
       k: 0.016823960693202553,
       a: 0.595,
@@ -162,7 +162,7 @@ const compartments = [
       a: 0.3719,
       b: 0.9222
     },
-    helium: {
+    He: {
       halfTime: 55.19,
       k: 0.012559289374160995,
       a: 0.5545,
@@ -177,7 +177,7 @@ const compartments = [
       a: 0.3447,
       b: 0.9319
     },
-    helium: {
+    He: {
       halfTime: 70.69,
       k: 0.009805448869146206,
       a: 0.5333,
@@ -192,7 +192,7 @@ const compartments = [
       a: 0.3176,
       b: 0.9403
     },
-    helium: {
+    He: {
       halfTime: 90.34,
       k: 0.007672649773743029,
       a: 0.5189,
@@ -207,7 +207,7 @@ const compartments = [
       a: 0.2828,
       b: 0.9477
     },
-    helium: {
+    He: {
       halfTime: 115.29,
       k: 0.006012205573423066,
       a: 0.5181,
@@ -222,7 +222,7 @@ const compartments = [
       a: 0.2716,
       b: 0.9544
     },
-    helium: {
+    He: {
       halfTime: 147.42,
       k: 0.0047018530766513725,
       a: 0.5176,
@@ -237,7 +237,7 @@ const compartments = [
       a: 0.2523,
       b: 0.9602
     },
-    helium: {
+    He: {
       halfTime: 188.24,
       k: 0.0036822523404161987,
       a: 0.5172,
@@ -252,7 +252,7 @@ const compartments = [
       a: 0.2327,
       b: 0.9653
     },
-    helium: {
+    He: {
       halfTime: 240.03,
       k: 0.002887752283297693,
       a: 0.5119,

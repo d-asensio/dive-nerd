@@ -144,14 +144,14 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       compartments: endSample.compartments.map((compartment, index) => {
         const { max } = Math
         const { gas_pressure } = compartment
-        const { nitrogen, helium } = compartments[index]
+        const { nitrogen, He } = compartments[index]
         const pressure_n2 = gas_pressure
         const pressure_he = 0
 
         const a_n2 = nitrogen.a
         const b_n2 = nitrogen.b
-        const a_he = helium.a
-        const b_he = helium.b
+        const a_he = He.a
+        const b_he = He.b
 
         const a_coefficient =
           (a_n2 * pressure_n2 + a_he * pressure_he) /
