@@ -27,13 +27,6 @@ const getInitialCompartmentsGas = () => {
   )
 }
 
-// TODO: Refactor this to be a pure function
-let compartments_gas
-
-export const resetTissues = () => {
-  compartments_gas = getInitialCompartmentsGas()
-}
-
 const calculateAbmientPressure = ([previous_data_point, data_point]) => {
   const { depth } = data_point
 
@@ -131,26 +124,28 @@ const calculateCompartmentGasLoad = ([previous_data_point, data_point]) => {
 
   const { descent_rate, time_delta, pressureN } = data_point
 
+  const compartments_gas =
+    previous_data_point?.compartments ?? getInitialCompartmentsGas()
+
   const Pio = pressureN
 
   const R = descent_rate * pressureN
   const t = time_delta / 60 // In Minutes
 
-  compartments_gas = compartments_gas.map(
-    ({ gas_pressure: Po, ...rest }, index) => {
-      const k = compartments[index].nitrogen.k
-      return {
-        ...rest,
-        gas_pressure: Pio + R * (t - 1 / k) - (Pio - Po - R / k) * exp(-k * t)
-      }
-    }
-  )
-
   return [
     previous_data_point,
     {
       ...data_point,
-      compartments: compartments_gas
+      compartments: compartments_gas.map(
+        ({ gas_pressure: Po, ...rest }, index) => {
+          const k = compartments[index].nitrogen.k
+          return {
+            ...rest,
+            gas_pressure:
+              Pio + R * (t - 1 / k) - (Pio - Po - R / k) * exp(-k * t)
+          }
+        }
+      )
     }
   ]
 }
