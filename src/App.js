@@ -5,15 +5,19 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import * as ZHL16C from './buhlmann'
 import { DiveProfileChart } from './components'
+import { CompartmentsGasChart } from './components/CompartmentsGasChart'
+import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 
 // import dive from './dives/Dive_2013-10-31-0957.json'
 // import dive from './dives/Dive_2015-02-28-1040.json' // 50m
 // import dive from './dives/Dive_2015-05-31-0911.json'
 
-import { CompartmentsGasChart } from './components/CompartmentsGasChart'
+// My dives
+// import dive from './dives/Dive_2022-08-28-0946.json'
+// import dive from './dives/Dive_2022-04-12-0704.json'
 
+// Generator
 import dive from './dive-generator'
-import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 
 const Wrapper = styled.main`
   width: 100%;
