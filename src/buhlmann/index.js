@@ -139,6 +139,13 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   ]
 }
 
+const buhlmannCoefficientEquation = ({
+  coefficientN2: CN2,
+  coefficientHe: CHe,
+  startInertGasCompartmentPressureN2: PN2,
+  startInertGasCompartmentPressureHe: PHe
+}) => (CN2 * PN2 + CHe * PHe) / (PN2 + PHe)
+
 const calculateCompartmentCeiling = ([startSample, endSample]) => {
   return [
     startSample,
@@ -148,23 +155,23 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
         const { max } = Math
         const { pressureLoadN2 } = compartment
         const { N2, He } = compartments[index]
-        const pressure_n2 = pressureLoadN2
-        const pressure_he = 0
+        const pressureLoadHe = 0
 
-        const a_n2 = N2.a
-        const b_n2 = N2.b
-        const a_he = He.a
-        const b_he = He.b
-
-        const a_coefficient =
-          (a_n2 * pressure_n2 + a_he * pressure_he) /
-          (pressure_n2 + pressure_he)
-        const b_coefficient =
-          (b_n2 * pressure_n2 + b_he * pressure_he) /
-          (pressure_n2 + pressure_he)
+        const coefficientA = buhlmannCoefficientEquation({
+          coefficientN2: N2.a,
+          coefficientHe: He.a,
+          startInertGasCompartmentPressureN2: pressureLoadN2,
+          startInertGasCompartmentPressureHe: pressureLoadHe
+        })
+        const coefficientB = buhlmannCoefficientEquation({
+          coefficientN2: N2.b,
+          coefficientHe: He.b,
+          startInertGasCompartmentPressureN2: pressureLoadN2,
+          startInertGasCompartmentPressureHe: pressureLoadHe
+        })
 
         const ceiling =
-          (pressure_n2 + pressure_he - a_coefficient) * b_coefficient
+          (pressureLoadN2 + pressureLoadHe - coefficientA) * coefficientB
 
         return {
           ...compartment,
