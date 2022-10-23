@@ -5,7 +5,7 @@
       "depth": 1.49,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -15,7 +15,7 @@
       "depth": 2.39,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -25,7 +25,7 @@
       "depth": 3.21,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -35,7 +35,7 @@
       "depth": 3.35,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -45,7 +45,7 @@
       "depth": 8.6,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -55,7 +55,7 @@
       "depth": 12.75,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -65,7 +65,7 @@
       "depth": 16.16,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -75,7 +75,7 @@
       "depth": 20.75,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -85,7 +85,7 @@
       "depth": 22.43,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -95,7 +95,7 @@
       "depth": 21.6,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -105,7 +105,7 @@
       "depth": 21.96,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -115,7 +115,7 @@
       "depth": 23.51,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -125,7 +125,7 @@
       "depth": 25.51,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -135,7 +135,7 @@
       "depth": 26.05,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -145,7 +145,7 @@
       "depth": 25.59,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -155,7 +155,7 @@
       "depth": 26.04,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -165,7 +165,7 @@
       "depth": 25.59,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -175,7 +175,7 @@
       "depth": 24.46,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -185,7 +185,7 @@
       "depth": 24.39,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -195,7 +195,7 @@
       "depth": 24.44,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -205,7 +205,7 @@
       "depth": 23.42,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -215,7 +215,7 @@
       "depth": 22.5,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -225,7 +225,7 @@
       "depth": 23.17,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -235,7 +235,7 @@
       "depth": 22.83,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -245,7 +245,7 @@
       "depth": 22.79,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -255,7 +255,7 @@
       "depth": 23.87,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -265,7 +265,7 @@
       "depth": 24.8,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -275,7 +275,7 @@
       "depth": 24.5,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -285,7 +285,7 @@
       "depth": 24.55,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -295,7 +295,7 @@
       "depth": 24.39,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -305,7 +305,7 @@
       "depth": 24.37,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -315,7 +315,7 @@
       "depth": 24.14,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -325,7 +325,7 @@
       "depth": 23.35,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -335,7 +335,7 @@
       "depth": 23.08,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -345,7 +345,7 @@
       "depth": 23.87,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -355,7 +355,7 @@
       "depth": 24.01,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -365,7 +365,7 @@
       "depth": 24.21,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -375,7 +375,7 @@
       "depth": 23.58,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -385,7 +385,7 @@
       "depth": 23.9,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -395,7 +395,7 @@
       "depth": 23.3,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -405,7 +405,7 @@
       "depth": 24.01,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -415,7 +415,7 @@
       "depth": 24.61,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -425,7 +425,7 @@
       "depth": 24.82,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -435,7 +435,7 @@
       "depth": 25.57,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -445,7 +445,7 @@
       "depth": 26.2,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -455,7 +455,7 @@
       "depth": 25.15,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -465,7 +465,7 @@
       "depth": 25.42,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -475,7 +475,7 @@
       "depth": 25.65,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -485,7 +485,7 @@
       "depth": 25.14,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -495,7 +495,7 @@
       "depth": 23.88,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -505,7 +505,7 @@
       "depth": 22.42,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -515,7 +515,7 @@
       "depth": 21.78,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -525,7 +525,7 @@
       "depth": 20.31,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -535,7 +535,7 @@
       "depth": 18.26,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -545,7 +545,7 @@
       "depth": 16.55,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -555,7 +555,7 @@
       "depth": 14.42,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -565,7 +565,7 @@
       "depth": 13.19,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -575,7 +575,7 @@
       "depth": 11.7,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -585,7 +585,7 @@
       "depth": 9.69,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -595,7 +595,7 @@
       "depth": 9.21,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -605,7 +605,7 @@
       "depth": 8.59,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -615,7 +615,7 @@
       "depth": 8.06,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -625,7 +625,7 @@
       "depth": 8.96,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -635,7 +635,7 @@
       "depth": 7.68,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -645,7 +645,7 @@
       "depth": 7.54,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -655,7 +655,7 @@
       "depth": 8.32,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -665,7 +665,7 @@
       "depth": 7.57,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -675,7 +675,7 @@
       "depth": 7.54,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -685,7 +685,7 @@
       "depth": 8.22,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -695,7 +695,7 @@
       "depth": 9.23,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -705,7 +705,7 @@
       "depth": 10.15,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -715,7 +715,7 @@
       "depth": 9.67,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -725,7 +725,7 @@
       "depth": 9.22,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -735,7 +735,7 @@
       "depth": 9.57,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -745,7 +745,7 @@
       "depth": 10.85,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -755,7 +755,7 @@
       "depth": 11.57,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -765,7 +765,7 @@
       "depth": 10.58,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -775,7 +775,7 @@
       "depth": 9.96,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -785,7 +785,7 @@
       "depth": 8.83,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -795,7 +795,7 @@
       "depth": 7.1,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -805,7 +805,7 @@
       "depth": 5.98,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -815,7 +815,7 @@
       "depth": 4.73,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -825,7 +825,7 @@
       "depth": 4.78,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -835,7 +835,7 @@
       "depth": 4.84,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -845,7 +845,7 @@
       "depth": 5.3,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -855,7 +855,7 @@
       "depth": 5.03,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -865,7 +865,7 @@
       "depth": 4.98,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -875,7 +875,7 @@
       "depth": 4.82,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -885,7 +885,7 @@
       "depth": 4.77,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -895,7 +895,7 @@
       "depth": 4.69,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -905,7 +905,7 @@
       "depth": 5,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -915,7 +915,7 @@
       "depth": 4.34,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -925,7 +925,7 @@
       "depth": 4.37,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -935,7 +935,7 @@
       "depth": 4.52,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }
@@ -945,7 +945,7 @@
       "depth": 2.27,
       "temperature": 7,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }

@@ -5,7 +5,7 @@
       "depth": 1.56,
       "temperature": 22,
       "gasMixtures": {
-        "oxygen": 0.21,
+        "O2": 0.21,
         "nitrogen": 0.79,
         "He": 0
       }

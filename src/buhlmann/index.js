@@ -47,7 +47,7 @@ const calculatePartialPressureO2 = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      partialPressureO2: ambientPressure * gasMixtures.oxygen
+      partialPressureO2: ambientPressure * gasMixtures.O2
     }
   ]
 }
