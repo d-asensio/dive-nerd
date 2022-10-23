@@ -71,7 +71,7 @@ function App() {
     depth: 0,
     partialPressureO2: 0.21,
     partialPressureN2: 0.79,
-    ambient_pressure_delta: 0,
+    ambientPressureDelta: 0,
     timeDelta: 0,
     depthDelta: 0,
     descent_rate: 0

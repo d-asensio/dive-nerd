@@ -89,18 +89,18 @@ const calculateAmbientPressureDelta = ([startSample, endSample]) => [
   startSample,
   {
     ...endSample,
-    ambient_pressure_delta:
+    ambientPressureDelta:
       endSample.ambientPressure - startSample?.ambientPressure || 0
   }
 ]
 
 const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
-  const { timeDelta, ambient_pressure_delta } = endSample
+  const { timeDelta, ambientPressureDelta } = endSample
   return [
     startSample,
     {
       ...endSample,
-      descent_rate: (ambient_pressure_delta / timeDelta) * 60 || 0
+      descent_rate: (ambientPressureDelta / timeDelta) * 60 || 0
     }
   ]
 }

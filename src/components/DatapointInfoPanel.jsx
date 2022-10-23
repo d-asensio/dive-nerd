@@ -66,7 +66,7 @@ export function DatapointInfoPanel({ data }) {
     ambientPressure,
     partialPressureO2,
     partialPressureN2,
-    ambient_pressure_delta,
+    ambientPressureDelta,
     timeDelta,
     depthDelta,
     descent_rate
@@ -87,7 +87,7 @@ export function DatapointInfoPanel({ data }) {
         readOnly
         id="ambient_pressure_delta"
         label="Ambient p. Δ"
-        value={`${ambient_pressure_delta.toFixed(2)} bar`}
+        value={`${ambientPressureDelta.toFixed(2)} bar`}
       />
       <TextField
         readOnly
