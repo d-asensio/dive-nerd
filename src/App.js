@@ -74,7 +74,7 @@ function App() {
     ambientPressureDelta: 0,
     timeDelta: 0,
     depthDelta: 0,
-    descent_rate: 0
+    descentRate: 0
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 50)

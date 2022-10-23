@@ -69,7 +69,7 @@ export function DatapointInfoPanel({ data }) {
     ambientPressureDelta,
     timeDelta,
     depthDelta,
-    descent_rate
+    descentRate
   } = data
 
   return (
@@ -117,7 +117,7 @@ export function DatapointInfoPanel({ data }) {
         readOnly
         id="descent_rate"
         label="Descent Rate"
-        value={`${descent_rate.toFixed(2)} bar/min`}
+        value={`${descentRate.toFixed(2)} bar/min`}
       />
     </Wrapper>
   )

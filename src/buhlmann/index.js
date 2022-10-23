@@ -100,7 +100,7 @@ const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      descent_rate: (ambientPressureDelta / timeDelta) * 60 || 0
+      descentRate: (ambientPressureDelta / timeDelta) * 60 || 0
     }
   ]
 }
@@ -108,14 +108,14 @@ const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   const { exp } = Math
 
-  const { descent_rate, timeDelta, partialPressureN2 } = endSample
+  const { descentRate, timeDelta, partialPressureN2 } = endSample
 
   const compartments_gas =
     startSample?.compartments ?? getInitialCompartmentsGas()
 
   const Pio = partialPressureN2
 
-  const R = descent_rate * partialPressureN2
+  const R = descentRate * partialPressureN2
   const t = timeDelta / 60 // In Minutes
 
   return [
