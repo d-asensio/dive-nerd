@@ -1,5 +1,4 @@
 import { last, map, pipe, reduce } from 'ramda'
-import { pipeWithArgs } from './pipeWithArgs'
 import compartments from './compartments'
 
 /**

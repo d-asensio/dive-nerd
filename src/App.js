@@ -52,15 +52,8 @@ const calculateChartAxis = data_point => {
   }
 }
 
-const mapIndexed = addIndex(map)
-
-ZHL16C.resetTissues()
-
-const tranformDiveSamplesIntoChartData = mapIndexed(
-  pipe(ZHL16C.calculateDataPoint, calculateChartAxis)
-)
-
-const diveData = tranformDiveSamplesIntoChartData(dive.samples)
+const diveProfile = ZHL16C.calculateDiveProfile(dive.samples)
+const diveData = map(calculateChartAxis, diveProfile)
 
 const [maxDepthSample] = sort(
   ({ depth: da }, { depth: db }) => db - da,
