@@ -1,15 +1,17 @@
-import { last, map, pipe, reduce } from 'ramda'
+import { divide, last, map, pipe, reduce, __ } from 'ramda'
 import compartments from './compartments'
 
 /**
  * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
+const GRAVITY = 9.8 // m*s2
 
 /**
  * Dive variables
  */
-const surfacePressure = 1
+const surfacePressure = 1 // bar
+const waterDensity = 1023.6 // kg/m3
 
 export const getInitialCompartmentsGas = () => {
   const air_N2_partial_pressure = 0.79
@@ -25,20 +27,19 @@ export const getInitialCompartmentsGas = () => {
   )
 }
 
+const fromPascalsToBars = divide(__, 100000)
+
 const calculateAbmientPressure = ([startSample, endSample]) => {
   const { depth } = endSample
 
-  // const fresh_water_density = 997.0474
-  const salt_water_density = 1023.6 // kg/m^3 (in salty water) TODO: account for temperature?
-  const gravity = 9.8 // m*s^2
-  const pressure_in_pascals = depth * salt_water_density * gravity
-  const pressure_in_bars = pressure_in_pascals / 100000
+  const waterPressurePascals = depth * waterDensity * GRAVITY
+  const waterPressure = fromPascalsToBars(waterPressurePascals)
 
   return [
     startSample,
     {
       ...endSample,
-      ambientPressure: pressure_in_bars + surfacePressure
+      ambientPressure: waterPressure + surfacePressure
     }
   ]
 }
