@@ -114,32 +114,38 @@ const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
   ]
 }
 
-const calculateCompartmentGasLoad = ([startSample, endSample]) => {
-  const { exp } = Math
+const schreinerEquation = ({
+  inertGasAlveolarPressure: Palv,
+  inertGasPressureRateChange: R,
+  timeDelta: t,
+  comparmentDecayConstant: k,
+  startInertGasCompartmentPressure: Pi
+}) => Palv + R * (t - 1 / k) - (Palv - Pi - R / k) * Math.exp(-k * t)
 
-  const { descentRate, timeDelta, partialPressureN2 } = endSample
+const calculateCompartmentGasLoad = ([startSample, endSample]) => {
+  const { descentRate, timeDelta, partialPressureN2, gasMixtures } = endSample
 
   const compartments_gas =
     startSample?.compartments ?? getInitialCompartmentsGas()
 
-  const Pio = partialPressureN2
-
-  const R = descentRate * partialPressureN2
-  const t = timeDelta / 60 // In Minutes
+  const inertGasPressureRateChange = descentRate * gasMixtures.N2
+  const timeDeltaInMinutes = timeDelta / 60 // TODO: Convert everything to minutes
 
   return [
     startSample,
     {
       ...endSample,
       compartments: compartments_gas.map(
-        ({ pressureLoadN2: Po, ...rest }, index) => {
-          const k = compartments[index].N2.k
-          return {
-            ...rest,
-            pressureLoadN2:
-              Pio + R * (t - 1 / k) - (Pio - Po - R / k) * exp(-k * t)
-          }
-        }
+        ({ pressureLoadN2, ...rest }, index) => ({
+          ...rest,
+          pressureLoadN2: schreinerEquation({
+            inertGasAlveolarPressure: partialPressureN2,
+            inertGasPressureRateChange,
+            timeDelta: timeDeltaInMinutes,
+            comparmentDecayConstant: compartments[index].N2.k,
+            startInertGasCompartmentPressure: pressureLoadN2
+          })
+        })
       )
     }
   ]
