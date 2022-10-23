@@ -8,13 +8,13 @@ const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
 
 export const getInitialCompartmentsGas = () => {
   const surface_pressure_in_bars = 1
-  const air_nitrogen_partial_pressure = 0.79
+  const air_N2_partial_pressure = 0.79
 
   return map(
     ({ id }) => ({
       id,
       gas_pressure:
-        air_nitrogen_partial_pressure *
+        air_N2_partial_pressure *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
     }),
     compartments
@@ -63,7 +63,7 @@ const calculatePartialPressureN2 = ([startSample, endSample]) => {
       ...endSample,
       partialPressureN2:
         ambientPressure *
-        gasMixtures.nitrogen *
+        gasMixtures.N2 *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
     }
   ]
@@ -124,7 +124,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
       ...endSample,
       compartments: compartments_gas.map(
         ({ gas_pressure: Po, ...rest }, index) => {
-          const k = compartments[index].nitrogen.k
+          const k = compartments[index].N2.k
           return {
             ...rest,
             gas_pressure:
@@ -144,12 +144,12 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       compartments: endSample.compartments.map((compartment, index) => {
         const { max } = Math
         const { gas_pressure } = compartment
-        const { nitrogen, He } = compartments[index]
+        const { N2, He } = compartments[index]
         const pressure_n2 = gas_pressure
         const pressure_he = 0
 
-        const a_n2 = nitrogen.a
-        const b_n2 = nitrogen.b
+        const a_n2 = N2.a
+        const b_n2 = N2.b
         const a_he = He.a
         const b_he = He.b
 

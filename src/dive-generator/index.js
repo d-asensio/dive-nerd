@@ -92,7 +92,7 @@ export const createDiveGenerator = ({
           temperature: 21,
           gasMixtures: {
             O2: 0.21,
-            nitrogen: 0.79,
+            N2: 0.79,
             He: 0
           }
         }
