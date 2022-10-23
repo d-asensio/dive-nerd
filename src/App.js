@@ -62,8 +62,8 @@ const [maxDepthSample] = sort(
 
 function App() {
   const [currentDatapoint, setData] = useState({
-    compartments: [],
-    pressure: 1,
+    compartments: ZHL16C.getInitialCompartmentsGas(),
+    ambientPressure: 1,
     time: 0,
     depth: 0,
     pressureO2: 0.21,
@@ -88,7 +88,7 @@ function App() {
         </Frame>
         <CompartmentsGasChart
           data={currentDatapoint}
-          maxAmbientPressure={maxDepthSample.pressure}
+          maxAmbientPressure={maxDepthSample.ambientPressure}
         />
       </Sidebar>
     </Wrapper>

@@ -63,7 +63,7 @@ export function DatapointInfoPanel({ data }) {
   const {
     time,
     depth,
-    pressure,
+    ambientPressure,
     pressureO2,
     pressureN,
     ambient_pressure_delta,
@@ -81,7 +81,7 @@ export function DatapointInfoPanel({ data }) {
         readOnly
         id="ambient_pressure"
         label="Ambient p."
-        value={`${pressure.toFixed(2)} bar`}
+        value={`${ambientPressure.toFixed(2)} bar`}
       />
       <TextField
         readOnly

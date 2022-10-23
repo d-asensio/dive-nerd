@@ -6,7 +6,7 @@ import compartments from './compartments'
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
 
-const getInitialCompartmentsGas = () => {
+export const getInitialCompartmentsGas = () => {
   const surface_pressure_in_bars = 1
   const air_nitrogen_partial_pressure = 0.79
 
@@ -35,25 +35,25 @@ const calculateAbmientPressure = ([previous_data_point, data_point]) => {
     previous_data_point,
     {
       ...data_point,
-      pressure: pressure_in_bars + surface_pressure_in_bars
+      ambientPressure: pressure_in_bars + surface_pressure_in_bars
     }
   ]
 }
 
 const calculatePartialPressureO2 = ([previous_data_point, data_point]) => {
-  const { pressure, gasMixtures } = data_point
+  const { ambientPressure, gasMixtures } = data_point
 
   return [
     previous_data_point,
     {
       ...data_point,
-      pressureO2: pressure * gasMixtures.oxygen
+      pressureO2: ambientPressure * gasMixtures.oxygen
     }
   ]
 }
 
 const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
-  const { pressure, gasMixtures } = data_point
+  const { ambientPressure, gasMixtures } = data_point
 
   const surface_pressure_in_bars = 1
 
@@ -62,7 +62,7 @@ const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
     {
       ...data_point,
       pressureN:
-        pressure *
+        ambientPressure *
         gasMixtures.nitrogen *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
     }
@@ -90,7 +90,7 @@ const calculateAmbientPressureDelta = ([previous_data_point, data_point]) => [
   {
     ...data_point,
     ambient_pressure_delta:
-      data_point.pressure - previous_data_point?.pressure || 0
+      data_point.ambientPressure - previous_data_point?.ambientPressure || 0
   }
 ]
 

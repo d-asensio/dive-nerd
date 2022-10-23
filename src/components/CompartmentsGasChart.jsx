@@ -23,7 +23,7 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
     <>
       {bars.map(({ key, y, height, data }) => {
         const scaledCeiling = xScale(data.data.ceiling)
-        
+
         return (
           <line
             key={key}
@@ -43,7 +43,7 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
 }
 
 export const CompartmentsGasChart = ({
-  data: { compartments, pressure },
+  data: { compartments, ambientPressure },
   maxAmbientPressure
 }) => (
   <Wrapper>
@@ -73,9 +73,9 @@ export const CompartmentsGasChart = ({
         markers={[
           {
             axis: 'x',
-            value: pressure,
+            value: ambientPressure,
             lineStyle: { stroke: 'rgba(0, 0, 0, .35)', strokeWidth: 2 },
-            legend: `Ambient Pressure (${pressure.toFixed(2)} bar)`,
+            legend: `Ambient Pressure (${ambientPressure.toFixed(2)} bar)`,
             legendOrientation: 'vertical'
           }
         ]}
