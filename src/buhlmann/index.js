@@ -27,6 +27,13 @@ const getInitialCompartmentsGas = () => {
   )
 }
 
+// TODO: Refactor this to be a pure function
+let compartments_gas
+
+export const resetTissues = () => {
+  compartments_gas = getInitialCompartmentsGas()
+}
+
 const calculateAbmientPressure = data_point => {
   const { depth } = data_point
 
@@ -102,9 +109,6 @@ const calculateBarsPerMinutDescentRate = data_point => {
     descent_rate: (ambient_pressure_delta / time_delta) * 60 || 0
   }
 }
-
-// TODO: Refactor this to be a pure function
-let compartments_gas = getInitialCompartmentsGas()
 
 const calculateCompartmentGasLoad = data_point => {
   const { exp } = Math
