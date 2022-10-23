@@ -54,6 +54,7 @@ const calculateChartAxis = sample => {
 
 console.time('Time to calculate profile:')
 const diveProfile = ZHL16C.calculateDiveProfile(dive.samples)
+console.log(diveProfile)
 console.timeEnd('Time to calculate profile:')
 
 const diveData = map(calculateChartAxis, diveProfile)
