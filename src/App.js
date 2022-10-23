@@ -14,10 +14,10 @@ import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 
 // My dives
 // import dive from './dives/Dive_2022-08-28-0946.json'
-// import dive from './dives/Dive_2022-04-12-0704.json'
+import dive from './dives/Dive_2022-04-12-0704.json'
 
 // Generator
-import dive from './dive-generator'
+// import dive from './dive-generator'
 
 const Wrapper = styled.main`
   width: 100%;

@@ -2,11 +2,6 @@ import { last, map, pipe, reduce } from 'ramda'
 import compartments from './compartments'
 
 /**
- * IDEAS:
- * - Use instantaneous equation to calculate ongass for the first data point
- */
-
-/**
  * TODO: Validate this constant. Does this change at different ambient pressure (depth)?
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
@@ -78,9 +73,7 @@ const calculateTimeDelta = ([previous_data_point, data_point]) => [
   previous_data_point,
   {
     ...data_point,
-    time_delta: previous_data_point
-      ? data_point.time - previous_data_point.time
-      : 0
+    time_delta: data_point.time - previous_data_point?.time || 0
   }
 ]
 
@@ -88,9 +81,7 @@ const calculateDepthDelta = ([previous_data_point, data_point]) => [
   previous_data_point,
   {
     ...data_point,
-    depth_delta: previous_data_point
-      ? data_point.depth - previous_data_point.depth
-      : data_point.depth
+    depth_delta: data_point.depth - previous_data_point?.depth || 0
   }
 ]
 
@@ -98,9 +89,8 @@ const calculateAmbientPressureDelta = ([previous_data_point, data_point]) => [
   previous_data_point,
   {
     ...data_point,
-    ambient_pressure_delta: previous_data_point
-      ? data_point.pressure - previous_data_point.pressure
-      : 0
+    ambient_pressure_delta:
+      data_point.pressure - previous_data_point?.pressure || 0
   }
 ]
 
