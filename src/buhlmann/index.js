@@ -146,6 +146,12 @@ const buhlmannCoefficientEquation = ({
   startInertGasCompartmentPressureHe: PHe
 }) => (CN2 * PN2 + CHe * PHe) / (PN2 + PHe)
 
+const buhlmannBakerCeilingEquation = ({
+  inertGasCompartmentPressure: P,
+  coefficientA: A,
+  coefficientB: B
+}) => (P - A) * B
+
 const calculateCompartmentCeiling = ([startSample, endSample]) => {
   return [
     startSample,
@@ -170,8 +176,11 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
           startInertGasCompartmentPressureHe: pressureLoadHe
         })
 
-        const ceiling =
-          (pressureLoadN2 + pressureLoadHe - coefficientA) * coefficientB
+        const ceiling = buhlmannBakerCeilingEquation({
+          inertGasCompartmentPressure: pressureLoadN2 + pressureLoadHe,
+          coefficientA,
+          coefficientB
+        })
 
         return {
           ...compartment,
