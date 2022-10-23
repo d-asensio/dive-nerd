@@ -70,7 +70,7 @@ function App() {
     ambientPressure: 1,
     time: 0,
     depth: 0,
-    partialPressureN2: 0.79,
+    alveolarPressureN2: 0.79,
     ambientPressureDelta: 0,
     timeDelta: 0,
     depthDelta: 0,

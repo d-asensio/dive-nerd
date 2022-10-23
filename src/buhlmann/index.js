@@ -51,14 +51,14 @@ const calculateAbmientPressure = ([startSample, endSample]) => {
   ]
 }
 
-const calculatePartialPressureN2 = ([startSample, endSample]) => {
+const calculateAlveolarPressureN2 = ([startSample, endSample]) => {
   const { ambientPressure, gasMixtures } = endSample
 
   return [
     startSample,
     {
       ...endSample,
-      partialPressureN2: inertGasAlveolarPressure(
+      alveolarPressureN2: inertGasAlveolarPressure(
         gasMixtures.N2,
         ambientPressure
       )
@@ -111,7 +111,7 @@ const schreinerEquation = ({
 }) => Palv + R * (t - 1 / k) - (Palv - Pi - R / k) * Math.exp(-k * t)
 
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
-  const { descentRate, timeDelta, partialPressureN2, gasMixtures } = endSample
+  const { descentRate, timeDelta, alveolarPressureN2, gasMixtures } = endSample
 
   const compartments_gas =
     startSample?.compartments ?? getInitialCompartmentsGas()
@@ -127,7 +127,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
         ({ pressureLoadN2, ...rest }, index) => ({
           ...rest,
           pressureLoadN2: schreinerEquation({
-            inertGasAlveolarPressure: partialPressureN2,
+            inertGasAlveolarPressure: alveolarPressureN2,
             inertGasPressureRateChange,
             timeDelta: timeDeltaInMinutes,
             comparmentDecayConstant: compartments[index].N2.k,
@@ -179,7 +179,7 @@ const extactDataPointFromInterval = ([_, endSample]) => endSample
 
 export const calculateDataPointFromInterval = pipe(
   calculateAbmientPressure,
-  calculatePartialPressureN2,
+  calculateAlveolarPressureN2,
   calculateAmbientPressureDelta,
   calculateTimeDelta,
   calculateDepthDelta,
