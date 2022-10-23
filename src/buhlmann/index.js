@@ -41,19 +41,19 @@ const calculateAbmientPressure = ([previous_data_point, data_point]) => {
 }
 
 const calculatePartialPressureO2 = ([previous_data_point, data_point]) => {
-  const { pressure, gas_mixtures } = data_point
+  const { pressure, gasMixtures } = data_point
 
   return [
     previous_data_point,
     {
       ...data_point,
-      pressureO2: pressure * gas_mixtures.oxygen
+      pressureO2: pressure * gasMixtures.oxygen
     }
   ]
 }
 
 const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
-  const { pressure, gas_mixtures } = data_point
+  const { pressure, gasMixtures } = data_point
 
   const surface_pressure_in_bars = 1
 
@@ -63,7 +63,7 @@ const calculatePartialPressureN2 = ([previous_data_point, data_point]) => {
       ...data_point,
       pressureN:
         pressure *
-        gas_mixtures.nitrogen *
+        gasMixtures.nitrogen *
         (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
     }
   ]

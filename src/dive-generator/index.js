@@ -90,7 +90,7 @@ export const createDiveGenerator = ({
           time,
           depth: depth + perlinDepth,
           temperature: 21,
-          gas_mixtures: {
+          gasMixtures: {
             oxygen: 0.21,
             nitrogen: 0.79,
             helium: 0

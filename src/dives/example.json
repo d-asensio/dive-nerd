@@ -1,0 +1,14 @@
+{
+  "samples": [
+    {
+      "time": 0,
+      "depth": 1.56,
+      "temperature": 22,
+      "gasMixtures": {
+        "oxygen": 0.21,
+        "nitrogen": 0.79,
+        "helium": 0
+      }
+    }
+  ]
+}
