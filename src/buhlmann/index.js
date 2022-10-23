@@ -1,4 +1,4 @@
-import { divide, last, map, pipe, reduce, __ } from 'ramda'
+import { divide, last, map, multiply, subtract, pipe, reduce, __ } from 'ramda'
 import compartments from './compartments'
 
 /**
@@ -13,21 +13,28 @@ const GRAVITY = 9.8 // m*s2
 const surfacePressure = 1 // bar
 const waterDensity = 1023.6 // kg/m3
 
+/**
+ * Utility functions
+ */
+const fromPascalsToBars = divide(__, 100000)
+
+const inertGasAlveolarPressure = (inertGasFraction, ambientPressure) =>
+  inertGasFraction * (ambientPressure - WATER_VAPOUR_PARTIAL_PRESSURE)
+
 export const getInitialCompartmentsGas = () => {
-  const air_N2_partial_pressure = 0.79
+  const initialPartialPressureN2 = 0.79
 
   return map(
     ({ id }) => ({
       id,
-      pressureLoadN2:
-        air_N2_partial_pressure *
-        (surfacePressure - WATER_VAPOUR_PARTIAL_PRESSURE)
+      pressureLoadN2: inertGasAlveolarPressure(
+        initialPartialPressureN2,
+        surfacePressure
+      )
     }),
     compartments
   )
 }
-
-const fromPascalsToBars = divide(__, 100000)
 
 const calculateAbmientPressure = ([startSample, endSample]) => {
   const { depth } = endSample
@@ -63,10 +70,10 @@ const calculatePartialPressureN2 = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      partialPressureN2:
-        ambientPressure *
-        gasMixtures.N2 *
-        (surfacePressure - WATER_VAPOUR_PARTIAL_PRESSURE)
+      partialPressureN2: inertGasAlveolarPressure(
+        gasMixtures.N2,
+        ambientPressure
+      )
     }
   ]
 }
