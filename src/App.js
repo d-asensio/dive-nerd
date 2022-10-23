@@ -57,7 +57,7 @@ const mapIndexed = addIndex(map)
 ZHL16C.resetTissues()
 
 const tranformDiveSamplesIntoChartData = mapIndexed(
-  pipe(ZHL16C.calculateDataInterval, calculateChartAxis)
+  pipe(ZHL16C.calculateDataPoint, calculateChartAxis)
 )
 
 const diveData = tranformDiveSamplesIntoChartData(dive.samples)

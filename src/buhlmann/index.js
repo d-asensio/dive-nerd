@@ -191,7 +191,9 @@ const calculateCompartmentCeiling = ([previous_data_point, data_point]) => {
   ]
 }
 
-export const calculateDataInterval = pipe(
+const extactDataPointFromInterval = ([_, data_point]) => data_point
+
+export const calculateDataPoint = pipe(
   calculateAbmientPressure,
   calculatePartialPressureO2,
   calculatePartialPressureN2,
@@ -200,15 +202,14 @@ export const calculateDataInterval = pipe(
   calculateDepthDelta,
   calculateBarsPerMinutDescentRate,
   calculateCompartmentGasLoad,
-  calculateCompartmentCeiling
+  calculateCompartmentCeiling,
+  extactDataPointFromInterval
 )
 
 export const calculateDataPointReducer = (acc, currentPoint) => {
-  const currentInterval = [last(acc), currentPoint]
-  const nextInterval = calculateDataInterval(currentInterval)
-  const [_, calculatedDataPoint] = nextInterval
+  const iterval = [last(acc), currentPoint]
 
-  return [...acc, calculatedDataPoint]
+  return [...acc, calculateDataPoint(iterval)]
 }
 
 export const calculateDiveProfile = reduce(calculateDataPointReducer, [])
