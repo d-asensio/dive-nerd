@@ -64,7 +64,7 @@ export function DatapointInfoPanel({ data }) {
     time,
     depth,
     ambientPressure,
-    pressureO2,
+    partialPressureO2,
     pressureN,
     ambient_pressure_delta,
     time_delta,
@@ -93,7 +93,7 @@ export function DatapointInfoPanel({ data }) {
         readOnly
         id="oxygen_partial_pressure"
         label="O2 p.p."
-        value={`${pressureO2.toFixed(2)} bar`}
+        value={`${partialPressureO2.toFixed(2)} bar`}
       />
       <TextField
         readOnly
