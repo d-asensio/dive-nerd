@@ -6,8 +6,12 @@ import compartments from './compartments'
  */
 const WATER_VAPOUR_PARTIAL_PRESSURE = 0.0567
 
+/**
+ * Dive variables
+ */
+const surfacePressure = 1
+
 export const getInitialCompartmentsGas = () => {
-  const surface_pressure_in_bars = 1
   const air_N2_partial_pressure = 0.79
 
   return map(
@@ -15,7 +19,7 @@ export const getInitialCompartmentsGas = () => {
       id,
       pressureLoadN2:
         air_N2_partial_pressure *
-        (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+        (surfacePressure - WATER_VAPOUR_PARTIAL_PRESSURE)
     }),
     compartments
   )
@@ -24,7 +28,6 @@ export const getInitialCompartmentsGas = () => {
 const calculateAbmientPressure = ([startSample, endSample]) => {
   const { depth } = endSample
 
-  const surface_pressure_in_bars = 1
   // const fresh_water_density = 997.0474
   const salt_water_density = 1023.6 // kg/m^3 (in salty water) TODO: account for temperature?
   const gravity = 9.8 // m*s^2
@@ -35,7 +38,7 @@ const calculateAbmientPressure = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      ambientPressure: pressure_in_bars + surface_pressure_in_bars
+      ambientPressure: pressure_in_bars + surfacePressure
     }
   ]
 }
@@ -55,8 +58,6 @@ const calculatePartialPressureO2 = ([startSample, endSample]) => {
 const calculatePartialPressureN2 = ([startSample, endSample]) => {
   const { ambientPressure, gasMixtures } = endSample
 
-  const surface_pressure_in_bars = 1
-
   return [
     startSample,
     {
@@ -64,7 +65,7 @@ const calculatePartialPressureN2 = ([startSample, endSample]) => {
       partialPressureN2:
         ambientPressure *
         gasMixtures.N2 *
-        (surface_pressure_in_bars - WATER_VAPOUR_PARTIAL_PRESSURE)
+        (surfacePressure - WATER_VAPOUR_PARTIAL_PRESSURE)
     }
   ]
 }
