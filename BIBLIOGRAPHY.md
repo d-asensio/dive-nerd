@@ -28,6 +28,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 ## Blogs
 
 - [The Theoretical Diver](https://thetheoreticaldiver.org/wordpress/)
+    - [Real gas blender](https://thetheoreticaldiver.org/rch-cgi-bin/blender.pl)
 
 ## Deco concepts
 
@@ -74,9 +75,11 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - (PENDING) [Doppler Ultrasound](https://fetalmedicine.org/var/uploads/web/Doppler/Doppler%20Ultrasound%20-%20Principles%20and%20practice.pdf)
 
-## Math
+## Math and physics
 
 - [Differential equations](https://www.khanacademy.org/math/differential-equations/first-order-differential-equations#homogeneous-equations)
+
+- [Half-time](https://en.wikipedia.org/wiki/Half_time_(physics))
 
 ## Other scuba diving software
 
@@ -86,3 +89,5 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - [decotengu](https://wrobell.dcmod.org/decotengu/index.html)
   - [repo](https://github.com/gully/decotengu)
+- [Gas planner](https://jirkapok.github.io/GasPlanner/)
+  - [nyxtom dive](https://github.com/nyxtom/dive)
