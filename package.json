@@ -1,5 +1,5 @@
 {
-  "name": "no-deco-time-app",
+  "name": "@dive-nerd/app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
