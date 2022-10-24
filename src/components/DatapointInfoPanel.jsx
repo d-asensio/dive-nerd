@@ -51,7 +51,7 @@ const Input = styled.input`
 `
 
 function NumericField({ id, label, units, value, precision = 2, ...rest }) {
-  const formattedValue = value ? `${value.toFixed(precision)} ${units}` : ''
+  const formattedValue = typeof value === 'number' ? `${value.toFixed(precision)} ${units}` : ''
 
   return (
     <Fieldset>

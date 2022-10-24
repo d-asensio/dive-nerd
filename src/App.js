@@ -17,7 +17,102 @@ import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 // import dive from './dives/Dive_2022-04-12-0704.json'
 
 // Generator
-import dive from './dive-generator'
+// import dive from './dive-generator' TODO: Fix that
+
+const dive = {
+  samples: [
+    {
+      time: 0,
+      depth: 0,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 2 * 60,
+      depth: 35,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 12 * 60,
+      depth: 35,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 14 * 60 + 13,
+      depth: 15,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 15 * 60 + 43,
+      depth: 6,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 16 * 60 + 45,
+      depth: 6,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 17 * 60 + 45,
+      depth: 3,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 21 * 60 + 40,
+      depth: 3,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    },
+    {
+      time: 22 * 60 + 40,
+      depth: 0,
+      temperature: 21,
+      gasMixtures: {
+        O2: 0.21,
+        N2: 0.79,
+        He: 0
+      }
+    }
+  ]
+}
 
 const Wrapper = styled.main`
   width: 100%;

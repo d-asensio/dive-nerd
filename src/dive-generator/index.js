@@ -4,7 +4,7 @@ const { Noise } = require('noisejs')
 const noise = new Noise(Math.random())
 
 const specsExample = {
-  samplingIntervals: 1,
+  samplingIntervals: 50,
   initialDepth: 0,
   segments: [
     {

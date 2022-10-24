@@ -18,19 +18,26 @@ const gradientFactors = [0.3, 0.75]
  * Utility functions
  */
 const fromPascalsToBars = divide(__, 100000)
-
 const fromBarsToPascals = multiply(__, 100000)
 
-const fromPressureToDepth = ({ pressure: P, waterDensity: Wd }) => {
-  const Ppas = fromBarsToPascals(P)
+const fromPressureToDepth = ({
+  surfacePressure: Ps,
+  waterPressure: Pw,
+  waterDensity: Wd
+}) => {
+  const Pwpas = fromBarsToPascals(Pw - Ps)
 
-  return Ppas / (Wd * GRAVITY)
+  return Pwpas / (Wd * GRAVITY)
 }
 
-const fromDepthToPressure = ({ depth: D, waterDensity: Wd }) => {
-  const Ppas = D * Wd * GRAVITY
+const fromDepthToPressure = ({
+  depth: D,
+  surfacePressure: Ps,
+  waterDensity: Wd
+}) => {
+  const Pwpas = D * Wd * GRAVITY
 
-  return fromPascalsToBars(Ppas)
+  return fromPascalsToBars(Pwpas) + Ps
 }
 
 const inertGasAlveolarPressure = (inertGasFraction, ambientPressure) =>
@@ -54,14 +61,15 @@ export const getInitialCompartmentsGas = () => {
 const calculateAbmientPressure = ([startSample, endSample]) => {
   const { depth } = endSample
 
-  const waterPressurePascals = depth * waterDensity * GRAVITY
-  const waterPressure = fromPascalsToBars(waterPressurePascals)
-
   return [
     startSample,
     {
       ...endSample,
-      ambientPressure: waterPressure + surfacePressure
+      ambientPressure: fromDepthToPressure({
+        depth,
+        waterDensity,
+        surfacePressure
+      })
     }
   ]
 }
@@ -166,7 +174,7 @@ const buhlmannBakerCeilingEquation = ({
   coefficientA: A,
   coefficientB: B,
   gradientFactor: gf
-}) => Math.max(0, (P - A * gf) / (gf / B + 1 - gf))
+}) => (P - A * gf) / (gf / B + 1 - gf)
 
 const calculateCompartmentCeiling = ([startSample, endSample]) => {
   const compartments = endSample.compartments.map((compartment, index) => {
@@ -232,8 +240,16 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      lowCeiling: Math.max(0, (lowCeiling - 1) * 10), // fromPressureToDepth({ pressure: lowCeiling, waterDensity })
-      highCeiling: Math.max(0, (highCeiling - 1) * 10), // fromPressureToDepth({ pressure: highCeiling, waterDensity })
+      lowCeiling: fromPressureToDepth({
+        waterPressure: lowCeiling,
+        waterDensity,
+        surfacePressure
+      }),
+      highCeiling: fromPressureToDepth({
+        waterPressure: highCeiling,
+        waterDensity,
+        surfacePressure
+      }),
       compartments
     }
   ]
