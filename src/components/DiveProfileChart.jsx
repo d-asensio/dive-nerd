@@ -19,6 +19,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
   return (
     <Wrapper>
       <ResponsiveLine
+        enablePoints={false}
         data={[
           {
             id: 'Dive Profile',
