@@ -94,3 +94,8 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
   - [repo](https://github.com/gully/decotengu)
 - [Gas planner](https://jirkapok.github.io/GasPlanner/)
   - [nyxtom dive](https://github.com/nyxtom/dive)
+
+## Online divelogs
+
+- [DiveLogs DE](https://en.divelogs.de/)
+- [DiveSite](https://dive.site/)
