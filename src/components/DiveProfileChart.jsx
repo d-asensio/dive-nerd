@@ -47,8 +47,19 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
               }
             }),
           },
+          {
+            id: 'Max Value',
+            data: data.map(dataPoint => {
+              const { time, maxValue } = dataPoint
+              return {
+                ...dataPoint,
+                x: time / 60,
+                y: maxValue
+              }
+            }),
+          },
         ]}
-        colors={['#3daff7', '#e09f3e', '#9E2A2B']}
+        colors={['#3daff7', '#e09f3e', '#9E2A2B', '#ff0df7']}
         margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
         xScale={{ type: 'linear' }}
         yScale={{

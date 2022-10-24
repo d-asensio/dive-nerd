@@ -55,6 +55,23 @@ const CeilingValuesLayer = ({ bars, xScale }) => {
           />
         )
       })}
+      {bars.map(({ key, y, height, data }) => {
+        const scaledCeiling = xScale(data.data.maxValue)
+
+        return (
+          <line
+            key={key}
+            x1={scaledCeiling}
+            y1={y}
+            x2={scaledCeiling}
+            y2={y + height}
+            style={{
+              stroke: '#ff0df7',
+              strokeWidth: 1
+            }}
+          />
+        )
+      })}
     </>
   )
 }

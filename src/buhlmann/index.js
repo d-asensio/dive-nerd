@@ -211,10 +211,18 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       gradientFactor: highGradientFactor
     })
 
+    const maxValue = buhlmannBakerCeilingEquation({
+      inertGasCompartmentPressure: pressureLoadN2 + pressureLoadHe,
+      coefficientA,
+      coefficientB,
+      gradientFactor: 1
+    })
+
     return {
       ...compartment,
       lowCeiling,
-      highCeiling
+      highCeiling,
+      maxValue
     }
   })
 
@@ -236,6 +244,15 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     compartments
   )
 
+  const mostRestrictiveTissueMaxValue = reduce(
+    (acc, compartment) => {
+      if (!acc || compartment.maxValue > acc.maxValue) return compartment
+      return acc
+    },
+    null,
+    compartments
+  )
+
   const lowCeilingDepth = fromPressureToDepth({
     waterPressure: mostRestrictiveTissueLow.lowCeiling,
     waterDensity,
@@ -248,12 +265,19 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     surfacePressure
   })
 
+  const maxValueDepth = fromPressureToDepth({
+    waterPressure: mostRestrictiveTissueMaxValue.maxValue,
+    waterDensity,
+    surfacePressure
+  })
+
   return [
     startSample,
     {
       ...endSample,
       lowCeiling: Math.max(0, lowCeilingDepth),
       highCeiling: Math.max(0, highCeilingDepth),
+      maxValue: Math.max(0, maxValueDepth),
       compartments
     }
   ]
