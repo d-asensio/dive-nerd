@@ -50,6 +50,28 @@ const Input = styled.input`
   }
 `
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatTime (totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
+}
+
+function TimeField({ id, label, value, ...rest }) {
+  const formattedValue = typeof value === 'number' ? `${formatTime(value)} min` : ''
+
+  return (
+    <Fieldset>
+      <Label htmlFor={id}>{label}</Label>
+      <Input id={id} value={formattedValue} {...rest} />
+    </Fieldset>
+  )
+}
+
 function NumericField({ id, label, units, value, precision = 2, ...rest }) {
   const formattedValue = typeof value === 'number' ? `${value.toFixed(precision)} ${units}` : ''
 
@@ -78,12 +100,11 @@ export function DatapointInfoPanel({ data }) {
   return (
     <Wrapper>
       <Text>Datapoint Information</Text>
-      <NumericField
+      <TimeField
         readOnly
         id="time"
         label="Time"
         value={time}
-        units="s"
       />
       <NumericField
         readOnly
