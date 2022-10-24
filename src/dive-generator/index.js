@@ -1,4 +1,3 @@
-import { flatten, last, map, pipe, range, reduce } from 'ramda'
 const { Noise } = require('noisejs')
 
 const noise = new Noise(Math.random())
