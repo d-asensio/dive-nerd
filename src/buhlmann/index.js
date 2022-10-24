@@ -218,7 +218,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     }
   })
 
-  const { lowCeiling } = reduce(
+  const mostRestrictiveTissueLow = reduce(
     (acc, compartment) => {
       if (!acc || compartment.lowCeiling > acc.lowCeiling) return compartment
       return acc
@@ -227,7 +227,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     compartments
   )
 
-  const { highCeiling } = reduce(
+  const mostRestrictiveTissueHigh = reduce(
     (acc, compartment) => {
       if (!acc || compartment.highCeiling > acc.highCeiling) return compartment
       return acc
@@ -236,20 +236,24 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     compartments
   )
 
+  const lowCeilingDepth = fromPressureToDepth({
+    waterPressure: mostRestrictiveTissueLow.lowCeiling,
+    waterDensity,
+    surfacePressure
+  })
+
+  const highCeilingDepth = fromPressureToDepth({
+    waterPressure: mostRestrictiveTissueHigh.highCeiling,
+    waterDensity,
+    surfacePressure
+  })
+
   return [
     startSample,
     {
       ...endSample,
-      lowCeiling: fromPressureToDepth({
-        waterPressure: lowCeiling,
-        waterDensity,
-        surfacePressure
-      }),
-      highCeiling: fromPressureToDepth({
-        waterPressure: highCeiling,
-        waterDensity,
-        surfacePressure
-      }),
+      lowCeiling: Math.max(0, lowCeilingDepth),
+      highCeiling: Math.max(0, highCeilingDepth),
       compartments
     }
   ]
