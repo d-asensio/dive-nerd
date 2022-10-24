@@ -44,17 +44,19 @@ const Input = styled.input`
   height: 25px;
   min-width: 80px;
   max-width: 90px;
-  
+
   &:focus {
     box-shadow: 0 0 0 2px ${violet.violet8};
   }
 `
 
-function TextField({ id, label, ...rest }) {
+function NumericField({ id, label, units, value, precision = 2, ...rest }) {
+  const formattedValue = value ? `${value.toFixed(precision)} ${units}` : ''
+
   return (
     <Fieldset>
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} {...rest} />
+      <Input id={id} value={formattedValue} {...rest} />
     </Fieldset>
   )
 }
@@ -76,55 +78,75 @@ export function DatapointInfoPanel({ data }) {
   return (
     <Wrapper>
       <Text>Datapoint Information</Text>
-      <TextField readOnly id="time" label="Time" value={`${time} s`} />
-      <TextField readOnly id="depth" label="Depth" value={`${depth.toFixed(2)} m`} />
-      <TextField
+      <NumericField
+        readOnly
+        id="time"
+        label="Time"
+        value={time}
+        units="s"
+      />
+      <NumericField
+        readOnly
+        id="depth"
+        label="Depth"
+        value={depth}
+        units="m"
+      />
+      <NumericField
         readOnly
         id="ambient_pressure"
         label="Ambient p."
-        value={`${ambientPressure.toFixed(2)} bar`}
+        value={ambientPressure}
+        units="bar"
       />
-      <TextField
+      <NumericField
         readOnly
         id="ambient_pressure_delta"
         label="Ambient p. Δ"
-        value={`${ambientPressureDelta.toFixed(2)} bar`}
+        value={ambientPressureDelta}
+        units="bar"
       />
-      <TextField
+      <NumericField
         readOnly
         id="alvelar_pressure_N2"
         label="N2 Alveolar p."
-        value={`${alveolarPressureN2.toFixed(2)} bar`}
+        value={alveolarPressureN2}
+        units="bar"
       />
-      <TextField
+      <NumericField
         readOnly
         id="time_delta"
         label="Time Δ"
-        value={`${timeDelta.toFixed(2)} s`}
+        value={timeDelta}
+        units="s"
       />
-      <TextField
+      <NumericField
         readOnly
         id="depth_delta"
         label="Depth Δ"
-        value={`${depthDelta.toFixed(2)} m`}
+        value={depthDelta}
+        units="m"
       />
-      <TextField
+      <NumericField
         readOnly
         id="descent_rate"
         label="Descent Rate"
-        value={`${descentRate.toFixed(2)} bar/min`}
+        value={descentRate}
+        units="bar/min"
       />
-      <TextField
+      <NumericField
         readOnly
         id="low_ceiling"
         label="Low Ceiling"
-        value={`${lowCeiling.toFixed(2)} m`}
+        value={lowCeiling}
+        units="m"
       />
-      <TextField
+      <NumericField
         readOnly
         id="high_ceiling"
         label="High Ceiling"
-        value={`${highCeiling.toFixed(2)} m`}
+        value={highCeiling}
+        units="m"
       />
     </Wrapper>
   )

@@ -67,16 +67,7 @@ const [maxDepthSample] = sort(
 function App() {
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
-    ambientPressure: 1,
-    time: 0,
-    depth: 0,
-    alveolarPressureN2: 0.79,
-    ambientPressureDelta: 0,
-    timeDelta: 0,
-    depthDelta: 0,
-    descentRate: 0,
-    highCeiling: 0,
-    lowCeiling: 0
+    ambientPressure: 1
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
