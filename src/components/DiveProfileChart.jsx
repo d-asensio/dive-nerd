@@ -24,15 +24,37 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
             id: 'Dive Profile',
             data,
           },
+          {
+            id: 'Low Ceiling',
+            data: data.map(dataPoint => {
+              const { time, lowCeiling } = dataPoint
+              return {
+                ...dataPoint,
+                x: time / 60,
+                y: lowCeiling
+              }
+            }),
+          },
+          {
+            id: 'High Ceiling',
+            data: data.map(dataPoint => {
+              const { time, highCeiling } = dataPoint
+              return {
+                ...dataPoint,
+                x: time / 60,
+                y: highCeiling
+              }
+            }),
+          },
         ]}
-        colors={['#3daff7']}
+        colors={['#3daff7', '#e09f3e', '#9E2A2B']}
         margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
         xScale={{ type: 'linear' }}
         yScale={{
           type: 'linear',
           min: 'auto',
           max: 'auto',
-          stacked: true,
+          stacked: false,
           reverse: true,
         }}
         yFormat=" >-.2f"
@@ -57,9 +79,9 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           legendOffset: -40,
           legendPosition: 'middle',
         }}
-        pointSize={10}
+        pointSize={5}
         pointColor="white"
-        pointBorderWidth={2}
+        pointBorderWidth={1}
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh

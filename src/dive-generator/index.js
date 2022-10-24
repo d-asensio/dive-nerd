@@ -4,51 +4,35 @@ const { Noise } = require('noisejs')
 const noise = new Noise(Math.random())
 
 const specsExample = {
-  samplingIntervals: 50,
+  samplingIntervals: 1,
   initialDepth: 0,
   segments: [
     {
-      duration: 5 * 60,
-      endDepth: 50
+      duration: 2 * 60 + 42,
+      endDepth: 48
     },
     {
-      duration: 2 * 60,
-      endDepth: 50
+      duration: 2 * 60 + 18,
+      endDepth: 48
     },
     {
-      duration: 3 * 60,
-      endDepth: 40
+      duration: 3 * 60 + 40,
+      endDepth: 15
     },
     {
-      duration: 5 * 60,
-      endDepth: 30
+      duration: 1 * 60 + 30,
+      endDepth: 6
     },
     {
-      duration: 15 * 60,
-      endDepth: 30
-    },
-    {
-      duration: 5 * 60,
-      endDepth: 20
-    },
-    {
-      duration: 10 * 60,
-      endDepth: 20
-    },
-    {
-      duration: 9 * 60,
-      endDepth: 10
-    },
-    {
-      duration: 4 * 60,
-      endDepth: 5
+      duration: 1 * 60,
+      endDepth: 3
     },
     {
       duration: 3 * 60,
       endDepth: 3
     },
     {
-      duration: 40,
+      duration: 1 * 60,
       endDepth: 0
     }
   ]
@@ -63,7 +47,8 @@ function perlin(x, y, distortion) {
 export const createDiveGenerator = ({
   initialDepth,
   samplingIntervals,
-  segments
+  segments,
+  withPerlinDeviation = false
 }) => {
   const _roundWithPrecision = (number, precision) =>
     Math.round(number * 10 * precision) / 10 / precision
@@ -88,7 +73,7 @@ export const createDiveGenerator = ({
 
         return {
           time,
-          depth: depth + perlinDepth,
+          depth: withPerlinDeviation ? depth + perlinDepth : depth,
           temperature: 21,
           gasMixtures: {
             O2: 0.21,

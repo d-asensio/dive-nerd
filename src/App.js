@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { addIndex, map, pipe, sort } from 'ramda'
+import { map, sort } from 'ramda'
 import { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -74,7 +74,9 @@ function App() {
     ambientPressureDelta: 0,
     timeDelta: 0,
     depthDelta: 0,
-    descentRate: 0
+    descentRate: 0,
+    highCeiling: 0,
+    lowCeiling: 0
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)

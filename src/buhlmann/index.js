@@ -1,4 +1,4 @@
-import { divide, last, map, pipe, reduce, __ } from 'ramda'
+import { divide, last, map, multiply, pipe, reduce, __ } from 'ramda'
 import compartmentCoefficients from './compartments'
 
 /**
@@ -12,12 +12,26 @@ const GRAVITY = 9.8 // m*s2
  */
 const surfacePressure = 1 // bar
 const waterDensity = 1023.6 // kg/m3
-const gradientFactors = [0, 1]
+const gradientFactors = [0.3, 0.75]
 
 /**
  * Utility functions
  */
 const fromPascalsToBars = divide(__, 100000)
+
+const fromBarsToPascals = multiply(__, 100000)
+
+const fromPressureToDepth = ({ pressure: P, waterDensity: Wd }) => {
+  const Ppas = fromBarsToPascals(P)
+
+  return Ppas / (Wd * GRAVITY)
+}
+
+const fromDepthToPressure = ({ depth: D, waterDensity: Wd }) => {
+  const Ppas = D * Wd * GRAVITY
+
+  return fromPascalsToBars(Ppas)
+}
 
 const inertGasAlveolarPressure = (inertGasFraction, ambientPressure) =>
   inertGasFraction * (ambientPressure - WATER_VAPOUR_PARTIAL_PRESSURE)
@@ -196,10 +210,30 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
     }
   })
 
+  const { lowCeiling } = reduce(
+    (acc, compartment) => {
+      if (!acc || compartment.lowCeiling > acc.lowCeiling) return compartment
+      return acc
+    },
+    null,
+    compartments
+  )
+
+  const { highCeiling } = reduce(
+    (acc, compartment) => {
+      if (!acc || compartment.highCeiling > acc.highCeiling) return compartment
+      return acc
+    },
+    null,
+    compartments
+  )
+
   return [
     startSample,
     {
       ...endSample,
+      lowCeiling: Math.max(0, (lowCeiling - 1) * 10), // fromPressureToDepth({ pressure: lowCeiling, waterDensity })
+      highCeiling: Math.max(0, (highCeiling - 1) * 10), // fromPressureToDepth({ pressure: highCeiling, waterDensity })
       compartments
     }
   ]

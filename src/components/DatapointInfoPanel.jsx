@@ -68,7 +68,9 @@ export function DatapointInfoPanel({ data }) {
     ambientPressureDelta,
     timeDelta,
     depthDelta,
-    descentRate
+    descentRate,
+    lowCeiling,
+    highCeiling
   } = data
 
   return (
@@ -111,6 +113,18 @@ export function DatapointInfoPanel({ data }) {
         id="descent_rate"
         label="Descent Rate"
         value={`${descentRate.toFixed(2)} bar/min`}
+      />
+      <TextField
+        readOnly
+        id="low_ceiling"
+        label="Low Ceiling"
+        value={`${lowCeiling.toFixed(2)} m`}
+      />
+      <TextField
+        readOnly
+        id="high_ceiling"
+        label="High Ceiling"
+        value={`${highCeiling.toFixed(2)} m`}
       />
     </Wrapper>
   )
