@@ -17,103 +17,50 @@ import { DatapointInfoPanel } from './components/DatapointInfoPanel'
 // import dive from './dives/Dive_2022-04-12-0704.json'
 
 // Generator
-// import dive from './dive-generator' TODO: Fix that
+import { generateDive } from './dive-generator'
 
-const dive = {
-  samples: [
+const dive = generateDive({
+  samplingIntervals: 1,
+  withPerlinNoise: false,
+  segments: [
     {
       time: 0,
-      depth: 0,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 0
     },
     {
       time: 2 * 60,
-      depth: 35,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 35
     },
     {
       time: 12 * 60,
-      depth: 35,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 35
     },
     {
       time: 14 * 60 + 13,
-      depth: 15,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 15
     },
     {
       time: 15 * 60 + 43,
-      depth: 6,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 6
     },
     {
       time: 16 * 60 + 45,
-      depth: 6,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 6
     },
     {
       time: 17 * 60 + 45,
-      depth: 3,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 3
     },
     {
       time: 21 * 60 + 40,
-      depth: 3,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 3
     },
     {
       time: 22 * 60 + 40,
-      depth: 0,
-      temperature: 21,
-      gasMixtures: {
-        O2: 0.21,
-        N2: 0.79,
-        He: 0
-      }
+      depth: 0
     }
   ]
-}
-
+})
 const Wrapper = styled.main`
   width: 100%;
   height: 100%;
