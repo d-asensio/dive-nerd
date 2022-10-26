@@ -87,6 +87,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 ## Other scuba diving software
 
 - [Subsurface Divelog](https://subsurface-divelog.org/documentation/subsurface-4-user-manual/)
+  - [Tissue tolerance calculation](https://github.com/subsurface/subsurface/commit/67d59ff0181f4dccdd46923d53cda7902f279a57)
 
 ## Other implementations
 
