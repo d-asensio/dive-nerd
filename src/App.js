@@ -10,10 +10,10 @@ import Card from '@mui/joy/Card'
 import * as ZHL16C from './buhlmann'
 import {
   DiveProfileChart,
-  CompartmentsGasChart,
-  DiveList,
-  DiveLogPanel
+  CompartmentsGasChart
 } from './components'
+
+import { Divelog } from './sections'
 
 import dive from './dives/Dive_2022-04-12-0704.json'
 import { useDive } from './hooks/useDive'
@@ -72,11 +72,13 @@ const Charts = memo(() => {
 
 const Layout = styled.div`
   position: absolute;
-  left: 50%;
-  width: 100%;
-  height: 100vh;
-  max-width: 1800px;
   z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  max-width: 1800px;
+  
+  left: 50%;
   transform: translateX(-50%);
 
   display: grid;
@@ -116,23 +118,7 @@ function App () {
   return (
     <Wrapper>
       <Layout>
-        <DiveLogPanel>
-          <DiveList>
-            <DiveList.Item
-              name='Thomas Reef'
-              date='25/10/2022 10:30 AM'
-              depth='48.2 m'
-              time='00:38'
-            />
-            <DiveList.Divider />
-            <DiveList.Item
-              name='Thomas Reef'
-              date='25/10/2022 10:30 AM'
-              depth='48.2 m'
-              time='00:38'
-            />
-          </DiveList>
-        </DiveLogPanel>
+        <Divelog />
         <Charts />
       </Layout>
       <Map
