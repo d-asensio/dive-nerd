@@ -7,8 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format:check": "prettier --check src",
-    "format:fix": "prettier --write src",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
     "markdown:generate-toc": "markdown-toc -i",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
@@ -49,31 +49,21 @@
     "husky": ">=6",
     "lint-staged": ">=10",
     "markdown-toc": "^1.2.0",
-    "prettier": "^2.7.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "standard": "^17.0.0"
   },
   "lint-staged": {
     "./README.md": [
       "yarn markdown:generate-toc"
     ],
     "*.js": [
-      "prettier --write"
+      "yarn lint:fix"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
+  "standard": {
+    "env": [
+      "jest",
+      "browser"
     ]
   },
   "browserslist": {

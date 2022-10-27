@@ -136,7 +136,7 @@ const schreinerEquation = ({
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   const { descentRate, timeDelta, alveolarPressureN2, gasMixtures } = endSample
 
-  const compartments_gas =
+  const compartmentsGas =
     startSample?.compartments ?? getInitialCompartmentsGas()
 
   const inertGasPressureRateChange = descentRate * gasMixtures.N2
@@ -146,7 +146,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      compartments: compartments_gas.map(
+      compartments: compartmentsGas.map(
         ({ pressureLoadN2, ...rest }, index) => ({
           ...rest,
           pressureLoadN2: schreinerEquation({

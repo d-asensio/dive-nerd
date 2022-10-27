@@ -2,7 +2,7 @@ const { Noise } = require('noisejs')
 
 const noise = new Noise(Math.random())
 
-function perlin(x, y, distortion) {
+function perlin (x, y, distortion) {
   const value = noise.simplex2(x / 100, y / 100)
 
   return value * distortion

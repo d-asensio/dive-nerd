@@ -169,7 +169,7 @@ const Button = styled.button`
   left: 20px;
 `
 
-function App() {
+function App () {
   const mapRef = useRef(null)
   const [viewState, setViewState] = useState({
     longitude: -100,
@@ -196,7 +196,7 @@ function App() {
         {...viewState}
         mapLib={mapboxgl}
         ref={mapRef}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle='mapbox://styles/mapbox/streets-v9'
         onMove={handleMapMove}
       />
       <Charts />

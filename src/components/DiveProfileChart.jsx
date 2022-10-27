@@ -23,7 +23,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
         data={[
           {
             id: 'Dive Profile',
-            data,
+            data
           },
           {
             id: 'Low Ceiling',
@@ -34,7 +34,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
                 x: time / 60,
                 y: lowCeiling
               }
-            }),
+            })
           },
           {
             id: 'High Ceiling',
@@ -45,7 +45,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
                 x: time / 60,
                 y: highCeiling
               }
-            }),
+            })
           },
           {
             id: 'Max Value',
@@ -56,8 +56,8 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
                 x: time / 60,
                 y: maxValue
               }
-            }),
-          },
+            })
+          }
         ]}
         colors={['#3daff7', '#e09f3e', '#9E2A2B', '#ff0df7']}
         margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
@@ -67,9 +67,9 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           min: 'auto',
           max: 'auto',
           stacked: false,
-          reverse: true,
+          reverse: true
         }}
-        yFormat=" >-.2f"
+        yFormat=' >-.2f'
         animate={false}
         axisTop={null}
         axisRight={null}
@@ -80,7 +80,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           tickRotation: 0,
           legend: 'Time (in minutes)',
           legendOffset: 36,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         axisLeft={{
           orient: 'left',
@@ -89,10 +89,10 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           tickRotation: 0,
           legend: 'Depth (in meters)',
           legendOffset: -40,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         pointSize={5}
-        pointColor="white"
+        pointColor='white'
         pointBorderWidth={1}
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
@@ -102,7 +102,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
             <DatapointInfoPanel data={point.data} />
           </Tooltip>
         )}
-        crosshairType="top"
+        crosshairType='top'
         onMouseMove={handleMouseMove}
       />
     </Wrapper>

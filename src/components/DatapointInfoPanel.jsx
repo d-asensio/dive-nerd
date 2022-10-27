@@ -50,18 +50,18 @@ const Input = styled.input`
   }
 `
 
-function padTo2Digits(num) {
-  return num.toString().padStart(2, '0');
+function padTo2Digits (num) {
+  return num.toString().padStart(2, '0')
 }
 
 function formatTime (totalSeconds) {
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
 
-  return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
+  return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`
 }
 
-function TimeField({ id, label, value, ...rest }) {
+function TimeField ({ id, label, value, ...rest }) {
   const formattedValue = typeof value === 'number' ? `${formatTime(value)} min` : ''
 
   return (
@@ -72,7 +72,7 @@ function TimeField({ id, label, value, ...rest }) {
   )
 }
 
-function NumericField({ id, label, units, value, precision = 2, ...rest }) {
+function NumericField ({ id, label, units, value, precision = 2, ...rest }) {
   const formattedValue = typeof value === 'number' ? `${value.toFixed(precision)} ${units}` : ''
 
   return (
@@ -83,7 +83,7 @@ function NumericField({ id, label, units, value, precision = 2, ...rest }) {
   )
 }
 
-export function DatapointInfoPanel({ data }) {
+export function DatapointInfoPanel ({ data }) {
   const {
     time,
     depth,
@@ -102,72 +102,72 @@ export function DatapointInfoPanel({ data }) {
       <Text>Datapoint Information</Text>
       <TimeField
         readOnly
-        id="time"
-        label="Time"
+        id='time'
+        label='Time'
         value={time}
       />
       <NumericField
         readOnly
-        id="depth"
-        label="Depth"
+        id='depth'
+        label='Depth'
         value={depth}
-        units="m"
+        units='m'
       />
       <NumericField
         readOnly
-        id="ambient_pressure"
-        label="Ambient p."
+        id='ambient_pressure'
+        label='Ambient p.'
         value={ambientPressure}
-        units="bar"
+        units='bar'
       />
       <NumericField
         readOnly
-        id="ambient_pressure_delta"
-        label="Ambient p. Δ"
+        id='ambient_pressure_delta'
+        label='Ambient p. Δ'
         value={ambientPressureDelta}
-        units="bar"
+        units='bar'
       />
       <NumericField
         readOnly
-        id="alvelar_pressure_N2"
-        label="N2 Alveolar p."
+        id='alvelar_pressure_N2'
+        label='N2 Alveolar p.'
         value={alveolarPressureN2}
-        units="bar"
+        units='bar'
       />
       <NumericField
         readOnly
-        id="time_delta"
-        label="Time Δ"
+        id='time_delta'
+        label='Time Δ'
         value={timeDelta}
-        units="s"
+        units='s'
       />
       <NumericField
         readOnly
-        id="depth_delta"
-        label="Depth Δ"
+        id='depth_delta'
+        label='Depth Δ'
         value={depthDelta}
-        units="m"
+        units='m'
       />
       <NumericField
         readOnly
-        id="descent_rate"
-        label="Descent Rate"
+        id='descent_rate'
+        label='Descent Rate'
         value={descentRate}
-        units="bar/min"
+        units='bar/min'
       />
       <NumericField
         readOnly
-        id="low_ceiling"
-        label="Low Ceiling"
+        id='low_ceiling'
+        label='Low Ceiling'
         value={lowCeiling}
-        units="m"
+        units='m'
       />
       <NumericField
         readOnly
-        id="high_ceiling"
-        label="High Ceiling"
+        id='high_ceiling'
+        label='High Ceiling'
         value={highCeiling}
-        units="m"
+        units='m'
       />
     </Wrapper>
   )
