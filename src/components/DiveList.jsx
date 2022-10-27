@@ -38,12 +38,10 @@ const Item = ({ name, date, depth, time }) => (
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'stretch'
+            flexDirection: 'column'
           }}
         >
-          <Typography level='h4'>{name}</Typography>
+          <Typography level='h5'>{name}</Typography>
           <Typography level='body1' noWrap textColor='text.secondary'>
             {date}
           </Typography>
@@ -56,18 +54,18 @@ const Item = ({ name, date, depth, time }) => (
           }}
         >
           <Box>
-            <Typography fontSize='sm' textColor='text.secondary'>
-              DEPTH
+            <Typography level='body2' textColor='text.secondary'>
+              Depth
             </Typography>
-            <Typography fontSize='xl2' lineHeight={1}>
+            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
               {depth}
             </Typography>
           </Box>
           <Box>
-            <Typography fontSize='sm' textColor='text.secondary'>
-              TIME
+            <Typography level='body2' textColor='text.secondary'>
+              Time
             </Typography>
-            <Typography fontSize='xl2' lineHeight={1}>
+            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
               {time}
             </Typography>
           </Box>

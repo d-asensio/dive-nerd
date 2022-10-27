@@ -146,12 +146,6 @@ const Charts = memo(() => {
   )
 })
 
-const Button = styled.button`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-`
-
 const Layout = styled.div`
   position: absolute;
   width: 100vw;
@@ -159,7 +153,7 @@ const Layout = styled.div`
   z-index: 1;
 
   display: grid;
-  grid-template-columns: 3fr 4fr;
+  grid-template-columns: 3fr 5fr;
   gap: 2em;
   padding: 2em;
 
@@ -183,13 +177,13 @@ function App () {
     []
   )
 
-  const handleResetClick = useCallback(() => {
-    mapRef.current?.flyTo({
-      center: [-100, 40],
-      zoom: 3.5,
-      duration: 2000
-    })
-  }, [])
+  // const handleResetClick = useCallback(() => {
+  //   mapRef.current?.flyTo({
+  //     center: [-100, 40],
+  //     zoom: 3.5,
+  //     duration: 2000
+  //   })
+  // }, [])
 
   return (
     <Wrapper>
@@ -220,7 +214,6 @@ function App () {
         mapStyle='mapbox://styles/mapbox/streets-v9'
         onMove={handleMapMove}
       />
-      <Button onClick={handleResetClick}>Reset</Button>
     </Wrapper>
   )
 }
