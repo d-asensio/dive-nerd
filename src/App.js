@@ -11,7 +11,9 @@ import Card from '@mui/joy/Card'
 import * as ZHL16C from './buhlmann'
 import {
   DiveProfileChart,
-  CompartmentsGasChart
+  CompartmentsGasChart,
+  DiveList,
+  DiveLogPanel
 } from './components'
 
 // import dive from './dives/Dive_2013-10-31-0957.json'
@@ -73,14 +75,6 @@ const Wrapper = styled.main`
   height: 100%;
 `
 
-const ChartWrapper = styled.div`
-  position: absolute;
-  bottom: 2em;
-  left: 2em;
-  right: 2em;
-  top: 2em;
-`
-
 const StyledCard = styled(Card)`
   width: 100%;
   height: 100%;
@@ -135,22 +129,20 @@ const Charts = memo(() => {
   const handleDatapointHover = useDebouncedCallback(setData, 10)
 
   return (
-    <ChartWrapper>
-      <StyledCard>
-        <InfoLayout>
-          <DiveProfileChart
-            data={diveData}
-            onDatapointHover={handleDatapointHover}
+    <StyledCard>
+      <InfoLayout>
+        <DiveProfileChart
+          data={diveData}
+          onDatapointHover={handleDatapointHover}
+        />
+        <Sidebar>
+          <CompartmentsGasChart
+            data={currentDatapoint}
+            maxAmbientPressure={maxDepthSample.ambientPressure}
           />
-          <Sidebar>
-            <CompartmentsGasChart
-              data={currentDatapoint}
-              maxAmbientPressure={maxDepthSample.ambientPressure}
-            />
-          </Sidebar>
-        </InfoLayout>
-      </StyledCard>
-    </ChartWrapper>
+        </Sidebar>
+      </InfoLayout>
+    </StyledCard>
   )
 })
 
@@ -158,6 +150,24 @@ const Button = styled.button`
   position: absolute;
   top: 20px;
   left: 20px;
+`
+
+const Layout = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  gap: 2em;
+  padding: 2em;
+
+  pointer-events: none;
+
+  > * {
+    pointer-events: initial;
+  }
 `
 
 function App () {
@@ -183,6 +193,26 @@ function App () {
 
   return (
     <Wrapper>
+      <Layout>
+        <DiveLogPanel>
+          <DiveList>
+            <DiveList.Item
+              name='Thomas Reef'
+              date='25/10/2022 10:30 AM'
+              depth='48.2 m'
+              time='00:38'
+            />
+            <DiveList.Divider />
+            <DiveList.Item
+              name='Thomas Reef'
+              date='25/10/2022 10:30 AM'
+              depth='48.2 m'
+              time='00:38'
+            />
+          </DiveList>
+        </DiveLogPanel>
+        <Charts />
+      </Layout>
       <Map
         {...viewState}
         mapLib={mapboxgl}
@@ -190,7 +220,6 @@ function App () {
         mapStyle='mapbox://styles/mapbox/streets-v9'
         onMove={handleMapMove}
       />
-      <Charts />
       <Button onClick={handleResetClick}>Reset</Button>
     </Wrapper>
   )
