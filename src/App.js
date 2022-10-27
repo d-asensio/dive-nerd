@@ -6,6 +6,8 @@ import { useDebouncedCallback } from 'use-debounce'
 import Map from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
+import Card from '@mui/joy/Card'
+
 import * as ZHL16C from './buhlmann'
 import {
   DiveProfileChart,
@@ -72,16 +74,24 @@ const Wrapper = styled.main`
   height: 100%;
 `
 
-const ChartWrapper = styled.main`
+const ChartWrapper = styled.div`
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 70%;
-  height: 70%;
+  bottom: 2em;
+  left: 2em;
+  right: 2em;
+  top: 2em;
+`
+
+const StyledCard = styled(Card)`
+  width: 100%;
+  height: 100%;
 
   overflow: hidden;
+`
 
-  background: rgba(255, 255, 255, 0.9);
+const InfoLayout = styled.div`
+  width: 100%;
+  height: 100%;
 
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -132,19 +142,23 @@ const Charts = memo(() => {
 
   return (
     <ChartWrapper>
-      <DiveProfileChart
-        data={diveData}
-        onDatapointHover={handleDatapointHover}
-      />
-      <Sidebar>
-        <Frame>
-          <DatapointInfoPanel data={currentDatapoint} />
-        </Frame>
-        <CompartmentsGasChart
-          data={currentDatapoint}
-          maxAmbientPressure={maxDepthSample.ambientPressure}
-        />
-      </Sidebar>
+      <StyledCard>
+        <InfoLayout>
+          <DiveProfileChart
+            data={diveData}
+            onDatapointHover={handleDatapointHover}
+          />
+          <Sidebar>
+            <Frame>
+              <DatapointInfoPanel data={currentDatapoint} />
+            </Frame>
+            <CompartmentsGasChart
+              data={currentDatapoint}
+              maxAmbientPressure={maxDepthSample.ambientPressure}
+            />
+          </Sidebar>
+        </InfoLayout>
+      </StyledCard>
     </ChartWrapper>
   )
 })
