@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals'
 import { createGlobalStyle } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
+import 'mapbox-gl/dist/mapbox-gl.css'
+
 const GlobalStyle = createGlobalStyle`
   ${normalize}
 

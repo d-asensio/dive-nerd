@@ -1,12 +1,16 @@
+import { useCallback, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
 import { map, sort } from 'ramda'
-import { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import Map from 'react-map-gl'
+
 import * as ZHL16C from './buhlmann'
-import { DiveProfileChart } from './components'
-import { CompartmentsGasChart } from './components/CompartmentsGasChart'
-import { DatapointInfoPanel } from './components/DatapointInfoPanel'
+import {
+  DiveProfileChart,
+  CompartmentsGasChart,
+  DatapointInfoPanel
+} from './components'
 
 // import dive from './dives/Dive_2013-10-31-0957.json'
 // import dive from './dives/Dive_2015-02-28-1040.json' // 50m
@@ -61,11 +65,22 @@ const dive = generateDive({
     }
   ]
 })
+
 const Wrapper = styled.main`
   width: 100%;
   height: 100%;
+`
+
+const ChartWrapper = styled.main`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: 70%;
 
   overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.9);
 
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -106,7 +121,7 @@ const [maxDepthSample] = sort(
   diveData
 )
 
-function App() {
+const Charts = memo(() => {
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1
@@ -115,7 +130,7 @@ function App() {
   const handleDatapointHover = useDebouncedCallback(setData, 10)
 
   return (
-    <Wrapper>
+    <ChartWrapper>
       <DiveProfileChart
         data={diveData}
         onDatapointHover={handleDatapointHover}
@@ -129,6 +144,47 @@ function App() {
           maxAmbientPressure={maxDepthSample.ambientPressure}
         />
       </Sidebar>
+    </ChartWrapper>
+  )
+})
+
+const Button = styled.button`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+`
+
+function App() {
+  const mapRef = useRef(null)
+  const [viewState, setViewState] = useState({
+    longitude: -100,
+    latitude: 40,
+    zoom: 3.5
+  })
+
+  const handleMapMove = useCallback(
+    ({ viewState }) => setViewState(viewState),
+    []
+  )
+
+  const handleResetClick = useCallback(() => {
+    mapRef.current?.flyTo({
+      center: [-100, 40],
+      zoom: 3.5,
+      duration: 2000
+    })
+  }, [])
+
+  return (
+    <Wrapper>
+      <Map
+        {...viewState}
+        ref={mapRef}
+        mapStyle="mapbox://styles/mapbox/streets-v9"
+        onMove={handleMapMove}
+      />
+      <Charts />
+      <Button onClick={handleResetClick}>Reset</Button>
     </Wrapper>
   )
 }
