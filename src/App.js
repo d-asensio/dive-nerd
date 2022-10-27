@@ -1,6 +1,5 @@
 import { useCallback, useState, useRef, memo } from 'react'
 import styled from 'styled-components'
-import { map, sort } from 'ramda'
 import { useDebouncedCallback } from 'use-debounce'
 
 import Map from 'react-map-gl'
@@ -23,6 +22,7 @@ import {
 // My dives
 // import dive from './dives/Dive_2022-08-28-0946.json'
 import dive from './dives/Dive_2022-04-12-0704.json'
+import { useDive } from './hooks/useDive'
 
 // Generator
 // import { generateDive } from './dive-generator'
@@ -94,29 +94,9 @@ const Sidebar = styled.div`
   align-items: start;
 `
 
-const calculateChartAxis = sample => {
-  const { time, depth } = sample
-
-  return {
-    ...sample,
-    x: time / 60, // In minutes
-    y: depth
-  }
-}
-
-console.time('Time to calculate profile:')
-const diveProfile = ZHL16C.calculateDiveProfile(dive.samples)
-console.log(diveProfile)
-console.timeEnd('Time to calculate profile:')
-
-const diveData = map(calculateChartAxis, diveProfile)
-
-const [maxDepthSample] = sort(
-  ({ depth: da }, { depth: db }) => db - da,
-  diveData
-)
-
 const Charts = memo(() => {
+  const { samples, maxAmbientPressure } = useDive(dive)
+
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1
@@ -128,13 +108,13 @@ const Charts = memo(() => {
     <StyledCard>
       <InfoLayout>
         <DiveProfileChart
-          data={diveData}
+          samples={samples}
           onDatapointHover={handleDatapointHover}
         />
         <Sidebar>
           <CompartmentsGasChart
             data={currentDatapoint}
-            maxAmbientPressure={maxDepthSample.ambientPressure}
+            maxAmbientPressure={maxAmbientPressure}
           />
         </Sidebar>
       </InfoLayout>

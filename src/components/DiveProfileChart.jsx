@@ -3,9 +3,11 @@ import styled from 'styled-components'
 
 import { ResponsiveLine } from '@nivo/line'
 import Box from '@mui/joy/Box'
+import CircularProgress from '@mui/joy/CircularProgress'
 import Tooltip from '@mui/joy/Tooltip'
 
 import { DatapointInfoPanel } from './DatapointInfoPanel'
+import { identity } from 'ramda'
 
 const StatsTooltip = ({ point }) => {
   return (
@@ -47,10 +49,13 @@ const Wrapper = styled.div`
   height: 500px;
 `
 
-export const DiveProfileChart = ({ data, onDatapointHover }) => {
-  const handleMouseMove = useCallback(({ data }) => onDatapointHover(data), [
-    onDatapointHover
-  ])
+export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
+  const handleMouseMove = useCallback(
+    ({ data }) => onDatapointHover(data),
+    [onDatapointHover]
+  )
+
+  if (!samples) return <CircularProgress />
 
   return (
     <Wrapper>
@@ -59,11 +64,11 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
         data={[
           {
             id: 'Dive Profile',
-            data
+            data: samples
           },
           {
             id: 'Low Ceiling',
-            data: data.map((dataPoint) => {
+            data: samples.map((dataPoint) => {
               const { time, lowCeiling } = dataPoint
               return {
                 ...dataPoint,
@@ -74,7 +79,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           },
           {
             id: 'High Ceiling',
-            data: data.map((dataPoint) => {
+            data: samples.map((dataPoint) => {
               const { time, highCeiling } = dataPoint
               return {
                 ...dataPoint,
@@ -85,7 +90,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           },
           {
             id: 'Max Value',
-            data: data.map((dataPoint) => {
+            data: samples.map((dataPoint) => {
               const { time, maxValue } = dataPoint
               return {
                 ...dataPoint,
