@@ -4,90 +4,76 @@ import List from '@mui/joy/List'
 import ListItem from '@mui/joy/ListItem'
 import ListItemContent from '@mui/joy/ListItemContent'
 import ListDivider from '@mui/joy/ListDivider'
+import ListItemButton from '@mui/joy/ListItemButton'
 import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import Typography from '@mui/joy/Typography'
 import Sheet from '@mui/joy/Sheet'
 
-const Item = ({
-  name,
-  date,
-  depth,
-  time
-}) => (
-  <ListItem
-    sx={{
-      gap: 2
-    }}
-  >
-    <ListItemDecorator>
-      <Sheet
-        variant='outlined'
-        sx={{
-          width: 150,
-          borderRadius: 'md',
-          overflow: 'auto'
-        }}
-      >
-        <AspectRatio />
-      </Sheet>
-    </ListItemDecorator>
-    <ListItemContent
+const Item = ({ name, date, depth, time }) => (
+  <ListItem>
+    <ListItemButton
       sx={{
-        display: 'flex',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between'
+        gap: 2
       }}
     >
-      <Box
+      <ListItemDecorator>
+        <Sheet
+          variant='outlined'
+          sx={{
+            width: 120,
+            borderRadius: 'md',
+            overflow: 'auto'
+          }}
+        >
+          <AspectRatio />
+        </Sheet>
+      </ListItemDecorator>
+      <ListItemContent
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          gap: 3,
-          alignItems: 'stretch'
+          alignItems: 'flex-end',
+          justifyContent: 'space-between'
         }}
       >
-        <Typography level='h3'>{name}</Typography>
-        <Typography level='body2' noWrap>
-          {date}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 3,
-          alignItems: 'stretch'
-        }}
-      >
-        <Box>
-          <Typography
-            fontSize='sm'
-            textColor='text.secondary'
-          >
-            DEPTH
-          </Typography>
-          <Typography
-            fontSize='xl3'
-            lineHeight={1}
-          >
-            {depth}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'stretch'
+          }}
+        >
+          <Typography level='h4'>{name}</Typography>
+          <Typography level='body1' noWrap textColor='text.secondary'>
+            {date}
           </Typography>
         </Box>
-        <Box>
-          <Typography
-            fontSize='sm'
-            textColor='text.secondary'
-          >
-            TIME
-          </Typography>
-          <Typography
-            fontSize='xl3'
-            lineHeight={1}
-          >
-            {time}
-          </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 3,
+            alignItems: 'stretch'
+          }}
+        >
+          <Box>
+            <Typography fontSize='sm' textColor='text.secondary'>
+              DEPTH
+            </Typography>
+            <Typography fontSize='xl2' lineHeight={1}>
+              {depth}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography fontSize='sm' textColor='text.secondary'>
+              TIME
+            </Typography>
+            <Typography fontSize='xl2' lineHeight={1}>
+              {time}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
-    </ListItemContent>
+      </ListItemContent>
+    </ListItemButton>
   </ListItem>
 )
 
