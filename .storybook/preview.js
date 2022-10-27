@@ -1,3 +1,6 @@
+import { globalStylesDecorator } from "./decorators/global-styles"
+import { joyUIDecorator } from "./decorators/joy-ui"
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -7,3 +10,8 @@ export const parameters = {
     }
   }
 }
+
+export const decorators = [
+  globalStylesDecorator,
+  joyUIDecorator
+]

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { CssVarsProvider } from '@mui/joy/styles'
+import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles'
 
 import App from './App'
 import { GlobalStyle } from './styles/GlobalStyle'
@@ -13,9 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <CssVarsProvider>
-      <App />
-    </CssVarsProvider>
+    <StyledEngineProvider injectFirst>
+      <CssVarsProvider>
+        <App />
+      </CssVarsProvider>
+    </StyledEngineProvider>
   </React.StrictMode>
 )
 
