@@ -24,7 +24,7 @@ import {
 import { generateDive } from './dive-generator'
 
 const dive = generateDive({
-  samplingIntervals: 1,
+  samplingIntervals: 20,
   withPerlinNoise: false,
   segments: [
     {
