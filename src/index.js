@@ -1,36 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
 
 import { CssVarsProvider } from '@mui/joy/styles'
 
-import { createGlobalStyle } from 'styled-components'
-import { normalize } from 'styled-normalize'
+import App from './App'
+import { GlobalStyle } from './styles/GlobalStyle'
+import reportWebVitals from './reportWebVitals'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-const GlobalStyle = createGlobalStyle`
-  ${normalize}
-
-  #root {
-    width: 100vw;
-    height: 100vh;
-  }
-
-  * {
-    box-sizing: border-box;
-
-    &::before,
-    &::after {
-      box-sizing: border-box;
-    }
-  }
-
-  body {
-    font-family: system-ui;
-  }
-`
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
