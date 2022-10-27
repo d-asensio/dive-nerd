@@ -15,12 +15,6 @@ import {
   DiveLogPanel
 } from './components'
 
-// import dive from './dives/Dive_2013-10-31-0957.json'
-// import dive from './dives/Dive_2015-02-28-1040.json' // 50m
-// import dive from './dives/Dive_2015-05-31-0911.json'
-
-// My dives
-// import dive from './dives/Dive_2022-08-28-0946.json'
 import dive from './dives/Dive_2022-04-12-0704.json'
 import { useDive } from './hooks/useDive'
 

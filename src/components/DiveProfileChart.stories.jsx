@@ -4,15 +4,18 @@ import { DiveProfileChart } from './DiveProfileChart'
 
 import { useDive } from '../hooks/useDive'
 
-import dive from '../dives/Dive_2022-04-12-0704.json'
+import * as dives from '../dives'
 
 export default {
   title: 'Components/DiveProfileChart',
   component: DiveProfileChart,
   argTypes: {
-    variant: {
-      options: ['primary', 'secondary'],
-      control: { type: 'radio' }
+    dive: {
+      options: Object.keys(dives),
+      mapping: dives,
+      control: {
+        type: 'select'
+      }
     }
   }
 }
@@ -27,5 +30,5 @@ const Template = ({ dive, ...args }) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  dive
+  dive: 'diveY2022M04D12T0704'
 }
