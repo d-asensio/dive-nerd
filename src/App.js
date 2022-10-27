@@ -76,9 +76,6 @@ const Wrapper = styled.main`
 `
 
 const StyledCard = styled(Card)`
-  width: 100%;
-  height: 100%;
-
   overflow: hidden;
 `
 
@@ -88,7 +85,6 @@ const InfoLayout = styled.div`
 
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 1em;
 `
 
 const Sidebar = styled.div`
@@ -154,6 +150,7 @@ const Layout = styled.div`
 
   display: grid;
   grid-template-columns: 3fr 5fr;
+  align-items: start;
   gap: 2em;
   padding: 2em;
 
