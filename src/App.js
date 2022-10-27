@@ -4,6 +4,7 @@ import { map, sort } from 'ramda'
 import { useDebouncedCallback } from 'use-debounce'
 
 import Map from 'react-map-gl'
+import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
 import * as ZHL16C from './buhlmann'
 import {
@@ -179,6 +180,7 @@ function App() {
     <Wrapper>
       <Map
         {...viewState}
+        mapLib={mapboxgl}
         ref={mapRef}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onMove={handleMapMove}
