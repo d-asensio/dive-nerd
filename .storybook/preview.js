@@ -12,6 +12,5 @@ export const parameters = {
 }
 
 export const decorators = [
-  globalStylesDecorator,
   joyUIDecorator
 ]
