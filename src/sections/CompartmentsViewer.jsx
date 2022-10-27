@@ -3,9 +3,7 @@ import { CompartmentsGasChart } from '../components'
 
 export const CompartmentsViewer = ({ gridArea, dataPoint, maxAmbientPressure }) => {
   return (
-    <Card
-      sx={{ gridArea }}
-    >
+    <Card sx={{ gridArea }}>
       <CompartmentsGasChart
         data={dataPoint}
         maxAmbientPressure={maxAmbientPressure}
