@@ -124,9 +124,12 @@ const Charts = memo(() => {
 
 const Layout = styled.div`
   position: absolute;
-  width: 100vw;
+  left: 50%;
+  width: 100%;
   height: 100vh;
+  max-width: 1800px;
   z-index: 1;
+  transform: translateX(-50%);
 
   display: grid;
   grid-template-columns: 3fr 5fr;
