@@ -1,8 +1,8 @@
 import { DiveList, DiveLogPanel } from '../components'
 
-export const Divelog = () => {
+export const Divelog = ({ gridArea }) => {
   return (
-    <DiveLogPanel>
+    <DiveLogPanel sx={{ gridArea }}>
       <DiveList>
         <DiveList.Item
           name='Thomas Reef'

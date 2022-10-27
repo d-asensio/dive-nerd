@@ -5,15 +5,14 @@ import { always } from 'ramda'
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
+  height: 500px;
 
   overflow-y: scroll;
-
-  flex: 1;
 
   > div {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 500px;
     min-height: 400px;
   }
 `

@@ -1,19 +1,17 @@
-import { useCallback, useState, useRef, memo } from 'react'
+import { useCallback, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { useDebouncedCallback } from 'use-debounce'
 
 import Map from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
-import Card from '@mui/joy/Card'
-
 import * as ZHL16C from './buhlmann'
-import {
-  DiveProfileChart,
-  CompartmentsGasChart
-} from './components'
 
-import { Divelog } from './sections'
+import {
+  CompartmentsViewer,
+  Divelog,
+  ProfileViewer
+} from './sections'
 
 import dive from './dives/Dive_2022-04-12-0704.json'
 import { useDive } from './hooks/useDive'
@@ -22,53 +20,6 @@ const Wrapper = styled.main`
   width: 100%;
   height: 100%;
 `
-
-const StyledCard = styled(Card)`
-  overflow: hidden;
-`
-
-const InfoLayout = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-`
-
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-`
-
-const Charts = memo(() => {
-  const { samples, maxAmbientPressure } = useDive(dive)
-
-  const [currentDatapoint, setData] = useState({
-    compartments: ZHL16C.getInitialCompartmentsGas(),
-    ambientPressure: 1
-  })
-
-  const handleDatapointHover = useDebouncedCallback(setData, 10)
-
-  return (
-    <StyledCard>
-      <InfoLayout>
-        <DiveProfileChart
-          samples={samples}
-          onDatapointHover={handleDatapointHover}
-        />
-        <Sidebar>
-          <CompartmentsGasChart
-            data={currentDatapoint}
-            maxAmbientPressure={maxAmbientPressure}
-          />
-        </Sidebar>
-      </InfoLayout>
-    </StyledCard>
-  )
-})
 
 const Layout = styled.div`
   position: absolute;
@@ -82,7 +33,11 @@ const Layout = styled.div`
   transform: translateX(-50%);
 
   display: grid;
+  grid-template-areas:
+    "dive-log profile-viewer "
+    "dive-log compartments-viewer";
   grid-template-columns: 3fr 5fr;
+  grid-template-rows: min-content min-content;
   align-items: start;
   gap: 2em;
   padding: 2em;
@@ -95,6 +50,12 @@ const Layout = styled.div`
 `
 
 function App () {
+  const { samples, maxAmbientPressure } = useDive(dive)
+  const [currentDatapoint, setData] = useState({
+    compartments: ZHL16C.getInitialCompartmentsGas(),
+    ambientPressure: 1
+  })
+
   const mapRef = useRef(null)
   const [viewState, setViewState] = useState({
     longitude: -100,
@@ -106,6 +67,7 @@ function App () {
     ({ viewState }) => setViewState(viewState),
     []
   )
+  const handleDatapointHover = useDebouncedCallback(setData, 10)
 
   // const handleResetClick = useCallback(() => {
   //   mapRef.current?.flyTo({
@@ -118,8 +80,17 @@ function App () {
   return (
     <Wrapper>
       <Layout>
-        <Divelog />
-        <Charts />
+        <Divelog gridArea='dive-log' />
+        <ProfileViewer
+          gridArea='profile-viewer'
+          samples={samples}
+          onDatapointHover={handleDatapointHover}
+        />
+        <CompartmentsViewer
+          gridArea='compartments-viewer'
+          dataPoint={currentDatapoint}
+          maxAmbientPressure={maxAmbientPressure}
+        />
       </Layout>
       <Map
         {...viewState}
