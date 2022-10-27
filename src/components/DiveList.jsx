@@ -54,7 +54,11 @@ const Item = ({ name, date, depth, time }) => (
           }}
         >
           <Box>
-            <Typography level='body2' textColor='text.secondary'>
+            <Typography
+              level='body3'
+              textTransform='uppercase'
+              fontWeight='lg'
+            >
               Depth
             </Typography>
             <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
@@ -62,7 +66,11 @@ const Item = ({ name, date, depth, time }) => (
             </Typography>
           </Box>
           <Box>
-            <Typography level='body2' textColor='text.secondary'>
+            <Typography
+              level='body3'
+              textTransform='uppercase'
+              fontWeight='lg'
+            >
               Time
             </Typography>
             <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
