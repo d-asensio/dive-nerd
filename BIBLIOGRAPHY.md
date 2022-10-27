@@ -84,6 +84,8 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
 
 - [Half-time](https://en.wikipedia.org/wiki/Half_time_(physics))
 
+- [Ceiling calculation](https://www.desmos.com/calculator/c6f7av7ydu)
+
 ## Other scuba diving software
 
 - [Subsurface Divelog](https://subsurface-divelog.org/documentation/subsurface-4-user-manual/)
