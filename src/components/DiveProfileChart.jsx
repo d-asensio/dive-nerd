@@ -1,9 +1,46 @@
-import styled from 'styled-components'
-import { ResponsiveLine } from '@nivo/line'
-
-import { Tooltip } from './Tooltip'
-import { DatapointInfoPanel } from './DatapointInfoPanel'
 import { useCallback } from 'react'
+import styled from 'styled-components'
+
+import { ResponsiveLine } from '@nivo/line'
+import Box from '@mui/joy/Box'
+import Tooltip from '@mui/joy/Tooltip'
+
+import { DatapointInfoPanel } from './DatapointInfoPanel'
+
+const StatsTooltip = ({ point }) => {
+  return (
+    <Tooltip
+      placement='top'
+      variant='outlined'
+      open
+      arrow
+      title={
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: 320,
+            justifyContent: 'center',
+            p: 1
+          }}
+        >
+          <DatapointInfoPanel data={point.data} />
+        </Box>
+      }
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '1px',
+          height: '1px',
+          margin: '-1px'
+        }}
+      />
+    </Tooltip>
+  )
+}
 
 const Wrapper = styled.div`
   min-width: 0;
@@ -11,15 +48,14 @@ const Wrapper = styled.div`
 `
 
 export const DiveProfileChart = ({ data, onDatapointHover }) => {
-  const handleMouseMove = useCallback(
-    ({ data }) => onDatapointHover(data),
-    [onDatapointHover]
-  )
+  const handleMouseMove = useCallback(({ data }) => onDatapointHover(data), [
+    onDatapointHover
+  ])
 
   return (
     <Wrapper>
       <ResponsiveLine
-        enablePoints={false}
+        // enablePoints={false}
         data={[
           {
             id: 'Dive Profile',
@@ -27,7 +63,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           },
           {
             id: 'Low Ceiling',
-            data: data.map(dataPoint => {
+            data: data.map((dataPoint) => {
               const { time, lowCeiling } = dataPoint
               return {
                 ...dataPoint,
@@ -38,7 +74,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           },
           {
             id: 'High Ceiling',
-            data: data.map(dataPoint => {
+            data: data.map((dataPoint) => {
               const { time, highCeiling } = dataPoint
               return {
                 ...dataPoint,
@@ -49,7 +85,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
           },
           {
             id: 'Max Value',
-            data: data.map(dataPoint => {
+            data: data.map((dataPoint) => {
               const { time, maxValue } = dataPoint
               return {
                 ...dataPoint,
@@ -97,11 +133,7 @@ export const DiveProfileChart = ({ data, onDatapointHover }) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh
-        tooltip={({ point }) => (
-          <Tooltip>
-            <DatapointInfoPanel data={point.data} />
-          </Tooltip>
-        )}
+        tooltip={StatsTooltip}
         crosshairType='top'
         onMouseMove={handleMouseMove}
       />
