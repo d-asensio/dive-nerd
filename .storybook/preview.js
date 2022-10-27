@@ -1,4 +1,3 @@
-import { globalStylesDecorator } from "./decorators/global-styles"
 import { joyUIDecorator } from "./decorators/joy-ui"
 
 export const parameters = {
