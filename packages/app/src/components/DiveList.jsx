@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Box from '@mui/joy/Box'
 import List from '@mui/joy/List'
 import ListItem from '@mui/joy/ListItem'
@@ -14,6 +16,8 @@ import { DiveProfileThumbnail } from './DiveProfileThumbnail'
 const Item = ({ name, date, depth, time, rating, samples }) => (
   <ListItem>
     <ListItemButton
+      component={Link}
+      to='/dive/1'
       sx={{
         alignItems: 'stretch',
         gap: 1,

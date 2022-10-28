@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 
 import Alert from '@mui/joy/Alert'
 import Avatar from '@mui/joy/Avatar'
+import Box from '@mui/joy/Box'
 import IconButton from '@mui/joy/IconButton'
 import Menu from '@mui/joy/Menu'
 import MenuItem from '@mui/joy/MenuItem'
@@ -36,9 +37,15 @@ export function NavigationBar () {
   }, [])
 
   return (
+    <Box
+      sx={{
+        width: '100%',
+        borderBottom: 1,
+        borderColor: 'divider'
+      }}
+    >
     <List
       row
-      variant='outlined'
       sx={{
         p: 1,
         justifyContent: 'space-between',
@@ -104,5 +111,6 @@ export function NavigationBar () {
         </ListItemDecorator>
       </ListItem>
     </List>
+    </Box>
   )
 }
