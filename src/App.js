@@ -60,14 +60,6 @@ function App () {
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
 
-  // const handleResetClick = useCallback(() => {
-  //   mapRef.current?.flyTo({
-  //     center: [-100, 40],
-  //     zoom: 3.5,
-  //     duration: 2000
-  //   })
-  // }, [])
-
   return (
     <Wrapper>
       <NavigationBar />
