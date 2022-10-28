@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 import { ResponsiveLine } from '@nivo/line'
 import CircularProgress from '@mui/joy/CircularProgress'

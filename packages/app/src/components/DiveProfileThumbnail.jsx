@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@nivo/line'
 import AspectRatio from '@mui/joy/AspectRatio'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import Tooltip from '@mui/joy/Tooltip'
 
 const ChartWrapper = styled.div`
