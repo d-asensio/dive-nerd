@@ -1,9 +1,6 @@
-import { useCallback, useState, useRef } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useDebouncedCallback } from 'use-debounce'
-
-import Map from 'react-map-gl'
-import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
 import * as ZHL16C from './buhlmann'
 
@@ -13,7 +10,8 @@ import {
 
 import {
   CompartmentsViewer,
-  Divelog,
+  DiveLog,
+  DiveMap,
   ProfileViewer
 } from './sections'
 
@@ -53,11 +51,6 @@ const Layout = styled.div`
   }
 `
 
-const MapWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-`
-
 function App () {
   const { samples, maxAmbientPressure } = useDive(dive)
   const [currentDatapoint, setData] = useState({
@@ -65,17 +58,6 @@ function App () {
     ambientPressure: 1
   })
 
-  const mapRef = useRef(null)
-  const [viewState, setViewState] = useState({
-    longitude: -100,
-    latitude: 40,
-    zoom: 3.5
-  })
-
-  const handleMapMove = useCallback(
-    ({ viewState }) => setViewState(viewState),
-    []
-  )
   const handleDatapointHover = useDebouncedCallback(setData, 10)
 
   // const handleResetClick = useCallback(() => {
@@ -90,7 +72,7 @@ function App () {
     <Wrapper>
       <NavigationBar />
       <Layout>
-        <Divelog gridArea='dive-log' />
+        <DiveLog gridArea='dive-log' />
         <ProfileViewer
           gridArea='profile-viewer'
           samples={samples}
@@ -102,15 +84,7 @@ function App () {
           maxAmbientPressure={maxAmbientPressure}
         />
       </Layout>
-      <MapWrapper>
-        <Map
-          {...viewState}
-          mapLib={mapboxgl}
-          ref={mapRef}
-          mapStyle='mapbox://styles/mapbox/streets-v9'
-          onMove={handleMapMove}
-        />
-      </MapWrapper>
+      <DiveMap />
     </Wrapper>
   )
 }

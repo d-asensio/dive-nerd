@@ -1,6 +1,6 @@
 import { DiveList, DiveLogPanel } from '../components'
 
-export const Divelog = ({ gridArea }) => {
+export const DiveLog = ({ gridArea }) => {
   return (
     <DiveLogPanel sx={{ gridArea }}>
       <DiveList>
