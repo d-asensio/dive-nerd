@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles'
+import CssBaseline from '@mui/joy/CssBaseline'
 
 import App from './App'
-import { GlobalStyle } from './styles/GlobalStyle'
 import reportWebVitals from './reportWebVitals'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -12,9 +12,10 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
+    {/* <GlobalStyle /> */}
     <StyledEngineProvider injectFirst>
       <CssVarsProvider>
+        <CssBaseline />
         <App />
       </CssVarsProvider>
     </StyledEngineProvider>

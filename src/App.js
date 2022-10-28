@@ -53,6 +53,11 @@ const Layout = styled.div`
   }
 `
 
+const MapWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+`
+
 function App () {
   const { samples, maxAmbientPressure } = useDive(dive)
   const [currentDatapoint, setData] = useState({
@@ -97,13 +102,15 @@ function App () {
           maxAmbientPressure={maxAmbientPressure}
         />
       </Layout>
-      <Map
-        {...viewState}
-        mapLib={mapboxgl}
-        ref={mapRef}
-        mapStyle='mapbox://styles/mapbox/streets-v9'
-        onMove={handleMapMove}
-      />
+      <MapWrapper>
+        <Map
+          {...viewState}
+          mapLib={mapboxgl}
+          ref={mapRef}
+          mapStyle='mapbox://styles/mapbox/streets-v9'
+          onMove={handleMapMove}
+        />
+      </MapWrapper>
     </Wrapper>
   )
 }

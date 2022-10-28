@@ -23,8 +23,6 @@
     "@nivo/bar": "^0.80.0",
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
-    "@popperjs/core": "^2.11.6",
-    "@radix-ui/colors": "^0.1.8",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -36,7 +34,6 @@
     "react-map-gl": "^7.0.19",
     "react-popper": "^2.3.0",
     "styled-components": "^5.3.6",
-    "styled-normalize": "^8.0.7",
     "use-debounce": "^8.0.4",
     "web-vitals": "^2.1.0"
   },
