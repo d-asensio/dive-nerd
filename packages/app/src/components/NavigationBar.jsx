@@ -40,17 +40,12 @@ export function NavigationBar () {
       row
       variant='outlined'
       sx={{
+        p: 1,
         justifyContent: 'space-between',
-        alignItems: 'center',
-        '--List-decorator-size': '48px',
-        '--List-item-paddingY': '1rem'
+        alignItems: 'center'
       }}
     >
-      <Logo
-        sx={{
-          marginLeft: 8
-        }}
-      />
+      <Logo />
       <Alert variant='soft' color='warning'>
         DiveNerd is still in beta, use it carefully!
       </Alert>

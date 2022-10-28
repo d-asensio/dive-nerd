@@ -1,10 +1,9 @@
-export const Logo = ({ sx, ...props }) => (
+export const Logo = props => (
   <svg
     width={298}
     height={64}
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
-    style={sx}
     {...props}
   >
     <path fill='#fff' d='M0 0h298v64H0z' />
