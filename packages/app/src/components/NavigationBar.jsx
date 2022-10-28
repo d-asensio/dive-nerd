@@ -52,7 +52,7 @@ export function NavigationBar () {
         }}
       />
       <Alert variant='soft' color='warning'>
-        DiveNerd is in beta, use it at your own risk!
+        DiveNerd is still in beta, use it carefully!
       </Alert>
       <ListItem>
         <ListItemDecorator>
