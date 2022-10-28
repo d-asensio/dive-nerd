@@ -3,15 +3,19 @@ import styled from '@emotion/styled'
 import { useDebouncedCallback } from 'use-debounce'
 
 import Box from '@mui/joy/Box'
+import Typography from '@mui/joy/Typography'
+import IconButton from '@mui/joy/IconButton'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import { mockDives } from '@divenerd/mock-dives'
 import * as ZHL16C from '@divenerd/dive-physics'
 
 import { NavigationBar, Layout } from '../components'
 
-import { CompartmentsViewer, DiveLog, ProfileViewer } from '../sections'
+import { CompartmentsViewer, ProfileViewer } from '../sections'
 
 import { useDive } from '../hooks/useDive'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -22,13 +26,13 @@ const Wrapper = styled.main`
   align-items: center;
 `
 
-function DiveViewerPage () {
+function DiveViewerPage() {
   const { samples, maxAmbientPressure } = useDive(
-    mockDives.diveY2022M04D12T0704
+    mockDives.diveY2022M04D12T0704,
   )
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
-    ambientPressure: 1
+    ambientPressure: 1,
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
@@ -44,10 +48,27 @@ function DiveViewerPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0
+            minHeight: 0,
           }}
         >
-          <DiveLog samples={samples} />
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 3
+            }}
+          >
+            <IconButton
+              to="/"
+              component={Link}
+              size="lg"
+              variant="outlined"
+              color="neutral"
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Typography level="h2">Thomas Reef</Typography>
+          </Box>
         </Box>
         <Box
           sx={{
@@ -55,7 +76,7 @@ function DiveViewerPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0
+            minHeight: 0,
           }}
         >
           <ProfileViewer
