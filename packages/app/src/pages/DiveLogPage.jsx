@@ -1,12 +1,9 @@
 import styled from '@emotion/styled'
 
-import { mockDives } from '@divenerd/mock-dives'
-
 import { NavigationBar, Layout } from '../components'
 import { DiveLog, DiveMap } from '../sections'
 
 import Box from '@mui/joy/Box'
-import { useDive } from '../hooks/useDive'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -18,10 +15,6 @@ const Wrapper = styled.main`
 `
 
 function DiveLogPage () {
-  const { samples } = useDive(
-    mockDives.diveY2022M04D12T0704
-  )
-
   return (
     <Wrapper>
       <NavigationBar />
@@ -36,7 +29,7 @@ function DiveLogPage () {
             minHeight: 0
           }}
         >
-          <DiveLog samples={samples} />
+          <DiveLog />
         </Box>
         <Box
           sx={{

@@ -44,7 +44,7 @@ function DiveItem({ id }) {
   )
 }
 
-export const DiveLog = ({ samples }) => {
+export const DiveLog = () => {
   const diveIdList = useSelector(diveIdListSelector)
 
   if (!diveIdList) return null
