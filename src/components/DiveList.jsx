@@ -14,7 +14,8 @@ const Item = ({ name, date, depth, time, samples }) => (
   <ListItem>
     <ListItemButton
       sx={{
-        gap: 2
+        alignItems: 'stretch',
+        gap: 1
       }}
     >
       <ListItemDecorator>
@@ -32,18 +33,21 @@ const Item = ({ name, date, depth, time, samples }) => (
       <ListItemContent
         sx={{
           display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between'
+          alignItems: 'stretch',
+          justifyContent: 'space-between',
+          gap: 3
         }}
       >
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: 0.5
           }}
         >
-          <Typography level='h5'>{name}</Typography>
-          <Typography level='body1' noWrap textColor='text.secondary'>
+          <Typography level='h5' component='div'>{name}</Typography>
+          <Typography level='body1' component='div' noWrap textColor='text.secondary'>
             {date}
           </Typography>
         </Box>
@@ -51,7 +55,7 @@ const Item = ({ name, date, depth, time, samples }) => (
           sx={{
             display: 'flex',
             gap: 3,
-            alignItems: 'stretch'
+            alignSelf: 'flex-end'
           }}
         >
           <Box>
@@ -62,7 +66,7 @@ const Item = ({ name, date, depth, time, samples }) => (
             >
               Depth
             </Typography>
-            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
+            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
               {depth}
             </Typography>
           </Box>
@@ -74,7 +78,7 @@ const Item = ({ name, date, depth, time, samples }) => (
             >
               Time
             </Typography>
-            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg'>
+            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
               {time}
             </Typography>
           </Box>
