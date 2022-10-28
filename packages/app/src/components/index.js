@@ -1,7 +1,6 @@
 export * from './CompartmentsGasChart'
 export * from './DatapointInfoPanel'
 export * from './DiveList'
-export * from './DiveLogPanel'
 export * from './DiveProfileChart'
 export * from './DiveProfileThumbnail'
 export * from './Layout'
