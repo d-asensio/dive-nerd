@@ -8,6 +8,10 @@ import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loade
 import * as ZHL16C from './buhlmann'
 
 import {
+  NavigationBar
+} from './components'
+
+import {
   CompartmentsViewer,
   Divelog,
   ProfileViewer
@@ -79,6 +83,7 @@ function App () {
 
   return (
     <Wrapper>
+      <NavigationBar />
       <Layout>
         <Divelog gridArea='dive-log' />
         <ProfileViewer
