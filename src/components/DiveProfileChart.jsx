@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import styled from 'styled-components'
 
 import { ResponsiveLine } from '@nivo/line'
-import Box from '@mui/joy/Box'
 import CircularProgress from '@mui/joy/CircularProgress'
 import Tooltip from '@mui/joy/Tooltip'
 
@@ -18,17 +17,7 @@ const StatsTooltip = ({ point }) => {
       open
       arrow
       title={
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            maxWidth: 320,
-            justifyContent: 'center',
-            p: 1
-          }}
-        >
-          <DatapointInfoPanel data={point.data} />
-        </Box>
+        <DatapointInfoPanel data={point.data} />
       }
     >
       <div
