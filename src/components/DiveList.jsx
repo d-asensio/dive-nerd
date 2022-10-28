@@ -15,7 +15,7 @@ const Item = ({ name, date, depth, time, samples }) => (
     <ListItemButton
       sx={{
         alignItems: 'stretch',
-        gap: 1
+        gap: 2
       }}
     >
       <ListItemDecorator>
@@ -42,45 +42,68 @@ const Item = ({ name, date, depth, time, samples }) => (
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
-            padding: 0.5
+            justifyContent: 'space-between'
           }}
         >
-          <Typography level='h5' component='div'>{name}</Typography>
-          <Typography level='body1' component='div' noWrap textColor='text.secondary'>
-            {date}
-          </Typography>
+          <Typography level='h5'>{name}</Typography>
         </Box>
         <Box
           sx={{
             display: 'flex',
-            gap: 3,
-            alignSelf: 'flex-end'
+            flexDirection: 'column',
+            justifyContent: 'space-between'
           }}
         >
-          <Box>
-            <Typography
-              level='body3'
-              textTransform='uppercase'
-              fontWeight='lg'
+          <Typography
+            noWrap
+            level='body2'
+            textColor='text.secondary'
+          >
+            {date}
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 3,
+              alignSelf: 'flex-end'
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end'
+              }}
             >
-              Depth
-            </Typography>
-            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
-              {depth}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography
-              level='body3'
-              textTransform='uppercase'
-              fontWeight='lg'
+              <Typography
+                level='body3'
+                textTransform='uppercase'
+                fontWeight='lg'
+              >
+                Depth
+              </Typography>
+              <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
+                {depth}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end'
+              }}
             >
-              Time
-            </Typography>
-            <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
-              {time}
-            </Typography>
+              <Typography
+                level='body3'
+                textTransform='uppercase'
+                fontWeight='lg'
+              >
+                Time
+              </Typography>
+              <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
+                {time}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </ListItemContent>
