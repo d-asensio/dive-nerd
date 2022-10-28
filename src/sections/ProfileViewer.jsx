@@ -1,9 +1,9 @@
 import Card from '@mui/joy/Card'
 import { DiveProfileChart } from '../components'
 
-export const ProfileViewer = ({ gridArea, samples, onDatapointHover }) => {
+export const ProfileViewer = ({ samples, onDatapointHover }) => {
   return (
-    <Card sx={{ gridArea }}>
+    <Card>
       <DiveProfileChart
         samples={samples}
         onDatapointHover={onDatapointHover}

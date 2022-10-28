@@ -1,9 +1,9 @@
 import Card from '@mui/joy/Card'
 import { CompartmentsGasChart } from '../components'
 
-export const CompartmentsViewer = ({ gridArea, dataPoint, maxAmbientPressure }) => {
+export const CompartmentsViewer = ({ dataPoint, maxAmbientPressure }) => {
   return (
-    <Card sx={{ gridArea }}>
+    <Card>
       <CompartmentsGasChart
         data={dataPoint}
         maxAmbientPressure={maxAmbientPressure}
