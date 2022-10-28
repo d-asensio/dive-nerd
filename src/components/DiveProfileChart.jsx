@@ -14,6 +14,7 @@ const StatsTooltip = ({ point }) => {
     <Tooltip
       placement='top'
       variant='outlined'
+      disableInteractive
       open
       arrow
       title={
