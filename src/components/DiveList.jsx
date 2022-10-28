@@ -48,7 +48,7 @@ const Item = ({ name, date, depth, time, rating, samples }) => (
           }}
         >
           <Typography level='h5'>{name}</Typography>
-          <Rating value={rating} size='small' />
+          <Rating value={rating} size='small' readOnly />
         </Box>
         <Box
           sx={{
