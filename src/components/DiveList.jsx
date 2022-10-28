@@ -16,7 +16,8 @@ const Item = ({ name, date, depth, time, rating, samples }) => (
     <ListItemButton
       sx={{
         alignItems: 'stretch',
-        gap: 1
+        gap: 1,
+        borderRadius: 'sm'
       }}
     >
       <ListItemDecorator>
@@ -24,7 +25,7 @@ const Item = ({ name, date, depth, time, rating, samples }) => (
           variant='outlined'
           sx={{
             width: 120,
-            borderRadius: 'md',
+            borderRadius: 'sm',
             overflow: 'auto'
           }}
         >

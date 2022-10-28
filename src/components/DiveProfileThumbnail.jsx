@@ -27,7 +27,7 @@ const DepthTooltip = ({ point }) => {
 
 export const DiveProfileThumbnail = ({ samples }) => {
   return (
-    <AspectRatio>
+    <AspectRatio variant='plain'>
       <ChartWrapper>
         <ResponsiveLine
           data={[
