@@ -2101,6 +2101,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@divenerd/app@workspace:packages/app"
   dependencies:
+    "@divenerd/dive-generator": "workspace:^"
     "@divenerd/dive-physics": "workspace:^"
     "@divenerd/mock-dives": "workspace:^"
     "@emotion/react": ^11.10.5
@@ -2139,6 +2140,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@divenerd/dive-generator@workspace:^, @divenerd/dive-generator@workspace:packages/dive-generator":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/dive-generator@workspace:packages/dive-generator"
+  dependencies:
+    noisejs: ^2.1.0
+  languageName: unknown
+  linkType: soft
+
 "@divenerd/dive-physics@workspace:^, @divenerd/dive-physics@workspace:packages/dive-physics":
   version: 0.0.0-use.local
   resolution: "@divenerd/dive-physics@workspace:packages/dive-physics"
@@ -2162,6 +2171,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@divenerd/monorepo-wrapper@workspace:."
   dependencies:
+    "@divenerd/dive-generator": "workspace:^"
     husky: ">=6"
     lint-staged: ">=10"
     markdown-toc: ^1.2.0

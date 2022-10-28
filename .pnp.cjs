@@ -20,6 +20,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/app"\
       },\
       {\
+        "name": "@divenerd/dive-generator",\
+        "reference": "workspace:packages/dive-generator"\
+      },\
+      {\
         "name": "@divenerd/dive-physics",\
         "reference": "workspace:packages/dive-physics"\
       },\
@@ -32,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@divenerd/app", ["workspace:packages/app"]],\
+      ["@divenerd/dive-generator", ["workspace:packages/dive-generator"]],\
       ["@divenerd/dive-physics", ["workspace:packages/dive-physics"]],\
       ["@divenerd/mock-dives", ["workspace:packages/mock-dives"]],\
       ["@divenerd/monorepo-wrapper", ["workspace:."]]\
@@ -640,6 +645,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       [\
         "@divenerd/app",\
         "workspace:packages/app"\
+      ],\
+      [\
+        "@divenerd/dive-generator",\
+        "workspace:packages/dive-generator"\
       ],\
       [\
         "@divenerd/dive-physics",\
@@ -6727,6 +6736,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\
@@ -13266,6 +13276,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/app/",\
           "packageDependencies": [\
             ["@divenerd/app", "workspace:packages/app"],\
+            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
             ["@divenerd/dive-physics", "workspace:packages/dive-physics"],\
             ["@divenerd/mock-dives", "workspace:packages/mock-dives"],\
             ["@emotion/react", "virtual:b5e9d6b0904b179392331eac96daa00bce7cabbb22193864614acfa6e2028c707c1a2c48a36888548948d523b724c9d2b99038b3efef5f4e837cec99cd2d5dba#npm:11.10.5"],\
@@ -13305,6 +13316,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT"\
         }]\
       ]],\
+      ["@divenerd/dive-generator", [\
+        ["workspace:packages/dive-generator", {\
+          "packageLocation": "./packages/dive-generator/",\
+          "packageDependencies": [\
+            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
+            ["noisejs", "npm:2.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@divenerd/dive-physics", [\
         ["workspace:packages/dive-physics", {\
           "packageLocation": "./packages/dive-physics/",\
@@ -13334,6 +13355,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@divenerd/monorepo-wrapper", "workspace:."],\
+            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\

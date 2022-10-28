@@ -11,6 +11,7 @@
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@divenerd/dive-generator": "workspace:^",
     "@divenerd/dive-physics": "workspace:^",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

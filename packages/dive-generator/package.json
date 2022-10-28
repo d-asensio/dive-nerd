@@ -1,0 +1,9 @@
+{
+  "name": "@divenerd/dive-generator",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "dependencies": {
+    "noisejs": "^2.1.0"
+  }
+}

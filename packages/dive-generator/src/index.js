@@ -8,7 +8,7 @@ function perlin (x, y, distortion) {
   return value * distortion
 }
 
-export const generateDive = ({
+const generateDive = ({
   withPerlinNoise,
   samplingIntervals,
   segments
@@ -71,3 +71,5 @@ export const generateDive = ({
 
   return { samples }
 }
+
+module.exports = { generateDive }

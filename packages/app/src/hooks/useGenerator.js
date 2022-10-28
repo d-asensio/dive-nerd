@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { generateDive } from '@divenerd/dive-generator'
+
 import { useDive } from './useDive'
-import { generateDive } from '../dive-generator'
 
 export const useGenerator = ({ samplingIntervals, withPerlinNoise, segments }) => {
   const [dive, setDive] = useState({ samples: [] })
