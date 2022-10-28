@@ -120,7 +120,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
         pointLabelYOffset={-12}
         useMesh
         tooltip={StatsTooltip}
-        crosshairType='top'
+        crosshairType='bottom'
         onMouseMove={handleMouseMove}
       />
     </Wrapper>
