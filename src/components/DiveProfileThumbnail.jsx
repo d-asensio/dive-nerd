@@ -1,6 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import AspectRatio from '@mui/joy/AspectRatio'
 import styled from 'styled-components'
+import Tooltip from '@mui/joy/Tooltip'
 
 const ChartWrapper = styled.div`
   width: 100%;
@@ -9,12 +10,26 @@ const ChartWrapper = styled.div`
   align-items: stretch;
 `
 
+const DepthTooltip = ({ point }) => {
+  return (
+    <Tooltip
+      placement='top'
+      variant='solid'
+      disableInteractive
+      open
+      arrow
+      title={`${point.data.depth} m`}
+    >
+      <span />
+    </Tooltip>
+  )
+}
+
 export const DiveProfileThumbnail = ({ samples }) => {
   return (
     <AspectRatio>
       <ChartWrapper>
         <ResponsiveLine
-          enablePoints={false}
           data={[
             {
               id: 'Dive Profile',
@@ -31,11 +46,12 @@ export const DiveProfileThumbnail = ({ samples }) => {
             stacked: false,
             reverse: true
           }}
-          layers={['lines']}
+          layers={['lines', 'mesh']}
           animate={false}
           enableGridX={false}
           enableGridY={false}
-          isInteractive={false}
+          useMesh
+          tooltip={DepthTooltip}
         />
       </ChartWrapper>
     </AspectRatio>
