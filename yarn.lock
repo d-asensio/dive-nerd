@@ -2170,7 +2170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@divenerd/monorepo-wrapper@workspace:."
   dependencies:
-    husky: ">=6"
+    husky: ^8.0.0
     lint-staged: ">=10"
     markdown-toc: ^1.2.0
     standard: ^17.0.0
@@ -12504,7 +12504,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:>=6":
+"husky@npm:^8.0.0":
   version: 8.0.1
   resolution: "husky@npm:8.0.1"
   bin:
