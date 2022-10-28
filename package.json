@@ -1,57 +1,21 @@
 {
-  "name": "@dive-nerd/app",
+  "name": "@divenerd/monorepo-wrapper",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "app": "yarn workspace @divenerd/app",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "markdown:generate-toc": "markdown-toc -i",
-    "prepare": "husky install",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/joy": "^5.0.0-alpha.51",
-    "@mui/material": "^5.10.11",
-    "@mui/utils": "^5.10.9",
-    "@nivo/bar": "^0.80.0",
-    "@nivo/core": "^0.80.0",
-    "@nivo/line": "^0.80.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "mapbox-gl": "^2.10.0",
-    "noisejs": "^2.1.0",
-    "ramda": "^0.28.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-map-gl": "^7.0.19",
-    "react-popper": "^2.3.0",
-    "styled-components": "^5.3.6",
-    "use-debounce": "^8.0.4",
-    "web-vitals": "^2.1.0"
+    "postinstall": "husky install"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-interactions": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.13",
-    "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/node-logger": "^6.5.13",
-    "@storybook/react": "^6.5.13",
-    "@storybook/testing-library": "^0.0.13",
     "husky": ">=6",
     "lint-staged": ">=10",
     "markdown-toc": "^1.2.0",
-    "react-scripts": "5.0.1",
     "standard": "^17.0.0"
   },
   "lint-staged": {
@@ -66,18 +30,6 @@
     "env": [
       "jest",
       "browser"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   }
 }
