@@ -10,6 +10,11 @@ import ListItem from '@mui/joy/ListItem'
 import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import ListDivider from '@mui/joy/ListDivider'
 import Typography from '@mui/joy/Typography'
+
+import PersonIcon from '@mui/icons-material/Person'
+import SettingsIcon from '@mui/icons-material/Settings'
+import LogoutIcon from '@mui/icons-material/Logout'
+
 import { Logo } from './Logo'
 
 const Shortcut = ({ text }) => (
@@ -75,8 +80,16 @@ export function NavigationBar () {
           >
             <ListItem nested>
               <List>
-                <MenuItem>Profile</MenuItem>
                 <MenuItem>
+                  <ListItemDecorator>
+                    <PersonIcon />
+                  </ListItemDecorator>
+                  Profile
+                </MenuItem>
+                <MenuItem>
+                  <ListItemDecorator>
+                    <SettingsIcon />
+                  </ListItemDecorator>
                   Settings <Shortcut text='⌘ ,' />
                 </MenuItem>
               </List>
@@ -84,7 +97,12 @@ export function NavigationBar () {
             <ListDivider />
             <ListItem nested>
               <List>
-                <MenuItem>Sign out</MenuItem>
+                <MenuItem ariant='soft' color='danger'>
+                  <ListItemDecorator sx={{ color: 'inherit' }}>
+                    <LogoutIcon />
+                  </ListItemDecorator>
+                  Log out
+                </MenuItem>
               </List>
             </ListItem>
           </Menu>
