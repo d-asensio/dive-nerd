@@ -1,9 +1,7 @@
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles'
+import { ThemeProvider } from '../../src/providers'
 
 export const joyUIDecorator = (Story) => (
-  <StyledEngineProvider injectFirst>
-    <CssVarsProvider>
-      <Story />
-    </CssVarsProvider>
-  </StyledEngineProvider>
+  <ThemeProvider>
+    <Story />
+  </ThemeProvider>
 )

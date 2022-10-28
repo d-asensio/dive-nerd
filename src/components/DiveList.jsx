@@ -7,15 +7,16 @@ import ListItemButton from '@mui/joy/ListItemButton'
 import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import Typography from '@mui/joy/Typography'
 import Sheet from '@mui/joy/Sheet'
+import Rating from '@mui/material/Rating'
 
 import { DiveProfileThumbnail } from './DiveProfileThumbnail'
 
-const Item = ({ name, date, depth, time, samples }) => (
+const Item = ({ name, date, depth, time, rating, samples }) => (
   <ListItem>
     <ListItemButton
       sx={{
         alignItems: 'stretch',
-        gap: 2
+        gap: 1
       }}
     >
       <ListItemDecorator>
@@ -42,10 +43,12 @@ const Item = ({ name, date, depth, time, samples }) => (
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            padding: 0.5
           }}
         >
           <Typography level='h5'>{name}</Typography>
+          <Rating value={rating} size='small' />
         </Box>
         <Box
           sx={{

@@ -1,24 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles'
-import CssBaseline from '@mui/joy/CssBaseline'
-
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+import { ThemeProvider } from './providers'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    {/* <GlobalStyle /> */}
-    <StyledEngineProvider injectFirst>
-      <CssVarsProvider>
-        <CssBaseline />
-        <App />
-      </CssVarsProvider>
-    </StyledEngineProvider>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 )
 
