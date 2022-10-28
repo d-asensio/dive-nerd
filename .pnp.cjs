@@ -6736,7 +6736,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\
@@ -13302,7 +13301,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:b5e9d6b0904b179392331eac96daa00bce7cabbb22193864614acfa6e2028c707c1a2c48a36888548948d523b724c9d2b99038b3efef5f4e837cec99cd2d5dba#npm:13.4.0"],\
             ["@testing-library/user-event", "virtual:b5e9d6b0904b179392331eac96daa00bce7cabbb22193864614acfa6e2028c707c1a2c48a36888548948d523b724c9d2b99038b3efef5f4e837cec99cd2d5dba#npm:13.5.0"],\
             ["mapbox-gl", "npm:2.10.0"],\
-            ["noisejs", "npm:2.1.0"],\
             ["ramda", "npm:0.28.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:b5e9d6b0904b179392331eac96daa00bce7cabbb22193864614acfa6e2028c707c1a2c48a36888548948d523b724c9d2b99038b3efef5f4e837cec99cd2d5dba#npm:18.2.0"],\
@@ -13355,7 +13353,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@divenerd/monorepo-wrapper", "workspace:."],\
-            ["@divenerd/dive-generator", "workspace:packages/dive-generator"],\
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\
