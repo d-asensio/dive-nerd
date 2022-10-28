@@ -6,7 +6,7 @@ import { NavigationBar, Layout } from '../components'
 import { DiveLog, DiveMap } from '../sections'
 
 import Box from '@mui/joy/Box'
-import {useDive} from '../hooks/useDive';
+import { useDive } from '../hooks/useDive'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -19,7 +19,7 @@ const Wrapper = styled.main`
 
 function DiveLogPage () {
   const { samples } = useDive(
-    mockDives.diveY2022M04D12T0704,
+    mockDives.diveY2022M04D12T0704
   )
 
   return (
@@ -33,7 +33,7 @@ function DiveLogPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <DiveLog samples={samples} />
@@ -43,7 +43,7 @@ function DiveLogPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <DiveMap />

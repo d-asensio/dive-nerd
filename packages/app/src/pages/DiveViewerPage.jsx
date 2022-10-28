@@ -24,11 +24,11 @@ const Wrapper = styled.main`
 
 function DiveViewerPage () {
   const { samples, maxAmbientPressure } = useDive(
-    mockDives.diveY2022M04D12T0704,
+    mockDives.diveY2022M04D12T0704
   )
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
-    ambientPressure: 1,
+    ambientPressure: 1
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
@@ -44,7 +44,7 @@ function DiveViewerPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <DiveLog samples={samples} />
@@ -55,7 +55,7 @@ function DiveViewerPage () {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <ProfileViewer

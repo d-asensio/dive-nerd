@@ -44,73 +44,73 @@ export function NavigationBar () {
         borderColor: 'divider'
       }}
     >
-    <List
-      row
-      sx={{
-        p: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}
-    >
-      <Logo />
-      <Alert variant='soft' color='warning'>
-        DiveNerd is still in beta, use it carefully!
-      </Alert>
-      <ListItem>
-        <ListItemDecorator>
-          <IconButton
-            ref={buttonRef}
-            color='neutral'
-            aria-haspopup='menu'
-            onClick={handleAvatarClick}
-            sx={{
-              borderRadius: '50%',
-              marginInlineStart: 'var(--Avatar-marginInlineStart)',
-              boxShadow: 'var(--Avatar-ring)'
-            }}
-          >
-            <Avatar size='sm'>DN</Avatar>
-          </IconButton>
-          <Menu
-            open={menuOpen}
-            anchorEl={buttonRef.current}
-            placement='bottom-end'
-            onClose={handleClose}
-            sx={{
-              width: 250
-            }}
-          >
-            <ListItem nested>
-              <List>
-                <MenuItem>
-                  <ListItemDecorator>
-                    <PersonIcon />
-                  </ListItemDecorator>
-                  Profile
-                </MenuItem>
-                <MenuItem>
-                  <ListItemDecorator>
-                    <SettingsIcon />
-                  </ListItemDecorator>
-                  Settings <Shortcut text='⌘ ,' />
-                </MenuItem>
-              </List>
-            </ListItem>
-            <ListDivider />
-            <ListItem nested>
-              <List>
-                <MenuItem ariant='soft' color='danger'>
-                  <ListItemDecorator sx={{ color: 'inherit' }}>
-                    <LogoutIcon />
-                  </ListItemDecorator>
-                  Log out
-                </MenuItem>
-              </List>
-            </ListItem>
-          </Menu>
-        </ListItemDecorator>
-      </ListItem>
-    </List>
+      <List
+        row
+        sx={{
+          p: 1,
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <Logo />
+        <Alert variant='soft' color='warning'>
+          DiveNerd is still in beta, use it carefully!
+        </Alert>
+        <ListItem>
+          <ListItemDecorator>
+            <IconButton
+              ref={buttonRef}
+              color='neutral'
+              aria-haspopup='menu'
+              onClick={handleAvatarClick}
+              sx={{
+                borderRadius: '50%',
+                marginInlineStart: 'var(--Avatar-marginInlineStart)',
+                boxShadow: 'var(--Avatar-ring)'
+              }}
+            >
+              <Avatar size='sm'>DN</Avatar>
+            </IconButton>
+            <Menu
+              open={menuOpen}
+              anchorEl={buttonRef.current}
+              placement='bottom-end'
+              onClose={handleClose}
+              sx={{
+                width: 250
+              }}
+            >
+              <ListItem nested>
+                <List>
+                  <MenuItem>
+                    <ListItemDecorator>
+                      <PersonIcon />
+                    </ListItemDecorator>
+                    Profile
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemDecorator>
+                      <SettingsIcon />
+                    </ListItemDecorator>
+                    Settings <Shortcut text='⌘ ,' />
+                  </MenuItem>
+                </List>
+              </ListItem>
+              <ListDivider />
+              <ListItem nested>
+                <List>
+                  <MenuItem ariant='soft' color='danger'>
+                    <ListItemDecorator sx={{ color: 'inherit' }}>
+                      <LogoutIcon />
+                    </ListItemDecorator>
+                    Log out
+                  </MenuItem>
+                </List>
+              </ListItem>
+            </Menu>
+          </ListItemDecorator>
+        </ListItem>
+      </List>
     </Box>
   )
 }

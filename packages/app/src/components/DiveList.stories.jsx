@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {mockDives} from '@divenerd/mock-dives';
+import { mockDives } from '@divenerd/mock-dives'
 
 import { DiveList } from './DiveList'
 import { useDive } from '../hooks/useDive'
