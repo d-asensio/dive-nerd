@@ -68,10 +68,21 @@ export function DatapointInfoPanel ({ data }) {
         label='Time'
         value={time}
       />
+      <TimeField
+        readOnly
+        label='Time Δ'
+        value={timeDelta}
+      />
       <NumericField
         readOnly
         label='Depth'
         value={depth}
+        units='m'
+      />
+      <NumericField
+        readOnly
+        label='Depth Δ'
+        value={depthDelta}
         units='m'
       />
       <NumericField
@@ -88,27 +99,15 @@ export function DatapointInfoPanel ({ data }) {
       />
       <NumericField
         readOnly
-        label='N2 Alveolar p.'
-        value={alveolarPressureN2}
-        units='bar'
-      />
-      <NumericField
-        readOnly
-        label='Time Δ'
-        value={timeDelta}
-        units='s'
-      />
-      <NumericField
-        readOnly
-        label='Depth Δ'
-        value={depthDelta}
-        units='m'
-      />
-      <NumericField
-        readOnly
         label='Descent Rate'
         value={descentRate}
         units='bar/min'
+      />
+      <NumericField
+        readOnly
+        label='N2 Alveolar p.'
+        value={alveolarPressureN2}
+        units='bar'
       />
       <NumericField
         readOnly
