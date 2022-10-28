@@ -20,16 +20,7 @@ const StatsTooltip = ({ point }) => {
         <DatapointInfoPanel data={point.data} />
       }
     >
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '1px',
-          height: '1px',
-          margin: '-1px'
-        }}
-      />
+      <span />
     </Tooltip>
   )
 }
