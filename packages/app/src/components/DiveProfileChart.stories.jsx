@@ -4,7 +4,7 @@ import { DiveProfileChart } from './DiveProfileChart'
 
 import { useDive } from '../hooks/useDive'
 
-import * as dives from '../dives'
+import { mockDives } from '@divenerd/mock-dives'
 import { useGenerator } from '../hooks/useGenerator'
 
 export default {
@@ -12,8 +12,8 @@ export default {
   component: DiveProfileChart,
   argTypes: {
     dive: {
-      options: Object.keys(dives),
-      mapping: dives,
+      options: Object.keys(mockDives),
+      mapping: mockDives,
       control: {
         type: 'select'
       }

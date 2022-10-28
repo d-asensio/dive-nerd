@@ -1,8 +1,9 @@
 import React from 'react'
 
+import {mockDives} from '@divenerd/mock-dives';
+
 import { DiveList } from './DiveList'
 import { useDive } from '../hooks/useDive'
-import dive from '../dives/Dive_2013-10-25-0945.json'
 
 export default {
   title: 'Components/DiveList',
@@ -11,7 +12,7 @@ export default {
 }
 
 const Template = (args) => {
-  const { samples } = useDive(dive)
+  const { samples } = useDive(mockDives.diveY2022M04D12T0704)
 
   return (
     <DiveList {...args}>

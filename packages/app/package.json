@@ -11,6 +11,7 @@
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@divenerd/dive-physics": "workspace:^",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.9",
@@ -35,6 +36,7 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
+    "@divenerd/mock-dives": "workspace:^",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",

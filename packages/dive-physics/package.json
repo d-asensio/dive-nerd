@@ -1,0 +1,20 @@
+{
+  "name": "@divenerd/dive-physics",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@divenerd/mock-dives": "workspace:^",
+    "babel-jest": "^29.2.2",
+    "jest": "^29.2.2"
+  },
+  "dependencies": {
+    "ramda": "^0.28.0"
+  }
+}

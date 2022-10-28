@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "app": "yarn workspace @divenerd/app",
+    "dive-physics": "yarn workspace @divenerd/dive-physics",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "markdown:generate-toc": "markdown-toc -i",

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { map, sort } from 'ramda'
-import * as ZHL16C from '../buhlmann'
+import * as ZHL16C from '@divenerd/dive-physics'
 
 const calculateChartAxis = sample => {
   const { time, depth } = sample

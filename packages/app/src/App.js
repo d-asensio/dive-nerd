@@ -2,7 +2,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { useDebouncedCallback } from 'use-debounce'
 
-import * as ZHL16C from './buhlmann'
+import { mockDives } from '@divenerd/mock-dives'
+import * as ZHL16C from '@divenerd/dive-physics'
 
 import {
   NavigationBar,
@@ -16,7 +17,6 @@ import {
   ProfileViewer
 } from './sections'
 
-import dive from './dives/Dive_2022-04-12-0704.json'
 import { useDive } from './hooks/useDive'
 
 const Wrapper = styled.main`
@@ -25,7 +25,7 @@ const Wrapper = styled.main`
 `
 
 function App () {
-  const { samples, maxAmbientPressure } = useDive(dive)
+  const { samples, maxAmbientPressure } = useDive(mockDives.diveY2022M04D12T0704)
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1
