@@ -1,4 +1,3 @@
-import AspectRatio from '@mui/joy/AspectRatio'
 import Box from '@mui/joy/Box'
 import List from '@mui/joy/List'
 import ListItem from '@mui/joy/ListItem'
@@ -9,7 +8,9 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import Typography from '@mui/joy/Typography'
 import Sheet from '@mui/joy/Sheet'
 
-const Item = ({ name, date, depth, time }) => (
+import { DiveProfileThumbnail } from './DiveProfileThumbnail'
+
+const Item = ({ name, date, depth, time, samples }) => (
   <ListItem>
     <ListItemButton
       sx={{
@@ -25,7 +26,7 @@ const Item = ({ name, date, depth, time }) => (
             overflow: 'auto'
           }}
         >
-          <AspectRatio />
+          <DiveProfileThumbnail samples={samples} />
         </Sheet>
       </ListItemDecorator>
       <ListItemContent

@@ -43,7 +43,7 @@ function App () {
         `}
       >
         <Layout.Area name='dive-log'>
-          <DiveLog />
+          <DiveLog samples={samples} />
         </Layout.Area>
         <Layout.Area name='profile-viewer'>
           <ProfileViewer
