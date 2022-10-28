@@ -1,4 +1,5 @@
 import { joyUIDecorator } from "./decorators/joy-ui"
+import {reactRouterDecorator} from './decorators/react-router';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -11,5 +12,6 @@ export const parameters = {
 }
 
 export const decorators = [
-  joyUIDecorator
+  joyUIDecorator,
+  reactRouterDecorator
 ]
