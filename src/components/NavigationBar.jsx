@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
+import Alert from '@mui/joy/Alert'
 import Avatar from '@mui/joy/Avatar'
 import IconButton from '@mui/joy/IconButton'
 import Menu from '@mui/joy/Menu'
@@ -45,6 +46,9 @@ export function NavigationBar () {
           marginLeft: 8
         }}
       />
+      <Alert variant='soft' color='warning'>
+        DiveNerd is in beta, use it at your own risk!
+      </Alert>
       <ListItem>
         <ListItemDecorator>
           <IconButton
