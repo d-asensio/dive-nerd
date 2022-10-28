@@ -1,16 +1,6 @@
 import Box from '@mui/joy/Box'
 import TextField from '@mui/joy/TextField'
-
-function padTo2Digits (num) {
-  return num.toString().padStart(2, '0')
-}
-
-function formatTime (totalSeconds) {
-  const minutes = Math.floor(totalSeconds / 60)
-  const seconds = totalSeconds % 60
-
-  return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`
-}
+import {formatTime} from '../utils/formatTime';
 
 function TimeField ({ value, ...rest }) {
   const formattedValue = typeof value === 'number' ? `${formatTime(value)} min` : ''

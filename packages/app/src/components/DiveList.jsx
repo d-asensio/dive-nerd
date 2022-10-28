@@ -13,16 +13,15 @@ import Rating from '@mui/material/Rating'
 
 import { DiveProfileThumbnail } from './DiveProfileThumbnail'
 
-const Item = ({ name, date, depth, time, rating, samples }) => (
+const Item = ({ name, date, maximumDepth, totalDuration, rating, samples, onClick }) => (
   <ListItem>
     <ListItemButton
-      component={Link}
-      to='/dive/1'
       sx={{
         alignItems: 'stretch',
         gap: 1,
         borderRadius: 'sm'
       }}
+      onClick={onClick}
     >
       <ListItemDecorator>
         <Sheet
@@ -91,7 +90,7 @@ const Item = ({ name, date, depth, time, rating, samples }) => (
                 Depth
               </Typography>
               <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
-                {depth}
+                {maximumDepth}
               </Typography>
             </Box>
             <Box
@@ -109,7 +108,7 @@ const Item = ({ name, date, depth, time, rating, samples }) => (
                 Time
               </Typography>
               <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
-                {time}
+                {totalDuration}
               </Typography>
             </Box>
           </Box>

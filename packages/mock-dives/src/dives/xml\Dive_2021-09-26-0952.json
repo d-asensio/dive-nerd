@@ -1,9 +1,14 @@
 {
+  "name": "Dive 1",
+  "date": "2015-03-25T12:00:00Z",
+  "rating": 1,
+  "maximumDepth": 50.7,
+  "totalDuration": 5000,
   "samples": [
     {
       "time": 0,
-      "depth": 1.56,
-      "temperature": 22,
+      "depth": 1.32,
+      "temperature": 23,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -12,7 +17,7 @@
     },
     {
       "time": 20,
-      "depth": 4.63,
+      "depth": 3.49,
       "temperature": 22,
       "gasMixtures": {
         "O2": 0.21,
@@ -22,7 +27,7 @@
     },
     {
       "time": 40,
-      "depth": 6.82,
+      "depth": 4.01,
       "temperature": 22,
       "gasMixtures": {
         "O2": 0.21,
@@ -32,7 +37,7 @@
     },
     {
       "time": 60,
-      "depth": 10.71,
+      "depth": 3.96,
       "temperature": 22,
       "gasMixtures": {
         "O2": 0.21,
@@ -42,7 +47,7 @@
     },
     {
       "time": 80,
-      "depth": 15.42,
+      "depth": 4.04,
       "temperature": 22,
       "gasMixtures": {
         "O2": 0.21,
@@ -52,8 +57,8 @@
     },
     {
       "time": 100,
-      "depth": 17.84,
-      "temperature": 22,
+      "depth": 5.15,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -62,8 +67,8 @@
     },
     {
       "time": 120,
-      "depth": 19.08,
-      "temperature": 22,
+      "depth": 5.16,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -72,8 +77,8 @@
     },
     {
       "time": 140,
-      "depth": 18.42,
-      "temperature": 22,
+      "depth": 6.24,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -82,8 +87,8 @@
     },
     {
       "time": 160,
-      "depth": 18.03,
-      "temperature": 22,
+      "depth": 6.29,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -92,8 +97,8 @@
     },
     {
       "time": 180,
-      "depth": 18.13,
-      "temperature": 22,
+      "depth": 8.22,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -102,8 +107,8 @@
     },
     {
       "time": 200,
-      "depth": 18.12,
-      "temperature": 22,
+      "depth": 8.19,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -112,8 +117,8 @@
     },
     {
       "time": 220,
-      "depth": 18.38,
-      "temperature": 22,
+      "depth": 9.43,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -122,8 +127,8 @@
     },
     {
       "time": 240,
-      "depth": 18.53,
-      "temperature": 22,
+      "depth": 7.72,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -132,8 +137,8 @@
     },
     {
       "time": 260,
-      "depth": 18.46,
-      "temperature": 22,
+      "depth": 4.65,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -142,8 +147,8 @@
     },
     {
       "time": 280,
-      "depth": 17.29,
-      "temperature": 22,
+      "depth": 0.11,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -152,8 +157,8 @@
     },
     {
       "time": 300,
-      "depth": 17.09,
-      "temperature": 22,
+      "depth": 0.09,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -162,8 +167,8 @@
     },
     {
       "time": 320,
-      "depth": 17.91,
-      "temperature": 22,
+      "depth": 0.05,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -172,8 +177,8 @@
     },
     {
       "time": 340,
-      "depth": 18.1,
-      "temperature": 22,
+      "depth": 3.13,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -182,8 +187,8 @@
     },
     {
       "time": 360,
-      "depth": 19.78,
-      "temperature": 22,
+      "depth": 6.06,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -192,8 +197,8 @@
     },
     {
       "time": 380,
-      "depth": 18.79,
-      "temperature": 22,
+      "depth": 7.92,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -202,8 +207,8 @@
     },
     {
       "time": 400,
-      "depth": 18.61,
-      "temperature": 22,
+      "depth": 7.76,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -212,8 +217,8 @@
     },
     {
       "time": 420,
-      "depth": 18.15,
-      "temperature": 22,
+      "depth": 8.92,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -222,8 +227,8 @@
     },
     {
       "time": 440,
-      "depth": 18.12,
-      "temperature": 22,
+      "depth": 12.69,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -232,8 +237,8 @@
     },
     {
       "time": 460,
-      "depth": 18.28,
-      "temperature": 22,
+      "depth": 14.91,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -242,8 +247,8 @@
     },
     {
       "time": 480,
-      "depth": 19.57,
-      "temperature": 22,
+      "depth": 19.02,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -252,8 +257,8 @@
     },
     {
       "time": 500,
-      "depth": 20.94,
-      "temperature": 22,
+      "depth": 21.61,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -262,8 +267,8 @@
     },
     {
       "time": 520,
-      "depth": 22.06,
-      "temperature": 22,
+      "depth": 22.72,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -272,8 +277,8 @@
     },
     {
       "time": 540,
-      "depth": 24.19,
-      "temperature": 22,
+      "depth": 23.34,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -282,8 +287,8 @@
     },
     {
       "time": 560,
-      "depth": 26.72,
-      "temperature": 22,
+      "depth": 24.12,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -292,8 +297,8 @@
     },
     {
       "time": 580,
-      "depth": 26.69,
-      "temperature": 22,
+      "depth": 24.08,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -302,8 +307,8 @@
     },
     {
       "time": 600,
-      "depth": 28.41,
-      "temperature": 22,
+      "depth": 24.06,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -312,8 +317,8 @@
     },
     {
       "time": 620,
-      "depth": 31.93,
-      "temperature": 22,
+      "depth": 23.58,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -322,8 +327,8 @@
     },
     {
       "time": 640,
-      "depth": 33.91,
-      "temperature": 22,
+      "depth": 23.14,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -332,8 +337,8 @@
     },
     {
       "time": 660,
-      "depth": 36.29,
-      "temperature": 22,
+      "depth": 26.18,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -342,8 +347,8 @@
     },
     {
       "time": 680,
-      "depth": 38.98,
-      "temperature": 22,
+      "depth": 27.98,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -352,8 +357,8 @@
     },
     {
       "time": 700,
-      "depth": 42.04,
-      "temperature": 22,
+      "depth": 29.26,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -362,8 +367,8 @@
     },
     {
       "time": 720,
-      "depth": 44.87,
-      "temperature": 22,
+      "depth": 27.38,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -372,8 +377,8 @@
     },
     {
       "time": 740,
-      "depth": 44.27,
-      "temperature": 22,
+      "depth": 27.78,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -382,8 +387,8 @@
     },
     {
       "time": 760,
-      "depth": 45.84,
-      "temperature": 22,
+      "depth": 28.97,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -392,8 +397,8 @@
     },
     {
       "time": 780,
-      "depth": 48.21,
-      "temperature": 22,
+      "depth": 28.91,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -402,8 +407,8 @@
     },
     {
       "time": 800,
-      "depth": 46.92,
-      "temperature": 22,
+      "depth": 28.64,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -412,8 +417,8 @@
     },
     {
       "time": 820,
-      "depth": 48.27,
-      "temperature": 22,
+      "depth": 29.13,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -422,8 +427,8 @@
     },
     {
       "time": 840,
-      "depth": 48.37,
-      "temperature": 22,
+      "depth": 28.32,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -432,8 +437,8 @@
     },
     {
       "time": 860,
-      "depth": 46.82,
-      "temperature": 22,
+      "depth": 27.88,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -442,8 +447,8 @@
     },
     {
       "time": 880,
-      "depth": 42.14,
-      "temperature": 22,
+      "depth": 28.48,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -452,8 +457,8 @@
     },
     {
       "time": 900,
-      "depth": 41.12,
-      "temperature": 22,
+      "depth": 27.92,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -462,8 +467,8 @@
     },
     {
       "time": 920,
-      "depth": 42.83,
-      "temperature": 22,
+      "depth": 28.3,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -472,8 +477,8 @@
     },
     {
       "time": 940,
-      "depth": 45.86,
-      "temperature": 22,
+      "depth": 27.44,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -482,8 +487,8 @@
     },
     {
       "time": 960,
-      "depth": 44.61,
-      "temperature": 22,
+      "depth": 28.93,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -492,8 +497,8 @@
     },
     {
       "time": 980,
-      "depth": 42.41,
-      "temperature": 22,
+      "depth": 27.64,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -502,8 +507,8 @@
     },
     {
       "time": 1000,
-      "depth": 38.46,
-      "temperature": 22,
+      "depth": 27.4,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -512,8 +517,8 @@
     },
     {
       "time": 1020,
-      "depth": 33.4,
-      "temperature": 22,
+      "depth": 28.07,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -522,8 +527,8 @@
     },
     {
       "time": 1040,
-      "depth": 27.52,
-      "temperature": 22,
+      "depth": 26.85,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -532,8 +537,8 @@
     },
     {
       "time": 1060,
-      "depth": 23.27,
-      "temperature": 22,
+      "depth": 26.6,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -542,8 +547,8 @@
     },
     {
       "time": 1080,
-      "depth": 21.79,
-      "temperature": 22,
+      "depth": 27.08,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -552,8 +557,8 @@
     },
     {
       "time": 1100,
-      "depth": 19.45,
-      "temperature": 22,
+      "depth": 27.71,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -562,8 +567,8 @@
     },
     {
       "time": 1120,
-      "depth": 21.47,
-      "temperature": 22,
+      "depth": 27.5,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -572,8 +577,8 @@
     },
     {
       "time": 1140,
-      "depth": 23.43,
-      "temperature": 22,
+      "depth": 28.1,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -582,8 +587,8 @@
     },
     {
       "time": 1160,
-      "depth": 22.87,
-      "temperature": 22,
+      "depth": 28.12,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -592,8 +597,8 @@
     },
     {
       "time": 1180,
-      "depth": 22.25,
-      "temperature": 22,
+      "depth": 27.69,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -602,8 +607,8 @@
     },
     {
       "time": 1200,
-      "depth": 21.31,
-      "temperature": 22,
+      "depth": 26.91,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -612,8 +617,8 @@
     },
     {
       "time": 1220,
-      "depth": 20.46,
-      "temperature": 22,
+      "depth": 26.25,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -622,8 +627,8 @@
     },
     {
       "time": 1240,
-      "depth": 19.24,
-      "temperature": 22,
+      "depth": 25.79,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -632,8 +637,8 @@
     },
     {
       "time": 1260,
-      "depth": 17.36,
-      "temperature": 22,
+      "depth": 23.88,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -642,8 +647,8 @@
     },
     {
       "time": 1280,
-      "depth": 14.2,
-      "temperature": 22,
+      "depth": 22.52,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -652,8 +657,8 @@
     },
     {
       "time": 1300,
-      "depth": 12.08,
-      "temperature": 22,
+      "depth": 21.46,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -662,8 +667,8 @@
     },
     {
       "time": 1320,
-      "depth": 12.19,
-      "temperature": 22,
+      "depth": 21.06,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -672,8 +677,8 @@
     },
     {
       "time": 1340,
-      "depth": 10.05,
-      "temperature": 22,
+      "depth": 21.85,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -682,8 +687,8 @@
     },
     {
       "time": 1360,
-      "depth": 9.12,
-      "temperature": 22,
+      "depth": 23.29,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -692,8 +697,8 @@
     },
     {
       "time": 1380,
-      "depth": 8.85,
-      "temperature": 22,
+      "depth": 23.25,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -702,8 +707,8 @@
     },
     {
       "time": 1400,
-      "depth": 7.61,
-      "temperature": 22,
+      "depth": 22.01,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -712,8 +717,8 @@
     },
     {
       "time": 1420,
-      "depth": 7.9,
-      "temperature": 22,
+      "depth": 22.3,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -722,8 +727,8 @@
     },
     {
       "time": 1440,
-      "depth": 8.86,
-      "temperature": 22,
+      "depth": 21.65,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -732,8 +737,8 @@
     },
     {
       "time": 1460,
-      "depth": 8.39,
-      "temperature": 22,
+      "depth": 21.43,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -742,8 +747,8 @@
     },
     {
       "time": 1480,
-      "depth": 5.65,
-      "temperature": 22,
+      "depth": 22.02,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -752,8 +757,8 @@
     },
     {
       "time": 1500,
-      "depth": 4.77,
-      "temperature": 22,
+      "depth": 21.2,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -762,8 +767,8 @@
     },
     {
       "time": 1520,
-      "depth": 4,
-      "temperature": 22,
+      "depth": 22.33,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -772,8 +777,8 @@
     },
     {
       "time": 1540,
-      "depth": 5.46,
-      "temperature": 22,
+      "depth": 21.84,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -782,8 +787,8 @@
     },
     {
       "time": 1560,
-      "depth": 6.12,
-      "temperature": 22,
+      "depth": 21.38,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -792,8 +797,8 @@
     },
     {
       "time": 1580,
-      "depth": 6.1,
-      "temperature": 22,
+      "depth": 20.83,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -802,8 +807,8 @@
     },
     {
       "time": 1600,
-      "depth": 6.13,
-      "temperature": 22,
+      "depth": 19.05,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -812,8 +817,8 @@
     },
     {
       "time": 1620,
-      "depth": 5.87,
-      "temperature": 22,
+      "depth": 18.62,
+      "temperature": 20,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,
@@ -822,8 +827,238 @@
     },
     {
       "time": 1640,
-      "depth": 3.04,
-      "temperature": 22,
+      "depth": 19.11,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1660,
+      "depth": 19.84,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1680,
+      "depth": 22,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1700,
+      "depth": 22.58,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1720,
+      "depth": 20.61,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1740,
+      "depth": 18.78,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1760,
+      "depth": 16.41,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1780,
+      "depth": 14.22,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1800,
+      "depth": 11.5,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1820,
+      "depth": 7.25,
+      "temperature": 20,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1840,
+      "depth": 7.44,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1860,
+      "depth": 5.56,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1880,
+      "depth": 5.69,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1900,
+      "depth": 5.79,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1920,
+      "depth": 5.86,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1940,
+      "depth": 5.46,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1960,
+      "depth": 5,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 1980,
+      "depth": 5.23,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2000,
+      "depth": 5.07,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2020,
+      "depth": 5.37,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2040,
+      "depth": 4.31,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2060,
+      "depth": 3.51,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2080,
+      "depth": 3.71,
+      "temperature": 21,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    },
+    {
+      "time": 2100,
+      "depth": 1.57,
+      "temperature": 21,
       "gasMixtures": {
         "O2": 0.21,
         "N2": 0.79,

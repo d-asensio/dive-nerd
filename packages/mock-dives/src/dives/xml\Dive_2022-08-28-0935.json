@@ -1,0 +1,19 @@
+{
+  "name": "Dive 1",
+  "date": "2015-03-25T12:00:00Z",
+  "rating": 1,
+  "maximumDepth": 50.7,
+  "totalDuration": 5000,
+  "samples": [
+    {
+      "time": 0,
+      "depth": 2.17,
+      "temperature": 25,
+      "gasMixtures": {
+        "O2": 0.21,
+        "N2": 0.79,
+        "He": 0
+      }
+    }
+  ]
+}

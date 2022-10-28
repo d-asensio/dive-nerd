@@ -1,4 +1,9 @@
 {
+  "name": "Dive 1",
+  "date": "2015-03-25T12:00:00Z",
+  "rating": 1,
+  "maximumDepth": 50.7,
+  "totalDuration": 5000,
   "samples": [
     {
       "time": 0,
