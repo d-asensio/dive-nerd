@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -10,12 +11,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { mockDives } from '@divenerd/mock-dives'
 import * as ZHL16C from '@divenerd/dive-physics'
 
+import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
-
 import { CompartmentsViewer, ProfileViewer } from '../sections'
-
 import { useDive } from '../hooks/useDive'
-import { Link } from 'react-router-dom'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -27,6 +26,8 @@ const Wrapper = styled.main`
 `
 
 function DiveViewerPage() {
+  const name = useSelector(({ name }) => name)
+
   const { samples, maxAmbientPressure } = useDive(
     mockDives.diveY2022M04D12T0704,
   )
@@ -67,7 +68,7 @@ function DiveViewerPage() {
             >
               <ArrowBackIcon />
             </IconButton>
-            <Typography level="h2">Thomas Reef</Typography>
+            <Typography level="h2">{name}</Typography>
           </Box>
         </Box>
         <Box
