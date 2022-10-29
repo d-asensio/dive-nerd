@@ -21,4 +21,4 @@ jobs:
       - name: Deploy to DEV
         run: yarn api deploy --stage dev
       - name: Deploy to PROD
-        run: yarn api deploy --stage dev
+        run: yarn api deploy --stage prod
