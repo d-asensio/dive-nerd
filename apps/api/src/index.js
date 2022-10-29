@@ -34,7 +34,7 @@ const typeDefs = gql`
     depth: Float!
     temperature: Float
     gasMixture: GasMixture!
-    
+
     x: Float!
     y: Float!
 
@@ -97,8 +97,8 @@ const server = new ApolloServer({
 exports.graphql = server.createHandler({
   expressGetMiddlewareOptions: {
     cors: {
-      origin: false,
-      credentials: false
+      origin: '*',
+      methods: ['GET', 'POST']
     }
   }
 })
