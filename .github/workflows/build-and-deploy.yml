@@ -54,14 +54,14 @@ jobs:
       - name: Unzip web artifact
         run: 7z x web-artifact.zip -aoa -o ./dist
       - name: Deploy to Netlify
-          uses: nwtgck/actions-netlify@v1.2
-          with:
-            publish-dir: './dist'
-            netlify-config-path: ./netlify.toml
-            production-branch: main
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            deploy-message: "Deploy from GitHub Actions"
-            enable-pull-request-comment: false
-            enable-commit-comment: true
-            overwrites-pull-request-comment: true
-          timeout-minutes: 1
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './dist'
+          netlify-config-path: ./netlify.toml
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        timeout-minutes: 1
