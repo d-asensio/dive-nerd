@@ -57,8 +57,8 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: web-artifact
-          netlify-config-path: web-artifact/netlify.toml
+          publish-dir: apps/web/build/
+          netlify-config-path: netlify.toml
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
