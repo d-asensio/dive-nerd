@@ -51,8 +51,11 @@ export const DiveLog = () => {
 
   return (
     <DiveList>
-      {diveIdList.map(diveId => (
-        <DiveItem key={diveId} id={diveId} />
+      {diveIdList.map((diveId, index) => (
+        <>
+          <DiveItem key={diveId} id={diveId} />
+          {index !== diveIdList.length - 1 && <DiveList.Divider />}
+        </>
       ))}
     </DiveList>
   )
