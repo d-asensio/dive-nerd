@@ -6,7 +6,7 @@ import { useDive } from '../hooks/useDive'
 import {formatTime} from '../utils/formatTime';
 import {formatNumber} from '../utils/formatNumber';
 import { useNavigate } from "react-router-dom";
-import { useCallback } from 'react';
+import { Fragment, useCallback } from 'react';
 
 
 function DiveItem({ id }) {
@@ -52,10 +52,10 @@ export const DiveLog = () => {
   return (
     <DiveList>
       {diveIdList.map((diveId, index) => (
-        <>
-          <DiveItem key={diveId} id={diveId} />
+        <Fragment key={diveId}>
+          <DiveItem id={diveId} />
           {index !== diveIdList.length - 1 && <DiveList.Divider />}
-        </>
+        </Fragment>
       ))}
     </DiveList>
   )
