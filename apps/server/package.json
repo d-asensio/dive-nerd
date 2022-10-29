@@ -1,0 +1,18 @@
+{
+  "name": "@divenerd/server",
+  "scripts": {
+    "dev": "sls offline",
+    "deploy": "sls deploy --verbose"
+  },
+  "dependencies": {
+    "apollo-server-core": "^3.10.3",
+    "apollo-server-lambda": "^3.10.3",
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.12",
+    "serverless": "^3.23.0",
+    "serverless-esbuild": "^1.33.0",
+    "serverless-offline": "^8.5.0"
+  }
+}

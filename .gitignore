@@ -1,7 +1,8 @@
 # Coverage reports
 coverage/
 
-# Build artifact
+# Build artifacts
+.esbuild/
 build/
 storybook-static/
 
@@ -30,3 +31,6 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Serverless directories
+.serverless
