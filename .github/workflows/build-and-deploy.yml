@@ -6,10 +6,10 @@ on:
 
 jobs:
   deploy-api:
+    runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,6 +22,7 @@ jobs:
       - name: Deploy to PROD
         run: yarn api deploy --stage prod
   build-web:
+    runs-on: ubuntu-latest
     env:
       NODE_ENV: production
       REACT_APP_MAPBOX_ACCESS_TOKEN: ${{ secrets.REACT_APP_MAPBOX_ACCESS_TOKEN }}
@@ -43,6 +44,7 @@ jobs:
           path: web-artifact.zip
   deploy-web:
     needs: build-web
+    runs-on: ubuntu-latest
     env:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
