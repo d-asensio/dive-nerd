@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -8,13 +8,11 @@ import Typography from '@mui/joy/Typography'
 import IconButton from '@mui/joy/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-import { mockDives } from '@divenerd/mock-dives'
 import * as ZHL16C from '@divenerd/dive-physics'
 
 import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
-import { useDive } from '../hooks/useDive'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -26,11 +24,10 @@ const Wrapper = styled.main`
 `
 
 function DiveViewerPage() {
+  let { diveId } = useParams();
+
   const name = useSelector(({ name }) => name)
 
-  const { samples, maxAmbientPressure } = useDive(
-    mockDives.diveY2022M04D12T0704,
-  )
   const [currentDatapoint, setData] = useState({
     compartments: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1,
@@ -81,12 +78,12 @@ function DiveViewerPage() {
           }}
         >
           <ProfileViewer
-            samples={samples}
+            diveId={diveId}
             onDatapointHover={handleDatapointHover}
           />
           <CompartmentsViewer
             dataPoint={currentDatapoint}
-            maxAmbientPressure={maxAmbientPressure}
+            maxAmbientPressure={5}
           />
         </Box>
       </Layout>
