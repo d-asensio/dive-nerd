@@ -41,7 +41,7 @@ jobs:
           name: web-artifact
           path: |
             apps/web/build/
-            netlify.toml
+            apps/web/netlify.toml
           if-no-files-found: error
   deploy-web:
     needs: build-web
@@ -57,7 +57,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: apps/web/build/
+          publish-dir: build/
           netlify-config-path: netlify.toml
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
