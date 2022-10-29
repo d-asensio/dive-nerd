@@ -20,4 +20,4 @@ functions:
       - http:
           path: graphql
           method: ANY
-          cors: true
+          cors: false
