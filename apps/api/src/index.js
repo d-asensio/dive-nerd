@@ -94,4 +94,11 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
 })
 
-exports.graphql = server.createHandler()
+exports.graphql = server.createHandler({
+  expressGetMiddlewareOptions: {
+    cors: {
+      origin: false,
+      credentials: false
+    }
+  }
+})
