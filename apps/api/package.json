@@ -1,5 +1,5 @@
 {
-  "name": "@divenerd/server",
+  "name": "@divenerd/api",
   "scripts": {
     "dev": "sls offline",
     "deploy": "sls deploy --verbose"

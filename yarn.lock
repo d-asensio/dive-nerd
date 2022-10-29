@@ -2229,6 +2229,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@divenerd/api@workspace:apps/api":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/api@workspace:apps/api"
+  dependencies:
+    apollo-server-core: ^3.10.3
+    apollo-server-lambda: ^3.10.3
+    esbuild: ^0.15.12
+    graphql: ^16.6.0
+    serverless: ^3.23.0
+    serverless-esbuild: ^1.33.0
+    serverless-offline: ^8.5.0
+  languageName: unknown
+  linkType: soft
+
 "@divenerd/dive-generator@workspace:^, @divenerd/dive-generator@workspace:packages/dive-generator":
   version: 0.0.0-use.local
   resolution: "@divenerd/dive-generator@workspace:packages/dive-generator"
@@ -2261,20 +2275,6 @@ __metadata:
     lint-staged: ">=10"
     markdown-toc: ^1.2.0
     standard: ^17.0.0
-  languageName: unknown
-  linkType: soft
-
-"@divenerd/server@workspace:apps/server":
-  version: 0.0.0-use.local
-  resolution: "@divenerd/server@workspace:apps/server"
-  dependencies:
-    apollo-server-core: ^3.10.3
-    apollo-server-lambda: ^3.10.3
-    esbuild: ^0.15.12
-    graphql: ^16.6.0
-    serverless: ^3.23.0
-    serverless-esbuild: ^1.33.0
-    serverless-offline: ^8.5.0
   languageName: unknown
   linkType: soft
 
