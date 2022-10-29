@@ -68,12 +68,12 @@ const CeilingValuesLayer = ({ bars, yScale }) => {
 }
 
 export const CompartmentsGasChart = ({
-  data: { compartments, ambientPressure },
+  data: { compartmentsGasLoad, ambientPressure },
   maxAmbientPressure
 }) => (
   <Wrapper>
     <ResponsiveBar
-      data={compartments}
+      data={compartmentsGasLoad}
       keys={['pressureLoadN2']}
       margin={{ top: 12, right: 12, bottom: 48, left: 62 }}
       padding={0.3}

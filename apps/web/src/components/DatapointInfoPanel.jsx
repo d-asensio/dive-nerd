@@ -1,10 +1,10 @@
 import Box from '@mui/joy/Box'
 import TextField from '@mui/joy/TextField'
-import {formatTime} from '../utils/formatTime';
+import {formatTimeMinutes} from '../utils/formatTime';
 import {formatNumber} from '../utils/formatNumber';
 
 function TimeField ({ value, ...rest }) {
-  const formattedValue = typeof value === 'number' ? `${formatTime(value)} min` : ''
+  const formattedValue = typeof value === 'number' ? `${formatTimeMinutes(value)} min` : ''
 
   return (
     <TextField

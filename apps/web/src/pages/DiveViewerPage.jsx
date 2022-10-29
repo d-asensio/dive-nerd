@@ -29,7 +29,7 @@ function DiveViewerPage() {
   const name = useSelector(({ name }) => name)
 
   const [currentDatapoint, setData] = useState({
-    compartments: ZHL16C.getInitialCompartmentsGas(),
+    compartmentsGasLoad: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1,
   })
 

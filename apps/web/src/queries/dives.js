@@ -5,13 +5,14 @@ export const getAllDivesQuery = gql`
     dives {
       id
       name
+      date
       rating
       geographicCoordinates {
         latitude
         longitude
       }
       profile {
-        maximunDepth
+        maximumDepth
         totalDuration
         dataPoints {
           time
@@ -19,6 +20,7 @@ export const getAllDivesQuery = gql`
           temperature
           ambientPressure
           ambientPressureDelta
+          timeDelta
           depthDelta
           descentRate
           alveolarPressureN2
@@ -32,15 +34,13 @@ export const getAllDivesQuery = gql`
             maxValue
             pressureLoadN2
           }
-          cartesianCoordinates {
-            x
-            y
-          }
           gasMixture {
             O2
             N2
             He
           }
+          x
+          y
         }
       }
     }

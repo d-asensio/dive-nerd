@@ -53,7 +53,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
               const { time, lowCeiling } = dataPoint
               return {
                 ...dataPoint,
-                x: time / 60,
+                x: time,
                 y: lowCeiling
               }
             })
@@ -64,7 +64,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
               const { time, highCeiling } = dataPoint
               return {
                 ...dataPoint,
-                x: time / 60,
+                x: time,
                 y: highCeiling
               }
             })
@@ -75,7 +75,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
               const { time, maxValue } = dataPoint
               return {
                 ...dataPoint,
-                x: time / 60,
+                x: time,
                 y: maxValue
               }
             })

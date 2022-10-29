@@ -1,11 +1,8 @@
 import createStoreHook from 'zustand'
 import createStore from 'zustand/vanilla'
 
-import { mockDives } from '@divenerd/mock-dives'
-
 const initialState = {
-  divesById: mockDives,
-  diveIdList: Object.keys(mockDives)
+  diveIdList: []
 }
 
 export const store = createStore(

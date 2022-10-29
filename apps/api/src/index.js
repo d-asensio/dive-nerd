@@ -34,12 +34,15 @@ const typeDefs = gql`
     depth: Float!
     temperature: Float
     gasMixture: GasMixture!
-    cartesianCoordinates: CartesianCoordinates!
+    
+    x: Float!
+    y: Float!
 
     ambientPressure: Float!
     ambientPressureDelta: Float!
     depthDelta: Float!
     descentRate: Float!
+    timeDelta: Float!
     alveolarPressureN2: Float!
 
     compartmentsGasLoad: [CompartmentsGasLoad!]!
@@ -50,7 +53,7 @@ const typeDefs = gql`
   }
 
   type DiveProfile {
-    maximunDepth: Float!
+    maximumDepth: Float!
     totalDuration: Float!
     dataPoints: [DiveProfileDataPoint!]!
   }

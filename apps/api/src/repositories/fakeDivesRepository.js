@@ -12,10 +12,8 @@ const adaptData = ({ time, gasMixtures, compartments, ...sample }) => {
     time: timeInMinutes,
     gasMixture: gasMixtures,
     compartmentsGasLoad: compartments,
-    cartesianCoordinates: {
-      x: timeInMinutes,
-      y: depth
-    }
+    x: timeInMinutes,
+    y: depth
   }
 }
 
@@ -33,7 +31,7 @@ export const createFakeDivesRepository = () => {
         longitude: parseFloat(faker.address.longitude())
       },
       profile: {
-        maximunDepth: parseFloat(faker.datatype.number({ min: 10, max: 70, precision: 0.01 })),
+        maximumDepth: parseFloat(faker.datatype.number({ min: 10, max: 70, precision: 0.01 })),
         totalDuration: parseFloat(faker.datatype.number({ min: 10, max: 55, precision: 0.01 })),
         dataPoints: diveProfile.map(adaptData)
       }
