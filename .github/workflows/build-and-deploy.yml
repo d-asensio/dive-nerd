@@ -36,7 +36,7 @@ jobs:
       - name: Create build
         run: yarn web build
       - name: Create artifact
-        run: 7z a web-artifact.zip app/web/build/*
+        run: 7z a ./web-artifact.zip ./apps/web/build/*
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -54,7 +54,7 @@ jobs:
         with:
           name: web-artifact
       - name: Unzip web artifact
-        run: 7z x web-artifact.zip -aoa -o ./dist
+        run: 7z x ./web-artifact.zip -aoa -o ./dist
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
