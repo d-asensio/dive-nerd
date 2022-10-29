@@ -4,15 +4,12 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "react-scripts test",
+    "test:watch": "react-scripts test --watch"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.6",
-    "@babel/preset-env": "^7.19.4",
     "@divenerd/mock-dives": "workspace:^",
-    "babel-jest": "^29.2.2",
-    "jest": "^29.2.2"
+    "react-scripts": "^5.0.1"
   },
   "dependencies": {
     "ramda": "^0.28.0"
