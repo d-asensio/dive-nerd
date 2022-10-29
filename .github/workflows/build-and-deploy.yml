@@ -44,7 +44,7 @@ jobs:
             apps/web/netlify.toml
           if-no-files-found: error
   deploy-web:
-    needs: build-web
+    needs: [build-web, deploy-api]
     runs-on: ubuntu-latest
     env:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
