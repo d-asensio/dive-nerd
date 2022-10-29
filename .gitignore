@@ -6,6 +6,9 @@ coverage/
 build/
 storybook-static/
 
+# Cache
+.turbo/
+
 # Dependency files
 node_modules/
 
