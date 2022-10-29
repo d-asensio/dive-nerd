@@ -26,10 +26,6 @@ export const DiveMap = () => {
   return (
     <Map
       {...viewState}
-      style={{
-        width: '100%',
-        height: '100%'
-      }}
       mapLib={mapboxgl}
       ref={mapRef}
       mapStyle='mapbox://styles/mapbox/streets-v9'
