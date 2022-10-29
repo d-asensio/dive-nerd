@@ -4,6 +4,10 @@ plugins:
   - serverless-esbuild
   - serverless-offline
 
+custom:
+  serverless-offline:
+    httpPort: 9000
+
 provider:
   name: aws
   runtime: nodejs16.x
@@ -17,5 +21,3 @@ functions:
           path: graphql
           method: ANY
           cors: true
-
-

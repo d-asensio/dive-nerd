@@ -7392,6 +7392,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:0.0.0"\
       ],\
       [\
+        "turbo",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-darwin-64",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-darwin-arm64",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-linux-64",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-linux-arm64",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-windows-64",\
+        "npm:1.6.2"\
+      ],\
+      [\
+        "turbo-windows-arm64",\
+        "npm:1.6.2"\
+      ],\
+      [\
         "type",\
         "npm:2.7.2"\
       ],\
@@ -7948,7 +7976,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\
-            ["standard", "npm:17.0.0"]\
+            ["standard", "npm:17.0.0"],\
+            ["turbo", "npm:1.6.2"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -14562,7 +14591,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["markdown-toc", "npm:1.2.0"],\
-            ["standard", "npm:17.0.0"]\
+            ["standard", "npm:17.0.0"],\
+            ["turbo", "npm:1.6.2"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -41955,6 +41985,75 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tty-browserify-npm-0.0.0-684371f6ca-a06f746acc.zip/node_modules/tty-browserify/",\
           "packageDependencies": [\
             ["tty-browserify", "npm:0.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-npm-1.6.2-2d195c871b/node_modules/turbo/",\
+          "packageDependencies": [\
+            ["turbo", "npm:1.6.2"],\
+            ["turbo-darwin-64", "npm:1.6.2"],\
+            ["turbo-darwin-arm64", "npm:1.6.2"],\
+            ["turbo-linux-64", "npm:1.6.2"],\
+            ["turbo-linux-arm64", "npm:1.6.2"],\
+            ["turbo-windows-64", "npm:1.6.2"],\
+            ["turbo-windows-arm64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-darwin-64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-darwin-64-npm-1.6.2-3fad717142/node_modules/turbo-darwin-64/",\
+          "packageDependencies": [\
+            ["turbo-darwin-64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-darwin-arm64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-darwin-arm64-npm-1.6.2-a0ecd79856/node_modules/turbo-darwin-arm64/",\
+          "packageDependencies": [\
+            ["turbo-darwin-arm64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-linux-64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-linux-64-npm-1.6.2-a6044fb748/node_modules/turbo-linux-64/",\
+          "packageDependencies": [\
+            ["turbo-linux-64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-linux-arm64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-linux-arm64-npm-1.6.2-6dead358ba/node_modules/turbo-linux-arm64/",\
+          "packageDependencies": [\
+            ["turbo-linux-arm64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-windows-64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-windows-64-npm-1.6.2-05889d9916/node_modules/turbo-windows-64/",\
+          "packageDependencies": [\
+            ["turbo-windows-64", "npm:1.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["turbo-windows-arm64", [\
+        ["npm:1.6.2", {\
+          "packageLocation": "./.yarn/unplugged/turbo-windows-arm64-npm-1.6.2-7b550ad8e9/node_modules/turbo-windows-arm64/",\
+          "packageDependencies": [\
+            ["turbo-windows-arm64", "npm:1.6.2"]\
           ],\
           "linkType": "HARD"\
         }]\
