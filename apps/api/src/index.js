@@ -1,17 +1,80 @@
 import { ApolloServer, gql } from 'apollo-server-lambda'
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 
+import { createFakeDivesRepository } from './repositories/fakeDivesRepository'
+
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
+  type GeographicCoordinates {
+    latitude: Float!
+    longitude: Float!
+  }
+
+  type CartesianCoordinates {
+    x: Float!
+    y: Float!
+  }
+
+  type GasMixture {
+    O2: Float!
+    N2: Float!
+    He: Float!
+  }
+
+  type CompartmentsGasLoad {
+    id: ID!
+    highCeiling: Float!
+    lowCeiling: Float!
+    maxValue: Float!
+    pressureLoadN2: Float!
+  }
+
+  type DiveProfileDataPoint {
+    time: Float!
+    depth: Float!
+    temperature: Float
+    gasMixture: GasMixture!
+    cartesianCoordinates: CartesianCoordinates!
+
+    ambientPressure: Float!
+    ambientPressureDelta: Float!
+    depthDelta: Float!
+    descentRate: Float!
+    alveolarPressureN2: Float!
+
+    compartmentsGasLoad: [CompartmentsGasLoad!]!
+
+    lowCeiling: Float!
+    highCeiling: Float!
+    maxValue: Float!
+  }
+
+  type DiveProfile {
+    maximunDepth: Float!
+    totalDuration: Float!
+    dataPoints: [DiveProfileDataPoint!]!
+  }
+
+  type Dive {
+    id: ID!
+    name: String!
+    date: String!
+    rating: Int
+    geographicCoordinates: GeographicCoordinates
+    profile: DiveProfile!
+  }
+
   type Query {
-    hello: String
+    dives: [Dive!]!
   }
 `
+
+const divesRepository = createFakeDivesRepository()
 
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: () => 'Hello production!'
+    dives: () => divesRepository.getAllDives()
   }
 }
 

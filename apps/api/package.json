@@ -5,6 +5,9 @@
     "deploy": "sls deploy --verbose"
   },
   "dependencies": {
+    "@divenerd/dive-physics": "workspace:^",
+    "@divenerd/mock-dives": "workspace:^",
+    "@faker-js/faker": "^7.6.0",
     "apollo-server-core": "^3.10.3",
     "apollo-server-lambda": "^3.10.3",
     "graphql": "^16.6.0"

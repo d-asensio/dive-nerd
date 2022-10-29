@@ -2233,6 +2233,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@divenerd/api@workspace:apps/api"
   dependencies:
+    "@divenerd/dive-physics": "workspace:^"
+    "@divenerd/mock-dives": "workspace:^"
+    "@faker-js/faker": ^7.6.0
     apollo-server-core: ^3.10.3
     apollo-server-lambda: ^3.10.3
     esbuild: ^0.15.12
@@ -2511,6 +2514,13 @@ __metadata:
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
   checksum: f03e9d6727efd3e0719da2051ea80c0c73d20e28c171121527dbb868cd34232ca9c1d0525a66e517a404afea26624b1e47895b6a92474678418c2f50c9566694
+  languageName: node
+  linkType: hard
+
+"@faker-js/faker@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "@faker-js/faker@npm:7.6.0"
+  checksum: 942af6221774e8c98a0eb6bc75265e05fb81a941170377666c3439aab9495dd321d6beedc5406f07e6ad44262b3e43c20961f666d116ad150b78e7437dd1bb2b
   languageName: node
   linkType: hard
 
