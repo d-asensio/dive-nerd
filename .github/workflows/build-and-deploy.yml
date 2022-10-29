@@ -35,13 +35,12 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Create build
         run: yarn web build
-      - name: Create artifact
-        run: tar -cvf web-artifact.tar apps/web/build/
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: web-artifact
-          path: web-artifact.tar
+          path: apps/web/build/
+          if-no-files-found: error
   deploy-web:
     needs: build-web
     runs-on: ubuntu-latest
@@ -53,8 +52,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: web-artifact
-      - name: Unzip web artifact
-        run: tar xvf web-artifact.tar --directory=dist
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
