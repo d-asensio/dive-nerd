@@ -1,0 +1,17 @@
+name: [API] Build and deploy to AWS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Deploy to DEV
+        run: yarn api deploy --stage dev
+      - name: Deploy to PROD
+        run: yarn api deploy --stage dev

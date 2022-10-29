@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "api": "yarn workspace @divenerd/api",
     "web": "yarn workspace @divenerd/web",
     "dive-physics": "yarn workspace @divenerd/dive-physics",
     "lint": "standard",
