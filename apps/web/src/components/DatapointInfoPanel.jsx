@@ -1,6 +1,7 @@
 import Box from '@mui/joy/Box'
 import TextField from '@mui/joy/TextField'
 import {formatTime} from '../utils/formatTime';
+import {formatNumber} from '../utils/formatNumber';
 
 function TimeField ({ value, ...rest }) {
   const formattedValue = typeof value === 'number' ? `${formatTime(value)} min` : ''
@@ -16,7 +17,7 @@ function TimeField ({ value, ...rest }) {
 }
 
 function NumericField ({ units, value, precision = 2, ...rest }) {
-  const formattedValue = typeof value === 'number' ? `${value.toFixed(precision)} ${units}` : ''
+  const formattedValue = formatNumber({ value, precision, units })
 
   return (
     <TextField
