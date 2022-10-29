@@ -35,7 +35,6 @@ function DiveLogPage () {
           sx={{
             borderRight: 1,
             borderColor: 'divider',
-            overflow: 'scroll',
             minHeight: 0
           }}
         >
