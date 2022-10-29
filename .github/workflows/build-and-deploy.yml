@@ -1,0 +1,67 @@
+name: Build and deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-api:
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Deploy to DEV
+        run: yarn api deploy --stage dev
+      - name: Deploy to PROD
+        run: yarn api deploy --stage prod
+  build-web:
+    env:
+      NODE_ENV: production
+      REACT_APP_MAPBOX_ACCESS_TOKEN: ${{ secrets.REACT_APP_MAPBOX_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Create build
+        run: yarn web build
+      - name: Create artifact
+        run: 7z a web-artifact.zip app/web/build/*
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: web-artifact
+          path: web-artifact.zip
+  deploy-web:
+    needs: build-web
+    env:
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    steps:
+      - name: Download web artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: web-artifact
+      - name: Unzip web artifact
+        run: 7z x web-artifact.zip -aoa -o ./dist
+      - name: Deploy to Netlify
+          uses: nwtgck/actions-netlify@v1.2
+          with:
+            publish-dir: './dist'
+            netlify-config-path: ./netlify.toml
+            production-branch: main
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            deploy-message: "Deploy from GitHub Actions"
+            enable-pull-request-comment: false
+            enable-commit-comment: true
+            overwrites-pull-request-comment: true
+          timeout-minutes: 1
