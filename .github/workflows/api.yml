@@ -1,4 +1,4 @@
-name: [API] Build and deploy to AWS
+name: API - Build and deploy to AWS
 on:
   push:
     branches:
