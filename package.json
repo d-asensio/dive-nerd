@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "app": "yarn workspace @divenerd/app",
+    "web": "yarn workspace @divenerd/web",
     "dive-physics": "yarn workspace @divenerd/dive-physics",
     "lint": "standard",
     "lint:fix": "standard --fix",

@@ -2097,9 +2097,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@divenerd/app@workspace:packages/app":
+"@divenerd/dive-generator@workspace:^, @divenerd/dive-generator@workspace:packages/dive-generator":
   version: 0.0.0-use.local
-  resolution: "@divenerd/app@workspace:packages/app"
+  resolution: "@divenerd/dive-generator@workspace:packages/dive-generator"
+  dependencies:
+    noisejs: ^2.1.0
+  languageName: unknown
+  linkType: soft
+
+"@divenerd/dive-physics@workspace:^, @divenerd/dive-physics@workspace:packages/dive-physics":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/dive-physics@workspace:packages/dive-physics"
+  dependencies:
+    "@divenerd/mock-dives": "workspace:^"
+    ramda: ^0.28.0
+    react-scripts: ^5.0.1
+  languageName: unknown
+  linkType: soft
+
+"@divenerd/mock-dives@workspace:^, @divenerd/mock-dives@workspace:packages/mock-dives":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/mock-dives@workspace:packages/mock-dives"
+  languageName: unknown
+  linkType: soft
+
+"@divenerd/monorepo-wrapper@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/monorepo-wrapper@workspace:."
+  dependencies:
+    husky: ^8.0.0
+    lint-staged: ">=10"
+    markdown-toc: ^1.2.0
+    standard: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
+"@divenerd/web@workspace:apps/web":
+  version: 0.0.0-use.local
+  resolution: "@divenerd/web@workspace:apps/web"
   dependencies:
     "@divenerd/dive-generator": "workspace:^"
     "@divenerd/dive-physics": "workspace:^"
@@ -2143,41 +2178,6 @@ __metadata:
     use-debounce: ^8.0.4
     web-vitals: ^2.1.0
     zustand: ^3.6.9
-  languageName: unknown
-  linkType: soft
-
-"@divenerd/dive-generator@workspace:^, @divenerd/dive-generator@workspace:packages/dive-generator":
-  version: 0.0.0-use.local
-  resolution: "@divenerd/dive-generator@workspace:packages/dive-generator"
-  dependencies:
-    noisejs: ^2.1.0
-  languageName: unknown
-  linkType: soft
-
-"@divenerd/dive-physics@workspace:^, @divenerd/dive-physics@workspace:packages/dive-physics":
-  version: 0.0.0-use.local
-  resolution: "@divenerd/dive-physics@workspace:packages/dive-physics"
-  dependencies:
-    "@divenerd/mock-dives": "workspace:^"
-    ramda: ^0.28.0
-    react-scripts: ^5.0.1
-  languageName: unknown
-  linkType: soft
-
-"@divenerd/mock-dives@workspace:^, @divenerd/mock-dives@workspace:packages/mock-dives":
-  version: 0.0.0-use.local
-  resolution: "@divenerd/mock-dives@workspace:packages/mock-dives"
-  languageName: unknown
-  linkType: soft
-
-"@divenerd/monorepo-wrapper@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@divenerd/monorepo-wrapper@workspace:."
-  dependencies:
-    husky: ^8.0.0
-    lint-staged: ">=10"
-    markdown-toc: ^1.2.0
-    standard: ^17.0.0
   languageName: unknown
   linkType: soft
 
