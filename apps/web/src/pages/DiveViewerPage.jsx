@@ -8,12 +8,17 @@ import Typography from '@mui/joy/Typography'
 import IconButton from '@mui/joy/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
+import Tabs from '@mui/joy/Tabs'
+import TabList from '@mui/joy/TabList'
+import Tab from '@mui/joy/Tab'
+import TabPanel from '@mui/joy/TabPanel'
+
 import * as ZHL16C from '@divenerd/dive-physics'
 
 import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
-import {diveSelector} from '../entities/dives/selectors';
+import { diveSelector } from '../entities/dives/selectors'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -54,7 +59,7 @@ function DiveViewerPage() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 3
+              gap: 3,
             }}
           >
             <IconButton
@@ -78,14 +83,34 @@ function DiveViewerPage() {
             minHeight: 0,
           }}
         >
-          <ProfileViewer
-            diveId={diveId}
-            onDatapointHover={handleDatapointHover}
-          />
-          <CompartmentsViewer
-            dataPoint={currentDatapoint}
-            maxAmbientPressure={5}
-          />
+          <Tabs
+            defaultValue={0}
+            sx={{
+              gap: 3,
+            }}
+          >
+            <TabList
+              sx={{
+                alignSelf: 'center'
+              }}
+            >
+              <Tab>Dive Profile</Tab>
+              <Tab>Media</Tab>
+              <Tab>Gear</Tab>
+            </TabList>
+            <TabPanel value={0}>
+              <ProfileViewer
+                diveId={diveId}
+                onDatapointHover={handleDatapointHover}
+              />
+              <CompartmentsViewer
+                dataPoint={currentDatapoint}
+                maxAmbientPressure={5}
+              />
+            </TabPanel>
+            <TabPanel value={1}>Media</TabPanel>
+            <TabPanel value={2}>Gear</TabPanel>
+          </Tabs>
         </Box>
       </Layout>
     </Wrapper>
