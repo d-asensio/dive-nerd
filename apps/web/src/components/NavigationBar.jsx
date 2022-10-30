@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import Alert from '@mui/joy/Alert'
 import Avatar from '@mui/joy/Avatar'
@@ -19,12 +20,12 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { Logo } from './Logo'
 
 const Shortcut = ({ text }) => (
-  <Typography level='body2' textColor='text.tertiary' ml='auto'>
+  <Typography level="body2" textColor="text.tertiary" ml="auto">
     {text}
   </Typography>
 )
 
-export function NavigationBar () {
+function ProfileAvatarMenu({ onLogoutClick }) {
   const buttonRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -37,11 +38,74 @@ export function NavigationBar () {
   }, [])
 
   return (
+    <>
+      <IconButton
+        ref={buttonRef}
+        color="neutral"
+        aria-haspopup="menu"
+        onClick={handleAvatarClick}
+        sx={{
+          borderRadius: '50%',
+          marginInlineStart: 'var(--Avatar-marginInlineStart)',
+          boxShadow: 'var(--Avatar-ring)',
+        }}
+      >
+        <Avatar size="sm">DN</Avatar>
+      </IconButton>
+      <Menu
+        open={menuOpen}
+        anchorEl={buttonRef.current}
+        placement="bottom-end"
+        onClose={handleClose}
+        sx={{
+          width: 250,
+        }}
+      >
+        <ListItem nested>
+          <List>
+            <MenuItem>
+              <ListItemDecorator>
+                <PersonIcon />
+              </ListItemDecorator>
+              Profile
+            </MenuItem>
+            <MenuItem>
+              <ListItemDecorator>
+                <SettingsIcon />
+              </ListItemDecorator>
+              Settings <Shortcut text="⌘ ," />
+            </MenuItem>
+          </List>
+        </ListItem>
+        <ListDivider />
+        <ListItem nested>
+          <List>
+            <MenuItem ariant="soft" color="danger" onClick={onLogoutClick}>
+              <ListItemDecorator sx={{ color: 'inherit' }}>
+                <LogoutIcon />
+              </ListItemDecorator>
+              Log out
+            </MenuItem>
+          </List>
+        </ListItem>
+      </Menu>
+    </>
+  )
+}
+
+export function NavigationBar() {
+  const { logout } = useAuth0();
+
+  const handleLogoutClick = useCallback(() => {
+    logout({ returnTo: window.location.origin })
+  }, [])
+
+  return (
     <Box
       sx={{
         width: '100%',
         borderBottom: 1,
-        borderColor: 'divider'
+        borderColor: 'divider',
       }}
     >
       <List
@@ -49,65 +113,16 @@ export function NavigationBar () {
         sx={{
           p: 1,
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Logo />
-        <Alert variant='soft' color='warning'>
+        <Alert variant="soft" color="warning">
           DiveNerd is still in beta, use it carefully!
         </Alert>
         <ListItem>
           <ListItemDecorator>
-            <IconButton
-              ref={buttonRef}
-              color='neutral'
-              aria-haspopup='menu'
-              onClick={handleAvatarClick}
-              sx={{
-                borderRadius: '50%',
-                marginInlineStart: 'var(--Avatar-marginInlineStart)',
-                boxShadow: 'var(--Avatar-ring)'
-              }}
-            >
-              <Avatar size='sm'>DN</Avatar>
-            </IconButton>
-            <Menu
-              open={menuOpen}
-              anchorEl={buttonRef.current}
-              placement='bottom-end'
-              onClose={handleClose}
-              sx={{
-                width: 250
-              }}
-            >
-              <ListItem nested>
-                <List>
-                  <MenuItem>
-                    <ListItemDecorator>
-                      <PersonIcon />
-                    </ListItemDecorator>
-                    Profile
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemDecorator>
-                      <SettingsIcon />
-                    </ListItemDecorator>
-                    Settings <Shortcut text='⌘ ,' />
-                  </MenuItem>
-                </List>
-              </ListItem>
-              <ListDivider />
-              <ListItem nested>
-                <List>
-                  <MenuItem ariant='soft' color='danger'>
-                    <ListItemDecorator sx={{ color: 'inherit' }}>
-                      <LogoutIcon />
-                    </ListItemDecorator>
-                    Log out
-                  </MenuItem>
-                </List>
-              </ListItem>
-            </Menu>
+            <ProfileAvatarMenu onLogoutClick={handleLogoutClick} />
           </ListItemDecorator>
         </ListItem>
       </List>

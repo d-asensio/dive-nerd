@@ -8,6 +8,13 @@ import LoginPage from './pages/LoginPage'
 
 import { divesService } from './entities'
 
+import { withAuthenticationRequired } from '@auth0/auth0-react';
+
+const ProtectedRoute = ({ component, ...args }) => {
+  const Component = withAuthenticationRequired(component, args);
+  return <Component />;
+};
+
 function App () {
   useEffectOnce(() => {
     run(
@@ -18,8 +25,8 @@ function App () {
   return (
     <Routes>
       <Route index path='/login' element={<LoginPage />} />
-      <Route index path='/' element={<DiveLogPage />} />
-      <Route path='/dive/:diveId' element={<DiveViewerPage />} />
+      <Route index path='/' element={<ProtectedRoute component={DiveLogPage} />} />
+      <Route path='/dive/:diveId' element={<ProtectedRoute component={DiveViewerPage} />} />
     </Routes>
   )
 }
