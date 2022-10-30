@@ -3,6 +3,7 @@
   "pipeline": {
     "dev": {
       "cache": false
-    }
+    },
+    "test": {}
   }
 }

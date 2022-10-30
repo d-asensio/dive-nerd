@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
+    "test": "turbo run test",
     "api": "yarn workspace @divenerd/api",
     "web": "yarn workspace @divenerd/web",
     "dive-physics": "yarn workspace @divenerd/dive-physics",

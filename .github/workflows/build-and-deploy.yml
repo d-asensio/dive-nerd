@@ -21,6 +21,21 @@ jobs:
         run: yarn api deploy --stage dev
       - name: Deploy to PROD
         run: yarn api deploy --stage prod
+  test-web:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      REACT_APP_MAPBOX_ACCESS_TOKEN: ${{ secrets.REACT_APP_MAPBOX_ACCESS_TOKEN }}
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run visual regression tests
+        run: yarn web chromatic
   build-web:
     runs-on: ubuntu-latest
     env:
@@ -44,7 +59,7 @@ jobs:
             apps/web/netlify.toml
           if-no-files-found: error
   deploy-web:
-    needs: [build-web, deploy-api]
+    needs: [build-web, test-web]
     runs-on: ubuntu-latest
     env:
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
