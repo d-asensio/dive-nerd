@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   type CompartmentsGasLoad {
-    id: ID!
+    name: String!
     highCeiling: Float!
     lowCeiling: Float!
     maxValue: Float!

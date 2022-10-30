@@ -5,7 +5,7 @@
  */
 const compartments = [
   {
-    id: '1',
+    name: '1',
     N2: {
       halfTime: 4,
       k: 0.17328679513998632,
@@ -20,7 +20,7 @@ const compartments = [
     }
   },
   {
-    id: '1b',
+    name: '1b',
     N2: {
       halfTime: 5,
       k: 0.13862943611198905,
@@ -35,7 +35,7 @@ const compartments = [
     }
   },
   {
-    id: '2',
+    name: '2',
     N2: {
       halfTime: 8,
       k: 0.08664339756999316,
@@ -50,7 +50,7 @@ const compartments = [
     }
   },
   {
-    id: '3',
+    name: '3',
     N2: {
       halfTime: 12.5,
       k: 0.055451774444795626,
@@ -65,7 +65,7 @@ const compartments = [
     }
   },
   {
-    id: '4',
+    name: '4',
     N2: {
       halfTime: 18.5,
       k: 0.037467415165402446,
@@ -80,7 +80,7 @@ const compartments = [
     }
   },
   {
-    id: '5',
+    name: '5',
     N2: {
       halfTime: 27,
       k: 0.025672117798516494,
@@ -95,7 +95,7 @@ const compartments = [
     }
   },
   {
-    id: '6',
+    name: '6',
     N2: {
       halfTime: 38.3,
       k: 0.01809783761253121,
@@ -110,7 +110,7 @@ const compartments = [
     }
   },
   {
-    id: '7',
+    name: '7',
     N2: {
       halfTime: 54.3,
       k: 0.012765141446776157,
@@ -125,7 +125,7 @@ const compartments = [
     }
   },
   {
-    id: '8',
+    name: '8',
     N2: {
       halfTime: 77,
       k: 0.009001911435843446,
@@ -140,7 +140,7 @@ const compartments = [
     }
   },
   {
-    id: '9',
+    name: '9',
     N2: {
       halfTime: 109,
       k: 0.006359148445504085,
@@ -155,7 +155,7 @@ const compartments = [
     }
   },
   {
-    id: '10',
+    name: '10',
     N2: {
       halfTime: 146,
       k: 0.004747583428492776,
@@ -170,7 +170,7 @@ const compartments = [
     }
   },
   {
-    id: '11',
+    name: '11',
     N2: {
       halfTime: 187,
       k: 0.0037066694147590657,
@@ -185,7 +185,7 @@ const compartments = [
     }
   },
   {
-    id: '12',
+    name: '12',
     N2: {
       halfTime: 239,
       k: 0.002900197408200608,
@@ -200,7 +200,7 @@ const compartments = [
     }
   },
   {
-    id: '13',
+    name: '13',
     N2: {
       halfTime: 305,
       k: 0.002272613706753919,
@@ -215,7 +215,7 @@ const compartments = [
     }
   },
   {
-    id: '14',
+    name: '14',
     N2: {
       halfTime: 390,
       k: 0.0017773004629742187,
@@ -230,7 +230,7 @@ const compartments = [
     }
   },
   {
-    id: '15',
+    name: '15',
     N2: {
       halfTime: 498,
       k: 0.0013918618083533039,
@@ -245,7 +245,7 @@ const compartments = [
     }
   },
   {
-    id: '16',
+    name: '16',
     N2: {
       halfTime: 635,
       k: 0.0010915703630865281,

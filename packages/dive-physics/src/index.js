@@ -47,8 +47,8 @@ export const getInitialCompartmentsGas = () => {
   const initialPartialPressureN2 = 0.79
 
   return map(
-    ({ id }) => ({
-      id,
+    ({ name }) => ({
+      name,
       pressureLoadN2: inertGasAlveolarPressure(
         initialPartialPressureN2,
         surfacePressure

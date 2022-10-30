@@ -28,7 +28,7 @@ export const getAllDivesQuery = gql`
           highCeiling
           maxValue
           compartmentsGasLoad {
-            id
+            name
             highCeiling
             lowCeiling
             maxValue
