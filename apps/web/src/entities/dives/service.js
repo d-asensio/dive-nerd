@@ -1,8 +1,8 @@
-import graphql from '../effects/graphql'
-import store from '../effects/store'
+import graphql from '../../effects/graphql'
+import store from '../../effects/store'
 
-import { saveDivesMutation } from '../mutations/dives'
-import { getAllDivesQuery } from '../queries/dives'
+import { saveDivesMutation } from './mutations'
+import { getAllDivesQuery } from './queries'
 
 export const divesService = (function IIFE () {
   function * fetchDives () {

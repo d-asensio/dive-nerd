@@ -5,7 +5,7 @@ import { run } from '@regenerate/core'
 import DiveLogPage from './pages/DiveLogPage'
 import DiveViewerPage from './pages/DiveViewerPage'
 
-import { divesService } from './services/divesService'
+import { divesService } from './entities'
 
 function App () {
   useEffect(() => {

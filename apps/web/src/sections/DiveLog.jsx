@@ -1,22 +1,20 @@
-import { DiveList } from '../components'
+import { Fragment, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { diveIdListSelector, diveSelector } from '../selectors/dives'
+import { DiveList } from '../components'
 import { useSelector } from '../store'
-import {formatTimeMinutes} from '../utils/formatTime';
-import {formatNumber} from '../utils/formatNumber';
-import { useNavigate } from "react-router-dom";
-import { Fragment, useCallback } from 'react';
+import { diveIdListSelector, diveSelector } from '../entities'
+
+import { formatTimeMinutes } from '../utils/formatTime'
+import { formatNumber } from '../utils/formatNumber'
 
 function DiveItem({ id }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleNavigate = useCallback(
-    () => navigate(`/dive/${id}`),
-    [id]
-  )
+  const handleNavigate = useCallback(() => navigate(`/dive/${id}`), [id])
 
-  const { name, date, rating, profile } = useSelector(
-    state => diveSelector(state, id)
+  const { name, date, rating, profile } = useSelector((state) =>
+    diveSelector(state, id),
   )
 
   return (
@@ -28,7 +26,7 @@ function DiveItem({ id }) {
       maximumDepth={formatNumber({
         value: profile.maximumDepth,
         units: 'm',
-        precision: 2
+        precision: 2,
       })}
       totalDuration={formatTimeMinutes(profile.totalDuration)}
       onClick={handleNavigate}
