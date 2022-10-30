@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffectOnce } from 'react-use'
 import { Routes, Route } from 'react-router-dom'
 import { run } from '@regenerate/core'
 
@@ -8,11 +8,11 @@ import DiveViewerPage from './pages/DiveViewerPage'
 import { divesService } from './entities'
 
 function App () {
-  useEffect(() => {
+  useEffectOnce(() => {
     run(
       divesService.fetchDives()
     )
-  }, [])
+  })
 
   return (
     <Routes>
