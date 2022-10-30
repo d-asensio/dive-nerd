@@ -1,33 +1,6 @@
 import Box from '@mui/joy/Box'
-import TextField from '@mui/joy/TextField'
-import {formatTimeMinutes} from '../utils/formatTime';
-import {formatNumber} from '../utils/formatNumber';
-
-function TimeField ({ value, ...rest }) {
-  const formattedValue = typeof value === 'number' ? `${formatTimeMinutes(value)} min` : ''
-
-  return (
-    <TextField
-      variant='soft'
-      size='sm'
-      value={formattedValue}
-      {...rest}
-    />
-  )
-}
-
-function NumericField ({ units, value, precision = 2, ...rest }) {
-  const formattedValue = formatNumber({ value, precision, units })
-
-  return (
-    <TextField
-      variant='soft'
-      size='sm'
-      value={formattedValue}
-      {...rest}
-    />
-  )
-}
+import {TimeField} from "./TimeField";
+import {NumericField} from "./NumericField";
 
 export function DatapointInfoPanel ({ data }) {
   const {

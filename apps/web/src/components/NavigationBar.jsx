@@ -17,7 +17,27 @@ import PersonIcon from '@mui/icons-material/Person'
 import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
 import { Logo } from './Logo'
+
+import { useColorScheme } from '@mui/joy/styles';
+
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  return (
+    <IconButton
+      variant="outlined"
+      color="neutral"
+      onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+    >
+      {mode === 'dark'
+        ? <LightModeIcon />
+        : <DarkModeIcon />}
+    </IconButton>
+  );
+}
 
 const Shortcut = ({ text }) => (
   <Typography level="body2" textColor="text.tertiary" ml="auto">
@@ -38,7 +58,7 @@ function ProfileAvatarMenu({ onLogoutClick }) {
   }, [])
 
   return (
-    <>
+    <div>
       <IconButton
         ref={buttonRef}
         color="neutral"
@@ -89,7 +109,7 @@ function ProfileAvatarMenu({ onLogoutClick }) {
           </List>
         </ListItem>
       </Menu>
-    </>
+    </div>
   )
 }
 
@@ -117,14 +137,19 @@ export function NavigationBar() {
         }}
       >
         <Logo />
-        <Alert variant="soft" color="warning">
-          DiveNerd is still in beta, use it carefully!
-        </Alert>
-        <ListItem>
-          <ListItemDecorator>
-            <ProfileAvatarMenu onLogoutClick={handleLogoutClick} />
-          </ListItemDecorator>
-        </ListItem>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2
+          }}
+        >
+          <Alert variant="soft" color="warning">
+            DiveNerd is still in beta, use it carefully!
+          </Alert>
+          <ModeToggle />
+          <ProfileAvatarMenu onLogoutClick={handleLogoutClick} />
+        </Box>
       </List>
     </Box>
   )

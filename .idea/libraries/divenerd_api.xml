@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="divenerd-api">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/apps/api/.serverless/divenerd-api.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
