@@ -87,14 +87,14 @@ const calculateAbmientPressure = ([startSample, endSample]) => {
 }
 
 const calculateAlveolarPressureN2 = ([startSample, endSample]) => {
-  const { ambientPressure, gasMixtures } = endSample
+  const { ambientPressure, gasMixture } = endSample
 
   return [
     startSample,
     {
       ...endSample,
       alveolarPressureN2: inertGasAlveolarPressure(
-        gasMixtures.N2,
+        gasMixture.N2,
         ambientPressure
       )
     }
@@ -146,12 +146,12 @@ const schreinerEquation = ({
 }) => Palv + R * (t - 1 / k) - (Palv - Pi - R / k) * Math.exp(-k * t)
 
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
-  const { descentRate, timeDelta, alveolarPressureN2, gasMixtures } = endSample
+  const { descentRate, timeDelta, alveolarPressureN2, gasMixture } = endSample
 
   const compartmentsGasLoad =
     startSample?.compartmentsGasLoad ?? getInitialCompartmentsGas()
 
-  const inertGasPressureRateChange = descentRate * gasMixtures.N2
+  const inertGasPressureRateChange = descentRate * gasMixture.N2
   const timeDeltaInMinutes = timeDelta
 
   return [

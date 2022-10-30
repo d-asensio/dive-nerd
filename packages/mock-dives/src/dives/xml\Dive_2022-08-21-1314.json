@@ -9,7 +9,7 @@
       "time": 0,
       "depth": 1.84,
       "temperature": 29,
-      "gasMixtures": {
+      "gasMixture": {
         "O2": 0.21,
         "N2": 0.79,
         "He": 0

@@ -25,7 +25,7 @@ const generateDive = ({
         time: currentSegment.time,
         depth: currentSegment.depth,
         temperature: 21,
-        gasMixtures: {
+        gasMixture: {
           O2: 0.21,
           N2: 0.79,
           He: 0
@@ -58,7 +58,7 @@ const generateDive = ({
         time,
         depth: depth + perlinDepth,
         temperature: 21,
-        gasMixtures: {
+        gasMixture: {
           O2: 0.21,
           N2: 0.79,
           He: 0

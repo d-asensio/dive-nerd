@@ -2,13 +2,11 @@ import { mockDives } from '@divenerd/mock-dives'
 import { faker } from '@faker-js/faker'
 import * as ZHL16C from '@divenerd/dive-physics'
 
-const adaptData = ({ gasMixtures, compartmentsGasLoad, ...sample }) => {
-  const { time, depth } = sample
+const adaptData = (dataPoint) => {
+  const { time, depth } = dataPoint
 
   return {
-    ...sample,
-    gasMixture: gasMixtures,
-    compartmentsGasLoad,
+    ...dataPoint,
     x: time,
     y: depth
   }
