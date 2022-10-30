@@ -29,9 +29,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup node
         with:
           fetch-depth: 0
+      - name: Setup node
         uses: actions/setup-node@v3
       - name: Install dependencies
         run: yarn install --frozen-lockfile
