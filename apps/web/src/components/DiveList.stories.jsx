@@ -12,7 +12,7 @@ export default {
 }
 
 const Template = (args) => {
-  const { samples } = useDive(mockDives['Dive_2022-09-11-1354'])
+  const { samples } = useDive(mockDives['2BB70361-453E-4B9A-A947-AE62D693CA37'])
 
   return (
     <DiveList {...args}>

@@ -13,13 +13,13 @@ const adaptData = (dataPoint) => {
 }
 
 export const createFakeDivesRepository = () => {
-  const getAllDives = () => Object.values(mockDives).map(({ samples }) => {
+  const getAllDives = () => Object.entries(mockDives).map(([id, { samples, ...rest }]) => {
     const diveProfile = ZHL16C.calculateDiveProfile(samples)
 
     return {
-      id: faker.datatype.uuid(),
+      ...rest,
+      id,
       name: faker.animal.fish(),
-      date: faker.date.recent(),
       rating: faker.datatype.number({ min: 0, max: 5, precision: 1 }),
       coordinates: {
         latitude: parseFloat(faker.address.latitude()),

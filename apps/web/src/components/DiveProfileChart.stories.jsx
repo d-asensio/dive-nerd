@@ -30,7 +30,7 @@ export const Default = ({ dive, ...args }) => {
 }
 
 Default.args = {
-  dive: 'Dive_2022-09-03-0915'
+  dive: '2BB70361-453E-4B9A-A947-AE62D693CA37'
 }
 
 export const Generator = ({ dive, ...options }) => {
