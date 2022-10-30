@@ -21,7 +21,7 @@ export const createFakeDivesRepository = () => {
       id,
       name: faker.animal.fish(),
       rating: faker.datatype.number({ min: 0, max: 5, precision: 1 }),
-      coordinates: {
+      geographicCoordinates: {
         latitude: parseFloat(faker.address.latitude()),
         longitude: parseFloat(faker.address.longitude())
       },

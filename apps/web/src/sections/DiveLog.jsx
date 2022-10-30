@@ -8,13 +8,13 @@ import { diveIdListSelector, diveSelector } from '../entities'
 import { formatTimeMinutes } from '../utils/formatTime'
 import { formatNumber } from '../utils/formatNumber'
 
-function DiveItem({ id }) {
+function DiveItem({ diveId }) {
   const navigate = useNavigate()
 
-  const handleNavigate = useCallback(() => navigate(`/dive/${id}`), [id])
+  const handleNavigate = useCallback(() => navigate(`/dive/${diveId}`), [diveId])
 
   const { name, date, rating, profile } = useSelector((state) =>
-    diveSelector(state, id),
+    diveSelector(state, diveId),
   )
 
   return (
@@ -43,7 +43,7 @@ export const DiveLog = () => {
     <DiveList>
       {diveIdList.map((diveId, index) => (
         <Fragment key={diveId}>
-          <DiveItem id={diveId} />
+          <DiveItem diveId={diveId} />
           {index !== diveIdList.length - 1 && <DiveList.Divider />}
         </Fragment>
       ))}
