@@ -3,14 +3,17 @@ import { useCallback, useState, useRef, useEffect } from 'react'
 import Map, { Marker } from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
+import {useNavigate} from 'react-router-dom';
+
+import { useColorScheme } from '@mui/joy/styles';
 import Badge from '@mui/joy/Badge'
 import Tooltip from '@mui/joy/Tooltip'
 
 import { useSelector } from '../store'
 import { diveSelector, diveIdListSelector, highlightedDiveSelector } from '../entities'
-import {useNavigate} from 'react-router-dom';
 
-const DiveMapMarker = ({ diveId }) => {
+
+const DiveMapMarker = ({ diveId }) => {const { mode } = useColorScheme();
   const navigate = useNavigate()
 
   const handleNavigate = useCallback(() => navigate(`/dive/${diveId}`), [diveId])
@@ -70,6 +73,8 @@ const DiveMapMarker = ({ diveId }) => {
 }
 
 export const DiveMap = () => {
+  const { mode: themeMode } = useColorScheme();
+
   const mapRef = useRef(null)
 
   const diveIdList = useSelector(diveIdListSelector)
@@ -103,7 +108,7 @@ export const DiveMap = () => {
       {...viewState}
       mapLib={mapboxgl}
       ref={mapRef}
-      mapStyle="mapbox://styles/mapbox/light-v9"
+      mapStyle={`mapbox://styles/mapbox/${themeMode}-v9`}
       onMove={handleMapMove}
     >
       {diveIdList.map((diveId) => (
