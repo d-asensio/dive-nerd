@@ -13,6 +13,7 @@ import * as ZHL16C from '@divenerd/dive-physics'
 import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
+import {diveSelector} from '../entities/dives/selectors';
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -24,9 +25,9 @@ const Wrapper = styled.main`
 `
 
 function DiveViewerPage() {
-  let { diveId } = useParams();
+  let { diveId } = useParams()
 
-  const name = useSelector(({ name }) => name)
+  const dive = useSelector((state) => diveSelector(state, diveId))
 
   const [currentDatapoint, setData] = useState({
     compartmentsGasLoad: ZHL16C.getInitialCompartmentsGas(),
@@ -65,7 +66,7 @@ function DiveViewerPage() {
             >
               <ArrowBackIcon />
             </IconButton>
-            <Typography level="h2">{name}</Typography>
+            <Typography level="h2">{dive?.name}</Typography>
           </Box>
         </Box>
         <Box

@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, Fragment } from 'react'
+import { useCallback, useState, useRef } from 'react'
 
 import Map, { Marker } from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
