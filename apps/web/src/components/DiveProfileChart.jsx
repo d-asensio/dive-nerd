@@ -8,6 +8,10 @@ import Tooltip from '@mui/joy/Tooltip'
 import { DatapointInfoPanel } from './DatapointInfoPanel'
 import { identity } from 'ramda'
 
+import lightTheme from '../themes/light'
+import darkTheme from '../themes/dark'
+import {useColorScheme} from '@mui/joy/styles';
+
 const StatsTooltip = ({ point }) => {
   return (
     <Tooltip
@@ -36,12 +40,15 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
     [onDatapointHover]
   )
 
+  const { mode: themeMode } = useColorScheme()
+
   if (!samples) return <CircularProgress />
 
   return (
     <Wrapper>
       <ResponsiveLine
         // enablePoints={false}
+        theme={themeMode === 'dark' ? darkTheme.charts : lightTheme.charts}
         data={[
           {
             id: 'Dive Profile',
