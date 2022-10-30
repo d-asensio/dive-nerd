@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Run visual regression tests
-        run: yarn web chromatic
+        run: yarn web chromatic --ci
   build-web:
     runs-on: ubuntu-latest
     env:
