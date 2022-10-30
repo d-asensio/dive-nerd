@@ -29,8 +29,7 @@ const DiveMapMarker = ({ diveId }) => {
       >
         <Badge
           badgeInset="50%"
-          color="success"
-          size="lg"
+          color="primary"
           sx={{
             p: 1.5,
             transition: 'transform 300ms',
@@ -48,7 +47,7 @@ const DiveMapMarker = ({ diveId }) => {
                 borderRadius: '50%',
                 animation: 'ripple 1.2s infinite ease-in-out',
                 border: '2px solid',
-                borderColor: 'success.500',
+                borderColor: 'primary.500',
                 content: '""',
               },
             },
