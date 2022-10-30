@@ -36,10 +36,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Run visual regression tests
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: apps/web
+        run: yarn web chromatic --ci
   build-web:
     runs-on: ubuntu-latest
     env:
