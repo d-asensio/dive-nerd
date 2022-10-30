@@ -58,6 +58,18 @@ export const getInitialCompartmentsGas = () => {
   )
 }
 
+const transformTimeToMinutes = ([startSample, endSample]) => {
+  const { time } = endSample
+
+  return [
+    startSample,
+    {
+      ...endSample,
+      time: time / 60
+    }
+  ]
+}
+
 const calculateAbmientPressure = ([startSample, endSample]) => {
   const { depth } = endSample
 
@@ -120,7 +132,7 @@ const calculateBarsPerMinutDescentRate = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      descentRate: (ambientPressureDelta / timeDelta) * 60 || 0
+      descentRate: ambientPressureDelta / timeDelta || 0
     }
   ]
 }
@@ -140,7 +152,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
     startSample?.compartmentsGasLoad ?? getInitialCompartmentsGas()
 
   const inertGasPressureRateChange = descentRate * gasMixtures.N2
-  const timeDeltaInMinutes = timeDelta / 60 // TODO: Convert everything to minutes
+  const timeDeltaInMinutes = timeDelta
 
   return [
     startSample,
@@ -286,6 +298,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
 const extactDataPointFromInterval = ([_, endSample]) => endSample
 
 export const calculateDataPointFromInterval = pipe(
+  transformTimeToMinutes,
   calculateAbmientPressure,
   calculateAlveolarPressureN2,
   calculateAmbientPressureDelta,

@@ -7,7 +7,7 @@ const calculateChartAxis = sample => {
 
   return {
     ...sample,
-    x: time / 60, // In minutes
+    x: time,
     y: depth
   }
 }

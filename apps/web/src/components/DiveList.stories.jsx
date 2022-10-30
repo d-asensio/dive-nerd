@@ -12,15 +12,15 @@ export default {
 }
 
 const Template = (args) => {
-  const { samples } = useDive(mockDives.diveY2022M04D12T0704)
+  const { samples } = useDive(mockDives['Dive_2022-09-11-1354'])
 
   return (
     <DiveList {...args}>
       <DiveList.Item
         name='Thomas Reef'
         date='25/10/2022 10:30 AM'
-        depth='48.2 m'
-        time='00:38'
+        maximumDepth='48.2 m'
+        totalDuration='00:38'
         rating={4}
         samples={samples}
       />
@@ -28,8 +28,8 @@ const Template = (args) => {
       <DiveList.Item
         name='Thomas Reef'
         date='25/10/2022 10:30 AM'
-        depth='48.2 m'
-        time='00:38'
+        maximumDepth='48.2 m'
+        totalDuration='00:38'
         rating={1}
         samples={samples}
       />
