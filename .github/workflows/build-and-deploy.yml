@@ -26,16 +26,20 @@ jobs:
     env:
       NODE_ENV: production
       REACT_APP_MAPBOX_ACCESS_TOKEN: ${{ secrets.REACT_APP_MAPBOX_ACCESS_TOKEN }}
-      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup node
+        with:
+          fetch-depth: 0
         uses: actions/setup-node@v3
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Run visual regression tests
-        run: yarn web chromatic --ci
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/web
   build-web:
     runs-on: ubuntu-latest
     env:
