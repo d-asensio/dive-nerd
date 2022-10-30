@@ -136,8 +136,8 @@ const schreinerEquation = ({
 const calculateCompartmentGasLoad = ([startSample, endSample]) => {
   const { descentRate, timeDelta, alveolarPressureN2, gasMixtures } = endSample
 
-  const compartmentsGas =
-    startSample?.compartments ?? getInitialCompartmentsGas()
+  const compartmentsGasLoad =
+    startSample?.compartmentsGasLoad ?? getInitialCompartmentsGas()
 
   const inertGasPressureRateChange = descentRate * gasMixtures.N2
   const timeDeltaInMinutes = timeDelta / 60 // TODO: Convert everything to minutes
@@ -146,7 +146,7 @@ const calculateCompartmentGasLoad = ([startSample, endSample]) => {
     startSample,
     {
       ...endSample,
-      compartments: compartmentsGas.map(
+      compartmentsGasLoad: compartmentsGasLoad.map(
         ({ pressureLoadN2, ...rest }, index) => ({
           ...rest,
           pressureLoadN2: schreinerEquation({
@@ -177,7 +177,7 @@ const buhlmannBakerCeilingEquation = ({
 }) => (P - A * gf) / (gf / B + 1 - gf)
 
 const calculateCompartmentCeiling = ([startSample, endSample]) => {
-  const compartments = endSample.compartments.map((compartment, index) => {
+  const compartmentsGasLoad = endSample.compartmentsGasLoad.map((compartment, index) => {
     const { pressureLoadN2, pressureLoadHe = 0 } = compartment
     const { N2, He } = compartmentCoefficients[index]
 
@@ -232,7 +232,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       return acc
     },
     null,
-    compartments
+    compartmentsGasLoad
   )
 
   const mostRestrictiveTissueHigh = reduce(
@@ -241,7 +241,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       return acc
     },
     null,
-    compartments
+    compartmentsGasLoad
   )
 
   const mostRestrictiveTissueMaxValue = reduce(
@@ -250,7 +250,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       return acc
     },
     null,
-    compartments
+    compartmentsGasLoad
   )
 
   const lowCeilingDepth = fromPressureToDepth({
@@ -278,7 +278,7 @@ const calculateCompartmentCeiling = ([startSample, endSample]) => {
       lowCeiling: Math.max(0, lowCeilingDepth),
       highCeiling: Math.max(0, highCeilingDepth),
       maxValue: Math.max(0, maxValueDepth),
-      compartments
+      compartmentsGasLoad
     }
   ]
 }
