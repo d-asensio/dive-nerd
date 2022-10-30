@@ -4,8 +4,8 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "test": "react-scripts test",
-    "test:watch": "react-scripts test --watch"
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test"
   },
   "devDependencies": {
     "@divenerd/mock-dives": "workspace:^",
