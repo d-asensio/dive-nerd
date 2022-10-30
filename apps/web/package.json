@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
+    "@auth0/auth0-react": "^1.12.0",
     "@divenerd/dive-generator": "workspace:^",
     "@divenerd/dive-physics": "workspace:^",
     "@emotion/react": "^11.10.5",

@@ -7,16 +7,18 @@ import reportWebVitals from './reportWebVitals'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-import { ThemeProvider } from './providers'
+import { AuthProvider, ThemeProvider } from './providers'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
   </React.StrictMode>
 )
 
