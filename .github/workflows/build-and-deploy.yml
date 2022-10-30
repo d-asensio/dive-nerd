@@ -4,6 +4,10 @@ on:
     branches:
       - main
 
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy-api:
     runs-on: ubuntu-latest
