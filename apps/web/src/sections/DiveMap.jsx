@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState, useRef, useEffect } from 'react'
 
 import Map, { Marker } from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
@@ -7,7 +7,7 @@ import Badge from '@mui/joy/Badge'
 import Tooltip from '@mui/joy/Tooltip'
 
 import { useSelector } from '../store'
-import { diveSelector, diveIdListSelector } from '../entities'
+import { diveSelector, diveIdListSelector, highlightedDiveSelector } from '../entities'
 import {useNavigate} from 'react-router-dom';
 
 const DiveMapMarker = ({ diveId }) => {
@@ -70,17 +70,23 @@ const DiveMapMarker = ({ diveId }) => {
 }
 
 export const DiveMap = () => {
-  const diveIdList = useSelector(diveIdListSelector)
-
-  // const handleResetClick = useCallback(() => {
-  //   mapRef.current?.flyTo({
-  //     center: [-100, 40],
-  //     zoom: 3.5,
-  //     duration: 2000
-  //   })
-  // }, [])
-
   const mapRef = useRef(null)
+
+  const diveIdList = useSelector(diveIdListSelector)
+  const highlightedDive = useSelector(highlightedDiveSelector)
+
+  useEffect(() => {
+    if (!highlightedDive) return
+
+    const { latitude, longitude } = highlightedDive.geographicCoordinates
+
+    mapRef.current?.flyTo({
+      center: [longitude, latitude],
+      zoom: 4,
+      duration: 2000
+    })
+  }, [highlightedDive])
+
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,

@@ -1,4 +1,5 @@
 
+import { createSelector } from 'reselect'
 import { createCachedSelector } from 're-reselect'
 
 const diveIdParameter = (_, id) => id
@@ -13,4 +14,12 @@ export const diveSelector = createCachedSelector(
   (divesById, id) => divesById[id] ?? null
 )(
   diveIdParameter
+)
+
+const highlightedDiveIdSelector = ({ highlightedDiveId }) => highlightedDiveId ?? null
+
+export const highlightedDiveSelector = createSelector(
+  divesByIdSelector,
+  highlightedDiveIdSelector,
+  (divesById, id) => divesById[id] ?? null
 )

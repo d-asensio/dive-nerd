@@ -1,7 +1,7 @@
 import graphql from '../../effects/graphql'
 import store from '../../effects/store'
 
-import { saveDivesMutation } from './mutations'
+import { highlightDiveMutation, saveDivesMutation } from './mutations'
 import { getAllDivesQuery } from './queries'
 
 export const divesService = (function IIFE () {
@@ -11,7 +11,12 @@ export const divesService = (function IIFE () {
     yield store.mutate(saveDivesMutation, dives)
   }
 
+  function * highlightDive (diveId) {
+    yield store.mutate(highlightDiveMutation, diveId)
+  }
+
   return {
-    fetchDives
+    fetchDives,
+    highlightDive
   }
 })()

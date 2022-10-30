@@ -3,15 +3,24 @@ import { useNavigate } from 'react-router-dom'
 
 import { DiveList } from '../components'
 import { useSelector } from '../store'
-import { diveIdListSelector, diveSelector } from '../entities'
+import { diveIdListSelector, diveSelector, divesService } from '../entities'
 
 import { formatTimeMinutes } from '../utils/formatTime'
 import { formatNumber } from '../utils/formatNumber'
+import { run } from '@regenerate/core'
+import {useDebouncedCallback} from 'use-debounce';
 
 function DiveItem({ diveId }) {
   const navigate = useNavigate()
 
-  const handleNavigate = useCallback(() => navigate(`/dive/${diveId}`), [diveId])
+  const handleNavigate = useCallback(() => navigate(`/dive/${diveId}`), [
+    diveId,
+  ])
+
+  const handleHover = useDebouncedCallback(() => {
+    run(divesService.highlightDive(diveId))
+  }, 500, {trailing: true})
+
 
   const { name, date, rating, profile } = useSelector((state) =>
     diveSelector(state, diveId),
@@ -30,6 +39,8 @@ function DiveItem({ diveId }) {
       })}
       totalDuration={formatTimeMinutes(profile.totalDuration)}
       onClick={handleNavigate}
+      onHover={handleHover}
+      onMouseLeave={handleHover.cancel}
     />
   )
 }

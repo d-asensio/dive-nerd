@@ -10,3 +10,7 @@ export const saveDivesMutation = produce((state, dives) => {
   state.divesById = divesById
   state.diveIdList = diveIdList
 })
+
+export const highlightDiveMutation = produce((state, diveId) => {
+  state.highlightedDiveId = diveId
+})
