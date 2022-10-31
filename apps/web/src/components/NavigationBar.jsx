@@ -17,35 +17,35 @@ import PersonIcon from '@mui/icons-material/Person'
 import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
 
 import { Logo } from './Logo'
 
-import { useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@mui/joy/styles'
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
+function ModeToggle () {
+  const { mode, setMode } = useColorScheme()
   return (
     <IconButton
-      variant="outlined"
-      color="neutral"
+      variant='outlined'
+      color='neutral'
       onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
     >
       {mode === 'dark'
         ? <LightModeIcon />
         : <DarkModeIcon />}
     </IconButton>
-  );
+  )
 }
 
 const Shortcut = ({ text }) => (
-  <Typography level="body2" textColor="text.tertiary" ml="auto">
+  <Typography level='body2' textColor='text.tertiary' ml='auto'>
     {text}
   </Typography>
 )
 
-function ProfileAvatarMenu({ onLogoutClick }) {
+function ProfileAvatarMenu ({ onLogoutClick }) {
   const buttonRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -61,24 +61,24 @@ function ProfileAvatarMenu({ onLogoutClick }) {
     <div>
       <IconButton
         ref={buttonRef}
-        color="neutral"
-        aria-haspopup="menu"
+        color='neutral'
+        aria-haspopup='menu'
         onClick={handleAvatarClick}
         sx={{
           borderRadius: '50%',
           marginInlineStart: 'var(--Avatar-marginInlineStart)',
-          boxShadow: 'var(--Avatar-ring)',
+          boxShadow: 'var(--Avatar-ring)'
         }}
       >
-        <Avatar size="sm">DN</Avatar>
+        <Avatar size='sm'>DN</Avatar>
       </IconButton>
       <Menu
         open={menuOpen}
         anchorEl={buttonRef.current}
-        placement="bottom-end"
+        placement='bottom-end'
         onClose={handleClose}
         sx={{
-          width: 250,
+          width: 250
         }}
       >
         <ListItem nested>
@@ -93,14 +93,14 @@ function ProfileAvatarMenu({ onLogoutClick }) {
               <ListItemDecorator>
                 <SettingsIcon />
               </ListItemDecorator>
-              Settings <Shortcut text="⌘ ," />
+              Settings <Shortcut text='⌘ ,' />
             </MenuItem>
           </List>
         </ListItem>
         <ListDivider />
         <ListItem nested>
           <List>
-            <MenuItem ariant="soft" color="danger" onClick={onLogoutClick}>
+            <MenuItem ariant='soft' color='danger' onClick={onLogoutClick}>
               <ListItemDecorator sx={{ color: 'inherit' }}>
                 <LogoutIcon />
               </ListItemDecorator>
@@ -113,8 +113,8 @@ function ProfileAvatarMenu({ onLogoutClick }) {
   )
 }
 
-export function NavigationBar() {
-  const { logout } = useAuth0();
+export function NavigationBar () {
+  const { logout } = useAuth0()
 
   const handleLogoutClick = useCallback(() => {
     logout({ returnTo: window.location.origin })
@@ -125,7 +125,7 @@ export function NavigationBar() {
       sx={{
         width: '100%',
         borderBottom: 1,
-        borderColor: 'divider',
+        borderColor: 'divider'
       }}
     >
       <List
@@ -133,7 +133,7 @@ export function NavigationBar() {
         sx={{
           p: 1,
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <Logo />
@@ -144,7 +144,7 @@ export function NavigationBar() {
             gap: 2
           }}
         >
-          <Alert variant="soft" color="warning">
+          <Alert variant='soft' color='warning'>
             DiveNerd is still in beta, use it carefully!
           </Alert>
           <ModeToggle />

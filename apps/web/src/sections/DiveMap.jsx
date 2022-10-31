@@ -1,45 +1,67 @@
-import { useCallback, useState, useRef, useEffect } from 'react'
+import { useCallback, useState, useRef } from 'react'
 
 import Map, { Marker } from 'react-map-gl'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-import { useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@mui/joy/styles'
 import Badge from '@mui/joy/Badge'
 import Tooltip from '@mui/joy/Tooltip'
 
+import { run } from '@regenerate/core'
+
 import { useSelector } from '../store'
-import { diveSelector, diveIdListSelector, highlightedDiveSelector } from '../entities'
+import {
+  diveSelector,
+  diveIdListSelector,
+  isDiveHighlightedSelector, divesService
+} from '../entities'
 
+import eventBus from '../eventBus'
+import { useMount } from 'react-use'
 
-const DiveMapMarker = ({ diveId }) => {const { mode } = useColorScheme();
+const DiveMapMarker = ({ diveId }) => {
   const navigate = useNavigate()
+  const isHighLighted = useSelector(
+    state => isDiveHighlightedSelector(state, diveId)
+  )
 
   const handleNavigate = useCallback(() => navigate(`/dive/${diveId}`), [diveId])
 
-  const { name, geographicCoordinates: { latitude, longitude } } = useSelector((state) =>
-    diveSelector(state, diveId),
+  const {
+    name,
+    geographicCoordinates: { latitude, longitude }
+  } = useSelector((state) =>
+    diveSelector(state, diveId)
   )
 
+  const handleEnter = useCallback(() => {
+    run(divesService.highlightDive(diveId))
+  }, [diveId])
+
+  const handleLeave = useCallback(() => {
+    run(divesService.highlightDive(null))
+  }, [])
+
   return (
-    <Marker longitude={longitude} latitude={latitude} anchor="center">
+    <Marker longitude={longitude} latitude={latitude} anchor='center'>
       <Tooltip
+        disableInteractive
+        open={isHighLighted}
         title={name}
-        placement="top"
-        variant="outlined"
+        placement='top'
+        variant='outlined'
         arrow
       >
         <Badge
-          badgeInset="50%"
-          color="primary"
+          badgeInset='50%'
+          color={isHighLighted ? 'success' : 'primary'}
           sx={{
             p: 1.5,
-            transition: 'transform 300ms',
+            transition: 'transform 300ms, color 300ms',
             cursor: 'pointer',
-            '&:hover': {
-              transform: 'scale(1.5)'
-            },
+            transform: isHighLighted && 'scale(1.5)',
             '& .JoyBadge-badge': {
               '&::after': {
                 position: 'absolute',
@@ -50,21 +72,23 @@ const DiveMapMarker = ({ diveId }) => {const { mode } = useColorScheme();
                 borderRadius: '50%',
                 animation: 'ripple 1.2s infinite ease-in-out',
                 border: '2px solid',
-                borderColor: 'primary.500',
-                content: '""',
-              },
+                borderColor: isHighLighted ? 'success.500' : 'primary.500',
+                content: '""'
+              }
             },
             '@keyframes ripple': {
               '0%': {
                 transform: 'scale(1)',
-                opacity: 1,
+                opacity: 1
               },
               '100%': {
                 transform: 'scale(2)',
-                opacity: 0,
-              },
-            },
+                opacity: 0
+              }
+            }
           }}
+          onMouseEnter={handleEnter}
+          onMouseLeave={handleLeave}
           onClick={handleNavigate}
         />
       </Tooltip>
@@ -73,34 +97,29 @@ const DiveMapMarker = ({ diveId }) => {const { mode } = useColorScheme();
 }
 
 export const DiveMap = () => {
-  const { mode: themeMode } = useColorScheme();
+  const { mode: themeMode } = useColorScheme()
 
   const mapRef = useRef(null)
 
   const diveIdList = useSelector(diveIdListSelector)
-  const highlightedDive = useSelector(highlightedDiveSelector)
 
-  useEffect(() => {
-    if (!highlightedDive) return
-
-    const { latitude, longitude } = highlightedDive.geographicCoordinates
-
-    mapRef.current?.flyTo({
-      center: [longitude, latitude],
-      zoom: 4,
-      duration: 2000
-    })
-  }, [highlightedDive])
+  useMount(() =>
+    eventBus.on('MAP_FOCUS_ON_COORDINATES',
+      ({ latitude, longitude }) => mapRef.current?.flyTo({
+        center: [longitude, latitude],
+        zoom: 4,
+        duration: 2000
+      })))
 
   const [viewState, setViewState] = useState({
-    longitude: -100,
-    latitude: 40,
-    zoom: 3.5,
+    longitude: 41.2284, // This should be user coordinates
+    latitude: 80.9098,
+    zoom: 1.8
   })
 
   const handleMapMove = useCallback(
     ({ viewState }) => setViewState(viewState),
-    [],
+    []
   )
 
   return (

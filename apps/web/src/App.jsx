@@ -8,12 +8,12 @@ import LoginPage from './pages/LoginPage'
 
 import { divesService } from './entities'
 
-import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { withAuthenticationRequired } from '@auth0/auth0-react'
 
 const ProtectedRoute = ({ component, ...args }) => {
-  const Component = withAuthenticationRequired(component, args);
-  return <Component />;
-};
+  const Component = withAuthenticationRequired(component, args)
+  return <Component />
+}
 
 function App () {
   useEffectOnce(() => {

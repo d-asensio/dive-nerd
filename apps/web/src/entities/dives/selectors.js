@@ -18,8 +18,8 @@ export const diveSelector = createCachedSelector(
 
 const highlightedDiveIdSelector = ({ highlightedDiveId }) => highlightedDiveId ?? null
 
-export const highlightedDiveSelector = createSelector(
-  divesByIdSelector,
+export const isDiveHighlightedSelector = createSelector(
   highlightedDiveIdSelector,
-  (divesById, id) => divesById[id] ?? null
+  diveIdParameter,
+  (highlightedDiveId, id) => highlightedDiveId === id
 )

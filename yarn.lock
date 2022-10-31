@@ -2382,6 +2382,7 @@ __metadata:
     "@testing-library/user-event": ^13.2.1
     chromatic: ^6.11.2
     dotenv-cli: ^6.0.0
+    emittery: ^1.0.0
     immer: ^9.0.16
     mapbox-gl: ^2.10.0
     ramda: ^0.28.0
@@ -11527,6 +11528,13 @@ __metadata:
   version: 0.8.1
   resolution: "emittery@npm:0.8.1"
   checksum: 2457e8c7b0688bb006126f2c025b2655abe682f66b184954122a8a065b5277f9813d49d627896a10b076b81c513ec5f491fd9c14fbd42c04b95ca3c9f3c365ee
+  languageName: node
+  linkType: hard
+
+"emittery@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "emittery@npm:1.0.0"
+  checksum: 271943d3fb94571e8d1474c8147c5045641ecb508ec7e83f89960fdca397b0dad6b5ee26083931872d97b0101c3749cbcd82111da60227c9c439b2ebc79b3a46
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 import Box from '@mui/joy/Box'
-import {TimeField} from "./TimeField";
-import {NumericField} from "./NumericField";
+import { TimeField } from './TimeField'
+import { NumericField } from './NumericField'
 
 export function DatapointInfoPanel ({ data }) {
   const {

@@ -3525,7 +3525,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "emittery",\
-        "npm:0.8.1"\
+        "npm:1.0.0"\
       ],\
       [\
         "emoji-regex",\
@@ -14904,6 +14904,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:8ff68d6583c6608dadaf2ca684259e3414a56cee244875ab5334e3af05c6355048a8df3986bdd49813d5ea34ffa5cf315e6bb1de085dac5372a21dabc71a1517#npm:13.5.0"],\
             ["chromatic", "npm:6.11.2"],\
             ["dotenv-cli", "npm:6.0.0"],\
+            ["emittery", "npm:1.0.0"],\
             ["immer", "npm:9.0.16"],\
             ["mapbox-gl", "npm:2.10.0"],\
             ["ramda", "npm:0.28.0"],\
@@ -27092,6 +27093,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/emittery-npm-0.8.1-9771f0f260-2457e8c7b0.zip/node_modules/emittery/",\
           "packageDependencies": [\
             ["emittery", "npm:0.8.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/emittery-npm-1.0.0-cf8c701e63-271943d3fb.zip/node_modules/emittery/",\
+          "packageDependencies": [\
+            ["emittery", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -10,7 +10,7 @@ import { identity } from 'ramda'
 
 import lightTheme from '../themes/light'
 import darkTheme from '../themes/dark'
-import {useColorScheme} from '@mui/joy/styles';
+import { useColorScheme } from '@mui/joy/styles'
 
 const StatsTooltip = ({ point }) => {
   return (

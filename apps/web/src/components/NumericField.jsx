@@ -1,8 +1,8 @@
-import {formatNumber} from "../utils/formatNumber";
-import TextField from "@mui/joy/TextField";
+import { formatNumber } from '../utils/formatNumber'
+import TextField from '@mui/joy/TextField'
 
-export function NumericField({units, value, precision = 2, ...rest}) {
-  const formattedValue = formatNumber({value, precision, units})
+export function NumericField ({ units, value, precision = 2, ...rest }) {
+  const formattedValue = formatNumber({ value, precision, units })
 
   return (
     <TextField

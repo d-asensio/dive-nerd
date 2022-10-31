@@ -29,14 +29,14 @@ const Wrapper = styled.main`
   align-items: center;
 `
 
-function DiveViewerPage() {
-  let { diveId } = useParams()
+function DiveViewerPage () {
+  const { diveId } = useParams()
 
   const dive = useSelector((state) => diveSelector(state, diveId))
 
   const [currentDatapoint, setData] = useState({
     compartmentsGasLoad: ZHL16C.getInitialCompartmentsGas(),
-    ambientPressure: 1,
+    ambientPressure: 1
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
@@ -52,26 +52,26 @@ function DiveViewerPage() {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 3,
+              gap: 3
             }}
           >
             <IconButton
-              to="/"
+              to='/'
               component={Link}
-              size="lg"
-              variant="outlined"
-              color="neutral"
+              size='lg'
+              variant='outlined'
+              color='neutral'
             >
               <ArrowBackIcon />
             </IconButton>
-            <Typography level="h2">{dive?.name}</Typography>
+            <Typography level='h2'>{dive?.name}</Typography>
           </Box>
         </Box>
         <Box
@@ -80,13 +80,13 @@ function DiveViewerPage() {
             borderRight: 1,
             borderColor: 'divider',
             overflow: 'scroll',
-            minHeight: 0,
+            minHeight: 0
           }}
         >
           <Tabs
             defaultValue={0}
             sx={{
-              gap: 3,
+              gap: 3
             }}
           >
             <TabList
