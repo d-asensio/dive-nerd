@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import styled from '@emotion/styled'
 
 import { ResponsiveLine } from '@nivo/line'
-import CircularProgress from '@mui/joy/CircularProgress'
 import Tooltip from '@mui/joy/Tooltip'
 
 import { DatapointInfoPanel } from './DatapointInfoPanel'
@@ -41,8 +40,6 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
   )
 
   const { mode: themeMode } = useColorScheme()
-
-  if (!samples) return <CircularProgress />
 
   return (
     <Wrapper>

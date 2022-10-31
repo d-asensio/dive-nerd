@@ -94,6 +94,7 @@ export const CompartmentsGasChart = ({
         indexScale={{ type: 'band', round: true }}
         colors={['#6da2ec']}
         tooltip={always(null)}
+        animate={false}
         layers={[
           'grid',
           'axes',
