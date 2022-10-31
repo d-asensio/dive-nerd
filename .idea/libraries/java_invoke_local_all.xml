@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="java-invoke-local-all">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/.yarn/unplugged/java-invoke-local-npm-0.0.6-66a0e38326/node_modules/java-invoke-local/build/libs/java-invoke-local-all.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
