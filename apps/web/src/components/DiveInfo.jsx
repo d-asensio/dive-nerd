@@ -25,10 +25,52 @@ import Co2Icon from '@mui/icons-material/Co2'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import Sheet from '@mui/joy/Sheet'
-import Avatar from '@mui/joy/Avatar'
 import Radio from '@mui/joy/Radio'
 import Divider from '@mui/joy/Divider'
 import { radioClasses, RadioGroup } from '@mui/joy'
+
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  width: '100%',
+  borderTop: `1px solid ${theme.palette.divider}`,
+  '&:last-child': {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  '&:before': {
+    display: 'none',
+  },
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -45,19 +87,19 @@ function FieldsRow ({ children, columns }) {
 }
 
 function Section ({ title, children }) {
-  return <Box sx={{ width: '100%' }}>
-    <Divider sx={{ '--Divider-childPosition': `0%` }}>
-      {title}
-    </Divider>
-    <Box
-      sx={{
-        p: 2,
-        width: '100%'
-      }}
-    >
-      {children}
-    </Box>
-  </Box>
+  const [expanded, setExpanded] = useState(true)
+  return (
+    <Accordion expanded={expanded} onChange={(_, newExpanded) => setExpanded(newExpanded)}>
+      <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+        <Typography>{title}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          {children}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+  )
 }
 
 export const DiveInfo = () => {
@@ -70,64 +112,69 @@ export const DiveInfo = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'start',
-          gap: 2
         }}
       >
-        <FieldsRow columns="1fr 3fr">
-          <TextField
-            sx={{ minWidth: 0 }}
-            label="Dive Number"
-            size="lg"
-            value="128"
-          />
-          <TextField
-            sx={{ minWidth: 0 }}
-            label="Date"
-            size="lg"
-            value="Tuesday, November 1, 2022"
-            endDecorator={
-              <Tooltip
-                placement="top-end"
-                variant="outlined"
-                arrow
-                title={
-                  <CalendarPicker
-                    sx={{ width: '100%' }}
-                    date={date}
-                    onChange={setDate}
-                  />
-                }
-              >
-                <IconButton variant="plain">
-                  <CalendarMonthIcon/>
-                </IconButton>
-              </Tooltip>
-            }
-          />
-        </FieldsRow>
-        <MultipleChoiceField label="Dive type">
-          <Choice value="open-water">
-            Open water
-          </Choice>
-          <Choice value="deep">
-            Deep
-          </Choice>
-          <Choice value="drift">
-            Drift
-          </Choice>
-          <Choice value="wreck">
-            Wreck
-          </Choice>
-          <Choice value="night">
-            Night
-          </Choice>
-          <Choice value="cave">
-            Cave
-          </Choice>
-          <Choice value="ice">
-            Ice
-          </Choice>
-        </MultipleChoiceField>
+        <Box
+          sx={{
+            p: 2
+          }}
+        >
+          <FieldsRow columns="1fr 3fr">
+            <TextField
+              sx={{ minWidth: 0 }}
+              label="Dive Number"
+              size="lg"
+              value="128"
+            />
+            <TextField
+              sx={{ minWidth: 0 }}
+              label="Date"
+              size="lg"
+              value="Tuesday, November 1, 2022"
+              endDecorator={
+                <Tooltip
+                  placement="top-end"
+                  variant="outlined"
+                  arrow
+                  title={
+                    <CalendarPicker
+                      sx={{ width: '100%' }}
+                      date={date}
+                      onChange={setDate}
+                    />
+                  }
+                >
+                  <IconButton variant="plain">
+                    <CalendarMonthIcon/>
+                  </IconButton>
+                </Tooltip>
+              }
+            />
+          </FieldsRow>
+          <MultipleChoiceField label="Dive type">
+            <Choice value="open-water">
+              Open water
+            </Choice>
+            <Choice value="deep">
+              Deep
+            </Choice>
+            <Choice value="drift">
+              Drift
+            </Choice>
+            <Choice value="wreck">
+              Wreck
+            </Choice>
+            <Choice value="night">
+              Night
+            </Choice>
+            <Choice value="cave">
+              Cave
+            </Choice>
+            <Choice value="ice">
+              Ice
+            </Choice>
+          </MultipleChoiceField>
+        </Box>
         <Section
           title={
             <Typography

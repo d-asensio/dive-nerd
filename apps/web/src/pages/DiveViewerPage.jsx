@@ -134,7 +134,6 @@ function DiveViewerPage () {
           <AsideHeader diveId={diveId}/>
           <Box
             sx={{
-              p: 3,
               minHeight: 0,
               overflowY: 'scroll'
             }}
