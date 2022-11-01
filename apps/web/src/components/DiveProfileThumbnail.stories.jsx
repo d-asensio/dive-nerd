@@ -27,9 +27,15 @@ export const Default = ({ dive, ...args }) => {
     <DiveProfileThumbnail samples={samples} {...args} />
   )
 }
-
 Default.args = {
   dive: '2BB70361-453E-4B9A-A947-AE62D693CA37',
   highlighted: false,
   loading: false
 }
+
+export const Skeleton = args => {
+  return (
+    <DiveProfileThumbnail.Skeleton {...args} />
+  )
+}
+Skeleton.args = {}

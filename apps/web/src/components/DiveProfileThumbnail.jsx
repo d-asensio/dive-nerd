@@ -4,6 +4,7 @@ import Tooltip from '@mui/joy/Tooltip'
 import Sheet from "@mui/joy/Sheet";
 import Badge from "@mui/joy/Badge";
 import CircularProgress from '@mui/joy/CircularProgress'
+import { Skeleton } from '@mui/material'
 
 const DepthTooltip = ({point}) => {
   return (
@@ -36,7 +37,7 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
           justifyContent: 'center',
           width: 128,
           height: 62,
-          borderRadius: 'sm',
+          borderRadius: 'xs',
           overflow: 'auto'
         }}
       >
@@ -74,3 +75,5 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
     </Badge>
   )
 }
+
+DiveProfileThumbnail.Skeleton = () => <Skeleton variant="rounded" width={128} height={62} />
