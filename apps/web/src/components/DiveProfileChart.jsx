@@ -86,7 +86,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
           }
         ]}
         colors={['#3daff7', '#e09f3e', '#9E2A2B', '#ff0df7']}
-        margin={{ top: 12, right: 12, bottom: 48, left: 62 }}
+        margin={{ top: 48, right: 12, bottom: 48, left: 62 }}
         xScale={{ type: 'linear' }}
         yScale={{
           type: 'linear',
@@ -97,15 +97,14 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
         }}
         yFormat=' >-.2f'
         animate={false}
-        axisTop={null}
         axisRight={null}
-        axisBottom={{
+        axisTop={{
           orient: 'bottom',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
           legend: 'Time (in minutes)',
-          legendOffset: 36,
+          legendOffset: -40,
           legendPosition: 'middle'
         }}
         axisLeft={{
