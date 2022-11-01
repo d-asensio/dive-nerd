@@ -37,8 +37,7 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
           justifyContent: 'center',
           width: 128,
           height: 62,
-          borderRadius: 'xs',
-          overflow: 'auto'
+          borderRadius: 'xs'
         }}
       >
         {loading
