@@ -5,7 +5,7 @@ import TextField from '@mui/joy/TextField'
 import Option from '@mui/joy/Option'
 import Slider from '@mui/joy/Slider'
 import FormHelperText from '@mui/joy/FormHelperText'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 
 import dayjs from 'dayjs'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -17,6 +17,12 @@ import IconButton from '@mui/joy/IconButton'
 import Tooltip from '@mui/joy/Tooltip'
 import { Divider } from '@mui/joy'
 import Typography from '@mui/joy/Typography'
+
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import WaterIcon from '@mui/icons-material/Water';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Co2Icon from '@mui/icons-material/Co2';
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -35,7 +41,7 @@ function FieldsRow ({ children, columns }) {
 function Section ({ title, children }) {
   return <Box sx={{ width: '100%' }}>
     <Divider sx={{ '--Divider-childPosition': `0%` }}>
-      <Typography level="h5">{title}</Typography>
+      {title}
     </Divider>
     <Box
       sx={{
@@ -61,7 +67,7 @@ export const DiveInfo = () => {
           gap: 2
         }}
       >
-        <FieldsRow columns='1fr 3fr'>
+        <FieldsRow columns="1fr 3fr">
           <TextField
             sx={{ minWidth: 0 }}
             label="Dive Number"
@@ -116,7 +122,16 @@ export const DiveInfo = () => {
             Ice
           </Choice>
         </MultipleChoiceField>
-        <Section title='Time'>
+        <Section
+          title={
+            <Typography
+              level="h5"
+              startDecorator={<AccessTimeFilledIcon/>}
+            >
+              Time
+            </Typography>
+          }
+        >
           <FieldsRow>
             <TextField
               sx={{ minWidth: 0 }}
@@ -146,7 +161,16 @@ export const DiveInfo = () => {
             />
           </FieldsRow>
         </Section>
-        <Section title='Depth'>
+        <Section
+          title={
+            <Typography
+              level="h5"
+              startDecorator={<ArrowDownwardIcon/>}
+            >
+              Depth
+            </Typography>
+          }
+        >
           <FieldsRow>
             <TextField
               sx={{ minWidth: 0 }}
@@ -164,7 +188,16 @@ export const DiveInfo = () => {
             />
           </FieldsRow>
         </Section>
-        <Section title='Water'>
+        <Section
+          title={
+            <Typography
+              level="h5"
+              startDecorator={<WaterIcon/>}
+            >
+              Water
+            </Typography>
+          }
+        >
           <FieldsRow>
             <TextField
               sx={{ minWidth: 0 }}
@@ -195,7 +228,16 @@ export const DiveInfo = () => {
             </SelectField>
           </FieldsRow>
         </Section>
-        <Section title='Gear'>
+        <Section
+          title={
+            <Typography
+              level="h5"
+              startDecorator={<ManageAccountsIcon/>}
+            >
+              Gear
+            </Typography>
+          }
+        >
           <TextField
             label="Weights"
             size="lg"
@@ -203,7 +245,16 @@ export const DiveInfo = () => {
             endDecorator="kg"
           />
         </Section>
-        <Section title='Gas'>
+        <Section
+          title={
+            <Typography
+              level="h5"
+              startDecorator={<Co2Icon/>}
+            >
+              Gas
+            </Typography>
+          }
+        >
           <FieldsRow>
             <SelectField
               sx={{ minWidth: '100%' }}
