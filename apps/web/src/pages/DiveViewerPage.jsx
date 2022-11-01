@@ -91,22 +91,15 @@ function Content ({ diveId }) {
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
 
-  return <Tabs
-    defaultValue={0}
-    sx={{
-      gap: 3
-    }}
-  >
-    <TabList
+  return (
+    <Box
       sx={{
-        alignSelf: 'center'
+        height: '100%',
+        minHeight: 0,
+        display: 'grid',
+        gridTemplateRows: '3fr 1fr'
       }}
     >
-      <Tab>Dive Profile</Tab>
-      <Tab>Media</Tab>
-      <Tab>Gear</Tab>
-    </TabList>
-    <TabPanel value={0}>
       <ProfileViewer
         diveId={diveId}
         onDatapointHover={handleDatapointHover}
@@ -115,10 +108,8 @@ function Content ({ diveId }) {
         dataPoint={currentDatapoint}
         maxAmbientPressure={5}
       />
-    </TabPanel>
-    <TabPanel value={1}>Media</TabPanel>
-    <TabPanel value={2}>Gear</TabPanel>
-  </Tabs>
+    </Box>
+  )
 }
 
 function DiveViewerPage () {

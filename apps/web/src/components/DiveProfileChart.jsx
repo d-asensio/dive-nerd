@@ -30,7 +30,7 @@ const StatsTooltip = ({ point }) => {
 
 const Wrapper = styled.div`
   min-width: 0;
-  height: 500px;
+  min-height: 550px;
 `
 
 export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {

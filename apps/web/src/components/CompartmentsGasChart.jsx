@@ -11,7 +11,7 @@ import darkTheme from '../themes/dark'
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 300px;
+  min-height: 300px;
 `
 
 const CeilingValuesLayer = ({ bars, yScale }) => {
