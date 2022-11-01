@@ -4,7 +4,7 @@ import FormLabel from '@mui/joy/FormLabel'
 import List from '@mui/joy/List'
 import ListItem from '@mui/joy/ListItem'
 
-function Choice ({ children, value }) {
+export function Choice ({ children, value }) {
   return (
     <ListItem variant="outlined">
       <Checkbox
@@ -56,5 +56,3 @@ export function MultipleChoiceField ({
     </List>
   </Box>
 }
-
-MultipleChoiceField.Choice = Choice

@@ -11,7 +11,22 @@ import dayjs from 'dayjs'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker'
-import { MultipleChoiceField } from './MultipleChoiceField'
+import { Choice, MultipleChoiceField } from './MultipleChoiceField'
+import { SelectField } from './SelectField'
+
+function FormRow ({ children }) {
+  return <Box
+    sx={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      justifyContent: 'stretch',
+      gap: 2,
+      width: '100%'
+    }}
+  >
+    {children}
+  </Box>
+}
 
 export const DiveInfo = () => {
   const [date, setDate] = useState(dayjs('2022-04-07'))
@@ -80,81 +95,72 @@ export const DiveInfo = () => {
           value="23"
           endDecorator="ºC"
         />
-        <FormLabel sx={{
-          gap: .5,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start'
-        }}>
-          Water salinity
-          <Select size="lg" defaultValue="sea">
-            <Option value="fresh">Fresh (1.00 kg/l)</Option>
-            <Option value="brackish">Brackish (1.02 kg/l)</Option>
-            <Option value="sea">Sea (1.03 kg/l)</Option>
-          </Select>
-        </FormLabel>
+        <SelectField label='Water salinity' size="lg" defaultValue="10">
+          <Option value="fresh">Fresh (1.00 kg/l)</Option>
+          <Option value="brackish">Brackish (1.02 kg/l)</Option>
+          <Option value="sea">Sea (1.03 kg/l)</Option>
+        </SelectField>
         <MultipleChoiceField>
-          <MultipleChoiceField.Choice value="open-water">
+          <Choice value="open-water">
             Open water
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="deep">
+          </Choice>
+          <Choice value="deep">
             Deep
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="drift">
+          </Choice>
+          <Choice value="drift">
             Drift
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="wreck">
+          </Choice>
+          <Choice value="wreck">
             Wreck
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="night">
+          </Choice>
+          <Choice value="night">
             Night
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="cave">
+          </Choice>
+          <Choice value="cave">
             Cave
-          </MultipleChoiceField.Choice>
-          <MultipleChoiceField.Choice value="ice">
+          </Choice>
+          <Choice value="ice">
             Ice
-          </MultipleChoiceField.Choice>
+          </Choice>
         </MultipleChoiceField>
-        <FormLabel sx={{
-          gap: .5,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start'
-        }}>
-          Visibility
-          <Select size="lg" defaultValue="good">
-            <Option value="good">Good (+20m)</Option>
-            <Option value="medium">Medium (10-20m)</Option>
-            <Option value="bad">Bad (-5m)</Option>
-          </Select>
-        </FormLabel>
-        <FormLabel sx={{
-          gap: .5,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start'
-        }}>
-          Tank volume
-          <Select label="Tank volume" size="lg" defaultValue="10">
+        <SelectField label='Visibility' size="lg" defaultValue="good">
+          <Option value="good">Good (+20m)</Option>
+          <Option value="medium">Medium (10-20m)</Option>
+          <Option value="bad">Bad (-5m)</Option>
+        </SelectField>
+        <FormRow>
+          <SelectField
+            sx={{ flex: 1, minWidth: '100%' }}
+            label='Tank volume'
+            size="lg"
+            defaultValue="10"
+          >
             <Option value="7">7 liters</Option>
             <Option value="10">10 liters</Option>
             <Option value="12">12 liters</Option>
             <Option value="15">15 liters</Option>
-          </Select>
-        </FormLabel>
-        <TextField
-          label="Start tank pressure"
-          size="lg"
-          value="200"
-          endDecorator="bar"
-        />
-        <TextField
-          label="End tank pressure"
-          size="lg"
-          value="50"
-          endDecorator="bar"
-        />
+          </SelectField>
+          <GasMixtureField
+            sx={{ flex: 1 }}
+            defaultValue={21}
+          />
+        </FormRow>
+        <FormRow>
+          <TextField
+            sx={{ flex: 1 }}
+            label="Start tank pressure"
+            size="lg"
+            value="200"
+            endDecorator="bar"
+          />
+          <TextField
+            sx={{ flex: 1 }}
+            label="End tank pressure"
+            size="lg"
+            value="50"
+            endDecorator="bar"
+          />
+        </FormRow>
         <TextField
           label="SAC Rate"
           size="lg"
@@ -162,19 +168,18 @@ export const DiveInfo = () => {
           endDecorator="l/min"
           readOnly
         />
-        <GasMixtureField defaultValue={21}/>
       </Box>
     </LocalizationProvider>
   )
 }
 
-function GasMixtureField ({ defaultValue }) {
+function GasMixtureField ({ sx, defaultValue }) {
   const [value, setValue] = useState(defaultValue)
 
   return <FormLabel
     sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
     Gas mixture
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: '100%', ...sx }}>
       <Slider
         sx={{
           '--Slider-size': 'max(30px, max(var(--Slider-thumb-size), var(--Slider-track-size)))'
