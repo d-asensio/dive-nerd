@@ -22,7 +22,8 @@
     "husky": "^8.0.0",
     "lint-staged": ">=10",
     "markdown-toc": "^1.2.0",
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "turbo": "^1.6.2"
   },
   "lint-staged": {
     "./README.md": [
@@ -42,8 +43,5 @@
     "node": "18.12.0",
     "yarn": "1.22.19"
   },
-  "packageManager": "yarn@3.2.4",
-  "dependencies": {
-    "turbo": "^1.6.2"
-  }
+  "packageManager": "yarn@3.2.4"
 }
