@@ -31,17 +31,97 @@ const Wrapper = styled.main`
   align-items: center;
 `
 
-function DiveViewerPage () {
-  const { diveId } = useParams()
-
+function AsideHeader ({ diveId }) {
   const dive = useSelector((state) => diveSelector(state, diveId))
 
+  return (
+    <Box
+      sx={{
+        p: 3,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+        borderBottom: 1,
+        borderColor: 'divider'
+      }}
+    >
+      <IconButton
+        to="/"
+        component={Link}
+        size="md"
+        variant="outlined"
+        color="neutral"
+      >
+        <ArrowBackIcon/>
+      </IconButton>
+      <Box
+        sx={{
+          gap: 0.5,
+          display: 'flex',
+          alignItems: 'center',
+          minWidth: 0
+        }}
+      >
+        <Typography
+          noWrap
+          level="h3"
+        >
+          {dive?.name}
+        </Typography>
+        <Tooltip title="Edit dive name" placement="right" size="sm">
+          <IconButton
+            size="sm"
+            variant="plain"
+            color="neutral"
+          >
+            <EditIcon/>
+          </IconButton>
+        </Tooltip>
+      </Box>
+    </Box>
+  )
+}
+
+function Content ({ diveId }) {
   const [currentDatapoint, setData] = useState({
     compartmentsGasLoad: ZHL16C.getInitialCompartmentsGas(),
     ambientPressure: 1
   })
 
   const handleDatapointHover = useDebouncedCallback(setData, 10)
+
+  return <Tabs
+    defaultValue={0}
+    sx={{
+      gap: 3
+    }}
+  >
+    <TabList
+      sx={{
+        alignSelf: 'center'
+      }}
+    >
+      <Tab>Dive Profile</Tab>
+      <Tab>Media</Tab>
+      <Tab>Gear</Tab>
+    </TabList>
+    <TabPanel value={0}>
+      <ProfileViewer
+        diveId={diveId}
+        onDatapointHover={handleDatapointHover}
+      />
+      <CompartmentsViewer
+        dataPoint={currentDatapoint}
+        maxAmbientPressure={5}
+      />
+    </TabPanel>
+    <TabPanel value={1}>Media</TabPanel>
+    <TabPanel value={2}>Gear</TabPanel>
+  </Tabs>
+}
+
+function DiveViewerPage () {
+  const { diveId } = useParams()
 
   return (
     <Wrapper>
@@ -52,92 +132,23 @@ function DiveViewerPage () {
             borderLeft: 1,
             borderRight: 1,
             borderColor: 'divider',
-            overflow: 'scroll',
             minHeight: 0
           }}
         >
-          <Box
-            sx={{
-              p: 3,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-              borderBottom: 1,
-              borderColor: 'divider'
-            }}
-          >
-            <IconButton
-              to="/"
-              component={Link}
-              size="md"
-              variant="outlined"
-              color="neutral"
-            >
-              <ArrowBackIcon/>
-            </IconButton>
-            <Box
-              sx={{
-                gap: 0.5,
-                display: 'flex',
-                alignItems: 'center',
-                minWidth: 0
-              }}
-            >
-              <Typography
-                noWrap
-                level="h3"
-              >
-                {dive?.name}
-              </Typography>
-              <Tooltip title="Edit dive name" placement="right" size="sm">
-                <IconButton
-                  size="sm"
-                  variant="plain"
-                  color="neutral"
-                >
-                  <EditIcon/>
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </Box>
+          <AsideHeader diveId={diveId}/>
         </Box>
         <Box
           sx={{
             p: 3,
             borderRight: 1,
             borderColor: 'divider',
-            overflow: 'scroll',
+            overflowY: 'scroll',
             minHeight: 0
           }}
         >
-          <Tabs
-            defaultValue={0}
-            sx={{
-              gap: 3
-            }}
-          >
-            <TabList
-              sx={{
-                alignSelf: 'center'
-              }}
-            >
-              <Tab>Dive Profile</Tab>
-              <Tab>Media</Tab>
-              <Tab>Gear</Tab>
-            </TabList>
-            <TabPanel value={0}>
-              <ProfileViewer
-                diveId={diveId}
-                onDatapointHover={handleDatapointHover}
-              />
-              <CompartmentsViewer
-                dataPoint={currentDatapoint}
-                maxAmbientPressure={5}
-              />
-            </TabPanel>
-            <TabPanel value={1}>Media</TabPanel>
-            <TabPanel value={2}>Gear</TabPanel>
-          </Tabs>
+          <Content
+            diveId={diveId}
+          />
         </Box>
       </Layout>
     </Wrapper>
