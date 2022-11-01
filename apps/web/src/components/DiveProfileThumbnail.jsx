@@ -1,16 +1,10 @@
-import { ResponsiveLine } from '@nivo/line'
-import AspectRatio from '@mui/joy/AspectRatio'
-import styled from '@emotion/styled'
+import {Line} from '@nivo/line'
+
 import Tooltip from '@mui/joy/Tooltip'
+import Sheet from "@mui/joy/Sheet";
+import Badge from "@mui/joy/Badge";
 
-const ChartWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: stretch;
-`
-
-const DepthTooltip = ({ point }) => {
+const DepthTooltip = ({point}) => {
   return (
     <Tooltip
       placement='top'
@@ -20,25 +14,38 @@ const DepthTooltip = ({ point }) => {
       arrow
       title={`${point.data.depth} m`}
     >
-      <span />
+      <span/>
     </Tooltip>
   )
 }
 
-export const DiveProfileThumbnail = ({ samples }) => {
+export const DiveProfileThumbnail = ({highlighted, samples}) => {
   return (
-    <AspectRatio variant='plain'>
-      <ChartWrapper>
-        <ResponsiveLine
+    <Badge color="success" sx={{
+      '.JoyBadge-badge': {
+        transition: 'opacity 300ms',
+        opacity: highlighted ? 1 : 0
+      }
+    }}>
+      <Sheet
+        variant='outlined'
+        sx={{
+          borderRadius: 'sm',
+          overflow: 'auto'
+        }}
+      >
+        <Line
+          width={128}
+          height={62}
           data={[
             {
-              id: 'Dive Profile',
+              id: 'dive-profile',
               data: samples
             }
           ]}
           colors={['#3daff7']}
-          margin={{ top: 6, right: 6, bottom: 6, left: 6 }}
-          xScale={{ type: 'linear' }}
+          margin={{top: 6, right: 6, bottom: 6, left: 6}}
+          xScale={{type: 'linear'}}
           yScale={{
             type: 'linear',
             min: 'auto',
@@ -53,7 +60,7 @@ export const DiveProfileThumbnail = ({ samples }) => {
           useMesh
           tooltip={DepthTooltip}
         />
-      </ChartWrapper>
-    </AspectRatio>
+      </Sheet>
+    </Badge>
   )
 }

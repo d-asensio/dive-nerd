@@ -36,23 +36,10 @@ const Item = ({
       onMouseLeave={onMouseLeave}
     >
       <ListItemDecorator>
-        <Badge color="success" sx={{
-          '.JoyBadge-badge': {
-            transition: 'opacity 300ms',
-            opacity: highlighted ? 1 : 0
-          }
-        }}>
-          <Sheet
-            variant='outlined'
-            sx={{
-              width: 120,
-              borderRadius: 'sm',
-              overflow: 'auto'
-            }}
-          >
-            <DiveProfileThumbnail samples={samples}/>
-          </Sheet>
-        </Badge>
+        <DiveProfileThumbnail
+          samples={samples}
+          highlighted={highlighted}
+        />
       </ListItemDecorator>
       <ListItemContent
         sx={{
