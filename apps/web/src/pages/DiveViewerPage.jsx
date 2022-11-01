@@ -136,12 +136,13 @@ function DiveViewerPage () {
             display: 'flex',
             flexDirection: 'column',
             minHeight: 0,
+            minWidth: 0
           }}
         >
           <AsideHeader diveId={diveId}/>
           <Box
             sx={{
-              p: 2,
+              p: 3,
               minHeight: 0,
               overflowY: 'scroll'
             }}

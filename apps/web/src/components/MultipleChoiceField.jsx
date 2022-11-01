@@ -29,30 +29,30 @@ export function Choice ({ children, value }) {
 }
 
 export function MultipleChoiceField ({
-  label = 'Dive types',
+  label,
   children
 }) {
-  return <Box
-    sx={{
-      width: '100%'
-    }}
-    role="group"
-  >
-    <FormLabel>{label}</FormLabel>
-    <List
-      sx={{
-        width: '100%',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
-        gap: 1,
-        minWidth: 240,
-        '--List-gap': 0,
-        '--List-item-paddingY': '1rem',
-        '--List-item-radius': '8px',
-        '--List-decorator-size': '32px',
-      }}
+  return (
+    <Box
+      sx={{ width: '100%' }}
+      role="group"
     >
-      {children}
-    </List>
-  </Box>
+      <FormLabel>{label}</FormLabel>
+      <List
+        sx={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: 1,
+          minWidth: 240,
+          '--List-gap': 0,
+          '--List-item-paddingY': '1rem',
+          '--List-item-radius': '8px',
+          '--List-decorator-size': '32px',
+        }}
+      >
+        {children}
+      </List>
+    </Box>
+  )
 }
