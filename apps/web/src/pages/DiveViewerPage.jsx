@@ -12,7 +12,7 @@ import Tabs from '@mui/joy/Tabs'
 import TabList from '@mui/joy/TabList'
 import Tab from '@mui/joy/Tab'
 import TabPanel from '@mui/joy/TabPanel'
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit'
 
 import * as ZHL16C from '@divenerd/dive-physics'
 
@@ -21,7 +21,6 @@ import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
 import { diveSelector } from '../entities'
 import Tooltip from '@mui/joy/Tooltip'
-
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -46,7 +45,7 @@ function DiveViewerPage () {
 
   return (
     <Wrapper>
-      <NavigationBar />
+      <NavigationBar/>
       <Layout>
         <Box
           sx={{
@@ -62,35 +61,41 @@ function DiveViewerPage () {
               p: 3,
               display: 'flex',
               alignItems: 'center',
-              gap: 3,
+              gap: 2,
               borderBottom: 1,
               borderColor: 'divider'
             }}
           >
             <IconButton
-              to='/'
+              to="/"
               component={Link}
-              size='lg'
-              variant='outlined'
-              color='neutral'
+              size="md"
+              variant="outlined"
+              color="neutral"
             >
-              <ArrowBackIcon />
+              <ArrowBackIcon/>
             </IconButton>
             <Box
               sx={{
+                gap: 0.5,
                 display: 'flex',
                 alignItems: 'center',
-                gap: 1
+                minWidth: 0
               }}
             >
-              <Typography level='h2'>{dive?.name}</Typography>
-              <Tooltip title='Edit dive name' placement="right" size="sm">
+              <Typography
+                noWrap
+                level="h3"
+              >
+                {dive?.name}
+              </Typography>
+              <Tooltip title="Edit dive name" placement="right" size="sm">
                 <IconButton
-                  size='sm'
-                  variant='plain'
-                  color='neutral'
+                  size="sm"
+                  variant="plain"
+                  color="neutral"
                 >
-                  <EditIcon />
+                  <EditIcon/>
                 </IconButton>
               </Tooltip>
             </Box>
