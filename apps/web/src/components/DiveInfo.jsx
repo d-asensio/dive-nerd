@@ -15,14 +15,20 @@ import { Choice, MultipleChoiceField } from './MultipleChoiceField'
 import { SelectField } from './SelectField'
 import IconButton from '@mui/joy/IconButton'
 import Tooltip from '@mui/joy/Tooltip'
-import { Divider } from '@mui/joy'
 import Typography from '@mui/joy/Typography'
 
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import WaterIcon from '@mui/icons-material/Water';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import Co2Icon from '@mui/icons-material/Co2';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
+import WaterIcon from '@mui/icons-material/Water'
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import Co2Icon from '@mui/icons-material/Co2'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+import Sheet from '@mui/joy/Sheet'
+import Avatar from '@mui/joy/Avatar'
+import Radio from '@mui/joy/Radio'
+import Divider from '@mui/joy/Divider'
+import { radioClasses, RadioGroup } from '@mui/joy'
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -255,6 +261,56 @@ export const DiveInfo = () => {
             </Typography>
           }
         >
+          <RadioGroup
+            aria-label="platform"
+            defaultValue="Website"
+            overlay
+            name="platform"
+            sx={{
+              mb: 3,
+              flexDirection: 'row',
+              gap: 2,
+              [`& .${radioClasses.checked}`]: {
+                [`& .${radioClasses.action}`]: {
+                  inset: -1,
+                  border: '3px solid',
+                  borderColor: 'primary.500',
+                },
+              },
+              [`& .${radioClasses.radio}`]: {
+                display: 'contents',
+                '& > svg': {
+                  zIndex: 2,
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-8px',
+                  bgcolor: 'background.body',
+                  borderRadius: '50%',
+                },
+              },
+            }}
+          >
+            {['Air', 'Nitrox', 'Trimix', 'Heliox'].map((value) => (
+              <Sheet
+                key={value}
+                variant="outlined"
+                sx={{
+                  width: "100%",
+                  borderRadius: 'md',
+                  bgcolor: 'background.level1',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  p: 2,
+                  minWidth: 120,
+                }}
+              >
+                <Radio id={value} value={value} checkedIcon={<CheckCircleIcon/>}/>
+                {/*<Avatar variant="soft" size="sm"/>*/}
+                <Typography level='h4'>{value}</Typography>
+              </Sheet>
+            ))}
+          </RadioGroup>
           <FieldsRow>
             <SelectField
               sx={{ minWidth: '100%' }}
