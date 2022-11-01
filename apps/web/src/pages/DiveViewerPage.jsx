@@ -18,10 +18,11 @@ import * as ZHL16C from '@divenerd/dive-physics'
 
 import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
-import { CompartmentsViewer, ProfileViewer } from '../sections'
+import { CompartmentsViewer, DiveMap, ProfileViewer } from '../sections'
 import { diveSelector } from '../entities'
 import Tooltip from '@mui/joy/Tooltip'
 import { DiveInfo } from '../components/DiveInfo'
+import { AspectRatio } from '@mui/joy'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -124,8 +125,8 @@ function DiveViewerPage () {
             borderLeft: 1,
             borderRight: 1,
             borderColor: 'divider',
-            display: 'flex',
-            flexDirection: 'column',
+            display: 'grid',
+            gridTemplateRows: 'min-content auto 300px',
             minHeight: 0,
             minWidth: 0
           }}
@@ -138,8 +139,9 @@ function DiveViewerPage () {
               overflowY: 'scroll'
             }}
           >
-            <DiveInfo />
+            <DiveInfo/>
           </Box>
+          <DiveMap/>
         </Box>
         <Box
           sx={{
