@@ -12,13 +12,16 @@ import Tabs from '@mui/joy/Tabs'
 import TabList from '@mui/joy/TabList'
 import Tab from '@mui/joy/Tab'
 import TabPanel from '@mui/joy/TabPanel'
+import EditIcon from '@mui/icons-material/Edit';
 
 import * as ZHL16C from '@divenerd/dive-physics'
 
 import { useSelector } from '../store'
 import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
-import { diveSelector } from '../entities/dives/selectors'
+import { diveSelector } from '../entities'
+import Tooltip from '@mui/joy/Tooltip'
+
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -47,7 +50,6 @@ function DiveViewerPage () {
       <Layout>
         <Box
           sx={{
-            p: 3,
             borderLeft: 1,
             borderRight: 1,
             borderColor: 'divider',
@@ -57,9 +59,12 @@ function DiveViewerPage () {
         >
           <Box
             sx={{
+              p: 3,
               display: 'flex',
               alignItems: 'center',
-              gap: 3
+              gap: 3,
+              borderBottom: 1,
+              borderColor: 'divider'
             }}
           >
             <IconButton
@@ -71,7 +76,24 @@ function DiveViewerPage () {
             >
               <ArrowBackIcon />
             </IconButton>
-            <Typography level='h2'>{dive?.name}</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1
+              }}
+            >
+              <Typography level='h2'>{dive?.name}</Typography>
+              <Tooltip title='Edit dive name' placement="right" size="sm">
+                <IconButton
+                  size='sm'
+                  variant='plain'
+                  color='neutral'
+                >
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
           </Box>
         </Box>
         <Box
