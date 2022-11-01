@@ -21,6 +21,7 @@ import { NavigationBar, Layout } from '../components'
 import { CompartmentsViewer, ProfileViewer } from '../sections'
 import { diveSelector } from '../entities'
 import Tooltip from '@mui/joy/Tooltip'
+import { DiveInfo } from '../components/DiveInfo'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -132,10 +133,21 @@ function DiveViewerPage () {
             borderLeft: 1,
             borderRight: 1,
             borderColor: 'divider',
-            minHeight: 0
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 0,
           }}
         >
           <AsideHeader diveId={diveId}/>
+          <Box
+            sx={{
+              p: 2,
+              minHeight: 0,
+              overflowY: 'scroll'
+            }}
+          >
+            <DiveInfo />
+          </Box>
         </Box>
         <Box
           sx={{
