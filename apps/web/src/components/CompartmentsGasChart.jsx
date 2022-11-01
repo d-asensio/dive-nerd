@@ -92,7 +92,8 @@ export const CompartmentsGasChart = ({
         maxValue={maxAmbientPressure}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={['#6da2ec']}
+        colors={['#074da7']}
+        labelTextColor="#ffffff"
         tooltip={always(null)}
         animate={false}
         layers={[
@@ -108,7 +109,7 @@ export const CompartmentsGasChart = ({
           {
             axis: 'y',
             value: ambientPressure,
-            lineStyle: { stroke: 'rgba(0, 0, 0, .35)', strokeWidth: 2 },
+            lineStyle: { stroke: '#42444d', strokeWidth: 2 },
             legend: `Ambient Pressure (${ambientPressure.toFixed(2)} bar)`
           }
         ]}

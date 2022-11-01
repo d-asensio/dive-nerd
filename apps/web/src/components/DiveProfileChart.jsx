@@ -118,7 +118,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
           legendPosition: 'middle'
         }}
         pointSize={5}
-        pointColor='white'
+        pointColor={themeMode === 'dark' ? '#141418' : 'white'}
         pointBorderWidth={1}
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
