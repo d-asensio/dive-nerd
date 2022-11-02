@@ -105,6 +105,60 @@ function Section ({ title, children }) {
   )
 }
 
+function SingleChoiceField ({ children }) {
+  return <RadioGroup
+    aria-label="platform"
+    defaultValue="Website"
+    overlay
+    name="platform"
+    sx={{
+      mb: 3,
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
+      gap: 2,
+      [`& .${radioClasses.checked}`]: {
+        [`& .${radioClasses.action}`]: {
+          inset: -1,
+          border: '3px solid',
+          borderColor: 'primary.500',
+        },
+      },
+      [`& .${radioClasses.radio}`]: {
+        display: 'contents',
+        '& > svg': {
+          zIndex: 2,
+          position: 'absolute',
+          top: '-8px',
+          right: '-8px',
+          bgcolor: 'background.body',
+          borderRadius: '50%',
+        },
+      },
+    }}
+  >
+    {children}
+  </RadioGroup>
+}
+
+function SingleChoice ({ children, ...rest }) {
+  return <Sheet
+
+    variant="outlined"
+    sx={{
+      minWidth: 110,
+      borderRadius: 'md',
+      bgcolor: 'background.level1',
+      flexGrow: 1,
+      display: 'flex',
+      justifyContent: 'center',
+      p: 2
+    }}
+  >
+    <Radio{...rest} checkedIcon={<CheckCircleIcon/>}/>
+    <Typography level="h4">{children}</Typography>
+  </Sheet>
+}
+
 export const DiveInfo = () => {
   const [date, setDate] = useState(dayjs('2022-04-07'))
 
@@ -313,57 +367,12 @@ export const DiveInfo = () => {
             </Typography>
           }
         >
-          <RadioGroup
-            aria-label="platform"
-            defaultValue="Website"
-            overlay
-            name="platform"
-            sx={{
-              mb: 3,
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
-              gap: 2,
-              [`& .${radioClasses.checked}`]: {
-                [`& .${radioClasses.action}`]: {
-                  inset: -1,
-                  border: '3px solid',
-                  borderColor: 'primary.500',
-                },
-              },
-              [`& .${radioClasses.radio}`]: {
-                display: 'contents',
-                '& > svg': {
-                  zIndex: 2,
-                  position: 'absolute',
-                  top: '-8px',
-                  right: '-8px',
-                  bgcolor: 'background.body',
-                  borderRadius: '50%',
-                },
-              },
-            }}
-          >
-            {['Air', 'Nitrox', 'Trimix', 'Heliox'].map((value) => (
-              <Sheet
-                key={value}
-                variant="outlined"
-                sx={{
-                  minWidth: 110,
-                  borderRadius: 'md',
-                  bgcolor: 'background.level1',
-                  flexGrow: 1,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  p: 2
-                }}
-              >
-                <Radio
-                  id={value}
-                  value={value} checkedIcon={<CheckCircleIcon/>}/>
-                <Typography level='h4'>{value}</Typography>
-              </Sheet>
-            ))}
-          </RadioGroup>
+          <SingleChoiceField>
+            <SingleChoice>Air</SingleChoice>
+            <SingleChoice>Nitrox</SingleChoice>
+            <SingleChoice>Trimix</SingleChoice>
+            <SingleChoice>Heliox</SingleChoice>
+          </SingleChoiceField>
           <FieldsRow>
             <SelectField
               sx={{ minWidth: '100%' }}
