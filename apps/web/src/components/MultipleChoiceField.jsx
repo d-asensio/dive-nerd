@@ -54,10 +54,9 @@ export function MultipleChoiceField ({
         row
         sx={{
           width: '100%',
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
           gap: 1,
-          minWidth: 240,
           p: 0,
           '--List-gap': 0,
           '--List-item-paddingY': '1rem',

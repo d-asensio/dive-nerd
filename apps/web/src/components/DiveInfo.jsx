@@ -79,7 +79,10 @@ function FieldsRow ({ children, columns }) {
       gridTemplateColumns: columns || `repeat(${Children.count(children)}, 1fr)`,
       gap: 2,
       mb: 2,
-      width: '100%'
+      width: '100%',
+      '&:last-child': {
+        mb: 0
+      }
     }}
   >
     {children}
@@ -115,11 +118,9 @@ export const DiveInfo = () => {
         }}
       >
         <Box
-          sx={{
-            p: 2
-          }}
+          sx={{ p: 2 }}
         >
-          <FieldsRow columns="1fr 3fr">
+          <FieldsRow columns="1fr 2fr">
             <TextField
               sx={{ minWidth: 0 }}
               label="Dive Number"
@@ -203,11 +204,13 @@ export const DiveInfo = () => {
           </FieldsRow>
           <FieldsRow>
             <TextField
+              sx={{ minWidth: 0 }}
               label="Start time"
               size="lg"
               value="12:45 PM"
             />
             <TextField
+              sx={{ minWidth: 0 }}
               label="End time"
               size="lg"
               value="01:45 PM"
@@ -252,6 +255,18 @@ export const DiveInfo = () => {
           }
         >
           <FieldsRow>
+            <SelectField
+              sx={{ minWidth: '100%' }}
+              label="Visibility"
+              size="lg"
+              defaultValue="good"
+            >
+              <Option value="good">Good (+20m)</Option>
+              <Option value="medium">Medium (10-20m)</Option>
+              <Option value="bad">Bad (-5m)</Option>
+            </SelectField>
+          </FieldsRow>
+          <FieldsRow>
             <TextField
               sx={{ minWidth: 0 }}
               label="Average temperature"
@@ -268,16 +283,6 @@ export const DiveInfo = () => {
               <Option value="fresh">Fresh (1.00 kg/l)</Option>
               <Option value="brackish">Brackish (1.02 kg/l)</Option>
               <Option value="sea">Sea (1.03 kg/l)</Option>
-            </SelectField>
-            <SelectField
-              sx={{ minWidth: '100%' }}
-              label="Visibility"
-              size="lg"
-              defaultValue="good"
-            >
-              <Option value="good">Good (+20m)</Option>
-              <Option value="medium">Medium (10-20m)</Option>
-              <Option value="bad">Bad (-5m)</Option>
             </SelectField>
           </FieldsRow>
         </Section>
@@ -315,7 +320,8 @@ export const DiveInfo = () => {
             name="platform"
             sx={{
               mb: 3,
-              flexDirection: 'row',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
               gap: 2,
               [`& .${radioClasses.checked}`]: {
                 [`& .${radioClasses.action}`]: {
@@ -342,18 +348,18 @@ export const DiveInfo = () => {
                 key={value}
                 variant="outlined"
                 sx={{
-                  width: "100%",
+                  minWidth: 110,
                   borderRadius: 'md',
                   bgcolor: 'background.level1',
+                  flexGrow: 1,
                   display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  p: 2,
-                  minWidth: 120,
+                  justifyContent: 'center',
+                  p: 2
                 }}
               >
-                <Radio id={value} value={value} checkedIcon={<CheckCircleIcon/>}/>
-                {/*<Avatar variant="soft" size="sm"/>*/}
+                <Radio
+                  id={value}
+                  value={value} checkedIcon={<CheckCircleIcon/>}/>
                 <Typography level='h4'>{value}</Typography>
               </Sheet>
             ))}
@@ -376,12 +382,14 @@ export const DiveInfo = () => {
           </FieldsRow>
           <FieldsRow>
             <TextField
+              sx={{ minWidth: 0 }}
               label="Start tank pressure"
               size="lg"
               value="200"
               endDecorator="bar"
             />
             <TextField
+              sx={{ minWidth: 0 }}
               label="End tank pressure"
               size="lg"
               value="50"
