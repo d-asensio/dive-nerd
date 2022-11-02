@@ -368,10 +368,10 @@ export const DiveInfo = () => {
           }
         >
           <SingleChoiceField>
-            <SingleChoice>Air</SingleChoice>
-            <SingleChoice>Nitrox</SingleChoice>
-            <SingleChoice>Trimix</SingleChoice>
-            <SingleChoice>Heliox</SingleChoice>
+            <SingleChoice id='air' value='air'>Air</SingleChoice>
+            <SingleChoice id='nitrox' value='nitrox'>Nitrox</SingleChoice>
+            <SingleChoice id='trimix' value='trimix'>Trimix</SingleChoice>
+            <SingleChoice id='heliox' value='heliox'>Heliox</SingleChoice>
           </SingleChoiceField>
           <FieldsRow>
             <SelectField
