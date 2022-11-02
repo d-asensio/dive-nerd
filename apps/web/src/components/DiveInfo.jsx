@@ -22,18 +22,18 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import WaterIcon from '@mui/icons-material/Water'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Co2Icon from '@mui/icons-material/Co2'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 import Sheet from '@mui/joy/Sheet'
 import Radio from '@mui/joy/Radio'
-import Divider from '@mui/joy/Divider'
 import { radioClasses, RadioGroup } from '@mui/joy'
 
-import { styled } from '@mui/material/styles';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import { styled } from '@mui/material/styles'
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
+import MuiAccordion from '@mui/material/Accordion'
+import MuiAccordionSummary from '@mui/material/AccordionSummary'
+import MuiAccordionDetails from '@mui/material/AccordionDetails'
+import { Unit } from './Unit'
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -46,11 +46,11 @@ const Accordion = styled((props) => (
   '&:before': {
     display: 'none',
   },
-}));
+}))
 
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }}/>}
     {...props}
   />
 ))(({ theme }) => ({
@@ -65,12 +65,12 @@ const AccordionSummary = styled((props) => (
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1),
   },
-}));
+}))
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: '1px solid rgba(0, 0, 0, .125)',
-}));
+}))
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -92,7 +92,8 @@ function FieldsRow ({ children, columns }) {
 function Section ({ title, children }) {
   const [expanded, setExpanded] = useState(true)
   return (
-    <Accordion expanded={expanded} onChange={(_, newExpanded) => setExpanded(newExpanded)}>
+    <Accordion expanded={expanded}
+               onChange={(_, newExpanded) => setExpanded(newExpanded)}>
       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
         <Typography>{title}</Typography>
       </AccordionSummary>
@@ -246,14 +247,18 @@ export const DiveInfo = () => {
               label="Total duration"
               size="lg"
               value="60:00"
-              endDecorator="mins"
+              endDecorator={
+                <Unit name='Meters' symbol='m' />
+              }
             />
             <TextField
               sx={{ minWidth: 0 }}
               label="Bottom time"
               size="lg"
               value="12:00"
-              endDecorator="mins"
+              endDecorator={
+                <Unit name='Meters' symbol='m' />
+              }
             />
           </FieldsRow>
           <FieldsRow>
@@ -287,14 +292,18 @@ export const DiveInfo = () => {
               label="Maximum Depth"
               size="lg"
               value="35.4"
-              endDecorator="meters"
+              endDecorator={
+                <Unit name='Meters' symbol='m' />
+              }
             />
             <TextField
               sx={{ minWidth: 0 }}
               label="Average Depth"
               size="lg"
               value="10.4"
-              endDecorator="meters"
+              endDecorator={
+                <Unit name='Meters' symbol='m' />
+              }
             />
           </FieldsRow>
         </Section>
@@ -326,7 +335,9 @@ export const DiveInfo = () => {
               label="Average temperature"
               size="lg"
               value="23"
-              endDecorator="ºC"
+              endDecorator={
+                <Unit name='Degrees Celsius' symbol='ºC' />
+              }
             />
             <SelectField
               sx={{ minWidth: '100%' }}
@@ -354,7 +365,9 @@ export const DiveInfo = () => {
             label="Weights"
             size="lg"
             value="6"
-            endDecorator="kg"
+            endDecorator={
+              <Unit name='Kilograms' symbol='kg' />
+            }
           />
         </Section>
         <Section
@@ -368,10 +381,10 @@ export const DiveInfo = () => {
           }
         >
           <SingleChoiceField>
-            <SingleChoice id='air' value='air'>Air</SingleChoice>
-            <SingleChoice id='nitrox' value='nitrox'>Nitrox</SingleChoice>
-            <SingleChoice id='trimix' value='trimix'>Trimix</SingleChoice>
-            <SingleChoice id='heliox' value='heliox'>Heliox</SingleChoice>
+            <SingleChoice id="air" value="air">Air</SingleChoice>
+            <SingleChoice id="nitrox" value="nitrox">Nitrox</SingleChoice>
+            <SingleChoice id="trimix" value="trimix">Trimix</SingleChoice>
+            <SingleChoice id="heliox" value="heliox">Heliox</SingleChoice>
           </SingleChoiceField>
           <FieldsRow>
             <SelectField
@@ -391,27 +404,46 @@ export const DiveInfo = () => {
           </FieldsRow>
           <FieldsRow>
             <TextField
+              label="Maximum operational depth"
+              size="lg"
+              value="12"
+              endDecorator={
+                <Unit name='Meters' symbol='m' />
+              }
+              readOnly
+            />
+          </FieldsRow>
+          <FieldsRow>
+            <TextField
               sx={{ minWidth: 0 }}
               label="Start tank pressure"
               size="lg"
               value="200"
-              endDecorator="bar"
+              endDecorator={
+                <Unit name='Bars' symbol='bar' />
+              }
             />
             <TextField
               sx={{ minWidth: 0 }}
               label="End tank pressure"
               size="lg"
               value="50"
-              endDecorator="bar"
+              endDecorator={
+                <Unit name='Bars' symbol='bar' />
+              }
             />
           </FieldsRow>
-          <TextField
-            label="SAC Rate"
-            size="lg"
-            value="12"
-            endDecorator="l/min"
-            readOnly
-          />
+          <FieldsRow>
+            <TextField
+              label="SAC Rate"
+              size="lg"
+              value="12"
+              endDecorator={
+                <Unit name='Liters per minute' symbol='l/min' />
+              }
+              readOnly
+            />
+          </FieldsRow>
         </Section>
       </Box>
     </LocalizationProvider>
