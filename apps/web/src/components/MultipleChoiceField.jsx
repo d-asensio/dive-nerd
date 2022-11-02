@@ -3,6 +3,7 @@ import Box from '@mui/joy/Box'
 import FormLabel from '@mui/joy/FormLabel'
 import List from '@mui/joy/List'
 import ListItem from '@mui/joy/ListItem'
+import Typography from '@mui/joy/Typography'
 
 export function Choice ({ children, value }) {
   return (
@@ -10,8 +11,14 @@ export function Choice ({ children, value }) {
       <Checkbox
         overlay
         value={value}
-        label={children}
-        sx={{ flexGrow: 1, flexDirection: 'row-reverse' }}
+        label={
+          <Typography noWrap>{children}</Typography>
+        }
+        sx={{
+          flexGrow: 1,
+          gap: 2,
+          flexDirection: 'row-reverse'
+        }}
         componentsProps={{
           action: ({ checked }) => ({
             sx: (theme) => ({
@@ -34,17 +41,24 @@ export function MultipleChoiceField ({
 }) {
   return (
     <Box
-      sx={{ width: '100%' }}
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 0.5
+    }}
       role="group"
     >
       <FormLabel>{label}</FormLabel>
       <List
+        row
         sx={{
           width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
+          display: 'flex',
+          flexWrap: 'wrap',
           gap: 1,
           minWidth: 240,
+          p: 0,
           '--List-gap': 0,
           '--List-item-paddingY': '1rem',
           '--List-item-radius': '8px',
