@@ -22,13 +22,9 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import WaterIcon from '@mui/icons-material/Water'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Co2Icon from '@mui/icons-material/Co2'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-
-import Sheet from '@mui/joy/Sheet'
-import Radio from '@mui/joy/Radio'
-import { radioClasses, RadioGroup } from '@mui/joy'
 import { Unit } from './Unit'
 import { Accordion } from './Accordion'
+import { SingleChoice, SingleChoiceField } from './SingleChoiceField'
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -64,60 +60,6 @@ function Section ({ title, children }) {
       </Accordion.Details>
     </Accordion>
   )
-}
-
-function SingleChoiceField ({ children }) {
-  return <RadioGroup
-    aria-label="platform"
-    defaultValue="Website"
-    overlay
-    name="platform"
-    sx={{
-      mb: 3,
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
-      gap: 2,
-      [`& .${radioClasses.checked}`]: {
-        [`& .${radioClasses.action}`]: {
-          inset: -1,
-          border: '3px solid',
-          borderColor: 'primary.500',
-        },
-      },
-      [`& .${radioClasses.radio}`]: {
-        display: 'contents',
-        '& > svg': {
-          zIndex: 2,
-          position: 'absolute',
-          top: '-8px',
-          right: '-8px',
-          bgcolor: 'background.body',
-          borderRadius: '50%',
-        },
-      },
-    }}
-  >
-    {children}
-  </RadioGroup>
-}
-
-function SingleChoice ({ children, ...rest }) {
-  return <Sheet
-
-    variant="outlined"
-    sx={{
-      minWidth: 110,
-      borderRadius: 'md',
-      bgcolor: 'background.level1',
-      flexGrow: 1,
-      display: 'flex',
-      justifyContent: 'center',
-      p: 2
-    }}
-  >
-    <Radio{...rest} checkedIcon={<CheckCircleIcon/>}/>
-    <Typography level="h4">{children}</Typography>
-  </Sheet>
 }
 
 export const DiveInfo = () => {
