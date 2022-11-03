@@ -1,4 +1,4 @@
-import { formatNumber } from '../utils/formatNumber'
+import { formatNumber } from '../../utils/formatNumber'
 import TextField from '@mui/joy/TextField'
 
 export function NumericField ({ units, value, precision = 2, ...rest }) {

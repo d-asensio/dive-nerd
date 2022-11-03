@@ -8,8 +8,8 @@ import FormHelperText from '@mui/joy/FormHelperText'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 
 import dayjs from 'dayjs'
-import { Choice, MultipleChoiceField } from './MultipleChoiceField'
-import { SelectField } from './SelectField'
+import { Choice, MultipleChoiceField } from './lib/MultipleChoiceField'
+import { SelectField } from './lib/SelectField'
 import IconButton from '@mui/joy/IconButton'
 import Tooltip from '@mui/joy/Tooltip'
 import Typography from '@mui/joy/Typography'
@@ -19,10 +19,10 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import WaterIcon from '@mui/icons-material/Water'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Co2Icon from '@mui/icons-material/Co2'
-import { Unit } from './Unit'
-import { Accordion } from './Accordion'
-import { SingleChoice, SingleChoiceField } from './SingleChoiceField'
-import { DatePicker } from './DatePicker'
+import { Unit } from './lib/Unit'
+import { Accordion } from './lib/Accordion'
+import { SingleChoice, SingleChoiceField } from './lib/SingleChoiceField'
+import { DatePicker } from './lib/DatePicker'
 
 function FieldsRow ({ children, columns }) {
   return (
@@ -73,9 +73,7 @@ export const DiveInfo = () => {
         alignItems: 'start'
       }}
     >
-      <Box
-        sx={{ p: 2 }}
-      >
+      <Box sx={{ p: 2 }}>
         <FieldsRow columns='1fr 2fr'>
           <TextField
             sx={{ minWidth: 0 }}

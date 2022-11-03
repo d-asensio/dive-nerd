@@ -1,4 +1,4 @@
-import { formatTimeMinutes } from '../utils/formatTime'
+import { formatTimeMinutes } from '../../utils/formatTime'
 import TextField from '@mui/joy/TextField'
 
 export function TimeField ({ value, ...rest }) {
