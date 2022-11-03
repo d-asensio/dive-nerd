@@ -54,8 +54,8 @@ const Item = ({
 export const DiveList = ({ children }) => {
   return (
     <List
-      inset="gutter"
-      aria-labelledby="ellipsis-list-demo"
+      inset='gutter'
+      aria-labelledby='ellipsis-list-demo'
       sx={{ '--List-decorator-size': '56px' }}
     >
       {children}

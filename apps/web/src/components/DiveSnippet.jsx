@@ -28,12 +28,12 @@ export const DiveSnippet = ({
     >
       <Typography
         sx={{ minWidth: 0 }}
-        level="h5"
+        level='h5'
         noWrap
       >
         {name}
       </Typography>
-      <Rating value={rating} size="small" readOnly/>
+      <Rating value={rating} size='small' readOnly />
     </Box>
     <Box
       sx={{
@@ -42,7 +42,7 @@ export const DiveSnippet = ({
         justifyContent: 'space-between'
       }}
     >
-      <Typography noWrap level="body2" textColor="text.secondary">
+      <Typography noWrap level='body2' textColor='text.secondary'>
         {date}
       </Typography>
       <Box
@@ -60,13 +60,13 @@ export const DiveSnippet = ({
           }}
         >
           <Typography
-            level="body3"
-            textTransform="uppercase"
-            fontWeight="lg"
+            level='body3'
+            textTransform='uppercase'
+            fontWeight='lg'
           >
             Depth
           </Typography>
-          <Typography fontSize="xl1" lineHeight={1} fontWeight="lg" noWrap>
+          <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
             {maximumDepth}
           </Typography>
         </Box>
@@ -78,13 +78,13 @@ export const DiveSnippet = ({
           }}
         >
           <Typography
-            level="body3"
-            textTransform="uppercase"
-            fontWeight="lg"
+            level='body3'
+            textTransform='uppercase'
+            fontWeight='lg'
           >
             Time
           </Typography>
-          <Typography fontSize="xl1" lineHeight={1} fontWeight="lg" noWrap>
+          <Typography fontSize='xl1' lineHeight={1} fontWeight='lg' noWrap>
             {totalDuration}
           </Typography>
         </Box>

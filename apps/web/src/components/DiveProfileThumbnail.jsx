@@ -1,12 +1,12 @@
-import {Line} from '@nivo/line'
+import { Line } from '@nivo/line'
 
 import Tooltip from '@mui/joy/Tooltip'
-import Sheet from "@mui/joy/Sheet";
-import Badge from "@mui/joy/Badge";
+import Sheet from '@mui/joy/Sheet'
+import Badge from '@mui/joy/Badge'
 import CircularProgress from '@mui/joy/CircularProgress'
 import { Skeleton } from '@mui/material'
 
-const DepthTooltip = ({point}) => {
+const DepthTooltip = ({ point }) => {
   return (
     <Tooltip
       placement='top'
@@ -16,20 +16,22 @@ const DepthTooltip = ({point}) => {
       arrow
       title={`${point.data.depth} m`}
     >
-      <span/>
+      <span />
     </Tooltip>
   )
 }
 
-export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
+export const DiveProfileThumbnail = ({ loading, highlighted, samples }) => {
   return (
-    <Badge color="success" sx={{
-      mr: 2,
-      '.JoyBadge-badge': {
-        transition: 'opacity 300ms',
-        opacity: highlighted ? 1 : 0
-      }
-    }}>
+    <Badge
+      color='success' sx={{
+        mr: 2,
+        '.JoyBadge-badge': {
+          transition: 'opacity 300ms',
+          opacity: highlighted ? 1 : 0
+        }
+      }}
+    >
       <Sheet
         variant='outlined'
         sx={{
@@ -42,7 +44,7 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
         }}
       >
         {loading
-          ? <CircularProgress size="sm" />
+          ? <CircularProgress size='sm' />
           : (
             <Line
               width={100}
@@ -54,8 +56,8 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
                 }
               ]}
               colors={['#3daff7']}
-              margin={{top: 6, right: 6, bottom: 6, left: 6}}
-              xScale={{type: 'linear'}}
+              margin={{ top: 6, right: 6, bottom: 6, left: 6 }}
+              xScale={{ type: 'linear' }}
               yScale={{
                 type: 'linear',
                 min: 'auto',
@@ -70,10 +72,10 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
               useMesh
               tooltip={DepthTooltip}
             />
-          )}
+            )}
       </Sheet>
     </Badge>
   )
 }
 
-DiveProfileThumbnail.Skeleton = () => <Skeleton variant="rounded" width={128} height={62} />
+DiveProfileThumbnail.Skeleton = () => <Skeleton variant='rounded' width={128} height={62} />

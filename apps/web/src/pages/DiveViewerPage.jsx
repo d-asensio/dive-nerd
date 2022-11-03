@@ -8,10 +8,6 @@ import Typography from '@mui/joy/Typography'
 import IconButton from '@mui/joy/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-import Tabs from '@mui/joy/Tabs'
-import TabList from '@mui/joy/TabList'
-import Tab from '@mui/joy/Tab'
-import TabPanel from '@mui/joy/TabPanel'
 import EditIcon from '@mui/icons-material/Edit'
 
 import * as ZHL16C from '@divenerd/dive-physics'
@@ -22,7 +18,6 @@ import { CompartmentsViewer, DiveMap, ProfileViewer } from '../sections'
 import { diveSelector } from '../entities'
 import Tooltip from '@mui/joy/Tooltip'
 import { DiveInfo } from '../components/DiveInfo'
-import { AspectRatio } from '@mui/joy'
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -48,13 +43,13 @@ function AsideHeader ({ diveId }) {
       }}
     >
       <IconButton
-        to="/"
+        to='/'
         component={Link}
-        size="md"
-        variant="outlined"
-        color="neutral"
+        size='md'
+        variant='outlined'
+        color='neutral'
       >
-        <ArrowBackIcon/>
+        <ArrowBackIcon />
       </IconButton>
       <Box
         sx={{
@@ -66,17 +61,17 @@ function AsideHeader ({ diveId }) {
       >
         <Typography
           noWrap
-          level="h3"
+          level='h3'
         >
           {dive?.name}
         </Typography>
-        <Tooltip title="Edit dive name" placement="right" size="sm">
+        <Tooltip title='Edit dive name' placement='right' size='sm'>
           <IconButton
-            size="sm"
-            variant="plain"
-            color="neutral"
+            size='sm'
+            variant='plain'
+            color='neutral'
           >
-            <EditIcon/>
+            <EditIcon />
           </IconButton>
         </Tooltip>
       </Box>
@@ -119,7 +114,7 @@ function DiveViewerPage () {
 
   return (
     <Wrapper>
-      <NavigationBar/>
+      <NavigationBar />
       <Layout>
         <Box
           sx={{
@@ -131,16 +126,16 @@ function DiveViewerPage () {
             minHeight: 0
           }}
         >
-          <AsideHeader diveId={diveId}/>
+          <AsideHeader diveId={diveId} />
           <Box
             sx={{
               minHeight: 0,
               overflowY: 'scroll'
             }}
           >
-            <DiveInfo/>
+            <DiveInfo />
           </Box>
-          <DiveMap/>
+          <DiveMap />
         </Box>
         <Box
           sx={{

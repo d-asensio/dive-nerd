@@ -46,7 +46,7 @@ const DiveMapMarker = ({ diveId }) => {
   }, [])
 
   return (
-    <Marker longitude={longitude} latitude={latitude} anchor="center">
+    <Marker longitude={longitude} latitude={latitude} anchor='center'>
       <Tooltip
         disableInteractive
         componentsProps={{
@@ -56,16 +56,16 @@ const DiveMapMarker = ({ diveId }) => {
         }}
         open={isHighLighted}
         title={
-          <Typography level="body1" fontWeight="lg" noWrap>
+          <Typography level='body1' fontWeight='lg' noWrap>
             {name}
           </Typography>
         }
-        placement="top"
-        variant="outlined"
+        placement='top'
+        variant='outlined'
         arrow
       >
         <Badge
-          badgeInset="50%"
+          badgeInset='50%'
           color={isHighLighted ? 'success' : 'primary'}
           sx={{
             p: 1.5,
@@ -141,7 +141,7 @@ export const DiveMap = () => {
       onMove={handleMapMove}
     >
       {diveIdList.map((diveId) => (
-        <DiveMapMarker key={diveId} diveId={diveId}/>
+        <DiveMapMarker key={diveId} diveId={diveId} />
       ))}
     </Map>
   )

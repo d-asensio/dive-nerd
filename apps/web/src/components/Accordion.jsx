@@ -6,7 +6,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails'
 
 const Summary = styled((props) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }}/>}
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
     {...props}
   />
 ))(({ theme }) => ({
@@ -16,16 +16,16 @@ const Summary = styled((props) => (
       : 'rgba(0, 0, 0, .03)',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
+    transform: 'rotate(90deg)'
   },
   '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
-  },
+    marginLeft: theme.spacing(1)
+  }
 }))
 
 const Details = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)',
+  borderTop: '1px solid rgba(0, 0, 0, .125)'
 }))
 
 export const Accordion = styled((props) => (
@@ -34,11 +34,11 @@ export const Accordion = styled((props) => (
   width: '100%',
   borderTop: `1px solid ${theme.palette.divider}`,
   '&:last-child': {
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`
   },
   '&:before': {
-    display: 'none',
-  },
+    display: 'none'
+  }
 }))
 
 Accordion.Summary = Summary

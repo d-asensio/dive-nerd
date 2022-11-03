@@ -7,7 +7,7 @@ import Typography from '@mui/joy/Typography'
 
 export function Choice ({ children, value }) {
   return (
-    <ListItem variant="outlined">
+    <ListItem variant='outlined'>
       <Checkbox
         overlay
         value={value}
@@ -25,10 +25,10 @@ export function Choice ({ children, value }) {
               ...(checked && {
                 inset: -1,
                 border: '2px solid',
-                borderColor: theme.vars.palette.primary[500],
-              }),
-            }),
-          }),
+                borderColor: theme.vars.palette.primary[500]
+              })
+            })
+          })
         }}
       />
     </ListItem>
@@ -46,8 +46,8 @@ export function MultipleChoiceField ({
         display: 'flex',
         flexDirection: 'column',
         gap: 0.5
-    }}
-      role="group"
+      }}
+      role='group'
     >
       <FormLabel>{label}</FormLabel>
       <List
@@ -61,7 +61,7 @@ export function MultipleChoiceField ({
           '--List-gap': 0,
           '--List-item-paddingY': '1rem',
           '--List-item-radius': '8px',
-          '--List-decorator-size': '32px',
+          '--List-decorator-size': '32px'
         }}
       >
         {children}

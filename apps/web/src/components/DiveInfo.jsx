@@ -25,20 +25,22 @@ import { SingleChoice, SingleChoiceField } from './SingleChoiceField'
 import { DatePicker } from './DatePicker'
 
 function FieldsRow ({ children, columns }) {
-  return <Box
-    sx={{
-      display: 'grid',
-      gridTemplateColumns: columns || `repeat(${Children.count(children)}, 1fr)`,
-      gap: 2,
-      mb: 2,
-      width: '100%',
-      '&:last-child': {
-        mb: 0
-      }
-    }}
-  >
-    {children}
-  </Box>
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: columns || `repeat(${Children.count(children)}, 1fr)`,
+        gap: 2,
+        mb: 2,
+        width: '100%',
+        '&:last-child': {
+          mb: 0
+        }
+      }}
+    >
+      {children}
+    </Box>
+  )
 }
 
 function Section ({ title, children }) {
@@ -48,7 +50,7 @@ function Section ({ title, children }) {
       expanded={expanded}
       onChange={(_, newExpanded) => setExpanded(newExpanded)}
     >
-      <Accordion.Summary aria-controls="panel1d-content" id="panel1d-header">
+      <Accordion.Summary aria-controls='panel1d-content' id='panel1d-header'>
         <Typography>{title}</Typography>
       </Accordion.Summary>
       <Accordion.Details>
@@ -68,60 +70,60 @@ export const DiveInfo = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'start',
+        alignItems: 'start'
       }}
     >
       <Box
         sx={{ p: 2 }}
       >
-        <FieldsRow columns="1fr 2fr">
+        <FieldsRow columns='1fr 2fr'>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Dive Number"
-            size="lg"
-            value="128"
+            label='Dive Number'
+            size='lg'
+            value='128'
           />
           <TextField
             sx={{ minWidth: 0 }}
-            label="Date"
-            size="lg"
-            value="Tuesday, November 1, 2022"
+            label='Date'
+            size='lg'
+            value='Tuesday, November 1, 2022'
             endDecorator={
               <Tooltip
-                placement="top-end"
-                variant="outlined"
+                placement='top-end'
+                variant='outlined'
                 arrow
                 title={
-                  <DatePicker date={date} onChange={setDate}/>
+                  <DatePicker date={date} onChange={setDate} />
                 }
               >
-                <IconButton variant="plain">
-                  <CalendarMonthIcon/>
+                <IconButton variant='plain'>
+                  <CalendarMonthIcon />
                 </IconButton>
               </Tooltip>
             }
           />
         </FieldsRow>
-        <MultipleChoiceField label="Dive type">
-          <Choice value="open-water">
+        <MultipleChoiceField label='Dive type'>
+          <Choice value='open-water'>
             Open water
           </Choice>
-          <Choice value="deep">
+          <Choice value='deep'>
             Deep
           </Choice>
-          <Choice value="drift">
+          <Choice value='drift'>
             Drift
           </Choice>
-          <Choice value="wreck">
+          <Choice value='wreck'>
             Wreck
           </Choice>
-          <Choice value="night">
+          <Choice value='night'>
             Night
           </Choice>
-          <Choice value="cave">
+          <Choice value='cave'>
             Cave
           </Choice>
-          <Choice value="ice">
+          <Choice value='ice'>
             Ice
           </Choice>
         </MultipleChoiceField>
@@ -129,8 +131,8 @@ export const DiveInfo = () => {
       <Section
         title={
           <Typography
-            level="h5"
-            startDecorator={<AccessTimeFilledIcon/>}
+            level='h5'
+            startDecorator={<AccessTimeFilledIcon />}
           >
             Time
           </Typography>
@@ -139,43 +141,43 @@ export const DiveInfo = () => {
         <FieldsRow>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Total duration"
-            size="lg"
-            value="60:00"
+            label='Total duration'
+            size='lg'
+            value='60:00'
             endDecorator={
-              <Unit name="Meters" symbol="m"/>
+              <Unit name='Meters' symbol='m' />
             }
           />
           <TextField
             sx={{ minWidth: 0 }}
-            label="Bottom time"
-            size="lg"
-            value="12:00"
+            label='Bottom time'
+            size='lg'
+            value='12:00'
             endDecorator={
-              <Unit name="Meters" symbol="m"/>
+              <Unit name='Meters' symbol='m' />
             }
           />
         </FieldsRow>
         <FieldsRow>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Start time"
-            size="lg"
-            value="12:45 PM"
+            label='Start time'
+            size='lg'
+            value='12:45 PM'
           />
           <TextField
             sx={{ minWidth: 0 }}
-            label="End time"
-            size="lg"
-            value="01:45 PM"
+            label='End time'
+            size='lg'
+            value='01:45 PM'
           />
         </FieldsRow>
       </Section>
       <Section
         title={
           <Typography
-            level="h5"
-            startDecorator={<ArrowDownwardIcon/>}
+            level='h5'
+            startDecorator={<ArrowDownwardIcon />}
           >
             Depth
           </Typography>
@@ -184,20 +186,20 @@ export const DiveInfo = () => {
         <FieldsRow>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Maximum Depth"
-            size="lg"
-            value="35.4"
+            label='Maximum Depth'
+            size='lg'
+            value='35.4'
             endDecorator={
-              <Unit name="Meters" symbol="m"/>
+              <Unit name='Meters' symbol='m' />
             }
           />
           <TextField
             sx={{ minWidth: 0 }}
-            label="Average Depth"
-            size="lg"
-            value="10.4"
+            label='Average Depth'
+            size='lg'
+            value='10.4'
             endDecorator={
-              <Unit name="Meters" symbol="m"/>
+              <Unit name='Meters' symbol='m' />
             }
           />
         </FieldsRow>
@@ -205,8 +207,8 @@ export const DiveInfo = () => {
       <Section
         title={
           <Typography
-            level="h5"
-            startDecorator={<WaterIcon/>}
+            level='h5'
+            startDecorator={<WaterIcon />}
           >
             Water
           </Typography>
@@ -215,83 +217,83 @@ export const DiveInfo = () => {
         <FieldsRow>
           <SelectField
             sx={{ minWidth: '100%' }}
-            label="Visibility"
-            size="lg"
-            defaultValue="good"
+            label='Visibility'
+            size='lg'
+            defaultValue='good'
           >
-            <Option value="good">Good (+20m)</Option>
-            <Option value="medium">Medium (10-20m)</Option>
-            <Option value="bad">Bad (-5m)</Option>
+            <Option value='good'>Good (+20m)</Option>
+            <Option value='medium'>Medium (10-20m)</Option>
+            <Option value='bad'>Bad (-5m)</Option>
           </SelectField>
         </FieldsRow>
         <FieldsRow>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Average temperature"
-            size="lg"
-            value="23"
+            label='Average temperature'
+            size='lg'
+            value='23'
             endDecorator={
-              <Unit name="Degrees Celsius" symbol="ºC"/>
+              <Unit name='Degrees Celsius' symbol='ºC' />
             }
           />
           <SelectField
             sx={{ minWidth: '100%' }}
-            label="Salinity"
-            size="lg"
-            defaultValue="sea"
+            label='Salinity'
+            size='lg'
+            defaultValue='sea'
           >
-            <Option value="fresh">Fresh (1.00 kg/l)</Option>
-            <Option value="brackish">Brackish (1.02 kg/l)</Option>
-            <Option value="sea">Sea (1.03 kg/l)</Option>
+            <Option value='fresh'>Fresh (1.00 kg/l)</Option>
+            <Option value='brackish'>Brackish (1.02 kg/l)</Option>
+            <Option value='sea'>Sea (1.03 kg/l)</Option>
           </SelectField>
         </FieldsRow>
       </Section>
       <Section
         title={
           <Typography
-            level="h5"
-            startDecorator={<ManageAccountsIcon/>}
+            level='h5'
+            startDecorator={<ManageAccountsIcon />}
           >
             Gear
           </Typography>
         }
       >
         <TextField
-          label="Weights"
-          size="lg"
-          value="6"
+          label='Weights'
+          size='lg'
+          value='6'
           endDecorator={
-            <Unit name="Kilograms" symbol="kg"/>
+            <Unit name='Kilograms' symbol='kg' />
           }
         />
       </Section>
       <Section
         title={
           <Typography
-            level="h5"
-            startDecorator={<Co2Icon/>}
+            level='h5'
+            startDecorator={<Co2Icon />}
           >
             Gas
           </Typography>
         }
       >
         <SingleChoiceField>
-          <SingleChoice id="air" value="air">Air</SingleChoice>
-          <SingleChoice id="nitrox" value="nitrox">Nitrox</SingleChoice>
-          <SingleChoice id="trimix" value="trimix">Trimix</SingleChoice>
-          <SingleChoice id="heliox" value="heliox">Heliox</SingleChoice>
+          <SingleChoice id='air' value='air'>Air</SingleChoice>
+          <SingleChoice id='nitrox' value='nitrox'>Nitrox</SingleChoice>
+          <SingleChoice id='trimix' value='trimix'>Trimix</SingleChoice>
+          <SingleChoice id='heliox' value='heliox'>Heliox</SingleChoice>
         </SingleChoiceField>
         <FieldsRow>
           <SelectField
             sx={{ minWidth: '100%' }}
-            label="Tank volume"
-            size="lg"
-            defaultValue="10-liters"
+            label='Tank volume'
+            size='lg'
+            defaultValue='10-liters'
           >
-            <Option value="7-liters">7 liters</Option>
-            <Option value="10-liters">10 liters</Option>
-            <Option value="12-liters">12 liters</Option>
-            <Option value="15-liters">15 liters</Option>
+            <Option value='7-liters'>7 liters</Option>
+            <Option value='10-liters'>10 liters</Option>
+            <Option value='12-liters'>12 liters</Option>
+            <Option value='15-liters'>15 liters</Option>
           </SelectField>
           <GasMixtureField
             defaultValue={21}
@@ -299,11 +301,11 @@ export const DiveInfo = () => {
         </FieldsRow>
         <FieldsRow>
           <TextField
-            label="Maximum operational depth"
-            size="lg"
-            value="12"
+            label='Maximum operational depth'
+            size='lg'
+            value='12'
             endDecorator={
-              <Unit name="Meters" symbol="m"/>
+              <Unit name='Meters' symbol='m' />
             }
             readOnly
           />
@@ -311,30 +313,30 @@ export const DiveInfo = () => {
         <FieldsRow>
           <TextField
             sx={{ minWidth: 0 }}
-            label="Start tank pressure"
-            size="lg"
-            value="200"
+            label='Start tank pressure'
+            size='lg'
+            value='200'
             endDecorator={
-              <Unit name="Bars" symbol="bar"/>
+              <Unit name='Bars' symbol='bar' />
             }
           />
           <TextField
             sx={{ minWidth: 0 }}
-            label="End tank pressure"
-            size="lg"
-            value="50"
+            label='End tank pressure'
+            size='lg'
+            value='50'
             endDecorator={
-              <Unit name="Bars" symbol="bar"/>
+              <Unit name='Bars' symbol='bar' />
             }
           />
         </FieldsRow>
         <FieldsRow>
           <TextField
-            label="SAC Rate"
-            size="lg"
-            value="12"
+            label='SAC Rate'
+            size='lg'
+            value='12'
             endDecorator={
-              <Unit name="Liters per minute" symbol="l/min"/>
+              <Unit name='Liters per minute' symbol='l/min' />
             }
             readOnly
           />
@@ -347,20 +349,23 @@ export const DiveInfo = () => {
 function GasMixtureField ({ sx, defaultValue }) {
   const [value, setValue] = useState(defaultValue)
 
-  return <FormLabel
-    sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-    Gas mixture
-    <Box sx={{ width: '100%', ...sx }}>
-      <Slider
-        sx={{
-          '--Slider-size': 'max(30px, max(var(--Slider-thumb-size), var(--Slider-track-size)))'
-        }}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        defaultValue={defaultValue}
-        step={1}
-      />
-    </Box>
-    <FormHelperText>{value}% O2 | {100 - value}% N2</FormHelperText>
-  </FormLabel>
+  return (
+    <FormLabel
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+    >
+      Gas mixture
+      <Box sx={{ width: '100%', ...sx }}>
+        <Slider
+          sx={{
+            '--Slider-size': 'max(30px, max(var(--Slider-thumb-size), var(--Slider-track-size)))'
+          }}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          defaultValue={defaultValue}
+          step={1}
+        />
+      </Box>
+      <FormHelperText>{value}% O2 | {100 - value}% N2</FormHelperText>
+    </FormLabel>
+  )
 }
