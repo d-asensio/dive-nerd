@@ -27,50 +27,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import Sheet from '@mui/joy/Sheet'
 import Radio from '@mui/joy/Radio'
 import { radioClasses, RadioGroup } from '@mui/joy'
-
-import { styled } from '@mui/material/styles'
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
-import MuiAccordion from '@mui/material/Accordion'
-import MuiAccordionSummary from '@mui/material/AccordionSummary'
-import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import { Unit } from './Unit'
-
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  width: '100%',
-  borderTop: `1px solid ${theme.palette.divider}`,
-  '&:last-child': {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  '&:before': {
-    display: 'none',
-  },
-}))
-
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }}/>}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, .05)'
-      : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
-  },
-}))
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)',
-}))
+import { Accordion } from './Accordion'
 
 function FieldsRow ({ children, columns }) {
   return <Box
@@ -92,16 +50,18 @@ function FieldsRow ({ children, columns }) {
 function Section ({ title, children }) {
   const [expanded, setExpanded] = useState(true)
   return (
-    <Accordion expanded={expanded}
-               onChange={(_, newExpanded) => setExpanded(newExpanded)}>
-      <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+    <Accordion
+      expanded={expanded}
+      onChange={(_, newExpanded) => setExpanded(newExpanded)}
+    >
+      <Accordion.Summary aria-controls="panel1d-content" id="panel1d-header">
         <Typography>{title}</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
+      </Accordion.Summary>
+      <Accordion.Details>
         <Typography>
           {children}
         </Typography>
-      </AccordionDetails>
+      </Accordion.Details>
     </Accordion>
   )
 }
@@ -248,7 +208,7 @@ export const DiveInfo = () => {
               size="lg"
               value="60:00"
               endDecorator={
-                <Unit name='Meters' symbol='m' />
+                <Unit name="Meters" symbol="m"/>
               }
             />
             <TextField
@@ -257,7 +217,7 @@ export const DiveInfo = () => {
               size="lg"
               value="12:00"
               endDecorator={
-                <Unit name='Meters' symbol='m' />
+                <Unit name="Meters" symbol="m"/>
               }
             />
           </FieldsRow>
@@ -293,7 +253,7 @@ export const DiveInfo = () => {
               size="lg"
               value="35.4"
               endDecorator={
-                <Unit name='Meters' symbol='m' />
+                <Unit name="Meters" symbol="m"/>
               }
             />
             <TextField
@@ -302,7 +262,7 @@ export const DiveInfo = () => {
               size="lg"
               value="10.4"
               endDecorator={
-                <Unit name='Meters' symbol='m' />
+                <Unit name="Meters" symbol="m"/>
               }
             />
           </FieldsRow>
@@ -336,7 +296,7 @@ export const DiveInfo = () => {
               size="lg"
               value="23"
               endDecorator={
-                <Unit name='Degrees Celsius' symbol='ºC' />
+                <Unit name="Degrees Celsius" symbol="ºC"/>
               }
             />
             <SelectField
@@ -366,7 +326,7 @@ export const DiveInfo = () => {
             size="lg"
             value="6"
             endDecorator={
-              <Unit name='Kilograms' symbol='kg' />
+              <Unit name="Kilograms" symbol="kg"/>
             }
           />
         </Section>
@@ -408,7 +368,7 @@ export const DiveInfo = () => {
               size="lg"
               value="12"
               endDecorator={
-                <Unit name='Meters' symbol='m' />
+                <Unit name="Meters" symbol="m"/>
               }
               readOnly
             />
@@ -420,7 +380,7 @@ export const DiveInfo = () => {
               size="lg"
               value="200"
               endDecorator={
-                <Unit name='Bars' symbol='bar' />
+                <Unit name="Bars" symbol="bar"/>
               }
             />
             <TextField
@@ -429,7 +389,7 @@ export const DiveInfo = () => {
               size="lg"
               value="50"
               endDecorator={
-                <Unit name='Bars' symbol='bar' />
+                <Unit name="Bars" symbol="bar"/>
               }
             />
           </FieldsRow>
@@ -439,7 +399,7 @@ export const DiveInfo = () => {
               size="lg"
               value="12"
               endDecorator={
-                <Unit name='Liters per minute' symbol='l/min' />
+                <Unit name="Liters per minute" symbol="l/min"/>
               }
               readOnly
             />
