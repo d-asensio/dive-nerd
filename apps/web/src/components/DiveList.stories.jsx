@@ -6,7 +6,7 @@ import { DiveList } from './DiveList'
 import { useDive } from '../hooks/useDive'
 
 export default {
-  title: 'Components/DiveList',
+  title: 'User Interface/DiveList',
   component: DiveList,
   argTypes: {}
 }

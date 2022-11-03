@@ -3,7 +3,7 @@ import React from 'react'
 import { DiveSnippet } from './DiveSnippet'
 
 export default {
-  title: 'Components/DiveSnippet',
+  title: 'User Interface/DiveSnippet',
   component: DiveSnippet,
   argTypes: {}
 }

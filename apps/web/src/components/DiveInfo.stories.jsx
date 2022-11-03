@@ -3,7 +3,7 @@ import React from 'react'
 import { DiveInfo } from './DiveInfo'
 
 export default {
-  title: 'Components/DiveInfo',
+  title: 'User Interface/DiveInfo',
   component: DiveInfo,
   argTypes: {}
 }

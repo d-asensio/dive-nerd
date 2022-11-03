@@ -6,9 +6,11 @@ import { useDive } from '../hooks/useDive'
 
 import { mockDives } from '@divenerd/mock-dives'
 import { useGenerator } from '../hooks/useGenerator'
+import Box from '@mui/joy/Box'
+import { DiveList } from './DiveList'
 
 export default {
-  title: 'Components/DiveProfileChart',
+  title: 'User Interface/DiveProfileChart',
   component: DiveProfileChart,
   argTypes: {
     dive: {
@@ -21,11 +23,23 @@ export default {
   }
 }
 
+const Template = args => (
+  <Box
+    sx={{
+      width: '100vw',
+      height: '100vh',
+      display: 'grid'
+    }}
+  >
+    <DiveProfileChart {...args} />
+  </Box>
+)
+
 export const Default = ({ dive, ...args }) => {
   const { samples } = useDive(dive)
 
   return (
-    <DiveProfileChart samples={samples} {...args} />
+    <Template samples={samples} {...args} />
   )
 }
 
@@ -37,7 +51,7 @@ export const Generator = ({ dive, ...options }) => {
   const { samples } = useGenerator(options)
 
   return (
-    <DiveProfileChart samples={samples} />
+      <Template samples={samples} />
   )
 }
 Generator.args = {

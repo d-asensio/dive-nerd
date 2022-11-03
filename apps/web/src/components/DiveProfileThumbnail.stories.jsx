@@ -7,7 +7,7 @@ import { useDive } from '../hooks/useDive'
 import { mockDives } from '@divenerd/mock-dives'
 
 export default {
-  title: 'Components/DiveProfileThumbnail',
+  title: 'User Interface/DiveProfileThumbnail',
   component: DiveProfileThumbnail,
   argTypes: {
     dive: {
