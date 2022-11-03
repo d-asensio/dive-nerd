@@ -86,7 +86,7 @@ export const DiveProfileChart = ({ samples, onDatapointHover = identity }) => {
           }
         ]}
         colors={['#3daff7', '#e09f3e', '#9E2A2B', '#ff0df7']}
-        margin={{ top: 48, right: 12, bottom: 48, left: 62 }}
+        margin={{ top: 48, right: 62, bottom: 48, left: 62 }}
         xScale={{ type: 'linear' }}
         yScale={{
           type: 'linear',

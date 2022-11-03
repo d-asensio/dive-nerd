@@ -97,6 +97,7 @@ function Content ({ diveId }) {
       sx={{
         height: '100%',
         minHeight: 0,
+        minWidth: 0,
         display: 'grid',
         gridTemplateRows: '3fr 1fr'
       }}
@@ -126,9 +127,8 @@ function DiveViewerPage () {
             borderRight: 1,
             borderColor: 'divider',
             display: 'grid',
-            gridTemplateRows: 'min-content auto 300px',
-            minHeight: 0,
-            minWidth: 0
+            gridTemplateRows: 'min-content auto 250px',
+            minHeight: 0
           }}
         >
           <AsideHeader diveId={diveId}/>

@@ -7,6 +7,6 @@ export const Layout = styled.div`
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 400px auto;
+  grid-template-columns: minmax(400px, 1fr) minmax(800px, 2fr);
   grid-template-rows: 1fr;
 `

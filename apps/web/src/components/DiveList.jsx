@@ -24,14 +24,15 @@ const Item = ({
     <ListItemButton
       sx={{
         alignItems: 'stretch',
-        gap: 1,
         borderRadius: 'sm'
       }}
       onClick={onClick}
       onMouseEnter={onHover}
       onMouseLeave={onMouseLeave}
     >
-      <ListItemDecorator>
+      <ListItemDecorator
+        sx={{ flexShrink: 0 }}
+      >
         <DiveProfileThumbnail
           samples={samples}
           highlighted={highlighted}

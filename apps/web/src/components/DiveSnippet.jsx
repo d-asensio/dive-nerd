@@ -14,18 +14,25 @@ export const DiveSnippet = ({
       display: 'flex',
       alignItems: 'stretch',
       justifyContent: 'space-between',
-      gap: 3
+      gap: 2
     }}
   >
     <Box
       sx={{
+        minWidth: 0,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 0.5
       }}
     >
-      <Typography level="h5">{name}</Typography>
+      <Typography
+        sx={{ minWidth: 0 }}
+        level="h5"
+        noWrap
+      >
+        {name}
+      </Typography>
       <Rating value={rating} size="small" readOnly/>
     </Box>
     <Box

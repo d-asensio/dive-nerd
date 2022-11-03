@@ -9,8 +9,7 @@ import lightTheme from '../themes/light'
 import darkTheme from '../themes/dark'
 
 const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
+  min-width: 0;
   min-height: 300px;
 `
 
@@ -85,7 +84,7 @@ export const CompartmentsGasChart = ({
         data={compartmentsGasLoad}
         keys={['pressureLoadN2']}
         indexBy='name'
-        margin={{ top: 12, right: 12, bottom: 48, left: 62 }}
+        margin={{ top: 12, right: 62, bottom: 48, left: 62 }}
         padding={0.3}
         valueFormat='>-.2f'
         minValue={0}

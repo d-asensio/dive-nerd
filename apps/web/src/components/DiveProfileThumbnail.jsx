@@ -24,6 +24,7 @@ const DepthTooltip = ({point}) => {
 export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
   return (
     <Badge color="success" sx={{
+      mr: 2,
       '.JoyBadge-badge': {
         transition: 'opacity 300ms',
         opacity: highlighted ? 1 : 0
@@ -35,7 +36,7 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: 128,
+          width: 100,
           height: 62,
           borderRadius: 'xs'
         }}
@@ -44,7 +45,7 @@ export const DiveProfileThumbnail = ({loading, highlighted, samples}) => {
           ? <CircularProgress size="sm" />
           : (
             <Line
-              width={128}
+              width={100}
               height={62}
               data={[
                 {
