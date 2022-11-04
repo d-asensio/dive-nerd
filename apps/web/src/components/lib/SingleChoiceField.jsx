@@ -1,8 +1,9 @@
 import { radioClasses, RadioGroup } from '@mui/joy'
 import Sheet from '@mui/joy/Sheet'
 import Radio from '@mui/joy/Radio'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import Typography from '@mui/joy/Typography'
+
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 export function SingleChoice ({ children, ...rest }) {
   return (
@@ -18,7 +19,7 @@ export function SingleChoice ({ children, ...rest }) {
         p: 2
       }}
     >
-      <Radio {...rest} checkedIcon={<CheckCircleIcon />} />
+      <Radio {...rest} checkedIcon={<CheckBoxIcon />} />
       <Typography level='h4'>{children}</Typography>
     </Sheet>
   )
