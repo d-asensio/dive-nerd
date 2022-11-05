@@ -29,7 +29,7 @@
     "./README.md": [
       "yarn markdown:generate-toc"
     ],
-    "*.{js, jsx}": [
+    "**/*.{js,jsx}": [
       "yarn lint:fix"
     ]
   },
