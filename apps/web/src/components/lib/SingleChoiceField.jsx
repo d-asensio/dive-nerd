@@ -4,7 +4,7 @@ import Radio from '@mui/joy/Radio'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import Typography from '@mui/joy/Typography'
 
-export function SingleChoice ({ children, ...rest }) {
+function Item({ children, ...rest }) {
   return (
     <Sheet
       variant='outlined'
@@ -60,3 +60,5 @@ export function SingleChoiceField ({ children }) {
     </RadioGroup>
   )
 }
+
+SingleChoiceField.Item = Item

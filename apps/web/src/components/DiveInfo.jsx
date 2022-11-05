@@ -21,7 +21,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Co2Icon from '@mui/icons-material/Co2'
 import { Unit } from './lib/Unit'
 import { Accordion } from './lib/Accordion'
-import { SingleChoice, SingleChoiceField } from './lib/SingleChoiceField'
+import { SingleChoiceField } from './lib/SingleChoiceField'
 import { DatePicker } from './lib/DatePicker'
 
 function FieldsRow ({ children, columns }) {
@@ -276,10 +276,10 @@ export const DiveInfo = () => {
         }
       >
         <SingleChoiceField>
-          <SingleChoice id='air' value='air'>Air</SingleChoice>
-          <SingleChoice id='nitrox' value='nitrox'>Nitrox</SingleChoice>
-          <SingleChoice id='trimix' value='trimix'>Trimix</SingleChoice>
-          <SingleChoice id='heliox' value='heliox'>Heliox</SingleChoice>
+          <SingleChoiceField.Item id='air' value='air'>Air</SingleChoiceField.Item>
+          <SingleChoiceField.Item id='nitrox' value='nitrox'>Nitrox</SingleChoiceField.Item>
+          <SingleChoiceField.Item id='trimix' value='trimix'>Trimix</SingleChoiceField.Item>
+          <SingleChoiceField.Item id='heliox' value='heliox'>Heliox</SingleChoiceField.Item>
         </SingleChoiceField>
         <FieldsRow>
           <SelectField
