@@ -1,7 +1,6 @@
-import { Children, useState } from 'react'
+import { useState } from 'react'
 import FormLabel from '@mui/joy/FormLabel'
 import Box from '@mui/joy/Box'
-import TextField from '@mui/joy/TextField'
 import Option from '@mui/joy/Option'
 import Slider from '@mui/joy/Slider'
 import FormHelperText from '@mui/joy/FormHelperText'
@@ -19,29 +18,13 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import WaterIcon from '@mui/icons-material/Water'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import Co2Icon from '@mui/icons-material/Co2'
+
 import { Unit } from './lib/Unit'
 import { Accordion } from './lib/Accordion'
 import { SingleChoiceField } from './lib/SingleChoiceField'
 import { DatePicker } from './lib/DatePicker'
-
-function FieldsRow ({ children, columns }) {
-  return (
-    <Box
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: columns || `repeat(${Children.count(children)}, 1fr)`,
-        gap: 2,
-        mb: 2,
-        width: '100%',
-        '&:last-child': {
-          mb: 0
-        }
-      }}
-    >
-      {children}
-    </Box>
-  )
-}
+import { TextField } from './lib/TextField'
+import { FieldsRow } from './lib/FieldsRow'
 
 function Section ({ title, children }) {
   const [expanded, setExpanded] = useState(true)
@@ -76,13 +59,11 @@ export const DiveInfo = () => {
       <Box sx={{ p: 2 }}>
         <FieldsRow columns='1fr 2fr'>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Dive Number'
             size='lg'
             value='128'
           />
           <TextField
-            sx={{ minWidth: 0 }}
             label='Date'
             size='lg'
             value='Tuesday, November 1, 2022'
@@ -138,7 +119,6 @@ export const DiveInfo = () => {
       >
         <FieldsRow>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Total duration'
             size='lg'
             value='60:00'
@@ -147,7 +127,6 @@ export const DiveInfo = () => {
             }
           />
           <TextField
-            sx={{ minWidth: 0 }}
             label='Bottom time'
             size='lg'
             value='12:00'
@@ -158,13 +137,11 @@ export const DiveInfo = () => {
         </FieldsRow>
         <FieldsRow>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Start time'
             size='lg'
             value='12:45 PM'
           />
           <TextField
-            sx={{ minWidth: 0 }}
             label='End time'
             size='lg'
             value='01:45 PM'
@@ -183,7 +160,6 @@ export const DiveInfo = () => {
       >
         <FieldsRow>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Maximum Depth'
             size='lg'
             value='35.4'
@@ -192,7 +168,6 @@ export const DiveInfo = () => {
             }
           />
           <TextField
-            sx={{ minWidth: 0 }}
             label='Average Depth'
             size='lg'
             value='10.4'
@@ -226,7 +201,6 @@ export const DiveInfo = () => {
         </FieldsRow>
         <FieldsRow>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Average temperature'
             size='lg'
             value='23'
@@ -235,7 +209,7 @@ export const DiveInfo = () => {
             }
           />
           <SelectField
-            sx={{ minWidth: '100%' }}
+            sx={{ minWidth: 0, width: '100%' }}
             label='Salinity'
             size='lg'
             defaultValue='sea'
@@ -276,14 +250,22 @@ export const DiveInfo = () => {
         }
       >
         <SingleChoiceField>
-          <SingleChoiceField.Item id='air' value='air'>Air</SingleChoiceField.Item>
-          <SingleChoiceField.Item id='nitrox' value='nitrox'>Nitrox</SingleChoiceField.Item>
-          <SingleChoiceField.Item id='trimix' value='trimix'>Trimix</SingleChoiceField.Item>
-          <SingleChoiceField.Item id='heliox' value='heliox'>Heliox</SingleChoiceField.Item>
+          <SingleChoiceField.Item id='air' value='air'>
+            Air
+          </SingleChoiceField.Item>
+          <SingleChoiceField.Item id='nitrox' value='nitrox'>
+            Nitrox
+          </SingleChoiceField.Item>
+          <SingleChoiceField.Item id='trimix' value='trimix'>
+            Trimix
+          </SingleChoiceField.Item>
+          <SingleChoiceField.Item id='heliox' value='heliox'>
+            Heliox
+          </SingleChoiceField.Item>
         </SingleChoiceField>
         <FieldsRow>
           <SelectField
-            sx={{ minWidth: '100%' }}
+            sx={{ minWidth: 0, width: '100%' }}
             label='Tank volume'
             size='lg'
             defaultValue='10-liters'
@@ -310,7 +292,6 @@ export const DiveInfo = () => {
         </FieldsRow>
         <FieldsRow>
           <TextField
-            sx={{ minWidth: 0 }}
             label='Start tank pressure'
             size='lg'
             value='200'
@@ -319,7 +300,6 @@ export const DiveInfo = () => {
             }
           />
           <TextField
-            sx={{ minWidth: 0 }}
             label='End tank pressure'
             size='lg'
             value='50'
@@ -349,7 +329,11 @@ function GasMixtureField ({ sx, defaultValue }) {
 
   return (
     <FormLabel
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      }}
     >
       Gas mixture
       <Box sx={{ width: '100%', ...sx }}>
