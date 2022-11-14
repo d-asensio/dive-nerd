@@ -1,3 +1,24 @@
+/**
+ * Calculates the water pressure in the alveoli. It uses the alveolar
+ * ventilation equation.
+ *
+ * There are various possible values for the respiratory quotient, it is a
+ * correction that varies depending on the modeler. Some are more
+ * conservative than others:
+ * - Schreiner: 0.8 (most conservative)
+ * - Workman (U.S. Navy): 0.9
+ * - Bühlmann: 1.0 (least conservative)
+ *
+ * Standard values for carbon dioxide pressure and water pressure are 40 mm Hg
+ * and 47 mm Hg respectively. For more information about the formula and the
+ * reasoning behind these values check out
+ * [this paper](https://journals.physiology.org/doi/epdf/10.1152/advan.00064.2019)
+ *
+ * @param Rq
+ * @param Pco2
+ * @param Ph2o
+ * @returns {number}
+ */
 export const alveolarWaterVaporPressure = ({
   respiratoryQuotient: Rq,
   carbonDioxidePressure: Pco2,
