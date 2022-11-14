@@ -28,6 +28,30 @@ describe('alveolarWaterVaporPressure', () => {
       carbonDioxidePressure: 40,
       waterPressure: 47,
       expectedResult: 47
+    },
+    {
+      labelUnits: 'bar',
+      labelModeler: 'Schreiner',
+      respiratoryQuotient: 0.8,
+      carbonDioxidePressure: 0.0533,
+      waterPressure: 0.0627,
+      expectedResult: 0.0493
+    },
+    {
+      labelUnits: 'bar',
+      labelModeler: 'Workman',
+      respiratoryQuotient: 0.9,
+      carbonDioxidePressure: 0.0533,
+      waterPressure: 0.0627,
+      expectedResult: 0.0567
+    },
+    {
+      labelUnits: 'bar',
+      labelModeler: 'Bühlmann',
+      respiratoryQuotient: 1,
+      carbonDioxidePressure: 0.0533,
+      waterPressure: 0.0627,
+      expectedResult: 0.0627
     }
   ])('should be $expectedResult $labelUnits according to $labelModeler, using $respiratoryQuotient as respiratory quotient', ({
     respiratoryQuotient,
