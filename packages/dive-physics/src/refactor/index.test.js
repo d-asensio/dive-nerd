@@ -1,4 +1,49 @@
-import { alveolarInertGasPartialPressure } from './index'
+import {
+  alveolarInertGasPartialPressure,
+  alveolarWaterVaporPressure
+} from './index'
+
+describe('alveolarWaterVaporPressure', () => {
+  it.each([
+    {
+      labelUnits: 'mm Hm',
+      labelModeler: 'Schreiner',
+      respiratoryQuotient: 0.8,
+      carbonDioxidePressure: 40,
+      waterPressure: 47,
+      expectedResult: 37
+    },
+    {
+      labelUnits: 'mm Hm',
+      labelModeler: 'Workman',
+      respiratoryQuotient: 0.9,
+      carbonDioxidePressure: 40,
+      waterPressure: 47,
+      expectedResult: 42.5555
+    },
+    {
+      labelUnits: 'mm Hm',
+      labelModeler: 'Bühlmann',
+      respiratoryQuotient: 1,
+      carbonDioxidePressure: 40,
+      waterPressure: 47,
+      expectedResult: 47
+    }
+  ])('should be $expectedResult $labelUnits according to $labelModeler, using $respiratoryQuotient as respiratory quotient', ({
+    respiratoryQuotient,
+    carbonDioxidePressure,
+    waterPressure,
+    expectedResult
+  }) => {
+    const result = alveolarWaterVaporPressure({
+      respiratoryQuotient,
+      carbonDioxidePressure,
+      waterPressure
+    })
+
+    expect(result).toBeCloseTo(expectedResult, 3)
+  })
+})
 
 describe('alveolarInertGasPartialPressure', () => {
   it.each([
