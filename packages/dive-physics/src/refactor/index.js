@@ -23,7 +23,7 @@ export const alveolarWaterVaporPressure = ({
   respiratoryQuotient: Rq,
   carbonDioxidePressure: Pco2,
   waterPressure: Ph2o
-}) => -((Pco2 * (1 - Rq)) / Rq) + Ph2o
+}) => Ph2o - (Pco2 * (1 - Rq) / Rq)
 
 /**
  * Calculates the alveolar partial pressure of an inert gas. This is the
