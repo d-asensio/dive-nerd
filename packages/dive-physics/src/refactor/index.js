@@ -14,6 +14,10 @@
  * reasoning behind these values check out
  * [this paper](https://journals.physiology.org/doi/epdf/10.1152/advan.00064.2019)
  *
+ * This function can be used with any pressure units (pascal, mm Hg, bar, msw,
+ * fsw), the only requirement is to be consistent in all the provided pressure
+ * parameters.
+ *
  * @param Rq
  * @param Pco2
  * @param Ph2o
