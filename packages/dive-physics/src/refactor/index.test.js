@@ -1,7 +1,35 @@
 import {
   alveolarInertGasPartialPressure,
-  alveolarWaterVaporPressure
+  alveolarWaterVaporPressure, inspiredGasChangeRate
 } from './index'
+
+describe('inspiredGasChangeRate', () => {
+  it.each([
+    {
+      labelUnits: 'fsw/min',
+      descentRate: 60,
+      inertGasFraction: 0.45,
+      expectedResult: 27
+    },
+    {
+      labelUnits: 'fsw/min',
+      descentRate: 60,
+      inertGasFraction: 0.40,
+      expectedResult: 24
+    }
+  ])('should be $expectedResult $labelUnits for a descent rate of $descentRate $labelUnits and $inertGasFraction fraction of inert gas', ({
+    descentRate,
+    inertGasFraction,
+    expectedResult
+  }) => {
+    const result = inspiredGasChangeRate({
+      descentRate,
+      inertGasFraction
+    })
+
+    expect(result).toBeCloseTo(expectedResult, 3)
+  })
+})
 
 describe('alveolarWaterVaporPressure', () => {
   it.each([

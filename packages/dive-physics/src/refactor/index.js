@@ -1,3 +1,8 @@
+export const inspiredGasChangeRate = ({
+  descentRate: R,
+  inertGasFraction: Fig
+}) => R * Fig
+
 /**
  * Calculates the water pressure in the alveoli. It uses the alveolar
  * ventilation equation.
