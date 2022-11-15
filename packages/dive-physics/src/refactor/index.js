@@ -1,3 +1,13 @@
+/**
+ * Calculates the inspired gas change rate for an inert gas fraction.
+ *
+ * This function can be used with any pressure units (pascal/second, bar/min,
+ * msw/min, fsw/min, etc.).
+ *
+ * @param R
+ * @param Fig
+ * @returns {number}
+ */
 export const inspiredGasChangeRate = ({
   descentRate: R,
   inertGasFraction: Fig
