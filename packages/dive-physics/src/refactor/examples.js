@@ -8,10 +8,10 @@ export const intervals = [
     // thus, the calculations are made considering nitrogen
     // surface full saturation. And helium is 0 because air
     // does not contain any.
-    initialCompartmentPressures: [
+    initialCompartments: [
       {
-        name: '1',
-        inertGasPressures: {
+        name: '1b',
+        gasLoad: {
           pN2: (33 - 2.042) * 0.79,
           pHe: 0
         }
@@ -27,12 +27,13 @@ export const intervals = [
 
 export const profile = {
   // This is for a "first dive" in which tissues are completely saturated with nitrogen
-  initialCompartmentPressures: {
-    1: {
+  initialCompartments: [
+    {
+      name: '1b',
       pN2: (initialAmbientPressure - BUHLMANN_ALVEOLAR_PRESSURE) * 0.79, // 7.40467 msw
       pHe: 0 // in msw
     }
-  },
+  ],
   samples: [
     {
       time: 0, // in seconds
