@@ -1,3 +1,31 @@
+const AIR_NITROGEN_FRACTION = 0.79
+
+/**
+ * Calculates the gas load saturation for the provided compartments at a
+ * specified surface ambient pressure (at sea level, or at height), taking into
+ * account the gas fractions of atmospheric air (21% O2, 79% N2).
+ *
+ * This function can be particularly useful for initializing the compartments
+ * before a "first dive", in which the diver haven't been diving for a
+ * relatively long period of time.
+ *
+ * @param compartments
+ * @param Ps
+ * @param Pwv
+ * @returns {*}
+ */
+export const getAirSaturatedCompartments = ({
+  compartments,
+  surfaceAmbientPressure: Ps,
+  waterVaporPressure: Pwv
+}) => compartments.map(compartment => ({
+  ...compartment,
+  gasLoad: {
+    pN2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
+    pHe: 0
+  }
+}))
+
 /**
  * Calculates the inspired gas change rate for an inert gas fraction.
  *

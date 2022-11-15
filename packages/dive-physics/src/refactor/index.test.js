@@ -1,7 +1,69 @@
 import {
   alveolarInertGasPartialPressure,
-  alveolarWaterVaporPressure, inspiredGasChangeRate
+  alveolarWaterVaporPressure,
+  getAirSaturatedCompartments,
+  inspiredGasChangeRate
 } from './index'
+
+describe('getAirSaturatedCompartments', () => {
+  it.each([
+    {
+      labelDepth: 'the surface of the sea',
+      labelUnits: 'fsw',
+      compartments: [
+        { name: '1b' },
+        { name: '2' }
+      ],
+      surfaceAmbientPressure: 33,
+      waterVaporPressure: 2.042,
+      expectedResult: 24.4568
+    },
+    {
+      labelDepth: 'the surface of the sea',
+      labelUnits: 'bar',
+      compartments: [
+        { name: '1b' },
+        { name: '2' }
+      ],
+      surfaceAmbientPressure: 1,
+      waterVaporPressure: 0.0627,
+      expectedResult: 0.7405
+    },
+    {
+      labelDepth: '300 meters above sea level',
+      labelUnits: 'bar',
+      compartments: [
+        { name: '1b' },
+        { name: '2' }
+      ],
+      surfaceAmbientPressure: 0.96,
+      waterVaporPressure: 0.0627,
+      expectedResult: 0.7089
+    }
+  ])('should be $expectedResult $labelUnits at $labelDepth for all the compartments', ({
+    compartments,
+    surfaceAmbientPressure,
+    waterVaporPressure,
+    expectedResult
+  }) => {
+    const result = getAirSaturatedCompartments({
+      compartments,
+      surfaceAmbientPressure,
+      waterVaporPressure
+    })
+
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          gasLoad: {
+            pN2: expect.closeTo(expectedResult, 3),
+            pHe: 0
+          }
+        })
+      ])
+    )
+  })
+})
 
 describe('inspiredGasChangeRate', () => {
   it.each([
