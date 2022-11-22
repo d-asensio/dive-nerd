@@ -91,3 +91,17 @@ export const alveolarInertGasPartialPressure = ({
   waterVaporPressure: Pwv,
   inertGasFraction: Fig
 }) => (Pa - Pwv) * Fig
+
+/**
+ * Calculates the time constant given an inert gas half-time. The half-time must
+ * be in minutes.
+ *
+ * For more information about the half-time (or half-life as it is called in
+ * physics) check [this wikipedia article](https://en.wikipedia.org/wiki/Half-life#:~:text=Half%2Dlife%20(symbol%20t%C2%BD,how%20long%20stable%20atoms%20survive.)
+ *
+ * @param T2ig
+ * @returns {number}
+ */
+export const inertGasTimeConstant = ({
+  inertGasHalfTime: T2ig
+}) => Math.LN2 / T2ig

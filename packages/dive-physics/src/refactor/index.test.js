@@ -1,7 +1,7 @@
 import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
-  getAirSaturatedCompartments,
+  getAirSaturatedCompartments, inertGasTimeConstant,
   inspiredGasChangeRate
 } from './index'
 
@@ -212,6 +212,23 @@ describe('alveolarInertGasPartialPressure', () => {
       waterVaporPressure,
       inertGasFraction
     })
+
+    expect(result).toBeCloseTo(expectedResult, 3)
+  })
+})
+
+describe('inertGasTimeConstant', () => {
+  it.each([
+    {
+      inertGasHalfTime: 1.51,
+      expectedResult: 0.459
+    },
+    {
+      inertGasHalfTime: 4,
+      expectedResult: 0.173
+    }
+  ])('should be $expectedResult for a half time of $inertGasHalfTime minutes', ({ inertGasHalfTime, expectedResult }) => {
+    const result = inertGasTimeConstant({ inertGasHalfTime })
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
