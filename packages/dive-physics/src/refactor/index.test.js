@@ -2,11 +2,11 @@ import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
   getAirSaturatedCompartments, inertGasTimeConstant,
-  inspiredGasChangeRate
+  inspiredGasChangeRate, schreinerEquation
 } from './index'
 
 describe('getAirSaturatedCompartments', () => {
-  it.each([
+  test.each([
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'fsw',
@@ -66,7 +66,7 @@ describe('getAirSaturatedCompartments', () => {
 })
 
 describe('inspiredGasChangeRate', () => {
-  it.each([
+  test.each([
     {
       labelUnits: 'fsw/min',
       descentRate: 60,
@@ -94,7 +94,7 @@ describe('inspiredGasChangeRate', () => {
 })
 
 describe('alveolarWaterVaporPressure', () => {
-  it.each([
+  test.each([
     {
       labelUnits: 'mm Hm',
       labelModeler: 'Schreiner',
@@ -160,7 +160,7 @@ describe('alveolarWaterVaporPressure', () => {
 })
 
 describe('alveolarInertGasPartialPressure', () => {
-  it.each([
+  test.each([
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'fsw',
@@ -218,7 +218,7 @@ describe('alveolarInertGasPartialPressure', () => {
 })
 
 describe('inertGasTimeConstant', () => {
-  it.each([
+  test.each([
     {
       inertGasHalfTime: 1.51,
       expectedResult: 0.459
@@ -229,6 +229,48 @@ describe('inertGasTimeConstant', () => {
     }
   ])('should be $expectedResult for a half time of $inertGasHalfTime minutes', ({ inertGasHalfTime, expectedResult }) => {
     const result = inertGasTimeConstant({ inertGasHalfTime })
+
+    expect(result).toBeCloseTo(expectedResult, 3)
+  })
+})
+
+describe('schreinerEquation', () => {
+  test.each([
+    {
+      labelTestCase: 'in a first dive, the total partial pressure of Helium for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
+      labelUnits: 'fsw',
+      initialInspiredGasPartialPressure: 13.93,
+      initialCompartmentGasPartialPressure: 0,
+      gasTimeConstant: 0.459,
+      gasChangeRate: 27,
+      intervalTime: 2,
+      expectedResult: 27.0332
+    },
+    {
+      labelTestCase: 'in a first dive, the total partial pressure of Nitrogen for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
+      labelUnits: 'fsw',
+      initialInspiredGasPartialPressure: 12.38,
+      initialCompartmentGasPartialPressure: 24.46,
+      gasTimeConstant: 0.173,
+      gasChangeRate: 24,
+      intervalTime: 2,
+      expectedResult: 28.3504
+    }
+  ])('$labelTestCase should be $expectedResult $labelUnits', ({
+    initialInspiredGasPartialPressure,
+    initialCompartmentGasPartialPressure,
+    gasTimeConstant,
+    gasChangeRate,
+    intervalTime,
+    expectedResult
+  }) => {
+    const result = schreinerEquation({
+      initialInspiredGasPartialPressure,
+      initialCompartmentGasPartialPressure,
+      gasTimeConstant,
+      gasChangeRate,
+      intervalTime
+    })
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })

@@ -105,3 +105,27 @@ export const alveolarInertGasPartialPressure = ({
 export const inertGasTimeConstant = ({
   inertGasHalfTime: T2ig
 }) => Math.LN2 / T2ig
+
+/**
+ * Calculates the total partial pressure of an inert gas in a compartment for a
+ * specific interval.
+ *
+ * The intervalTime must be in minutes, the pressure units for
+ * initialInspiredGasPartialPressure and initialCompartmentGasPartialPressure
+ * must be consistent (bar, fsw, msw, pascal, etc.) and the gasChangeRate must
+ * be in <pressure_units>/minute
+ *
+ * @param Pig
+ * @param Pcg
+ * @param k
+ * @param R
+ * @param t
+ * @returns {number}
+ */
+export const schreinerEquation = ({
+  initialInspiredGasPartialPressure: Pig,
+  initialCompartmentGasPartialPressure: Pcg,
+  gasTimeConstant: k,
+  gasChangeRate: R,
+  intervalTime: t
+}) => Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)
