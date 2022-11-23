@@ -10,47 +10,44 @@ describe('getAirSaturatedCompartments', () => {
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'fsw',
-      compartments: [
-        { name: '1b' },
-        { name: '2' }
-      ],
-      surfaceAmbientPressure: 33,
-      waterVaporPressure: 2.042,
+      args: {
+        compartments: [
+          { name: '1b' },
+          { name: '2' }
+        ],
+        surfaceAmbientPressure: 33,
+        waterVaporPressure: 2.042
+      },
       expectedResult: 24.4568
     },
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'bar',
-      compartments: [
-        { name: '1b' },
-        { name: '2' }
-      ],
-      surfaceAmbientPressure: 1,
-      waterVaporPressure: 0.0627,
+      args: {
+        compartments: [
+          { name: '1b' },
+          { name: '2' }
+        ],
+        surfaceAmbientPressure: 1,
+        waterVaporPressure: 0.0627
+      },
       expectedResult: 0.7405
     },
     {
       labelDepth: '300 meters above sea level',
       labelUnits: 'bar',
-      compartments: [
-        { name: '1b' },
-        { name: '2' }
-      ],
-      surfaceAmbientPressure: 0.96,
-      waterVaporPressure: 0.0627,
+      args: {
+        compartments: [
+          { name: '1b' },
+          { name: '2' }
+        ],
+        surfaceAmbientPressure: 0.96,
+        waterVaporPressure: 0.0627
+      },
       expectedResult: 0.7089
     }
-  ])('should be $expectedResult $labelUnits at $labelDepth for all the compartments', ({
-    compartments,
-    surfaceAmbientPressure,
-    waterVaporPressure,
-    expectedResult
-  }) => {
-    const result = getAirSaturatedCompartments({
-      compartments,
-      surfaceAmbientPressure,
-      waterVaporPressure
-    })
+  ])('should be $expectedResult $labelUnits at $labelDepth for all the compartments', ({ args, expectedResult }) => {
+    const result = getAirSaturatedCompartments(args)
 
     expect(result).toEqual(
       expect.arrayContaining([
@@ -69,25 +66,22 @@ describe('inspiredGasChangeRate', () => {
   test.each([
     {
       labelUnits: 'fsw/min',
-      descentRate: 60,
-      inertGasFraction: 0.45,
+      args: {
+        descentRate: 60,
+        inertGasFraction: 0.45
+      },
       expectedResult: 27
     },
     {
       labelUnits: 'fsw/min',
-      descentRate: 60,
-      inertGasFraction: 0.40,
+      args: {
+        descentRate: 60,
+        inertGasFraction: 0.40
+      },
       expectedResult: 24
     }
-  ])('should be $expectedResult $labelUnits for a descent rate of $descentRate $labelUnits and $inertGasFraction fraction of inert gas', ({
-    descentRate,
-    inertGasFraction,
-    expectedResult
-  }) => {
-    const result = inspiredGasChangeRate({
-      descentRate,
-      inertGasFraction
-    })
+  ])('should be $expectedResult $labelUnits for a descent rate of $args.descentRate $labelUnits and $args.inertGasFraction fraction of inert gas', ({ args, expectedResult }) => {
+    const result = inspiredGasChangeRate(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
@@ -98,62 +92,65 @@ describe('alveolarWaterVaporPressure', () => {
     {
       labelUnits: 'mm Hm',
       labelModeler: 'Schreiner',
-      respiratoryQuotient: 0.8,
-      carbonDioxidePressure: 40,
-      waterPressure: 47,
+      args: {
+        respiratoryQuotient: 0.8,
+        carbonDioxidePressure: 40,
+        waterPressure: 47
+      },
       expectedResult: 37
     },
     {
       labelUnits: 'mm Hm',
       labelModeler: 'Workman',
-      respiratoryQuotient: 0.9,
-      carbonDioxidePressure: 40,
-      waterPressure: 47,
+      args: {
+        respiratoryQuotient: 0.9,
+        carbonDioxidePressure: 40,
+        waterPressure: 47
+      },
       expectedResult: 42.5555
     },
     {
       labelUnits: 'mm Hm',
       labelModeler: 'Bühlmann',
-      respiratoryQuotient: 1,
-      carbonDioxidePressure: 40,
-      waterPressure: 47,
+      args: {
+        respiratoryQuotient: 1,
+        carbonDioxidePressure: 40,
+        waterPressure: 47
+      },
       expectedResult: 47
     },
     {
       labelUnits: 'bar',
       labelModeler: 'Schreiner',
-      respiratoryQuotient: 0.8,
-      carbonDioxidePressure: 0.0533,
-      waterPressure: 0.0627,
+      args: {
+        respiratoryQuotient: 0.8,
+        carbonDioxidePressure: 0.0533,
+        waterPressure: 0.0627
+      },
       expectedResult: 0.0493
     },
     {
       labelUnits: 'bar',
       labelModeler: 'Workman',
-      respiratoryQuotient: 0.9,
-      carbonDioxidePressure: 0.0533,
-      waterPressure: 0.0627,
+      args: {
+        respiratoryQuotient: 0.9,
+        carbonDioxidePressure: 0.0533,
+        waterPressure: 0.0627
+      },
       expectedResult: 0.0567
     },
     {
       labelUnits: 'bar',
       labelModeler: 'Bühlmann',
-      respiratoryQuotient: 1,
-      carbonDioxidePressure: 0.0533,
-      waterPressure: 0.0627,
+      args: {
+        respiratoryQuotient: 1,
+        carbonDioxidePressure: 0.0533,
+        waterPressure: 0.0627
+      },
       expectedResult: 0.0627
     }
-  ])('should be $expectedResult $labelUnits according to $labelModeler, using $respiratoryQuotient as respiratory quotient', ({
-    respiratoryQuotient,
-    carbonDioxidePressure,
-    waterPressure,
-    expectedResult
-  }) => {
-    const result = alveolarWaterVaporPressure({
-      respiratoryQuotient,
-      carbonDioxidePressure,
-      waterPressure
-    })
+  ])('should be $expectedResult $labelUnits according to $labelModeler, using $args.respiratoryQuotient as respiratory quotient', ({ args, expectedResult }) => {
+    const result = alveolarWaterVaporPressure(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
@@ -164,54 +161,55 @@ describe('alveolarInertGasPartialPressure', () => {
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'fsw',
-      ambientPressure: 33,
-      waterVaporPressure: 2.042,
-      inertGasFraction: 0.4,
+      args: {
+        ambientPressure: 33,
+        waterVaporPressure: 2.042,
+        inertGasFraction: 0.4
+      },
       expectedResult: 12.3832
     },
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'msw',
-      ambientPressure: 10,
-      waterVaporPressure: 0.627,
-      inertGasFraction: 0.4,
+      args: {
+        ambientPressure: 10,
+        waterVaporPressure: 0.627,
+        inertGasFraction: 0.4
+      },
       expectedResult: 3.7492
     },
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'msw',
-      ambientPressure: 10,
-      waterVaporPressure: 0.627,
-      inertGasFraction: 0.79,
+      args: {
+        ambientPressure: 10,
+        waterVaporPressure: 0.627,
+        inertGasFraction: 0.79
+      },
       expectedResult: 7.4046
     },
     {
       labelDepth: '10 meters from sea surface',
       labelUnits: 'msw',
-      ambientPressure: 20,
-      waterVaporPressure: 0.627,
-      inertGasFraction: 0.79,
+      args: {
+        ambientPressure: 20,
+        waterVaporPressure: 0.627,
+        inertGasFraction: 0.79
+      },
       expectedResult: 15.3046
     },
     {
       labelDepth: '10 meters from sea surface',
       labelUnits: 'bar',
-      ambientPressure: 2,
-      waterVaporPressure: 0.0627,
-      inertGasFraction: 0.79,
+      args: {
+        ambientPressure: 2,
+        waterVaporPressure: 0.0627,
+        inertGasFraction: 0.79
+      },
       expectedResult: 1.5304
     }
-  ])('should be $expectedResult $labelUnits for $inertGasFraction fraction of inert gas at $labelDepth', ({
-    ambientPressure,
-    waterVaporPressure,
-    inertGasFraction,
-    expectedResult
-  }) => {
-    const result = alveolarInertGasPartialPressure({
-      ambientPressure,
-      waterVaporPressure,
-      inertGasFraction
-    })
+  ])('should be $expectedResult $labelUnits for $args.inertGasFraction fraction of inert gas at $labelDepth', ({ args, expectedResult }) => {
+    const result = alveolarInertGasPartialPressure(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
@@ -220,15 +218,19 @@ describe('alveolarInertGasPartialPressure', () => {
 describe('inertGasTimeConstant', () => {
   test.each([
     {
-      inertGasHalfTime: 1.51,
+      args: {
+        inertGasHalfTime: 1.51
+      },
       expectedResult: 0.459
     },
     {
-      inertGasHalfTime: 4,
+      args: {
+        inertGasHalfTime: 4
+      },
       expectedResult: 0.173
     }
-  ])('should be $expectedResult for a half time of $inertGasHalfTime minutes', ({ inertGasHalfTime, expectedResult }) => {
-    const result = inertGasTimeConstant({ inertGasHalfTime })
+  ])('should be $expectedResult for a half time of $args.inertGasHalfTime minutes', ({ args, expectedResult }) => {
+    const result = inertGasTimeConstant(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
@@ -239,38 +241,29 @@ describe('schreinerEquation', () => {
     {
       labelTestCase: 'in a first dive, the total partial pressure of Helium for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
       labelUnits: 'fsw',
-      initialInspiredGasPartialPressure: 13.93,
-      initialCompartmentGasPartialPressure: 0,
-      gasTimeConstant: 0.459,
-      gasChangeRate: 27,
-      intervalTime: 2,
+      args: {
+        initialInspiredGasPartialPressure: 13.93,
+        initialCompartmentGasPartialPressure: 0,
+        gasTimeConstant: 0.459,
+        gasChangeRate: 27,
+        intervalTime: 2
+      },
       expectedResult: 27.0332
     },
     {
       labelTestCase: 'in a first dive, the total partial pressure of Nitrogen for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
       labelUnits: 'fsw',
-      initialInspiredGasPartialPressure: 12.38,
-      initialCompartmentGasPartialPressure: 24.46,
-      gasTimeConstant: 0.173,
-      gasChangeRate: 24,
-      intervalTime: 2,
+      args: {
+        initialInspiredGasPartialPressure: 12.38,
+        initialCompartmentGasPartialPressure: 24.46,
+        gasTimeConstant: 0.173,
+        gasChangeRate: 24,
+        intervalTime: 2
+      },
       expectedResult: 28.3504
     }
-  ])('$labelTestCase should be $expectedResult $labelUnits', ({
-    initialInspiredGasPartialPressure,
-    initialCompartmentGasPartialPressure,
-    gasTimeConstant,
-    gasChangeRate,
-    intervalTime,
-    expectedResult
-  }) => {
-    const result = schreinerEquation({
-      initialInspiredGasPartialPressure,
-      initialCompartmentGasPartialPressure,
-      gasTimeConstant,
-      gasChangeRate,
-      intervalTime
-    })
+  ])('$labelTestCase should be $expectedResult $labelUnits', ({ args, expectedResult }) => {
+    const result = schreinerEquation(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
