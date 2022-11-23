@@ -20,9 +20,9 @@ export const getAirSaturatedCompartments = ({
   waterVaporPressure: Pwv
 }) => compartments.map(compartment => ({
   ...compartment,
-  gasLoad: {
-    pN2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
-    pHe: 0
+  gasPartialPressure: {
+    N2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
+    He: 0
   }
 }))
 

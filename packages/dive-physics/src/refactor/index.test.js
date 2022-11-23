@@ -52,9 +52,9 @@ describe('getAirSaturatedCompartments', () => {
     expect(result).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          gasLoad: {
-            pN2: expect.closeTo(expectedResult, 3),
-            pHe: 0
+          gasPartialPressure: {
+            N2: expect.closeTo(expectedResult, 3),
+            He: 0
           }
         })
       ])
