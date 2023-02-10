@@ -13,7 +13,7 @@ import IconButton from '@mui/joy/IconButton'
 import Tooltip from '@mui/joy/Tooltip'
 import Typography from '@mui/joy/Typography'
 
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
+// import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import WaterIcon from '@mui/icons-material/Water'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
@@ -111,7 +111,7 @@ export const DiveInfo = () => {
         title={
           <Typography
             level='h5'
-            startDecorator={<AccessTimeFilledIcon />}
+            startDecorator={<ManageAccountsIcon />}
           >
             Time
           </Typography>
