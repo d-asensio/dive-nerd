@@ -1,5 +1,7 @@
 service: divenerd-api
 
+frameworkVersion: '3'
+
 plugins:
   - serverless-esbuild
   - serverless-offline
