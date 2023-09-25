@@ -1,4 +1,5 @@
 import {Separator} from "@/components/ui/separator";
+import { ShareButton } from "@/components/app/share-button";
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
@@ -13,7 +14,7 @@ const TopBar = () => (
       </div>
       <div className="ml-auto flex w-full space-x-2 sm:justify-end">
         <div className="hidden space-x-2 md:flex">
-
+          <ShareButton />
         </div>
       </div>
     </div>
