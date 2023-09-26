@@ -24,6 +24,7 @@ Dive Computers](https://cronatec.ch/wp-content/uploads/2021/09/ZH-L8ADT.pdf)
         - **Adaptation to cold water:** The model is able to change the saturation speed and the critical supersaturation of the muscle and skin ompartments according to the diver's exertion and/or cooling.
 
         To my understanding, the adaptation (ADT) part of this algorithm is useful when the diver has taken risks (Non-Limit diving, extensive repetitive diving, "jojo" dives, fast ascents, missed deco stops, dived in very cold water, etc.) because it is able to rearange the stops taking into account this information. Other than that (if no risks are taken) it should be the same as the ZH-L8 (and friends) with no gradient factors.
+- [Oxygen Toxicity Calculations](https://www.shearwater.com/wp-content/uploads/2012/08/Oxygen_Toxicity_Calculations.pdf) - By Erik C. Baker
 
 ## Blogs
 
