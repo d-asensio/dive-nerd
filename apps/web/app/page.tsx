@@ -1,21 +1,18 @@
 import * as React from "react";
-import { Separator } from "@/components/ui/separator";
-import { ShareButton } from "@/components/app/share-button";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { Input, InputProps } from "@/components/ui/input";
 import {cn} from "@/lib/utils";
+
+import {Separator} from "@/components/ui/separator";
+import {Input, InputProps} from "@/components/ui/input";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+
+import {ShareButton} from "@/components/app/share-button";
+import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
-    <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
+    <div
+      className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
       <div className="flex items-center space-x-2">
         <span className="text-4xl">
           🤿
@@ -26,11 +23,11 @@ const TopBar = () => (
       </div>
       <div className="ml-auto flex w-full space-x-2 sm:justify-end">
         <div className="hidden space-x-2 md:flex">
-          <ShareButton />
+          <ShareButton/>
         </div>
       </div>
     </div>
-    <Separator />
+    <Separator/>
   </div>
 )
 
@@ -38,11 +35,11 @@ interface InputWithUnitsProps extends Omit<InputProps, "decorator"> {
   units: string
 }
 
-const InputWithUnits = ({ units, ...props }: InputWithUnitsProps) => (
+const InputWithUnits = ({units, ...props}: InputWithUnitsProps) => (
   <Input
     decorator={
       <>
-        <Separator orientation={"vertical"} />
+        <Separator orientation={"vertical"}/>
         <span
           className={cn(
             "flex p-2 items-center w-auto border-l-0 rounded-l-none text-muted-foreground select-none whitespace-nowrap"
@@ -117,9 +114,10 @@ export function ProfileTable() {
 export default function Home() {
   return (
     <main>
-      <TopBar />
+      <TopBar/>
       <div className="container p-6">
-        <ProfileTable />
+        <ProfileTable/>
+        <DiveProfileChart/>
       </div>
     </main>
   )
