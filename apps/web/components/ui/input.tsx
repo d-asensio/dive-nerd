@@ -51,7 +51,7 @@ const inputVariants = cva(
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
     VariantProps<typeof inputVariants> {
-      decorator: React.ReactElement | string
+      decorator?: React.ReactElement | string
     }
 
 

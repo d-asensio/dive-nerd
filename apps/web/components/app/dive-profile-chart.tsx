@@ -1,9 +1,28 @@
 "use client"
 
 import * as React from "react";
-import { ResponsiveLine } from '@nivo/line'
+import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 
 import {cn} from "@/lib/utils";
+import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
+
+const PointTooltip = ({ point }: PointTooltipProps) => {
+  return (
+      <Tooltip open delayDuration={0}>
+        <TooltipTrigger/>
+        <TooltipPortal>
+          <TooltipContent>
+            <p className="pointer-events-none">
+              <span className="font-bold">Depth:</span> {point.data.yFormatted} m
+            </p>
+            <p className="pointer-events-none">
+              <span className="font-bold">Time:</span> {point.data.xFormatted} min.
+            </p>
+          </TooltipContent>
+        </TooltipPortal>
+      </Tooltip>
+  )
+}
 
 export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -127,6 +146,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           pointBorderColor={{from: "serieColor"}}
           pointLabelYOffset={-12}
           useMesh
+          tooltip={PointTooltip}
           crosshairType="bottom"
         />
       </div>
