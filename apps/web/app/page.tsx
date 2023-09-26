@@ -142,6 +142,14 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
               </Badge>
             </TableCell>
           </TableRow>
+          <TableRow className="font-medium bg-muted/50">
+            <TableCell>
+              Deco stops from 21 m
+            </TableCell>
+            <TableCell colSpan={2} className="text-right">
+              7 min.
+            </TableCell>
+          </TableRow>
           <TableRow>
             <TableCell className="font-medium">
               21 m
@@ -199,7 +207,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
               9 m
             </TableCell>
             <TableCell>
-              1 min.
+              3 min.
             </TableCell>
             <TableCell>
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
@@ -207,12 +215,20 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
               </Badge>
             </TableCell>
           </TableRow>
+          <TableRow className="font-medium bg-muted/50">
+            <TableCell>
+              Deco stops from 6 m
+            </TableCell>
+            <TableCell colSpan={2} className="text-right">
+              9 min.
+            </TableCell>
+          </TableRow>
           <TableRow>
             <TableCell className="font-medium">
               6 m
             </TableCell>
             <TableCell>
-              1 min.
+              3 min.
             </TableCell>
             <TableCell>
               <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
@@ -225,7 +241,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
               3 m
             </TableCell>
             <TableCell>
-              1 min.
+              6 min.
             </TableCell>
             <TableCell>
               <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
