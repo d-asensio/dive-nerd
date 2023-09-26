@@ -6,6 +6,14 @@ import {cn} from "@/lib/utils";
 import {Separator} from "@/components/ui/separator";
 import {Input, InputProps} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 
 import {ShareButton} from "@/components/app/share-button";
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
@@ -66,7 +74,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
           <TableHead>
             Duration
           </TableHead>
-          <TableHead className="w-[300px]">
+          <TableHead className="w-[200px]">
             Gas
           </TableHead>
         </TableRow>
@@ -75,7 +83,6 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
         <TableRow>
           <TableCell>
             <InputWithUnits
-              size="sm"
               units='m'
               type="number"
               defaultValue="45"
@@ -83,28 +90,129 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
           </TableCell>
           <TableCell>
             <InputWithUnits
-              size="sm"
               units='min.'
               type="number"
               defaultValue="25"
             />
           </TableCell>
           <TableCell>
+            <Select defaultValue='helitrox-21/22'>
+              <SelectTrigger>
+                <SelectValue placeholder="-- no gas selected --" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="helitrox-21/22">
+                  <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
+                    Helitrox 21/22
+                  </Badge>
+                </SelectItem>
+                <SelectItem value="nitrox-21/22">
+                  <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                    Nitrox 50
+                  </Badge>
+                </SelectItem>
+                <SelectItem value="oxygen-100">
+                  <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
+                    Oxygen 100
+                  </Badge>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  )
+}
+
+export function GasTable(props: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <Table {...props}>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[300px]" >
+            Gas
+          </TableHead>
+          <TableHead className="w-0" />
+          <TableHead className='text-right'>
+            MOD
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>
             <div className='flex items-center space-x-2'>
               <InputWithUnits
-                size="sm"
                 units='% O2'
                 type="number"
                 defaultValue="21"
               />
               <span>/</span>
               <InputWithUnits
-                size="sm"
                 units='% He'
                 type="number"
                 defaultValue="22"
               />
             </div>
+          </TableCell>
+          <TableCell>
+            <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
+              Helitrox 21/22
+            </Badge>
+          </TableCell>
+          <TableCell className='text-right'>
+            57 m
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <div className='flex items-center space-x-2'>
+              <InputWithUnits
+                units='% O2'
+                type="number"
+                defaultValue="50"
+              />
+              <span>/</span>
+              <InputWithUnits
+                units='% He'
+                type="number"
+                defaultValue="0"
+              />
+            </div>
+          </TableCell>
+          <TableCell>
+            <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+              Nitrox 50
+            </Badge>
+          </TableCell>
+          <TableCell className='text-right'>
+            21 m
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <div className='flex items-center space-x-2'>
+              <InputWithUnits
+                units='% O2'
+                type="number"
+                defaultValue="100"
+              />
+              <span>/</span>
+              <InputWithUnits
+                units='% He'
+                type="number"
+                defaultValue="0"
+              />
+            </div>
+          </TableCell>
+          <TableCell>
+            <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
+              Oxygen 100
+            </Badge>
+          </TableCell>
+          <TableCell className='text-right'>
+            6 m
           </TableCell>
         </TableRow>
       </TableBody>
@@ -143,7 +251,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
-                Tx 21/22
+                Helitrox 21/22
               </Badge>
             </TableCell>
           </TableRow>
@@ -159,7 +267,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
-                Tx 21/22
+                Helitrox 21/22
               </Badge>
             </TableCell>
           </TableRow>
@@ -183,7 +291,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                EAN 50
+                Nitrox 50
               </Badge>
             </TableCell>
           </TableRow>
@@ -199,7 +307,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                EAN 50
+                Nitrox 50
               </Badge>
             </TableCell>
           </TableRow>
@@ -215,7 +323,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                EAN 50
+                Nitrox 50
               </Badge>
             </TableCell>
           </TableRow>
@@ -231,7 +339,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                EAN 50
+                Nitrox 50
               </Badge>
             </TableCell>
           </TableRow>
@@ -247,7 +355,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                EAN 50
+                Nitrox 50
               </Badge>
             </TableCell>
           </TableRow>
@@ -271,7 +379,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
-                O2 100%
+                Oxygen 100
               </Badge>
             </TableCell>
           </TableRow>
@@ -287,7 +395,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
             </TableCell>
             <TableCell className="text-right">
               <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
-                O2 100%
+                Oxygen 100
               </Badge>
             </TableCell>
           </TableRow>
@@ -305,7 +413,6 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
               -
             </TableCell>
           </TableRow>
-
         </TableBody>
       </Table>
     </div>
@@ -319,13 +426,24 @@ export default function Home() {
       <TopBar/>
       <div className="container p-6 space-y-6">
         <div>
-          <h2 className="text-xl">
-            Dive plan
-          </h2>
-          <DivePlanTable/>
-          <Separator />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <h2 className="text-2xl">
+                Dive plan
+              </h2>
+              <DivePlanTable/>
+              <Separator />
+            </div>
+            <div>
+              <h2 className="text-2xl">
+                Gas
+              </h2>
+              <GasTable />
+              <Separator />
+            </div>
+          </div>
         </div>
-        <h2 className="text-xl">
+        <h2 className="text-2xl">
           Decompression profile
         </h2>
         <div className="grid grid-cols-3 gap-4">
