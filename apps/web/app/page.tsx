@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ArrowDown, ArrowRight, ArrowUp} from "lucide-react"
+import {ArrowDown, ArrowRight, ArrowUp, Plus} from "lucide-react"
 
 import {cn} from "@/lib/utils";
 
@@ -18,6 +18,7 @@ import {
 import {ShareButton} from "@/components/app/share-button";
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {Badge} from "@/components/ui/badge";
+import {Button} from "@/components/ui/button";
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
@@ -213,6 +214,14 @@ export function GasTable(props: React.HTMLAttributes<HTMLDivElement>) {
           </TableCell>
           <TableCell className='text-right'>
             6 m
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell colSpan={3} className="text-right">
+            <Button variant="ghost">
+              <Plus className="mr-2 h-4 w-4" />
+              Add gas mix
+            </Button>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -429,17 +438,15 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h2 className="text-2xl">
-                Dive plan
+                Plan
               </h2>
               <DivePlanTable/>
-              <Separator />
             </div>
             <div>
               <h2 className="text-2xl">
                 Gas
               </h2>
               <GasTable />
-              <Separator />
             </div>
           </div>
         </div>
