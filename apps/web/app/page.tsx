@@ -4,10 +4,11 @@ import {cn} from "@/lib/utils";
 
 import {Separator} from "@/components/ui/separator";
 import {Input, InputProps} from "@/components/ui/input";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 import {ShareButton} from "@/components/app/share-button";
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
+import {Badge} from "@/components/ui/badge";
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
@@ -53,9 +54,9 @@ const InputWithUnits = ({units, ...props}: InputWithUnitsProps) => (
   />
 )
 
-export function ProfileTable() {
+export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <Table>
+    <Table {...props}>
       <TableHeader>
         <TableRow>
           <TableHead>
@@ -71,10 +72,10 @@ export function ProfileTable() {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium">
+          <TableCell>
             <InputWithUnits
               size="sm"
-              units='meters'
+              units='m'
               type="number"
               defaultValue="30"
             />
@@ -82,7 +83,7 @@ export function ProfileTable() {
           <TableCell>
             <InputWithUnits
               size="sm"
-              units='minutes'
+              units='min.'
               type="number"
               defaultValue="30"
             />
@@ -110,14 +111,166 @@ export function ProfileTable() {
   )
 }
 
+export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div {...props}>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>
+              Depth
+            </TableHead>
+            <TableHead>
+              Duration
+            </TableHead>
+            <TableHead>
+              Gas
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell className="font-medium">
+              45 m
+            </TableCell>
+            <TableCell>
+              25 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
+                Tx 21/22
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              21 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                EAN 50
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              18 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                EAN 50
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              15 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                EAN 50
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              12 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                EAN 50
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              9 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
+                EAN 50
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              6 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
+                O2 100%
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              3 m
+            </TableCell>
+            <TableCell>
+              1 min.
+            </TableCell>
+            <TableCell>
+              <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
+                O2 100%
+              </Badge>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="font-medium">
+              0 m
+            </TableCell>
+            <TableCell>
+              -
+            </TableCell>
+            <TableCell>
+              -
+            </TableCell>
+          </TableRow>
+
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
 
 export default function Home() {
   return (
     <main>
       <TopBar/>
-      <div className="container p-6">
-        <ProfileTable/>
-        <DiveProfileChart/>
+      <div className="container p-6 space-y-6">
+        <div>
+          <h2 className="text-xl">
+            Dive plan
+          </h2>
+          <DivePlanTable/>
+          <Separator />
+        </div>
+        <h2 className="text-xl">
+          Decompression profile
+        </h2>
+        <div className="grid grid-cols-3 gap-4">
+          <DecompressionTable/>
+          <DiveProfileChart className="col-span-2"/>
+        </div>
       </div>
     </main>
   )

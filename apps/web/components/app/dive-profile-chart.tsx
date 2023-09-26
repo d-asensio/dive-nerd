@@ -2,10 +2,14 @@
 
 import * as React from "react";
 import { ResponsiveLine } from '@nivo/line'
+import {cn} from "@/lib/utils";
 
-export function DiveProfileChart() {
+export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className='min-w-0 h-[550px] overflow-x-scroll'>
+    <div
+      className={cn('min-w-0 min-h-[400px] max-h-[700px] overflow-x-scroll', className)}
+      {...props}
+    >
       <div className="min-w-[600px] h-full">
         <ResponsiveLine
           enablePoints={false}
