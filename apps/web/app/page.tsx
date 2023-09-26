@@ -78,7 +78,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
               size="sm"
               units='m'
               type="number"
-              defaultValue="30"
+              defaultValue="45"
             />
           </TableCell>
           <TableCell>
@@ -86,7 +86,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
               size="sm"
               units='min.'
               type="number"
-              defaultValue="30"
+              defaultValue="25"
             />
           </TableCell>
           <TableCell>
@@ -95,14 +95,14 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
                 size="sm"
                 units='% O2'
                 type="number"
-                defaultValue="30"
+                defaultValue="21"
               />
               <span>/</span>
               <InputWithUnits
                 size="sm"
                 units='% He'
                 type="number"
-                defaultValue="30"
+                defaultValue="22"
               />
             </div>
           </TableCell>
