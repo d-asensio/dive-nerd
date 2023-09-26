@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ArrowDown, ArrowRight, ArrowUp, Plus} from "lucide-react"
+import {AlertTriangle, ArrowDown, ArrowRight, ArrowUp, Plus} from "lucide-react"
 
 import {cn} from "@/lib/utils";
 
@@ -19,6 +19,7 @@ import {ShareButton} from "@/components/app/share-button";
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
@@ -78,10 +79,11 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
           <TableHead className="w-[200px]">
             Gas
           </TableHead>
+          <TableHead className="w-0"/>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
+        <TableRow className="bg-red-100 hover:bg-red-100/50">
           <TableCell>
             <InputWithUnits
               units='m'
@@ -97,7 +99,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
             />
           </TableCell>
           <TableCell>
-            <Select defaultValue='helitrox-21/22'>
+            <Select defaultValue='nitrox-50'>
               <SelectTrigger>
                 <SelectValue placeholder="-- no gas selected --" />
               </SelectTrigger>
@@ -107,7 +109,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
                     Helitrox 21/22
                   </Badge>
                 </SelectItem>
-                <SelectItem value="nitrox-21/22">
+                <SelectItem value="nitrox-50">
                   <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
                     Nitrox 50
                   </Badge>
@@ -119,6 +121,19 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
                 </SelectItem>
               </SelectContent>
             </Select>
+          </TableCell>
+          <TableCell>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger>
+                <AlertTriangle className="h-4 w-4 text-red-500" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-[300px] text-red-500">
+                  The maximum operating depth for the selected gas
+                  is <span className='font-bold'>21 meters</span>.
+                </p>
+              </TooltipContent>
+            </Tooltip>
           </TableCell>
         </TableRow>
       </TableBody>
