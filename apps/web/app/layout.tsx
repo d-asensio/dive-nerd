@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
 import {TooltipProvider} from "@/components/ui/tooltip";
 
 const inter = Inter({ subsets: ['latin'] })

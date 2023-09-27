@@ -113,7 +113,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             }
           ]}
           colors={["rgb(96, 165, 250)"]}
-          margin={{top: 24, right: 18, bottom: 62, left: 62}}
+          margin={{top: 12, right: 18, bottom: 62, left: 62}}
           xScale={{type: "linear"}}
           yScale={{
             type: "linear",
