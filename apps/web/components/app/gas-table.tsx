@@ -1,11 +1,12 @@
 import * as React from "react";
-import {Plus} from "lucide-react";
+import {Minus, Plus} from "lucide-react";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return (
@@ -19,6 +20,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <TableHead className='text-right'>
             MOD
           </TableHead>
+          <TableHead className="w-0"/>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -46,6 +48,18 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <TableCell className='text-right'>
             57 m
           </TableCell>
+          <TableCell>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button size="icon" variant="outline" disabled>
+                  <Minus className="h-4 w-4"/>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                First gas cannot be removed
+              </TooltipContent>
+            </Tooltip>
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
@@ -70,6 +84,18 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           </TableCell>
           <TableCell className='text-right'>
             21 m
+          </TableCell>
+          <TableCell>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button size="icon" variant="outline">
+                  <Minus className="h-4 w-4"/>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                Remove gas
+              </TooltipContent>
+            </Tooltip>
           </TableCell>
         </TableRow>
         <TableRow>
@@ -96,9 +122,21 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <TableCell className='text-right'>
             6 m
           </TableCell>
+          <TableCell>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button size="icon" variant="outline">
+                  <Minus className="h-4 w-4"/>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                Remove gas
+              </TooltipContent>
+            </Tooltip>
+          </TableCell>
         </TableRow>
-        <TableRow>
-          <TableCell colSpan={3} className="text-right">
+        <TableRow className="hover:bg-background">
+          <TableCell colSpan={4} className="text-right">
             <Button variant="ghost">
               <Plus className="mr-2 h-4 w-4"/>
               Add gas mix

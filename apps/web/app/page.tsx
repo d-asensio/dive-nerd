@@ -6,7 +6,6 @@ import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
 
-
 export default function Home() {
   return (
     <main>
@@ -22,7 +21,7 @@ export default function Home() {
             </div>
             <div>
               <h2 className="text-2xl">
-                Gas
+                Gases
               </h2>
               <GasTable/>
             </div>
