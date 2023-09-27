@@ -1,5 +1,18 @@
 const AIR_NITROGEN_FRACTION = 0.79
 
+interface InertGasLoad {
+  N2: number
+  He: number
+}
+
+interface UninitializedCompartment {
+  name: string;
+}
+
+interface Compartment extends UninitializedCompartment {
+  inertGasLoad: InertGasLoad
+}
+
 /**
  * Calculates the gas load saturation for the provided compartments at a
  * specified surface ambient pressure (at sea level, or at height), taking into
@@ -8,38 +21,38 @@ const AIR_NITROGEN_FRACTION = 0.79
  * This function can be particularly useful for initializing the compartments
  * before a "first dive", in which the diver haven't been diving for a
  * relatively long period of time.
- *
- * @param compartments
- * @param Ps
- * @param Pwv
- * @returns {*}
  */
-export const getAirSaturatedCompartments = ({
+export const getSurfaceSaturatedCompartments = ({
   compartments,
   surfaceAmbientPressure: Ps,
   waterVaporPressure: Pwv
-}) => compartments.map(compartment => ({
-  ...compartment,
-  gasPartialPressure: {
-    N2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
-    He: 0
-  }
-}))
+}: {
+  compartments: UninitializedCompartment[],
+  surfaceAmbientPressure: number,
+  waterVaporPressure: number
+}): Compartment[] =>
+  compartments.map(compartment => ({
+    ...compartment,
+    inertGasLoad: {
+      N2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
+      He: 0
+    }
+  }))
 
 /**
  * Calculates the inspired gas change rate for an inert gas fraction.
  *
  * This function can be used with any pressure units (pascal/second, bar/min,
  * msw/min, fsw/min, etc.).
- *
- * @param R
- * @param Fig
- * @returns {number}
  */
 export const inspiredGasChangeRate = ({
   descentRate: R,
   inertGasFraction: Fig
-}) => R * Fig
+}: {
+  descentRate: number,
+  inertGasFraction: number
+}): number =>
+  R * Fig
 
 /**
  * Calculates the water pressure in the alveoli. It uses the alveolar
@@ -60,17 +73,17 @@ export const inspiredGasChangeRate = ({
  * This function can be used with any pressure units (pascal, mm Hg, bar, msw,
  * fsw), the only requirement is to be consistent in all the provided pressure
  * parameters.
- *
- * @param Rq
- * @param Pco2
- * @param Ph2o
- * @returns {number}
  */
 export const alveolarWaterVaporPressure = ({
   respiratoryQuotient: Rq,
   carbonDioxidePressure: Pco2,
   waterPressure: Ph2o
-}) => Ph2o - (Pco2 * (1 - Rq) / Rq)
+}: {
+  respiratoryQuotient: number,
+  carbonDioxidePressure: number,
+  waterPressure: number
+}): number =>
+  Ph2o - (Pco2 * (1 - Rq) / Rq)
 
 /**
  * Calculates the alveolar partial pressure of an inert gas. This is the
@@ -80,17 +93,17 @@ export const alveolarWaterVaporPressure = ({
  * This function can be used with any pressure units (pascal, mm Hg, bar, msw,
  * fsw), the only requirement is to be consistent in all the provided pressure
  * parameters.
- *
- * @param Pa
- * @param Pwv
- * @param Fig
- * @returns {number}
  */
 export const alveolarInertGasPartialPressure = ({
   ambientPressure: Pa,
   waterVaporPressure: Pwv,
   inertGasFraction: Fig
-}) => (Pa - Pwv) * Fig
+}: {
+  ambientPressure: number,
+  waterVaporPressure: number,
+  inertGasFraction: number
+}): number =>
+  (Pa - Pwv) * Fig
 
 /**
  * Calculates the time constant given an inert gas half-time. The half-time must
@@ -98,13 +111,13 @@ export const alveolarInertGasPartialPressure = ({
  *
  * For more information about the half-time (or half-life as it is called in
  * physics) check [this wikipedia article](https://en.wikipedia.org/wiki/Half-life#:~:text=Half%2Dlife%20(symbol%20t%C2%BD,how%20long%20stable%20atoms%20survive.)
- *
- * @param T2ig
- * @returns {number}
  */
 export const inertGasTimeConstant = ({
   inertGasHalfTime: T2ig
-}) => Math.LN2 / T2ig
+}: {
+  inertGasHalfTime: number
+}): number =>
+  Math.LN2 / T2ig
 
 /**
  * Calculates the total partial pressure of an inert gas in a compartment for a
@@ -114,13 +127,6 @@ export const inertGasTimeConstant = ({
  * initialInspiredGasPartialPressure and initialCompartmentGasPartialPressure
  * must be consistent (bar, fsw, msw, pascal, etc.) and the gasChangeRate must
  * be in <pressure_units>/minute
- *
- * @param Pig
- * @param Pcg
- * @param k
- * @param R
- * @param t
- * @returns {number}
  */
 export const schreinerEquation = ({
   initialInspiredGasPartialPressure: Pig,
@@ -128,4 +134,11 @@ export const schreinerEquation = ({
   gasTimeConstant: k,
   gasChangeRate: R,
   intervalTime: t
-}) => Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)
+}: {
+  initialInspiredGasPartialPressure: number,
+  initialCompartmentGasPartialPressure: number,
+  gasTimeConstant: number,
+  gasChangeRate: number,
+  intervalTime: number
+}): number =>
+  Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)

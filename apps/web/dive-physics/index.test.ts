@@ -1,11 +1,13 @@
 import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
-  getAirSaturatedCompartments, inertGasTimeConstant,
-  inspiredGasChangeRate, schreinerEquation
+  getSurfaceSaturatedCompartments,
+  inertGasTimeConstant,
+  inspiredGasChangeRate,
+  schreinerEquation
 } from './index'
 
-describe('getAirSaturatedCompartments', () => {
+describe('getSurfaceSaturatedCompartments', () => {
   test.each([
     {
       labelDepth: 'the surface of the sea',
@@ -47,12 +49,12 @@ describe('getAirSaturatedCompartments', () => {
       expectedResult: 0.7089
     }
   ])('should be $expectedResult $labelUnits at $labelDepth for all the compartments', ({ args, expectedResult }) => {
-    const result = getAirSaturatedCompartments(args)
+    const result = getSurfaceSaturatedCompartments(args)
 
     expect(result).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          gasPartialPressure: {
+          inertGasLoad: {
             N2: expect.closeTo(expectedResult, 3),
             He: 0
           }
