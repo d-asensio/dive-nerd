@@ -5,7 +5,7 @@ import {cn} from "@/lib/utils";
 
 import {Separator} from "@/components/ui/separator";
 import {Input, InputProps} from "@/components/ui/input";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 import {
   Select,
   SelectContent,
@@ -20,6 +20,27 @@ import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+
+function LanguageSelector() {
+  return (
+    <Select defaultValue="en-US">
+      <SelectTrigger>
+        <SelectValue/>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="en-US">
+          English
+        </SelectItem>
+        <SelectItem value="es-ES">
+          Spanish
+        </SelectItem>
+        <SelectItem value="ca-ES">
+          Catalan
+        </SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
 
 const TopBar = () => (
   <div className="hidden h-full flex-col md:flex">
@@ -36,6 +57,7 @@ const TopBar = () => (
       <div className="ml-auto flex w-full space-x-2 sm:justify-end">
         <div className="hidden space-x-2 md:flex">
           <ShareButton/>
+          <LanguageSelector/>
         </div>
       </div>
     </div>
@@ -101,7 +123,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
           <TableCell>
             <Select defaultValue='nitrox-50'>
               <SelectTrigger>
-                <SelectValue placeholder="-- no gas selected --" />
+                <SelectValue placeholder="-- no gas selected --"/>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="helitrox-21/22">
@@ -125,7 +147,7 @@ export function DivePlanTable(props: React.HTMLAttributes<HTMLDivElement>) {
           <TableCell>
             <Tooltip delayDuration={0}>
               <TooltipTrigger>
-                <AlertTriangle className="h-4 w-4 text-red-500" />
+                <AlertTriangle className="h-4 w-4 text-red-500"/>
               </TooltipTrigger>
               <TooltipContent>
                 <p className="max-w-[300px] text-red-500">
@@ -146,10 +168,10 @@ export function GasTable(props: React.HTMLAttributes<HTMLDivElement>) {
     <Table {...props}>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[300px]" >
+          <TableHead className="w-[300px]">
             Gas
           </TableHead>
-          <TableHead className="w-0" />
+          <TableHead className="w-0"/>
           <TableHead className='text-right'>
             MOD
           </TableHead>
@@ -234,7 +256,7 @@ export function GasTable(props: React.HTMLAttributes<HTMLDivElement>) {
         <TableRow>
           <TableCell colSpan={3} className="text-right">
             <Button variant="ghost">
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus className="mr-2 h-4 w-4"/>
               Add gas mix
             </Button>
           </TableCell>
@@ -250,7 +272,7 @@ export function DecompressionTable(props: React.HTMLAttributes<HTMLDivElement>) 
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-0" />
+            <TableHead className="w-0"/>
             <TableHead>
               Depth
             </TableHead>
@@ -461,7 +483,7 @@ export default function Home() {
               <h2 className="text-2xl">
                 Gas
               </h2>
-              <GasTable />
+              <GasTable/>
             </div>
           </div>
         </div>
