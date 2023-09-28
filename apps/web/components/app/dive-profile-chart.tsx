@@ -15,21 +15,21 @@ const intervals = calculatesIntervalsFromPlan({
   },
   levels: [
     {
-      duration: 25,
+      duration: 4,
       depth: 45
     },
     {
       duration: 10,
       depth: 50
     },
-    {
-      duration: 20,
-      depth: 35
-    },
-    {
-      duration: 10,
-      depth: 35
-    }
+    // {
+    //   duration: 20,
+    //   depth: 35
+    // },
+    // {
+    //   duration: 10,
+    //   depth: 35
+    // }
   ]
 })
 

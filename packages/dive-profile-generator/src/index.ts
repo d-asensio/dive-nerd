@@ -46,14 +46,17 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
       } = level
 
       const depthDelta = endDepth - startDepth
+
       const rate =
         depthDelta < 0
           ? ascentRate
           : descentRate
+
       const deltaIntervalType =
         depthDelta < 0
           ? DiveProfileIntervalType.ASCENT
           : DiveProfileIntervalType.DESCENT
+
       const timeDelta = Math.abs(depthDelta / rate)
 
       const deltaInterval = {
@@ -62,6 +65,13 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         endTime: startTime + timeDelta,
         startDepth,
         endDepth
+      }
+
+      if (timeDelta > duration) {
+        return [
+          ...intervalsAcc,
+          deltaInterval
+        ]
       }
 
       const navigationInterval = {

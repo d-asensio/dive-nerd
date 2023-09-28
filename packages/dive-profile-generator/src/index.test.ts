@@ -56,7 +56,34 @@ describe('calculatesIntervalsFromPlan', () => {
     ])
   })
 
-  it('returns the intervals of the descent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
+  it('only returns the interval for the descent if it takes more than the whole duration', () => {
+    const plan: DivePlan = {
+      configuration: {
+        descentRate: 10,
+        ascentRate: 5
+      },
+      levels: [
+        {
+          duration: 4,
+          depth: 45
+        }
+      ]
+    }
+
+    const result = calculatesIntervalsFromPlan(plan)
+
+    expect(result).toStrictEqual([
+      {
+        type: DiveProfileIntervalType.DESCENT,
+        startTime: 0,
+        endTime: 4.5,
+        startDepth: 0,
+        endDepth: 45
+      }
+    ])
+  })
+
+  it('calculates the intervals of the descent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
     const plan: DivePlan = {
       configuration: {
         descentRate: 10,
@@ -108,7 +135,7 @@ describe('calculatesIntervalsFromPlan', () => {
     ])
   })
 
-  it('returns the intervals of the descent, navigation ascent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
+  it('calculates the intervals of the descent, navigation ascent and navigation for a multi level dive of 25min@45m -> 15min@40m', () => {
     const plan: DivePlan = {
       configuration: {
         descentRate: 10,
