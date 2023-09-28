@@ -1,79 +1,76 @@
-import {
-  map,
-  range,
-  pipe,
-  reduce,
-  concat,
-  last
-} from "ramda";
+import {last, reduce} from "ramda";
 
-interface DiveGeneratorOptions {
-  samplingRate: number
+interface DivePlanConfiguration {
   descentRate: number
-  initialAmbientPressure: number
+  ascentRate: number
 }
 
-interface DivePlanSample {
-  time: number
-  ambientPressure: number
+interface DivePlanLevel {
+  duration: number,
+  depth: number
 }
 
-const lastEnsured =
-  last as <T extends any>(list: readonly T[]) => T
+export interface DivePlan {
+  configuration: DivePlanConfiguration
+  levels: DivePlanLevel[]
+}
 
-export const createDiveProfileGenerator = (options: DiveGeneratorOptions) => {
+export enum DiveProfileIntervalType {
+  DESCENT,
+  NAVIGATION,
+  ASCENT,
+  DECO_STOP
+}
 
-  const {
-    samplingRate,
-    descentRate,
-    initialAmbientPressure
-  } = options
+interface DiveProfileInterval {
+  type: DiveProfileIntervalType
+  startTime: number
+  endTime: number
+  startDepth: number
+  endDepth: number
+}
 
-  function generateDivePlanForSegment (previousSample: DivePlanSample, endPressure: number): DivePlanSample[] {
-    const {
-      time: initialTime,
-      ambientPressure: initialPressure
-    } = previousSample
+export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
+  const {descentRate} = divePlan.configuration
 
-    const samplingRateSeconds = 60 / samplingRate
-    const segmentPressureDelta = endPressure - initialPressure
-    const segmentTimeDelta = segmentPressureDelta / descentRate * 60
-    const segmentsCount = Math.ceil(segmentTimeDelta / samplingRateSeconds)
+  return reduce(
+    (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
+      const {
+        endDepth: startDepth = 0,
+        endTime: startTime = 0
+      } = last(intervalsAcc) ?? {}
 
-    const intervalDepthDelta = segmentPressureDelta / segmentsCount
-    const intervalTimeDelta = segmentTimeDelta / segmentsCount
+      const {
+        duration,
+        depth: endDepth
+      } = level
 
-    return pipe(
-      range(1),
-      map(
-        (segmentIndex) => ({
-          time: segmentIndex*intervalTimeDelta + initialTime,
-          ambientPressure: segmentIndex*intervalDepthDelta + initialPressure,
-        })
-      )
-    )(segmentsCount + 1)
-  }
+      const depthDelta = endDepth - startDepth
+      const descentTimeDelta = depthDelta / descentRate
 
+      const descentInterval = {
+        type: DiveProfileIntervalType.DESCENT,
+        startTime,
+        endTime: startTime + descentTimeDelta,
+        startDepth,
+        endDepth
+      }
 
-  const generateFirstSample: () => DivePlanSample =
-    () => ({
-      time: 0,
-      ambientPressure: initialAmbientPressure
-    })
+      const navigationInterval = {
+        type: DiveProfileIntervalType.NAVIGATION,
+        startTime: descentInterval.endTime,
+        endTime: descentInterval.startTime + duration,
+        startDepth: descentInterval.endDepth,
+        endDepth: descentInterval.endDepth
+      }
 
-  const pressureLevelsToSegmentsReducer =
-    (acc: DivePlanSample[], endAmbientPressure: number) => concat(
-      acc,
-      generateDivePlanForSegment(
-        lastEnsured(acc),
-        endAmbientPressure
-      ))
-
-  const generateFromAmbientPressureLevels: (ambientPressureLevels: number[]) => DivePlanSample[] =
-    reduce(
-      pressureLevelsToSegmentsReducer,
-      [generateFirstSample()]
-    )
-
-  return {generateFromAmbientPressureLevels}
+      return [
+        ...intervalsAcc,
+        descentInterval,
+        navigationInterval
+      ]
+    },
+    [],
+    divePlan.levels
+  )
 }

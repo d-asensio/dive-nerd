@@ -6,18 +6,36 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 
-import { createDiveProfileGenerator } from "dive-profile-generator"
+import { calculatesIntervalsFromPlan } from "dive-profile-generator"
 
-const profileGenerator = createDiveProfileGenerator({
-  samplingRateSeconds: 60,
-  descentRate: 10
+const intervals = calculatesIntervalsFromPlan({
+  configuration: {
+    descentRate: 10,
+    ascentRate: 9
+  },
+  levels: [
+    {
+      duration: 25,
+      depth: 45
+    },
+    {
+      duration: 10,
+      depth: 50
+    }
+  ]
 })
 
-const segments = profileGenerator.generateFromSegments([
-  { from: 0, to: 45 }
-])
-
-console.log(segments)
+const chartDataPoints = [
+  {
+    x: 0,
+    y: 0
+  },
+  ...intervals.map(
+    ({ endTime, endDepth }) => ({
+      x: endTime,
+      y: endDepth
+    }))
+]
 
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
@@ -49,75 +67,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           data={[
             {
               id: "Dive Profile",
-              data: [
-                ...segments.map(
-                  ({ depth, time }) => ({ y: depth, x: time/60 })
-                ),
-                {
-                  "x": 25,
-                  "y": 45
-                },
-                {
-                  "x": 27,
-                  "y": 21
-                },
-                {
-                  "x": 27.5,
-                  "y": 21
-                },
-                {
-                  "x": 28,
-                  "y": 18
-                },
-                {
-                  "x": 29,
-                  "y": 18
-                },
-                {
-                  "x": 29.5,
-                  "y": 15
-                },
-                {
-                  "x": 30,
-                  "y": 15
-                },
-                {
-                  "x": 30.5,
-                  "y": 12
-                },
-                {
-                  "x": 31,
-                  "y": 12
-                },
-                {
-                  "x": 31.5,
-                  "y": 9
-                },
-                {
-                  "x": 34,
-                  "y": 9
-                },
-                {
-                  "x": 34.5,
-                  "y": 6
-                },
-                {
-                  "x": 37,
-                  "y": 6
-                },
-                {
-                  "x": 37.5,
-                  "y": 3
-                },
-                {
-                  "x": 43,
-                  "y": 3
-                },
-                {
-                  "x": 43.5,
-                  "y": 0
-                }
-              ]
+              data: chartDataPoints
             }
           ]}
           colors={["rgb(96, 165, 250)"]}

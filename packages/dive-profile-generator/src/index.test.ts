@@ -1,115 +1,103 @@
-import {createDiveProfileGenerator} from "./index";
+import {calculatesIntervalsFromPlan, DivePlan, DiveProfileIntervalType} from "./index";
 
-describe('createDiveProfileGenerator.generateFromAmbientPressureLevels', () => {
-  describe('single level descent', () => {
-    it.each([
-      {
-        options: {
-          samplingRate: 1,
-          descentRate: 1,
-          initialAmbientPressure: 0
-        },
-        levels: [1],
-        expectedResult: [
-          { time: 0,  ambientPressure: 0  },
-          { time: 60, ambientPressure: 1 }
-        ]
+describe('calculatesIntervalsFromPlan', () => {
+  it('returns an empty intervals if the plan has no levels', () => {
+    const plan: DivePlan = {
+      configuration: {
+        descentRate: 10,
+        ascentRate: 9
       },
-      {
-        options: {
-          samplingRate: 1,
-          descentRate: 2,
-          initialAmbientPressure: 0
-        },
-        levels: [1],
-        expectedResult: [
-          { time: 0,  ambientPressure: 0  },
-          { time: 30, ambientPressure: 1 }
-        ]
-      },
-      {
-        options: {
-          samplingRate: 1,
-          descentRate: 1,
-          initialAmbientPressure: 1
-        },
-        levels: [2],
-        expectedResult: [
-          { time: 0,  ambientPressure: 1 },
-          { time: 60, ambientPressure: 2 }
-        ]
-      },
-      {
-        options: {
-          samplingRate: 1,
-          descentRate: 2,
-          initialAmbientPressure: 1
-        },
-        levels: [2],
-        expectedResult: [
-          { time: 0,  ambientPressure: 1 },
-          { time: 30, ambientPressure: 2 }
-        ]
-      },
-      {
-        options: {
-          samplingRate: 1,
-          descentRate: 1,
-          initialAmbientPressure: 0
-        },
-        levels: [2],
-        expectedResult: [
-          { time: 0,   ambientPressure: 0 },
-          { time: 60,  ambientPressure: 1 },
-          { time: 120, ambientPressure: 2 }
-        ]
-      },
-      {
-        options: {
-          samplingRate: 2,
-          descentRate: 1,
-          initialAmbientPressure: 0
-        },
-        levels: [2],
-        expectedResult: [
-          { time: 0,   ambientPressure: 0 },
-          { time: 30,  ambientPressure: 0.5 },
-          { time: 60,  ambientPressure: 1 },
-          { time: 90,  ambientPressure: 1.5 },
-          { time: 120, ambientPressure: 2 }
-        ]
-      }
-    ])('goes from $options.initialAmbientPressure bar to $levels.0 bar at a descent rate of $options.descentRate bar/min ($options.samplingRate samples/min)', ({ options, levels, expectedResult }) => {
-      const diveProfileGenerator = createDiveProfileGenerator(options)
+      levels: []
+    }
 
-      const result = diveProfileGenerator.generateFromAmbientPressureLevels(levels)
+    const result = calculatesIntervalsFromPlan(plan)
 
-      expect(result).toStrictEqual(expectedResult)
-    })
+    expect(result).toStrictEqual([])
   })
 
-  describe('multi level descent', () => {
-    it.each([
+  it('calculates the intervals of the descent and navigation for a single level dive of 25min. @ 45m', () => {
+    const plan: DivePlan = {
+      configuration: {
+        descentRate: 10,
+        ascentRate: 9
+      },
+      levels: [
+        {
+          duration: 25,
+          depth: 45
+        }
+      ]
+    }
+
+    const result = calculatesIntervalsFromPlan(plan)
+
+    expect(result).toStrictEqual([
       {
-        options: {
-          samplingRate: 1,
-          descentRate: 1,
-          initialAmbientPressure: 0
-        },
-        levels: [1, 3],
-        expectedResult: [
-          { time: 0,  ambientPressure: 0  },
-          { time: 60, ambientPressure: 1 },
-          { time: 120, ambientPressure: 2 },
-          { time: 180, ambientPressure: 3 }
-        ]
+        type: DiveProfileIntervalType.DESCENT,
+        startTime: 0,
+        endTime: 4.5,
+        startDepth: 0,
+        endDepth: 45
+      },
+      {
+        type: DiveProfileIntervalType.NAVIGATION,
+        startTime: 4.5,
+        endTime: 25,
+        startDepth: 45,
+        endDepth: 45
       }
-    ])('goes from $options.initialAmbientPressure bar to $levels.1 bar at a descent rate of $options.descentRate bar/min ($levels.length levels - $options.samplingRate samples/min)', ({ options, levels, expectedResult }) => {
-      const diveProfileGenerator = createDiveProfileGenerator(options)
+    ])
+  })
 
-      const result = diveProfileGenerator.generateFromAmbientPressureLevels(levels)
+  it('returns the intervals of the descent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
+    const plan: DivePlan = {
+      configuration: {
+        descentRate: 10,
+        ascentRate: 9
+      },
+      levels: [
+        {
+          duration: 25,
+          depth: 45
+        },
+        {
+          duration: 10,
+          depth: 50
+        }
+      ]
+    }
 
-      expect(result).toStrictEqual(expectedResult)
-    })
+    const result = calculatesIntervalsFromPlan(plan)
+
+    expect(result).toStrictEqual([
+      {
+        type: DiveProfileIntervalType.DESCENT,
+        startTime: 0,
+        endTime: 4.5,
+        startDepth: 0,
+        endDepth: 45
+      },
+      {
+        type: DiveProfileIntervalType.NAVIGATION,
+        startTime: 4.5,
+        endTime: 25,
+        startDepth: 45,
+        endDepth: 45
+      },
+      {
+        type: DiveProfileIntervalType.DESCENT,
+        startTime: 25,
+        endTime: 25.5,
+        startDepth: 45,
+        endDepth: 50
+      },
+      {
+        type: DiveProfileIntervalType.NAVIGATION,
+        startTime: 25.5,
+        endTime: 35,
+        startDepth: 50,
+        endDepth: 50
+      }
+    ])
   })
 })
