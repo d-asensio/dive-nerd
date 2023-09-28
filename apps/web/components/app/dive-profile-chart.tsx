@@ -6,6 +6,19 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 
+import { createDiveProfileGenerator } from "dive-profile-generator"
+
+const profileGenerator = createDiveProfileGenerator({
+  samplingRateSeconds: 60,
+  descentRate: 10
+})
+
+const segments = profileGenerator.generateFromSegments([
+  { from: 0, to: 45 }
+])
+
+console.log(segments)
+
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
       <Tooltip open delayDuration={0}>
@@ -37,14 +50,9 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             {
               id: "Dive Profile",
               data: [
-                {
-                  "x": 0,
-                  "y": 0
-                },
-                {
-                  "x": 5,
-                  "y": 45
-                },
+                ...segments.map(
+                  ({ depth, time }) => ({ y: depth, x: time/60 })
+                ),
                 {
                   "x": 25,
                   "y": 45
