@@ -31,7 +31,7 @@ interface DiveProfileInterval {
 }
 
 export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
-  const {descentRate} = divePlan.configuration
+  const {descentRate, ascentRate} = divePlan.configuration
 
   return reduce(
     (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
@@ -46,27 +46,35 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
       } = level
 
       const depthDelta = endDepth - startDepth
-      const descentTimeDelta = depthDelta / descentRate
+      const rate =
+        depthDelta < 0
+          ? ascentRate
+          : descentRate
+      const deltaIntervalType =
+        depthDelta < 0
+          ? DiveProfileIntervalType.ASCENT
+          : DiveProfileIntervalType.DESCENT
+      const timeDelta = Math.abs(depthDelta / rate)
 
-      const descentInterval = {
-        type: DiveProfileIntervalType.DESCENT,
+      const deltaInterval = {
+        type: deltaIntervalType,
         startTime,
-        endTime: startTime + descentTimeDelta,
+        endTime: startTime + timeDelta,
         startDepth,
         endDepth
       }
 
       const navigationInterval = {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: descentInterval.endTime,
-        endTime: descentInterval.startTime + duration,
-        startDepth: descentInterval.endDepth,
-        endDepth: descentInterval.endDepth
+        startTime: deltaInterval.endTime,
+        endTime: deltaInterval.startTime + duration,
+        startDepth: deltaInterval.endDepth,
+        endDepth: deltaInterval.endDepth
       }
 
       return [
         ...intervalsAcc,
-        descentInterval,
+        deltaInterval,
         navigationInterval
       ]
     },

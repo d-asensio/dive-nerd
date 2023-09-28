@@ -21,9 +21,19 @@ const intervals = calculatesIntervalsFromPlan({
     {
       duration: 10,
       depth: 50
+    },
+    {
+      duration: 20,
+      depth: 35
+    },
+    {
+      duration: 10,
+      depth: 35
     }
   ]
 })
+
+console.log(intervals)
 
 const chartDataPoints = [
   {
