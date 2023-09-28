@@ -67,7 +67,7 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         endDepth
       }
 
-      if (timeDelta > duration) {
+      if (timeDelta >= duration) {
         return [
           ...intervalsAcc,
           deltaInterval
