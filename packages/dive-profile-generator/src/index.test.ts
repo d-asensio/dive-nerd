@@ -3,7 +3,6 @@ import {calculatesIntervalsFromPlan, DivePlan, DiveProfileIntervalType} from "./
 
 /**
  * TODO:
- *  - What if the descent takes more than the total duration?
  *  - Simplify consecutive intervals
  */
 

@@ -5,6 +5,8 @@ import {TopBar} from "@/components/app/top-bar";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
+import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
+
 
 export default function Home() {
   return (
@@ -14,9 +16,12 @@ export default function Home() {
         <div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h2 className="text-2xl">
-                Plan
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl">
+                  Plan
+                </h2>
+                <DiveSettingsPopover />
+              </div>
               <DivePlanTable/>
             </div>
             <div>

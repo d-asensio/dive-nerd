@@ -11,7 +11,7 @@ import { calculatesIntervalsFromPlan } from "dive-profile-generator"
 const intervals = calculatesIntervalsFromPlan({
   configuration: {
     descentRate: 10,
-    ascentRate: 9
+    ascentRate: 2
   },
   levels: [
     {
@@ -19,21 +19,23 @@ const intervals = calculatesIntervalsFromPlan({
       depth: 45
     },
     {
+      duration: 25,
+      depth: 45
+    },
+    {
       duration: 10,
       depth: 50
     },
-    // {
-    //   duration: 20,
-    //   depth: 35
-    // },
-    // {
-    //   duration: 10,
-    //   depth: 35
-    // }
+    {
+      duration: 20,
+      depth: 35
+    },
+    {
+      duration: 10,
+      depth: 35
+    }
   ]
 })
-
-console.log(intervals)
 
 const chartDataPoints = [
   {
