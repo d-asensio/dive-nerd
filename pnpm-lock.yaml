@@ -74,9 +74,6 @@ importers:
       postcss:
         specifier: 8.4.30
         version: 8.4.30
-      ramda:
-        specifier: ^0.29.0
-        version: 0.29.0
       react:
         specifier: 18.2.0
         version: 18.2.0
