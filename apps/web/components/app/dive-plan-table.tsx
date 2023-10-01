@@ -82,7 +82,7 @@ function PlanLevelRow({ id }: PlanLevelRow) {
       </TableCell>
       <TableCell>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button size="icon" variant="outline" disabled={isFirst}>
               <Minus className="h-4 w-4"/>
             </Button>

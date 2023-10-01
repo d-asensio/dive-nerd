@@ -50,7 +50,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           </TableCell>
           <TableCell>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button size="icon" variant="outline" disabled>
                   <Minus className="h-4 w-4"/>
                 </Button>
@@ -87,7 +87,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           </TableCell>
           <TableCell>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button size="icon" variant="outline">
                   <Minus className="h-4 w-4"/>
                 </Button>
@@ -124,7 +124,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           </TableCell>
           <TableCell>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button size="icon" variant="outline">
                   <Minus className="h-4 w-4"/>
                 </Button>
