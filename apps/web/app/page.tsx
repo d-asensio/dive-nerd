@@ -6,6 +6,9 @@ import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
 import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
+import {
+  CompartmentGasLoadChart
+} from "@/components/app/compartment-gas-load-chart";
 
 
 export default function Home() {
@@ -38,6 +41,17 @@ export default function Home() {
         <div className="grid grid-cols-3 gap-4">
           <DecompressionTable/>
           <DiveProfileChart className="col-span-2"/>
+        </div>
+        <h2 className="text-2xl">
+          Compartments
+        </h2>
+        <div className="grid grid-cols-4 gap-y-4">
+          {Array.from({ length: 16 }).map((_, id ) => (
+            <CompartmentGasLoadChart
+              key={String(id)}
+              id={String(id + 1)}
+            />
+          ))}
         </div>
       </div>
     </main>
