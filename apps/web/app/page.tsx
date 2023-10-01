@@ -10,6 +10,14 @@ import {
   CompartmentGasLoadChart
 } from "@/components/app/compartment-gas-load-chart";
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import {ChevronsUpDown} from "lucide-react";
+import {Button} from "@/components/ui/button";
+
 
 export default function Home() {
   return (
@@ -19,11 +27,11 @@ export default function Home() {
         <div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-start space-x-2">
+                <DiveSettingsPopover />
                 <h2 className="text-2xl">
                   Plan
                 </h2>
-                <DiveSettingsPopover />
               </div>
               <DivePlanTable/>
             </div>
@@ -42,17 +50,28 @@ export default function Home() {
           <DecompressionTable/>
           <DiveProfileChart className="col-span-2"/>
         </div>
-        <h2 className="text-2xl">
-          Compartments
-        </h2>
-        <div className="grid grid-cols-4 gap-y-4">
-          {Array.from({ length: 16 }).map((_, id ) => (
-            <CompartmentGasLoadChart
-              key={String(id)}
-              id={String(id + 1)}
-            />
-          ))}
-        </div>
+        <Collapsible>
+          <div className="flex items-center justify-start mb-6 space-x-2">
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <ChevronsUpDown className="h-4 w-4" />
+              </Button>
+            </CollapsibleTrigger>
+            <h2 className="text-2xl">
+              Compartment gas load
+            </h2>
+          </div>
+          <CollapsibleContent>
+            <div className="grid grid-cols-4 gap-y-4">
+              {Array.from({ length: 16 }).map((_, id ) => (
+                <CompartmentGasLoadChart
+                  key={String(id)}
+                  id={String(id + 1)}
+                />
+              ))}
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       </div>
     </main>
   )

@@ -1,9 +1,13 @@
+import * as React from "react";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+
+import {Settings} from "lucide-react";
+
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Button} from "@/components/ui/button";
-import {Settings} from "lucide-react";
 import {Label} from "@/components/ui/label";
+
 import {InputWithUnits} from "@/components/app/input-with-units";
-import * as React from "react";
 
 export function DiveSettingsPopover() {
   return (
