@@ -6,7 +6,7 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 
-import { calculatesIntervalsFromPlan } from "dive-profile-generator"
+import {calculatesIntervalsFromPlan} from "dive-profile-generator"
 
 const intervals = calculatesIntervalsFromPlan({
   configuration: {
@@ -36,8 +36,6 @@ const intervals = calculatesIntervalsFromPlan({
     }
   ]
 })
-
-console.log({ intervals })
 
 const chartDataPoints = [
   {
