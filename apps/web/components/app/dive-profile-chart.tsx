@@ -37,6 +37,8 @@ const intervals = calculatesIntervalsFromPlan({
   ]
 })
 
+console.log({ intervals })
+
 const chartDataPoints = [
   {
     x: 0,

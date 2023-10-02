@@ -6,7 +6,35 @@ import {ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 
+const maxValueLineEq = ({
+  coefficientA: a,
+  coefficientB: b,
+  ambientPressure: Pa
+}: {
+  coefficientA: number,
+  coefficientB: number,
+  ambientPressure: number
+}) => Pa/b + a
+
+const gradientFactorLineEq = ({
+  ambientPressure: Pa,
+  coefficientA: A,
+  coefficientB: B,
+  gradientFactor: gf
+}: {
+  ambientPressure: number,
+  coefficientA: number,
+  coefficientB: number,
+  gradientFactor: number
+}) => A*gf + (1/B - 1)*gf*Pa + Pa
+
 export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { id: string }) {
+  const coefficientA = 0.78
+  const coefficientB = 0.55
+
+  const lowGradientFactor = 0.2
+  const highGradientFactor = 0.7
+
   return (
     <div
       className={cn('flex flex-col items-center min-w-0 min-h-[300px] max-h-[600px] overflow-x-auto space-y-2', className)}
@@ -20,27 +48,99 @@ export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAtt
           enablePoints={false}
           data={[
             {
-              id: "Dive Profile",
+              id: "Ambient pressure line",
               data: [
                 { x: 0, y: 0 },
                 { x: 10, y: 10 }
               ]
             },
             {
-              id: "Ambient pressure line",
+              id: "Surface pressure line",
               data: [
                 { x: 1, y: 0 },
                 { x: 1, y: 10 }
               ]
+            },
+            {
+              id: "M-Value line",
+              data: [
+                {
+                  x: 0,
+                  y: maxValueLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 0
+                  })
+                },
+                {
+                  x: 10,
+                  y: maxValueLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 10
+                  })
+                }
+              ]
+            },
+            {
+              id: "GF@Low line",
+              data: [
+                {
+                  x: 0,
+                  y: gradientFactorLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 0,
+                    gradientFactor: lowGradientFactor
+                  })
+                },
+                {
+                  x: 10,
+                  y: gradientFactorLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 10,
+                    gradientFactor: lowGradientFactor
+                  })
+                }
+              ]
+            },
+            {
+              id: "GF@High line",
+              data: [
+                {
+                  x: 0,
+                  y: gradientFactorLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 0,
+                    gradientFactor: highGradientFactor
+                  })
+                },
+                {
+                  x: 10,
+                  y: gradientFactorLineEq({
+                    coefficientA,
+                    coefficientB,
+                    ambientPressure: 10,
+                    gradientFactor: highGradientFactor
+                  })
+                }
+
+              ]
             }
           ]}
-          colors={["black", "red"]}
-          margin={{top: 4, right: 0, bottom: 62, left: 62}}
-          xScale={{type: "linear"}}
+          colors={["black", "lightblue", "red", "orange", "purple"]}
+          margin={{top: 4, right: 6, bottom: 62, left: 62}}
+          xScale={{
+            type: "linear",
+            min: 0,
+            max: 10
+          }}
           yScale={{
             type: "linear",
-            min: "auto",
-            max: "auto",
+            min: 0,
+            max: 10,
             stacked: false
           }}
           yFormat=" >-.2f"
