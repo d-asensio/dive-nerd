@@ -28,12 +28,38 @@ const gradientFactorLineEq = ({
   gradientFactor: number
 }) => A*gf + (1/B - 1)*gf*Pa + Pa
 
+const gradientFactorsCeilingLineEq = ({
+  surfaceAmbientPressure: Ps,
+  ambientPressure: Pa,
+  compartmentGasPartialPressure: Pcg,
+  coefficientA: A,
+  coefficientB: B,
+  lowGradientFactor: gfL,
+  highGradientFactor: gfH
+}: {
+  surfaceAmbientPressure: number,
+  ambientPressure: number,
+  compartmentGasPartialPressure: number,
+  coefficientA: number,
+  coefficientB: number,
+  lowGradientFactor: number,
+  highGradientFactor: number
+}) => {
+  const n = (Pcg - A*gfL)/(gfL/B + 1 - gfL)
+  const m = Ps*(gfH/B + 1 - gfH) + A*gfH
+
+  return (Pa - Ps)*(Pcg - m)/(n - Ps) + m
+}
+
 export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { id: string }) {
   const coefficientA = 0.78
   const coefficientB = 0.55
 
   const lowGradientFactor = 0.2
   const highGradientFactor = 0.7
+
+  const surfaceAmbientPressure = 1
+  const compartmentGasPartialPressure = 6
 
   return (
     <div
@@ -128,9 +154,46 @@ export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAtt
                 }
 
               ]
+            },
+            {
+              id: "GF@Ceiling line",
+              data: [
+                {
+                  x: surfaceAmbientPressure,
+                  y: gradientFactorsCeilingLineEq({
+                    ambientPressure: surfaceAmbientPressure,
+                    surfaceAmbientPressure,
+                    compartmentGasPartialPressure,
+                    coefficientA,
+                    coefficientB,
+                    highGradientFactor,
+                    lowGradientFactor
+                  })
+                },
+                {
+                  x: compartmentGasPartialPressure - surfaceAmbientPressure,
+                  y: gradientFactorsCeilingLineEq({
+                    ambientPressure: compartmentGasPartialPressure - surfaceAmbientPressure,
+                    surfaceAmbientPressure,
+                    compartmentGasPartialPressure,
+                    coefficientA,
+                    coefficientB,
+                    highGradientFactor,
+                    lowGradientFactor
+                  })
+                }
+
+              ]
             }
           ]}
-          colors={["black", "lightblue", "red", "orange", "purple"]}
+          colors={[
+            "black",
+            "lightblue",
+            "red",
+            "orange",
+            "purple",
+            "green"
+          ]}
           margin={{top: 4, right: 6, bottom: 62, left: 62}}
           xScale={{
             type: "linear",
