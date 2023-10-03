@@ -142,3 +142,5 @@ export const schreinerEquation = ({
   intervalTime: number
 }): number =>
   Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)
+
+export  { buhlmannCompartments } from './buhlmannCompartments'

@@ -3,6 +3,8 @@
 import * as React from "react";
 import {ResponsiveLine} from '@nivo/line'
 
+import {buhlmannCompartments} from "dive-physics";
+
 import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 
@@ -52,8 +54,10 @@ const gradientFactorsCeilingLineEq = ({
 }
 
 export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { id: string }) {
-  const coefficientA = 0.78
-  const coefficientB = 0.55
+  const { N2 } = buhlmannCompartments[id]
+
+  const coefficientA = N2.a
+  const coefficientB = N2.b
 
   const lowGradientFactor = 0.2
   const highGradientFactor = 0.7

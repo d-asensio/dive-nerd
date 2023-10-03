@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { buhlmannCompartments } from "dive-physics"
+
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {TopBar} from "@/components/app/top-bar";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
@@ -17,7 +19,6 @@ import {
 } from "@/components/ui/collapsible"
 import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
-
 
 export default function Home() {
   return (
@@ -63,10 +64,10 @@ export default function Home() {
           </div>
           <CollapsibleContent>
             <div className="grid grid-cols-4 gap-y-4">
-              {Array.from({ length: 16 }).map((_, id ) => (
+              {Object.keys(buhlmannCompartments).map(id => (
                 <CompartmentGasLoadChart
-                  key={String(id)}
-                  id={String(id + 1)}
+                  key={id}
+                  id={id}
                 />
               ))}
             </div>

@@ -59,6 +59,9 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
+      dive-physics:
+        specifier: '*'
+        version: link:../../packages/dive-physics
       dive-profile-generator:
         specifier: '*'
         version: link:../../packages/dive-profile-generator
