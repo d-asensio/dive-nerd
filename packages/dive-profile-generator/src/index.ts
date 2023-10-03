@@ -16,10 +16,10 @@ export interface DivePlan {
 }
 
 export enum DiveProfileIntervalType {
-  DESCENT,
-  NAVIGATION,
-  ASCENT,
-  DECO_STOP
+  DESCENT = 'DESCENT',
+  NAVIGATION = 'NAVIGATION',
+  ASCENT = 'ASCENT',
+  DECO_STOP = 'DECO_STOP'
 }
 
 interface DiveProfileInterval {
@@ -80,6 +80,13 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         endTime: deltaInterval.startTime + duration,
         startDepth: deltaInterval.endDepth,
         endDepth: deltaInterval.endDepth
+      }
+
+      if(timeDelta === 0) {
+        return [
+          ...intervalsAcc,
+          navigationInterval
+        ]
       }
 
       return [
