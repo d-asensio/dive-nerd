@@ -1,6 +1,10 @@
 export  { buhlmannCompartments } from './buhlmannCompartments'
 
+/**
+ * Gravitational acceleration in meters * second^2
+ */
 const GRAVITY = 9.80665
+
 const AIR_NITROGEN_FRACTION = 0.79
 
 interface InertGasLoad {
