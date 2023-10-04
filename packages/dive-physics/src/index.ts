@@ -59,7 +59,7 @@ export const inspiredGasChangeRate = ({
   descentRate: number,
   inertGasFraction: number
 }): number =>
-  R * Fig
+  R*Fig
 
 /**
  * Calculates the water pressure in the alveoli. It uses the alveolar
@@ -90,7 +90,7 @@ export const alveolarWaterVaporPressure = ({
   carbonDioxidePressure: number,
   waterPressure: number
 }): number =>
-  Ph2o - (Pco2 * (1 - Rq) / Rq)
+  Ph2o - (Pco2*(1 - Rq)/Rq)
 
 /**
  * Calculates the alveolar partial pressure of an inert gas. This is the
@@ -110,7 +110,7 @@ export const alveolarInertGasPartialPressure = ({
   waterVaporPressure: number,
   inertGasFraction: number
 }): number =>
-  (Pa - Pwv) * Fig
+  (Pa - Pwv)*Fig
 
 /**
  * Calculates the time constant given an inert gas half-time. The half-time must
@@ -124,7 +124,7 @@ export const inertGasTimeConstant = ({
 }: {
   inertGasHalfTime: number
 }): number =>
-  Math.LN2 / T2ig
+  Math.LN2/T2ig
 
 /**
  * Calculates the total partial pressure of an inert gas in a compartment for a
@@ -148,7 +148,7 @@ export const schreinerEquation = ({
   gasChangeRate: number,
   intervalTime: number
 }): number =>
-  Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)
+  Pig + R*(t - 1/k) - (Pig - Pcg - R/k)*Math.exp(-k*t)
 
 
 const fromPascalsToBars: (pascals: number) => number =
