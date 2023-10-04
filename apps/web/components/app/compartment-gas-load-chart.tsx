@@ -76,7 +76,7 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
 
   return (
     <div
-      className={cn('flex flex-col items-center min-w-0 h-[1200px] overflow-x-auto space-y-2', className)}
+      className={cn('flex flex-col items-center min-w-0 h-[600px] overflow-x-auto space-y-2', className)}
       {...props}
     >
       <Badge variant="secondary" className="ml-[62px]">
@@ -247,6 +247,7 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
           }}
           pointSize={5}
           pointBorderWidth={1}
+          tooltip={() => null}
           pointBorderColor={{from: "serieColor"}}
           pointLabelYOffset={-12}
           useMesh
