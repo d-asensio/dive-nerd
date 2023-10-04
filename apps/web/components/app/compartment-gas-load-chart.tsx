@@ -8,6 +8,8 @@ import {buhlmannCompartments, CompartmentInertGasLoad} from "dive-physics";
 import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 
+import {useStore} from "@/state/store";
+
 const maxValueLineEq = ({
   coefficientA: a,
   coefficientB: b,

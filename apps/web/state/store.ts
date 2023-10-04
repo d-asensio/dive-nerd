@@ -1,9 +1,9 @@
-import { createStore } from 'zustand'
+import { create } from 'zustand'
 import {createDivePlanSlice, DivePlanSlice} from "@/state/slices/createDivePlanSlice";
 
 type StoreState = DivePlanSlice
 
-export const useStore = createStore<StoreState>()((...a) => ({
+export const useStore = create<StoreState>((...a) => ({
   ...createDivePlanSlice({
     descentRate: 10,
     ascentRate: 9,
