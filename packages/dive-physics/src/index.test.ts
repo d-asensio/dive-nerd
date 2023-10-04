@@ -245,7 +245,7 @@ describe('schreinerEquation', () => {
       labelTestCase: 'in a first dive, the total partial pressure of Helium for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
       labelUnits: 'fsw',
       args: {
-        initialInspiredGasPartialPressure: 13.93,
+        initialAlveolarGasPartialPressure: 13.93,
         initialCompartmentGasPartialPressure: 0,
         gasTimeConstant: 0.459,
         gasChangeRate: 27,
@@ -257,7 +257,7 @@ describe('schreinerEquation', () => {
       labelTestCase: 'in a first dive, the total partial pressure of Nitrogen for Bühlmann compartment 1 in a descent from 0 to 120 fsw at 60 fsw/min',
       labelUnits: 'fsw',
       args: {
-        initialInspiredGasPartialPressure: 12.38,
+        initialAlveolarGasPartialPressure: 12.38,
         initialCompartmentGasPartialPressure: 24.46,
         gasTimeConstant: 0.173,
         gasChangeRate: 24,

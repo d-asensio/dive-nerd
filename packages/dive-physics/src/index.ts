@@ -136,13 +136,13 @@ export const inertGasTimeConstant = ({
  * be in <pressure_units>/minute
  */
 export const schreinerEquation = ({
-  initialInspiredGasPartialPressure: Pig,
+  initialAlveolarGasPartialPressure: Pig,
   initialCompartmentGasPartialPressure: Pcg,
   gasTimeConstant: k,
   gasChangeRate: R,
   intervalTime: t
 }: {
-  initialInspiredGasPartialPressure: number,
+  initialAlveolarGasPartialPressure: number,
   initialCompartmentGasPartialPressure: number,
   gasTimeConstant: number,
   gasChangeRate: number,
