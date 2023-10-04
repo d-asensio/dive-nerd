@@ -72,7 +72,7 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
   const lowGradientFactor = 0.3
   const highGradientFactor = 0.8
 
-  const compartmentGasPartialPressure = 6
+  const compartmentGasPartialPressure = 5.530439123
 
   return (
     <div
@@ -247,7 +247,6 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
           }}
           pointSize={5}
           pointBorderWidth={1}
-          tooltip={() => null}
           pointBorderColor={{from: "serieColor"}}
           pointLabelYOffset={-12}
           useMesh
