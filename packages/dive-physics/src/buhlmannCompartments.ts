@@ -18,14 +18,14 @@ interface BuhlmannCompartment {
 export const buhlmannCompartments: BuhlmannCompartment[] = [
   {
     N2: {
-      halfTime: 4,
-      a: 1.2599,
-      b: 0.524
+      halfTime: 5,
+      a: 1.1696,
+      b: 0.5578
     },
     He: {
-      halfTime: 1.51,
-      a: 1.7424,
-      b: 0.4245
+      halfTime: 1.88,
+      a: 1.6189,
+      b: 0.4770
     }
   },
   {

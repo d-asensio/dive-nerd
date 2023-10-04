@@ -63,27 +63,26 @@ interface Dive {
   }[];
 }
 
-export function CompartmentGasLoadChart({compartmentId, className, dive, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number, dive: Dive }) {
+export function CompartmentGasLoadChart({compartmentId, className, dive, surfaceAmbientPressure, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number, dive: Dive, surfaceAmbientPressure: number }) {
   const { N2 } = buhlmannCompartments[compartmentId]
 
   const coefficientA = N2.a
   const coefficientB = N2.b
 
-  const lowGradientFactor = 0.2
-  const highGradientFactor = 0.7
+  const lowGradientFactor = 0.3
+  const highGradientFactor = 0.8
 
-  const surfaceAmbientPressure = 1
   const compartmentGasPartialPressure = 6
 
   return (
     <div
-      className={cn('flex flex-col items-center min-w-0 min-h-[300px] max-h-[600px] overflow-x-auto space-y-2', className)}
+      className={cn('flex flex-col items-center min-w-0 h-[1200px] overflow-x-auto space-y-2', className)}
       {...props}
     >
       <Badge variant="secondary" className="ml-[62px]">
         Compartment {compartmentId + 1}
       </Badge>
-      <div className="min-w-[300px] h-full">
+      <div className="w-full h-full">
         <ResponsiveLine
           enablePoints={false}
           data={[
@@ -246,7 +245,6 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, ...prop
             legendOffset: -30,
             legendPosition: "start"
           }}
-          tooltip={() => null}
           pointSize={5}
           pointBorderWidth={1}
           pointBorderColor={{from: "serieColor"}}

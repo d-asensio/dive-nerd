@@ -73,11 +73,11 @@ const intervals = calculatesIntervalsFromPlan({
     },
     {
       depth: 9,
-      duration: 7
+      duration: 8
     },
     {
       depth: 6,
-      duration: 55
+      duration: 68
     },
     {
       depth: 0,
@@ -277,12 +277,13 @@ export default function Home() {
             </h2>
           </div>
           <CollapsibleContent>
-            <div className="grid grid-cols-4 gap-y-4">
+            <div className="grid grid-cols-1 gap-y-4">
               {buhlmannCompartments.map((_, id) => (
                 <CompartmentGasLoadChart
                   key={id}
                   compartmentId={id}
                   dive={dive}
+                  surfaceAmbientPressure={surfaceAmbientPressure}
                 />
               ))}
             </div>
