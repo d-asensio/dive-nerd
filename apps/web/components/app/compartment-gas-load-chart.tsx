@@ -50,7 +50,28 @@ const gradientFactorsCeilingLineEq = ({
   const n = (Pcg - A*gfL)/(gfL/B + 1 - gfL)
   const m = Ps*(gfH/B + 1 - gfH) + A*gfH
 
-  return (Pa - Ps)*(Pcg - m)/(n - Ps) + m
+  const ceiling = (Pa - Ps)*(Pcg - m)/(n - Ps) + m
+
+  const highGradientFactor = gradientFactorLineEq({
+    coefficientA: A,
+    coefficientB: B,
+    ambientPressure: Pa,
+    gradientFactor: gfH
+  })
+
+  const lowGradientFactor = gradientFactorLineEq({
+    coefficientA: A,
+    coefficientB: B,
+    ambientPressure: Pa,
+    gradientFactor: gfL
+  })
+
+  if (ceiling < Pa) return null
+
+  if (ceiling > highGradientFactor) return null
+  if (ceiling < lowGradientFactor) return null
+
+  return ceiling
 }
 
 interface Dive {
@@ -72,7 +93,7 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
   const lowGradientFactor = 0.3
   const highGradientFactor = 0.8
 
-  const compartmentGasPartialPressure = 5.530439123
+  const maxAmbientPressure = 5.530439123
 
   return (
     <div
@@ -90,14 +111,14 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
               id: "Ambient pressure line",
               data: [
                 { x: 0, y: 0 },
-                { x: 10, y: 10 }
+                { x: maxAmbientPressure, y: maxAmbientPressure }
               ]
             },
             {
               id: "Surface pressure line",
               data: [
-                { x: 1, y: 0 },
-                { x: 1, y: 10 }
+                { x: surfaceAmbientPressure, y: 0 },
+                { x: surfaceAmbientPressure, y: maxAmbientPressure }
               ]
             },
             {
@@ -112,11 +133,11 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                   })
                 },
                 {
-                  x: 10,
+                  x: maxAmbientPressure,
                   y: maxValueLineEq({
                     coefficientA,
                     coefficientB,
-                    ambientPressure: 10
+                    ambientPressure: maxAmbientPressure
                   })
                 }
               ]
@@ -134,11 +155,11 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                   })
                 },
                 {
-                  x: 10,
+                  x: maxAmbientPressure,
                   y: gradientFactorLineEq({
                     coefficientA,
                     coefficientB,
-                    ambientPressure: 10,
+                    ambientPressure: maxAmbientPressure,
                     gradientFactor: lowGradientFactor
                   })
                 }
@@ -157,11 +178,11 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                   })
                 },
                 {
-                  x: 10,
+                  x: maxAmbientPressure,
                   y: gradientFactorLineEq({
                     coefficientA,
                     coefficientB,
-                    ambientPressure: 10,
+                    ambientPressure: maxAmbientPressure,
                     gradientFactor: highGradientFactor
                   })
                 }
@@ -176,7 +197,7 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                   y: gradientFactorsCeilingLineEq({
                     ambientPressure: surfaceAmbientPressure,
                     surfaceAmbientPressure,
-                    compartmentGasPartialPressure,
+                    compartmentGasPartialPressure: maxAmbientPressure, /// Wrong
                     coefficientA,
                     coefficientB,
                     highGradientFactor,
@@ -184,11 +205,11 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                   })
                 },
                 {
-                  x: compartmentGasPartialPressure - surfaceAmbientPressure,
+                  x: maxAmbientPressure - surfaceAmbientPressure,
                   y: gradientFactorsCeilingLineEq({
-                    ambientPressure: compartmentGasPartialPressure - surfaceAmbientPressure,
+                    ambientPressure: maxAmbientPressure - surfaceAmbientPressure,
                     surfaceAmbientPressure,
-                    compartmentGasPartialPressure,
+                    compartmentGasPartialPressure: maxAmbientPressure, /// Wrong
                     coefficientA,
                     coefficientB,
                     highGradientFactor,
@@ -204,6 +225,21 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
                 x: ambientPressure,
                 y: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He
               }))
+            },
+            {
+              id: "Ceil",
+              data: dive.dataPoints.map(({ compartmentInertGasLoads, ambientPressure }) => ({
+                x: ambientPressure,
+                y: gradientFactorsCeilingLineEq({
+                  ambientPressure,
+                  surfaceAmbientPressure,
+                  compartmentGasPartialPressure: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He,
+                  coefficientA,
+                  coefficientB,
+                  highGradientFactor,
+                  lowGradientFactor
+                })
+              }))
             }
           ]}
           colors={[
@@ -218,12 +254,12 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
           xScale={{
             type: "linear",
             min: 0,
-            max: 10
+            max: maxAmbientPressure
           }}
           yScale={{
             type: "linear",
             min: 0,
-            max: 10,
+            max: maxAmbientPressure,
             stacked: false
           }}
           yFormat=" >-.2f"

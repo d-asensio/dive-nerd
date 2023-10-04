@@ -84,7 +84,26 @@ const intervals = calculatesIntervalsFromPlan({
       duration: 0
     }
   ]
-})
+}).reduce((acc: DiveProfileInterval[], interval)  => {
+  const sampleEvery = 0.1 // seconds to minutes
+  const intervalTime = interval.endTime - interval.startTime
+  const totalIntervals = Math.round(intervalTime/sampleEvery)
+
+  const timeDelta = intervalTime/totalIntervals
+  const depthDelta = (interval.endDepth - interval.startDepth) / totalIntervals
+
+  return [
+    ...acc,
+    ...Array.from({ length: totalIntervals }).map((_, i) => ({
+      type: interval.type,
+      startTime: interval.startTime + (timeDelta * i),
+      endTime: interval.startTime + (timeDelta * (i+1)),
+      startDepth: interval.startDepth + (depthDelta * i),
+      endDepth: interval.startDepth + (depthDelta * (i+1)),
+    }))
+  ]
+}, [])
+
 
 interface DiveProfileIntervalWithAmbientPressure extends DiveProfileInterval {
   startAmbientPressure: number
@@ -227,9 +246,6 @@ const dive = calculatedIntervals.reduce(({ cumulativeCompartmentInertGasLoad, da
     }
   ]
 })
-
-console.log(calculatedIntervals)
-console.log(dive)
 
 export default function Home() {
   return (
