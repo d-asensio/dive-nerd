@@ -5,6 +5,22 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
+import {CompartmentInertGasLoad} from "dive-physics";
+
+const GRAVITY = 9.80665
+const surfaceAmbientPressure = 1.0133 // bar
+const waterDensity = 1023.6 // kg/m3
+const fromBarsToPascals = (bars: number) => bars * 100000
+
+const fromPressureToDepth = ({
+ surfaceAmbientPressure: Ps,
+ pressure: P,
+ waterDensity: Wd
+}: {
+  surfaceAmbientPressure: number,
+  pressure: number,
+  waterDensity: number
+}) => fromBarsToPascals(P - Ps) / (Wd*GRAVITY)
 
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
@@ -24,7 +40,16 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
   )
 }
 
-export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAttributes<HTMLDivElement> & { dataPoints: { x: number, y: number }[] }) {
+interface AdditionalProps {
+  dataPoints: {
+    compartmentInertGasLoads: CompartmentInertGasLoad[]
+    ambientPressure: number
+    x: number
+    y: number
+  }[];
+}
+
+export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAttributes<HTMLDivElement> & AdditionalProps) {
   return (
     <div
       className={cn('min-w-0 min-h-[400px] max-h-[800px] overflow-x-auto', className)}
@@ -37,9 +62,20 @@ export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAt
             {
               id: "Dive Profile",
               data: dataPoints
-            }
+            },
+            ...Array.from({ length: 16 }).map((_, i) => ({
+              id: `Compartment ${i}`,
+              data: dataPoints.map(({compartmentInertGasLoads, x, }) => ({
+                x,
+                y: fromPressureToDepth({
+                  pressure: compartmentInertGasLoads[i].N2 + compartmentInertGasLoads[i].He,
+                  surfaceAmbientPressure,
+                  waterDensity
+                })
+              }))
+            }))
           ]}
-          colors={["rgb(96, 165, 250)"]}
+          // colors={["rgb(96, 165, 250)"]}
           margin={{top: 12, right: 18, bottom: 62, left: 62}}
           xScale={{type: "linear"}}
           yScale={{

@@ -84,8 +84,11 @@ const intervals = calculatesIntervalsFromPlan({
       duration: 0
     }
   ]
-}).reduce((acc: DiveProfileInterval[], interval)  => {
-  const sampleEvery = 0.1 // seconds to minutes
+})
+
+
+.reduce((acc: DiveProfileInterval[], interval)  => {
+  const sampleEvery = 0.5 // seconds to minutes
   const intervalTime = interval.endTime - interval.startTime
   const totalIntervals = Math.round(intervalTime/sampleEvery)
 
