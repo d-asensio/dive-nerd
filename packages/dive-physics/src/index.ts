@@ -7,7 +7,7 @@ const GRAVITY = 9.80665
 
 const AIR_NITROGEN_FRACTION = 0.79
 
-interface CompartmentInertGasLoad {
+export interface CompartmentInertGasLoad {
   N2: number
   He: number
 }
@@ -143,10 +143,10 @@ const fromPascalsToBars: (pascals: number) => number =
 
 export const fromDepthToHydrostaticPressure = ({
    depth: D,
-   surfacePressure: Ps,
+   surfaceAmbientPressure: Ps,
    waterDensity: Wd
  }: {
   depth: number,
-  surfacePressure: number,
+  surfaceAmbientPressure: number,
   waterDensity: number
 }) => fromPascalsToBars(D * Wd * GRAVITY) + Ps

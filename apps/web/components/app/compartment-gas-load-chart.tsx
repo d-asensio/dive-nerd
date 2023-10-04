@@ -3,7 +3,7 @@
 import * as React from "react";
 import {ResponsiveLine} from '@nivo/line'
 
-import {buhlmannCompartments} from "dive-physics";
+import {buhlmannCompartments, CompartmentInertGasLoad} from "dive-physics";
 
 import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
@@ -53,7 +53,17 @@ const gradientFactorsCeilingLineEq = ({
   return (Pa - Ps)*(Pcg - m)/(n - Ps) + m
 }
 
-export function CompartmentGasLoadChart({compartmentId, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number }) {
+interface Dive {
+  cumulativeCompartmentInertGasLoad: CompartmentInertGasLoad[]
+  dataPoints: {
+    compartmentInertGasLoads: CompartmentInertGasLoad[]
+    ambientPressure: number
+    x: number
+    y: number
+  }[];
+}
+
+export function CompartmentGasLoadChart({compartmentId, className, dive, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number, dive: Dive }) {
   const { N2 } = buhlmannCompartments[compartmentId]
 
   const coefficientA = N2.a
@@ -188,6 +198,13 @@ export function CompartmentGasLoadChart({compartmentId, className, ...props}: Re
                 }
 
               ]
+            },
+            {
+              id: "Load",
+              data: dive.dataPoints.map(({ compartmentInertGasLoads, ambientPressure }) => ({
+                x: ambientPressure,
+                y: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He
+              }))
             }
           ]}
           colors={[

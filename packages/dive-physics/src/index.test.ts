@@ -266,7 +266,7 @@ describe('fromDepthToHydrostaticPressure', () => {
       args: {
         waterDensity: 1023.6,
         depth: 1,
-        surfacePressure: 1.0133
+        surfaceAmbientPressure: 1.0133
       },
       expectedResult: 1.1136
     },
@@ -275,7 +275,7 @@ describe('fromDepthToHydrostaticPressure', () => {
       args: {
         waterDensity: 1023.6,
         depth: 10,
-        surfacePressure: 1.0133
+        surfaceAmbientPressure: 1.0133
       },
       expectedResult: 2.0171
     },
@@ -284,7 +284,7 @@ describe('fromDepthToHydrostaticPressure', () => {
       args: {
         waterDensity: 997.0474,
         depth: 1,
-        surfacePressure: 1.0133
+        surfaceAmbientPressure: 1.0133
       },
       expectedResult: 1.111
     },
@@ -293,7 +293,7 @@ describe('fromDepthToHydrostaticPressure', () => {
       args: {
         waterDensity: 997.0474,
         depth: 10,
-        surfacePressure: 1.0133
+        surfaceAmbientPressure: 1.0133
       },
       expectedResult: 1.991
     }

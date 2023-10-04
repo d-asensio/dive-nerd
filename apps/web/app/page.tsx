@@ -1,6 +1,14 @@
 import * as React from "react";
 
-import { buhlmannCompartments } from "dive-physics"
+import {
+  alveolarInertGasPartialPressure,
+  alveolarWaterVaporPressure,
+  buhlmannCompartments,
+  fromDepthToHydrostaticPressure,
+  getSurfaceSaturatedCompartmentInertGasLoads, inertGasTimeConstant,
+  inspiredGasChangeRate,
+  schreinerEquation
+} from "dive-physics"
 
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {TopBar} from "@/components/app/top-bar";
@@ -19,6 +27,209 @@ import {
 } from "@/components/ui/collapsible"
 import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {
+  calculatesIntervalsFromPlan,
+  DiveProfileInterval
+} from "dive-profile-generator";
+import {pipe} from "ramda";
+
+
+/**
+ * Dive variables
+ */
+const surfaceAmbientPressure = 1.0133 // bar
+const waterDensity = 1023.6 // kg/m3
+const waterVaporPressure = alveolarWaterVaporPressure({
+  respiratoryQuotient: 0.9,
+  carbonDioxidePressure: 0.0533,
+  waterPressure: 0.0627
+})
+
+const intervals = calculatesIntervalsFromPlan({
+  configuration: {
+    descentRate: 10,
+    ascentRate: 9
+  },
+  levels: [
+    {
+      depth: 45,
+      duration: 30
+    },
+    {
+      depth: 21,
+      duration: 2
+    },
+    {
+      depth: 18,
+      duration: 2
+    },
+    {
+      depth: 15,
+      duration: 4
+    },
+    {
+      depth: 12,
+      duration: 5
+    },
+    {
+      depth: 9,
+      duration: 7
+    },
+    {
+      depth: 6,
+      duration: 55
+    },
+    {
+      depth: 0,
+      duration: 0
+    }
+  ]
+})
+
+interface DiveProfileIntervalWithAmbientPressure extends DiveProfileInterval {
+  startAmbientPressure: number
+  endAmbientPressure: number
+}
+
+interface DiveProfileIntervalWithDescentRate extends DiveProfileIntervalWithAmbientPressure {
+  descentRate: number
+}
+
+interface DiveProfileIntervalWithAlveolarInertGasPressures extends DiveProfileIntervalWithDescentRate {
+  startAlveolarInertGasPressures: {
+    N2: number
+    He: number
+  }
+  endAlveolarInertGasPressures: {
+    N2: number
+    He: number
+  }
+}
+
+const calculateAmbientPressure: (interval: DiveProfileInterval) => DiveProfileIntervalWithAmbientPressure =
+  interval => ({
+    ...interval,
+    startAmbientPressure: fromDepthToHydrostaticPressure({
+      depth: interval.startDepth,
+      surfaceAmbientPressure,
+      waterDensity
+    }),
+    endAmbientPressure: fromDepthToHydrostaticPressure({
+      depth: interval.endDepth,
+      surfaceAmbientPressure,
+      waterDensity
+    }),
+  })
+
+
+const calculateDescentRate: (interval: DiveProfileIntervalWithAmbientPressure) => DiveProfileIntervalWithDescentRate =
+  interval => ({
+    ...interval,
+    descentRate: (interval.endAmbientPressure - interval.startAmbientPressure)/(interval.endTime - interval.startTime)
+  })
+
+
+const calculateAlveolarInertGasPressures: (interval: DiveProfileIntervalWithDescentRate) => DiveProfileIntervalWithAlveolarInertGasPressures =
+  interval => ({
+    ...interval,
+    startAlveolarInertGasPressures: {
+      N2: alveolarInertGasPartialPressure({
+        ambientPressure: interval.startAmbientPressure,
+        waterVaporPressure,
+        inertGasFraction: 0.79
+      }),
+      He: alveolarInertGasPartialPressure({
+        ambientPressure: interval.startAmbientPressure,
+        waterVaporPressure,
+        inertGasFraction: 0
+      })
+    },
+    endAlveolarInertGasPressures: {
+      N2: alveolarInertGasPartialPressure({
+        ambientPressure: interval.endAmbientPressure,
+        waterVaporPressure,
+        inertGasFraction: 0.79
+      }),
+      He: alveolarInertGasPartialPressure({
+        ambientPressure: interval.endAmbientPressure,
+        waterVaporPressure,
+        inertGasFraction: 0
+      })
+    }
+  })
+
+const calculateInterval: (interval: DiveProfileInterval) => DiveProfileIntervalWithAlveolarInertGasPressures =
+  pipe(
+    calculateAmbientPressure,
+    calculateDescentRate,
+    calculateAlveolarInertGasPressures
+  )
+
+
+const calculatedIntervals = intervals.map(calculateInterval)
+
+
+const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentInertGasLoads({
+  surfaceAmbientPressure,
+  waterVaporPressure
+})
+
+const dive = calculatedIntervals.reduce(({ cumulativeCompartmentInertGasLoad, dataPoints }, interval) => {
+  const intervalTime = interval.endTime - interval.startTime
+
+  const nextCumulativeCompartmentInertGasLoad = cumulativeCompartmentInertGasLoad.map((compartmentInertGasLoads, compartmentId) => ({
+    N2: schreinerEquation({
+      initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.N2,
+      initialCompartmentGasPartialPressure: compartmentInertGasLoads.N2,
+      gasChangeRate: inspiredGasChangeRate({
+        descentRate: interval.descentRate,
+        inertGasFraction: 0.79
+      }),
+      gasTimeConstant: inertGasTimeConstant({
+        inertGasHalfTime: buhlmannCompartments[compartmentId].N2.halfTime
+      }),
+      intervalTime
+    }),
+    He: schreinerEquation({
+      initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.He,
+      initialCompartmentGasPartialPressure: compartmentInertGasLoads.He,
+      gasChangeRate: inspiredGasChangeRate({
+        descentRate: interval.descentRate,
+        inertGasFraction: 0
+      }),
+      gasTimeConstant: inertGasTimeConstant({
+        inertGasHalfTime: buhlmannCompartments[compartmentId].He.halfTime
+      }),
+      intervalTime
+    }),
+  }))
+
+  return {
+    cumulativeCompartmentInertGasLoad: nextCumulativeCompartmentInertGasLoad,
+    dataPoints: [
+      ...dataPoints,
+      {
+        compartmentInertGasLoads: nextCumulativeCompartmentInertGasLoad,
+        ambientPressure: interval.endAmbientPressure,
+        x: interval.endTime,
+        y: interval.endDepth
+      }
+    ]
+  }
+}, {
+  cumulativeCompartmentInertGasLoad: surfaceSaturatedCompartmentInertGasLoads,
+  dataPoints: [
+    {
+      compartmentInertGasLoads: surfaceSaturatedCompartmentInertGasLoads,
+      ambientPressure: surfaceAmbientPressure,
+      x: 0,
+      y: 0
+    }
+  ]
+})
+
+console.log(calculatedIntervals)
+console.log(dive)
 
 export default function Home() {
   return (
@@ -49,7 +260,10 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-3 gap-4">
           <DecompressionTable/>
-          <DiveProfileChart className="col-span-2"/>
+          <DiveProfileChart
+            dataPoints={dive.dataPoints}
+            className="col-span-2"
+          />
         </div>
         <Collapsible>
           <div className="flex items-center justify-start mb-6 space-x-2">
@@ -68,6 +282,7 @@ export default function Home() {
                 <CompartmentGasLoadChart
                   key={id}
                   compartmentId={id}
+                  dive={dive}
                 />
               ))}
             </div>

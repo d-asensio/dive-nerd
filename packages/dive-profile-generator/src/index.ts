@@ -22,7 +22,7 @@ export enum DiveProfileIntervalType {
   DECO_STOP = 'DECO_STOP'
 }
 
-interface DiveProfileInterval {
+export interface DiveProfileInterval {
   type: DiveProfileIntervalType
   startTime: number
   endTime: number

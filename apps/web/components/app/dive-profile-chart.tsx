@@ -6,49 +6,6 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 
-import {calculatesIntervalsFromPlan} from "dive-profile-generator"
-
-const intervals = calculatesIntervalsFromPlan({
-  configuration: {
-    descentRate: 10,
-    ascentRate: 2
-  },
-  levels: [
-    {
-      duration: 4,
-      depth: 45
-    },
-    {
-      duration: 25,
-      depth: 45
-    },
-    {
-      duration: 10,
-      depth: 50
-    },
-    {
-      duration: 20,
-      depth: 35
-    },
-    {
-      duration: 10,
-      depth: 35
-    }
-  ]
-})
-
-const chartDataPoints = [
-  {
-    x: 0,
-    y: 0
-  },
-  ...intervals.map(
-    ({ endTime, endDepth }) => ({
-      x: endTime,
-      y: endDepth
-    }))
-]
-
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
       <Tooltip open delayDuration={0}>
@@ -67,7 +24,7 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
   )
 }
 
-export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
+export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAttributes<HTMLDivElement> & { dataPoints: { x: number, y: number }[] }) {
   return (
     <div
       className={cn('min-w-0 min-h-[400px] max-h-[800px] overflow-x-auto', className)}
@@ -79,7 +36,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           data={[
             {
               id: "Dive Profile",
-              data: chartDataPoints
+              data: dataPoints
             }
           ]}
           colors={["rgb(96, 165, 250)"]}

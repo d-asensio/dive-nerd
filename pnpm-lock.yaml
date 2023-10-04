@@ -44,6 +44,9 @@ importers:
       '@types/node':
         specifier: 20.6.3
         version: 20.6.3
+      '@types/ramda':
+        specifier: ^0.29.5
+        version: 0.29.5
       '@types/react':
         specifier: 18.2.22
         version: 18.2.22
@@ -80,6 +83,9 @@ importers:
       postcss:
         specifier: 8.4.30
         version: 8.4.30
+      ramda:
+        specifier: ^0.29.0
+        version: 0.29.0
       react:
         specifier: 18.2.0
         version: 18.2.0
