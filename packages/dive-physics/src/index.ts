@@ -1,3 +1,6 @@
+export  { buhlmannCompartments } from './buhlmannCompartments'
+
+const GRAVITY = 9.80665
 const AIR_NITROGEN_FRACTION = 0.79
 
 interface InertGasLoad {
@@ -143,4 +146,16 @@ export const schreinerEquation = ({
 }): number =>
   Pig + R * (t - 1 / k) - (Pig - Pcg - R / k) * Math.exp(-k * t)
 
-export  { buhlmannCompartments } from './buhlmannCompartments'
+
+const fromPascalsToBars: (pascals: number) => number =
+  pascals => pascals / 100000
+
+export const fromDepthToHydrostaticPressure = ({
+   depth: D,
+   surfacePressure: Ps,
+   waterDensity: Wd
+ }: {
+  depth: number,
+  surfacePressure: number,
+  waterDensity: number
+}) => fromPascalsToBars(D * Wd * GRAVITY) + Ps

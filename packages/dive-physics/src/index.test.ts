@@ -1,6 +1,7 @@
 import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
+  fromDepthToHydrostaticPressure,
   getSurfaceSaturatedCompartments,
   inertGasTimeConstant,
   inspiredGasChangeRate,
@@ -266,6 +267,51 @@ describe('schreinerEquation', () => {
     }
   ])('$labelTestCase should be $expectedResult $labelUnits', ({ args, expectedResult }) => {
     const result = schreinerEquation(args)
+
+    expect(result).toBeCloseTo(expectedResult, 3)
+  })
+})
+
+describe('fromDepthToHydrostaticPressure', () => {
+  test.each([
+    {
+      labelWater: 'sea',
+      args: {
+        waterDensity: 1023.6,
+        depth: 1,
+        surfacePressure: 1.0133
+      },
+      expectedResult: 1.1136
+    },
+    {
+      labelWater: 'sea',
+      args: {
+        waterDensity: 1023.6,
+        depth: 10,
+        surfacePressure: 1.0133
+      },
+      expectedResult: 2.0171
+    },
+    {
+      labelWater: 'fresh',
+      args: {
+        waterDensity: 997.0474,
+        depth: 1,
+        surfacePressure: 1.0133
+      },
+      expectedResult: 1.111
+    },
+    {
+      labelWater: 'fresh',
+      args: {
+        waterDensity: 997.0474,
+        depth: 10,
+        surfacePressure: 1.0133
+      },
+      expectedResult: 1.991
+    }
+  ])('$args.depth meters below $labelWater water is $expectedResult bar', ({ args, expectedResult }) => {
+    const result = fromDepthToHydrostaticPressure(args)
 
     expect(result).toBeCloseTo(expectedResult, 3)
   })
