@@ -53,8 +53,8 @@ const gradientFactorsCeilingLineEq = ({
   return (Pa - Ps)*(Pcg - m)/(n - Ps) + m
 }
 
-export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { id: string }) {
-  const { N2 } = buhlmannCompartments[id]
+export function CompartmentGasLoadChart({compartmentId, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number }) {
+  const { N2 } = buhlmannCompartments[compartmentId]
 
   const coefficientA = N2.a
   const coefficientB = N2.b
@@ -71,7 +71,7 @@ export function CompartmentGasLoadChart({id, className, ...props}: React.HTMLAtt
       {...props}
     >
       <Badge variant="secondary" className="ml-[62px]">
-        Compartment {id}
+        Compartment {compartmentId + 1}
       </Badge>
       <div className="min-w-[300px] h-full">
         <ResponsiveLine

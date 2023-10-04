@@ -15,8 +15,8 @@ interface BuhlmannCompartment {
   He: InertGasBuhlmannConstants
 }
 
-export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
-  '1': {
+export const buhlmannCompartments: BuhlmannCompartment[] = [
+  {
     N2: {
       halfTime: 4,
       a: 1.2599,
@@ -28,7 +28,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.4245
     }
   },
-  '2': {
+  {
     N2: {
       halfTime: 8,
       a: 1,
@@ -40,7 +40,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.5747
     }
   },
-  '3': {
+  {
     N2: {
       halfTime: 12.5,
       a: 0.8618,
@@ -52,7 +52,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.6527
     }
   },
-  '4': {
+  {
     N2: {
       halfTime: 18.5,
       a: 0.7562,
@@ -64,7 +64,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.7223
     }
   },
-  '5': {
+  {
     N2: {
       halfTime: 27,
       a: 0.6491,
@@ -76,7 +76,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.7582
     }
   },
-  '6': {
+  {
     N2: {
       halfTime: 38.3,
       a: 0.5316,
@@ -88,7 +88,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.7957
     }
   },
-  '7': {
+  {
     N2: {
       halfTime: 54.3,
       a: 0.4681,
@@ -100,7 +100,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.8279
     }
   },
-  '8': {
+  {
     N2: {
       halfTime: 77,
       a: 0.4301,
@@ -112,7 +112,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.8553
     }
   },
-  '9': {
+  {
     N2: {
       halfTime: 109,
       a: 0.4049,
@@ -124,7 +124,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.8757
     }
   },
-  '10': {
+  {
     N2: {
       halfTime: 146,
       a: 0.3719,
@@ -136,7 +136,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.8903
     }
   },
-  '11': {
+  {
     N2: {
       halfTime: 187,
       a: 0.3447,
@@ -148,7 +148,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.8997
     }
   },
-  '12': {
+  {
     N2: {
       halfTime: 239,
       a: 0.3176,
@@ -160,7 +160,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.9073
     }
   },
-  '13': {
+  {
     N2: {
       halfTime: 305,
       a: 0.2828,
@@ -172,7 +172,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.9122
     }
   },
-  '14': {
+  {
     N2: {
       halfTime: 390,
       a: 0.2716,
@@ -184,7 +184,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.9171
     }
   },
-  '15': {
+  {
     N2: {
       halfTime: 498,
       a: 0.2523,
@@ -196,7 +196,7 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.9217
     }
   },
-  '16': {
+  {
     N2: {
       halfTime: 635,
       a: 0.2327,
@@ -208,4 +208,4 @@ export const buhlmannCompartments: Record<string, BuhlmannCompartment> = {
       b: 0.9267
     }
   }
-}
+]

@@ -7,17 +7,9 @@ const GRAVITY = 9.80665
 
 const AIR_NITROGEN_FRACTION = 0.79
 
-interface InertGasLoad {
+interface CompartmentInertGasLoad {
   N2: number
   He: number
-}
-
-interface UninitializedCompartment {
-  name: string;
-}
-
-interface Compartment extends UninitializedCompartment {
-  inertGasLoad: InertGasLoad
 }
 
 /**
@@ -29,21 +21,16 @@ interface Compartment extends UninitializedCompartment {
  * before a "first dive", in which the diver haven't been diving for a
  * relatively long period of time.
  */
-export const getSurfaceSaturatedCompartments = ({
-  compartments,
+export const getSurfaceSaturatedCompartmentInertGasLoads = ({
   surfaceAmbientPressure: Ps,
   waterVaporPressure: Pwv
 }: {
-  compartments: UninitializedCompartment[],
   surfaceAmbientPressure: number,
   waterVaporPressure: number
-}): Compartment[] =>
-  compartments.map(compartment => ({
-    ...compartment,
-    inertGasLoad: {
-      N2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
-      He: 0
-    }
+}): CompartmentInertGasLoad[] =>
+  Array.from({ length: 16 }).map(() => ({
+    N2: (Ps - Pwv) * AIR_NITROGEN_FRACTION,
+    He: 0
   }))
 
 /**

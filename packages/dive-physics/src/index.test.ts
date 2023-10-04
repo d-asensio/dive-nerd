@@ -2,22 +2,18 @@ import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
   fromDepthToHydrostaticPressure,
-  getSurfaceSaturatedCompartments,
+  getSurfaceSaturatedCompartmentInertGasLoads,
   inertGasTimeConstant,
   inspiredGasChangeRate,
   schreinerEquation
 } from './index'
 
-describe('getSurfaceSaturatedCompartments', () => {
+describe('getSurfaceSaturatedCompartmentInertGasLoads', () => {
   test.each([
     {
       labelDepth: 'the surface of the sea',
       labelUnits: 'fsw',
       args: {
-        compartments: [
-          { name: '1b' },
-          { name: '2' }
-        ],
         surfaceAmbientPressure: 33,
         waterVaporPressure: 2.042
       },
@@ -27,10 +23,6 @@ describe('getSurfaceSaturatedCompartments', () => {
       labelDepth: 'the surface of the sea',
       labelUnits: 'bar',
       args: {
-        compartments: [
-          { name: '1b' },
-          { name: '2' }
-        ],
         surfaceAmbientPressure: 1,
         waterVaporPressure: 0.0627
       },
@@ -40,25 +32,20 @@ describe('getSurfaceSaturatedCompartments', () => {
       labelDepth: '300 meters above sea level',
       labelUnits: 'bar',
       args: {
-        compartments: [
-          { name: '1b' },
-          { name: '2' }
-        ],
         surfaceAmbientPressure: 0.96,
         waterVaporPressure: 0.0627
       },
       expectedResult: 0.7089
     }
   ])('should be $expectedResult $labelUnits at $labelDepth for all the compartments', ({ args, expectedResult }) => {
-    const result = getSurfaceSaturatedCompartments(args)
+    const result = getSurfaceSaturatedCompartmentInertGasLoads(args)
 
+    expect(result).toHaveLength(16)
     expect(result).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({
-          inertGasLoad: {
-            N2: expect.closeTo(expectedResult, 3),
-            He: 0
-          }
+        expect.objectContaining( {
+          N2: expect.closeTo(expectedResult, 3),
+          He: 0
         })
       ])
     )

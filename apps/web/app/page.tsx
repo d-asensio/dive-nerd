@@ -64,10 +64,10 @@ export default function Home() {
           </div>
           <CollapsibleContent>
             <div className="grid grid-cols-4 gap-y-4">
-              {Object.keys(buhlmannCompartments).map(id => (
+              {buhlmannCompartments.map((_, id) => (
                 <CompartmentGasLoadChart
                   key={id}
-                  id={id}
+                  compartmentId={id}
                 />
               ))}
             </div>
