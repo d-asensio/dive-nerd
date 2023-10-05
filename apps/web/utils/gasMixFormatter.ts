@@ -1,11 +1,11 @@
 import { gasMixTypeResolver as defaultGasMixNameResolver } from "@/utils/gasMixTypeResolver";
 import {GasMix, GasMixType} from "@/utils/types";
 
-interface GasMixFormatterDependencies {
+interface GasMixFormatterFactoryDependencies {
   gasMixNameResolver?: typeof defaultGasMixNameResolver
 }
 
-export const createGasMixFormatter = (dependencies: GasMixFormatterDependencies = {}) => {
+export const createGasMixFormatter = (dependencies: GasMixFormatterFactoryDependencies = {}) => {
   const {
     gasMixNameResolver = defaultGasMixNameResolver
   } = dependencies

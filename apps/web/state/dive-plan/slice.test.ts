@@ -42,7 +42,7 @@ function divePlanBuilder () {
 it('initializes state', () => {
   const initialDivePlan = divePlanBuilder().build()
   const slice = createStore(
-    createDivePlanSlice(initialDivePlan)
+    createDivePlanSlice({ initialDivePlan })
   )
 
   const state = slice.getState()
@@ -52,12 +52,12 @@ it('initializes state', () => {
 
 describe('setAscentRate', () => {
   it('sets an ascent rate', () => {
+    const initialDivePlan =
+      divePlanBuilder()
+        .withAscentRate(0)
+        .build()
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withAscentRate(0)
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().setAscentRate(99)
@@ -68,12 +68,13 @@ describe('setAscentRate', () => {
 
 describe('setDescentRate', () => {
   it('sets a descent rate', () => {
+    const initialDivePlan =
+      divePlanBuilder()
+        .withDescentRate(0)
+        .build()
+
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withDescentRate(0)
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().setDescentRate(99)
@@ -84,14 +85,10 @@ describe('setDescentRate', () => {
 
 describe('addDiveLevel', () => {
   it('adds a level to an empty levels list', () => {
-    const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withLevels([])
-          .build()
-      )
-    )
-    const diveLevel: DivePlanLevel = {
+    const initialDivePlan = divePlanBuilder()
+      .withLevels([])
+      .build()
+    const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
       gasMix: {
@@ -99,11 +96,14 @@ describe('addDiveLevel', () => {
         fHe: 0
       }
     }
+    const slice = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
 
-    slice.getState().addDiveLevel(diveLevel)
+    slice.getState().addDiveLevel(aDiveLevel)
 
     expect(slice.getState().diveLevels).toStrictEqual([
-      diveLevel
+      aDiveLevel
     ])
   })
 
@@ -124,12 +124,12 @@ describe('addDiveLevel', () => {
         fHe: 0
       }
     }
+    const initialDivePlan =
+      divePlanBuilder()
+        .withLevels([aDiveLevel])
+        .build()
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withLevels([aDiveLevel])
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().addDiveLevel(anotherDiveLevel)
@@ -151,12 +151,12 @@ describe('removeDiveLevel', () => {
         fHe: 0
       }
     }
+    const initialDivePlan =
+      divePlanBuilder()
+        .withLevels([aDiveLevel])
+        .build()
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withLevels([aDiveLevel])
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().removeDiveLevel(0)
@@ -165,12 +165,11 @@ describe('removeDiveLevel', () => {
   })
 
   it('does nothing when attempting to delete a level from an empty list', () => {
+    const initialDivePlan = divePlanBuilder()
+      .withLevels([])
+      .build()
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withLevels([])
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().removeDiveLevel(0)
@@ -187,12 +186,12 @@ describe('removeDiveLevel', () => {
         fHe: 0
       }
     }
+    const initialDivePlan =
+      divePlanBuilder()
+        .withLevels([aDiveLevel])
+        .build()
     const slice = createStore(
-      createDivePlanSlice(
-        divePlanBuilder()
-          .withLevels([aDiveLevel])
-          .build()
-      )
+      createDivePlanSlice({ initialDivePlan })
     )
 
     slice.getState().removeDiveLevel(1)

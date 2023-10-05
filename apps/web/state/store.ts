@@ -6,7 +6,7 @@ import { initialDivePlan } from "@/state/dive-plan/initial";
 export type StoreState = DivePlanSlice
 
 export const useStore = create<StoreState>((...a) => ({
-  ...createDivePlanSlice(initialDivePlan)(...a)
+  ...createDivePlanSlice({ initialDivePlan })(...a)
 }))
 
 interface Gas {

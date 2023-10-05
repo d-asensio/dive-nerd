@@ -12,23 +12,28 @@ export type DivePlanSlice =
   DivePlan &
   DivePlanActions
 
+interface DivePlanSliceFactoryDependencies {
+  initialDivePlan: DivePlan
+}
+
 export const createDivePlanSlice =
-  (initialDivePlan: DivePlan) => immer<DivePlanSlice>((set) => ({
-    ...initialDivePlan,
-    setDescentRate: descentRate =>
-      set(state => {
-        state.descentRate = descentRate
-      }),
-    setAscentRate: ascentRate =>
-      set(state => {
-        state.ascentRate = ascentRate
-      }),
-    addDiveLevel: level =>
-      set(state => {
-        state.diveLevels.push(level)
-      }),
-    removeDiveLevel: levelIndex =>
-      set(state => {
-        state.diveLevels.splice(levelIndex, 1)
-      }),
-  }))
+  ({ initialDivePlan }: DivePlanSliceFactoryDependencies) =>
+    immer<DivePlanSlice>((set) => ({
+      ...initialDivePlan,
+      setDescentRate: descentRate =>
+        set(state => {
+          state.descentRate = descentRate
+        }),
+      setAscentRate: ascentRate =>
+        set(state => {
+          state.ascentRate = ascentRate
+        }),
+      addDiveLevel: level =>
+        set(state => {
+          state.diveLevels.push(level)
+        }),
+      removeDiveLevel: levelIndex =>
+        set(state => {
+          state.diveLevels.splice(levelIndex, 1)
+        }),
+    }))
