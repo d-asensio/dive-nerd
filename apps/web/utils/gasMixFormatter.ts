@@ -24,3 +24,5 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterDependencies 
 
   return {format}
 }
+
+export default createGasMixFormatter()
