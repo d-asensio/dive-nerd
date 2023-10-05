@@ -1,6 +1,7 @@
 import {DivePlan} from "@/state/dive-plan/types";
 
 export const diveLevelIdsSelector = ({diveLevels}: DivePlan) =>
-  Array.from(diveLevels.keys())
+  Object.keys(diveLevels)
+
 export const diveLevelByIdSelector = (diveLevelId: number) => ({diveLevels}: DivePlan) =>
   diveLevels[diveLevelId] || null

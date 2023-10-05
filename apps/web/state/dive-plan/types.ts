@@ -12,7 +12,7 @@ interface DivePlanLevel {
 interface DivePlan {
   descentRate: number
   ascentRate: number
-  diveLevels: DivePlanLevel[]
+  diveLevels: Record<string, DivePlanLevel>
 }
 
 export type {DivePlan, DivePlanLevel};

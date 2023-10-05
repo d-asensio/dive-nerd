@@ -2,19 +2,21 @@ import { createStore } from 'zustand/vanilla'
 
 import { createDivePlanSlice } from "./slice";
 import { DivePlan, DivePlanLevel } from "@/state/dive-plan/types";
+import {when} from "jest-when";
 
 function divePlanBuilder () {
   const builder = {
     withAscentRate,
     withDescentRate,
     withLevels,
+    withoutLevels,
     build
   }
 
   let divePlan: DivePlan = {
     descentRate: 10,
     ascentRate: 9,
-    diveLevels: []
+    diveLevels: {}
   }
 
   function withDescentRate (descentRate: number) {
@@ -27,8 +29,13 @@ function divePlanBuilder () {
     return builder
   }
 
-  function withLevels (levels: DivePlanLevel[]) {
+  function withLevels (levels: Record<string, DivePlanLevel>) {
     divePlan.diveLevels = levels
+    return builder
+  }
+
+  function withoutLevels () {
+    divePlan.diveLevels = {}
     return builder
   }
 
@@ -41,11 +48,11 @@ function divePlanBuilder () {
 
 it('initializes state', () => {
   const initialDivePlan = divePlanBuilder().build()
-  const slice = createStore(
+  const sliceStore = createStore(
     createDivePlanSlice({ initialDivePlan })
   )
 
-  const state = slice.getState()
+  const state = sliceStore.getState()
 
   expect(state).toMatchObject(initialDivePlan)
 })
@@ -56,13 +63,13 @@ describe('setAscentRate', () => {
       divePlanBuilder()
         .withAscentRate(0)
         .build()
-    const slice = createStore(
+    const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan })
     )
 
-    slice.getState().setAscentRate(99)
+    sliceStore.getState().setAscentRate(99)
 
-    expect(slice.getState().ascentRate).toBe(99)
+    expect(sliceStore.getState().ascentRate).toBe(99)
   })
 })
 
@@ -73,20 +80,22 @@ describe('setDescentRate', () => {
         .withDescentRate(0)
         .build()
 
-    const slice = createStore(
+    const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan })
     )
 
-    slice.getState().setDescentRate(99)
+    sliceStore.getState().setDescentRate(99)
 
-    expect(slice.getState().descentRate).toBe(99)
+    expect(sliceStore.getState().descentRate).toBe(99)
   })
 })
 
 describe('addDiveLevel', () => {
+  const generateUUID = jest.fn()
+
   it('adds a level to an empty levels list', () => {
     const initialDivePlan = divePlanBuilder()
-      .withLevels([])
+      .withoutLevels()
       .build()
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
@@ -96,15 +105,16 @@ describe('addDiveLevel', () => {
         fHe: 0
       }
     }
-    const slice = createStore(
-      createDivePlanSlice({ initialDivePlan })
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan, generateUUID })
     )
+    when(generateUUID).mockReturnValue('an-id')
 
-    slice.getState().addDiveLevel(aDiveLevel)
+    sliceStore.getState().addDiveLevel(aDiveLevel)
 
-    expect(slice.getState().diveLevels).toStrictEqual([
-      aDiveLevel
-    ])
+    expect(sliceStore.getState().diveLevels).toStrictEqual({
+      'an-id': aDiveLevel
+    })
   })
 
   it('adds a level to levels list', () => {
@@ -126,18 +136,19 @@ describe('addDiveLevel', () => {
     }
     const initialDivePlan =
       divePlanBuilder()
-        .withLevels([aDiveLevel])
+        .withLevels({ 'an-id': aDiveLevel })
         .build()
-    const slice = createStore(
-      createDivePlanSlice({ initialDivePlan })
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan, generateUUID })
     )
+    when(generateUUID).mockReturnValue('another-id')
 
-    slice.getState().addDiveLevel(anotherDiveLevel)
+    sliceStore.getState().addDiveLevel(anotherDiveLevel)
 
-    expect(slice.getState().diveLevels).toStrictEqual([
-      aDiveLevel,
-      anotherDiveLevel
-    ])
+    expect(sliceStore.getState().diveLevels).toStrictEqual({
+      'an-id': aDiveLevel,
+      'another-id': anotherDiveLevel
+    })
   })
 });
 
@@ -153,31 +164,31 @@ describe('removeDiveLevel', () => {
     }
     const initialDivePlan =
       divePlanBuilder()
-        .withLevels([aDiveLevel])
+        .withLevels({ 'an-id': aDiveLevel })
         .build()
-    const slice = createStore(
+    const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan })
     )
 
-    slice.getState().removeDiveLevel(0)
+    sliceStore.getState().removeDiveLevel('an-id')
 
-    expect(slice.getState().diveLevels).toStrictEqual([])
+    expect(sliceStore.getState().diveLevels).toStrictEqual({})
   })
 
   it('does nothing when attempting to delete a level from an empty list', () => {
     const initialDivePlan = divePlanBuilder()
-      .withLevels([])
+      .withoutLevels()
       .build()
-    const slice = createStore(
+    const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan })
     )
 
-    slice.getState().removeDiveLevel(0)
+    sliceStore.getState().removeDiveLevel('a-undefined-id')
 
-    expect(slice.getState().diveLevels).toStrictEqual([])
+    expect(sliceStore.getState().diveLevels).toStrictEqual({})
   })
 
-  it('does nothing when attempting to delete a undefined index', () => {
+  it('does nothing when attempting to delete a undefined id', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
@@ -188,14 +199,14 @@ describe('removeDiveLevel', () => {
     }
     const initialDivePlan =
       divePlanBuilder()
-        .withLevels([aDiveLevel])
+        .withLevels({ 'an-id': aDiveLevel })
         .build()
-    const slice = createStore(
+    const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan })
     )
 
-    slice.getState().removeDiveLevel(1)
+    sliceStore.getState().removeDiveLevel('a-undefined-id')
 
-    expect(slice.getState().diveLevels).toStrictEqual([aDiveLevel])
+    expect(sliceStore.getState().diveLevels).toStrictEqual({ 'an-id': aDiveLevel })
   })
 })

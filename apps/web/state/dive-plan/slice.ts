@@ -1,11 +1,12 @@
+import { v1 as defaultGenerateUUID } from 'uuid'
 import {immer} from 'zustand/middleware/immer'
 import {DivePlan, DivePlanLevel} from "@/state/dive-plan/types";
 
 interface DivePlanActions {
   setDescentRate: (descentRate: number) => void
   setAscentRate: (ascentRate: number) => void
-  addDiveLevel: (level: DivePlanLevel) => void
-  removeDiveLevel: (levelIndex: number) => void
+  addDiveLevel: (level: DivePlanLevel) => string
+  removeDiveLevel: (levelIndex: string) => void
 }
 
 export type DivePlanSlice =
@@ -14,10 +15,14 @@ export type DivePlanSlice =
 
 interface DivePlanSliceFactoryDependencies {
   initialDivePlan: DivePlan
+  generateUUID?: typeof defaultGenerateUUID
 }
 
 export const createDivePlanSlice =
-  ({ initialDivePlan }: DivePlanSliceFactoryDependencies) =>
+  ({
+     initialDivePlan,
+     generateUUID = defaultGenerateUUID
+  }: DivePlanSliceFactoryDependencies) =>
     immer<DivePlanSlice>((set) => ({
       ...initialDivePlan,
       setDescentRate: descentRate =>
@@ -28,12 +33,17 @@ export const createDivePlanSlice =
         set(state => {
           state.ascentRate = ascentRate
         }),
-      addDiveLevel: level =>
+      addDiveLevel: level => {
+        const newUuid = generateUUID()
+
         set(state => {
-          state.diveLevels.push(level)
-        }),
-      removeDiveLevel: levelIndex =>
+          state.diveLevels[newUuid] = level
+        })
+
+        return newUuid
+      },
+      removeDiveLevel: newUuid =>
         set(state => {
-          state.diveLevels.splice(levelIndex, 1)
+          delete state.diveLevels[newUuid]
         }),
     }))
