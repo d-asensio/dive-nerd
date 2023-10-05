@@ -1,7 +1,7 @@
 import {when} from "jest-when"
 
 import {GasMix, GasMixName} from "@/utils/types";
-import {createGasMixFormatter} from "@/utils/createGasMixFormatter";
+import {createGasMixFormatter} from "@/utils/gasMixFormatter";
 
 describe('createGasMixFormatter.format', () => {
   it('labels nitrox mixes with the O2 percentage', () => {

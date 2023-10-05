@@ -1,6 +1,4 @@
-import {
-  gasMixNameResolver as defaultGasMixNameResolver
-} from "@/utils/gasMixNameResolver";
+import { gasMixNameResolver as defaultGasMixNameResolver } from "@/utils/gasMixNameResolver";
 import {GasMix, GasMixName} from "@/utils/types";
 
 interface GasMixFormatterDependencies {
