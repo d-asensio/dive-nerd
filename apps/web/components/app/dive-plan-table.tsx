@@ -26,26 +26,24 @@ import {cn} from "@/lib/utils";
 import {useStore} from "@/state/store";
 
 
-import {
-  diveLevelByIdSelector,
-  diveLevelIdsSelector
-} from "@/state/dive-plan/selectors";
+import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
 
 interface PlanLevelRow {
-  id: number;
+  id: string;
 }
 
-function PlanLevelRow({ id }: PlanLevelRow) {
+const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
   const {
     diveLevel: { depth, duration, gasMix },
-    removeDiveLevel
+    removeDiveLevel,
+    isFirst
   } = useStore(state => ({
-    diveLevel: diveLevelByIdSelector(id)(state),
-    removeDiveLevel: state.removeDiveLevel
+    diveLevel: diveLevelByIdSelector(state, id),
+    removeDiveLevel: state.removeDiveLevel,
+    isFirst: isFirstDiveLevelSelector(state, id)
   }))
 
-  const isFirst = id === 0
   const alert = isFirst
     ? {
       id: 'GAS_MOD_LOWER_THAN_DEPTH',
@@ -141,13 +139,10 @@ function PlanLevelRow({ id }: PlanLevelRow) {
       </TableCell>
     </TableRow>
   )
-}
+})
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const { diveLevelIds, addDiveLevel } = useStore(state => ({
-    diveLevelIds: diveLevelIdsSelector(state),
-    addDiveLevel: state.addDiveLevel
-  }))
+  const { diveLevels, addDiveLevel } = useStore()
 
   const onAddLevelButtonClick = React.useCallback(() => {
     addDiveLevel({
@@ -174,11 +169,11 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {diveLevelIds.map(
-          diveLevelId => (
+        {Object.keys(diveLevels).map(
+          levelId => (
             <PlanLevelRow
-              key={diveLevelId}
-              id={diveLevelId}
+              key={levelId}
+              id={levelId}
             />
           )
         )}
