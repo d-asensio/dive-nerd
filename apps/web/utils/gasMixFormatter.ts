@@ -1,5 +1,5 @@
-import { gasMixNameResolver as defaultGasMixNameResolver } from "@/utils/gasMixNameResolver";
-import {GasMix, GasMixName} from "@/utils/types";
+import { gasMixTypeResolver as defaultGasMixNameResolver } from "@/utils/gasMixTypeResolver";
+import {GasMix, GasMixType} from "@/utils/types";
 
 interface GasMixFormatterDependencies {
   gasMixNameResolver?: typeof defaultGasMixNameResolver
@@ -16,8 +16,8 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterDependencies 
 
   function format(gasMix: GasMix) {
     const gasMixName = gasMixNameResolver.resolve(gasMix)
-    if (gasMixName === GasMixName.OXYGEN) return `${capitalize(gasMixName)}`
-    if (gasMixName === GasMixName.NITROX) return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}`
+    if (gasMixName === GasMixType.OXYGEN) return `${capitalize(gasMixName)}`
+    if (gasMixName === GasMixType.NITROX) return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}`
 
     return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}/${gasMix.fHe * 100}`
   }

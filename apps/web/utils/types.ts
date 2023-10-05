@@ -3,7 +3,7 @@ export interface GasMix {
   fHe: number
 }
 
-export enum GasMixName {
+export enum GasMixType {
   AIR = 'air',
   NITROX = 'nitrox',
   HELITROX = 'helitrox',

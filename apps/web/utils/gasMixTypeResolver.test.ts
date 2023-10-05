@@ -1,49 +1,49 @@
-import { gasMixNameResolver } from "@/utils/gasMixNameResolver";
-import {GasMixName} from "@/utils/types";
+import { gasMixTypeResolver } from "@/utils/gasMixTypeResolver";
+import {GasMixType} from "@/utils/types";
 
 it.each([
   {
     gasMix: { fO2: .21, fHe: 0 },
-    expectedResult: GasMixName.AIR
+    expectedResult: GasMixType.AIR
   },
   {
     gasMix: { fO2: .22, fHe: 0 },
-    expectedResult: GasMixName.NITROX
+    expectedResult: GasMixType.NITROX
   },
   {
     gasMix: { fO2: .50, fHe: 0 },
-    expectedResult: GasMixName.NITROX
+    expectedResult: GasMixType.NITROX
   },
   {
     gasMix: { fO2: .92, fHe: 0 },
-    expectedResult: GasMixName.NITROX
+    expectedResult: GasMixType.NITROX
   },
   {
     gasMix: { fO2: .93, fHe: 0 },
-    expectedResult: GasMixName.OXYGEN
+    expectedResult: GasMixType.OXYGEN
   },
   {
     gasMix: { fO2: .21, fHe: .1 },
-    expectedResult: GasMixName.HELITROX
+    expectedResult: GasMixType.HELITROX
   },
   {
     gasMix: { fO2: .19, fHe: .1 },
-    expectedResult: GasMixName.HELITROX
+    expectedResult: GasMixType.HELITROX
   },
   {
     gasMix: { fO2: .18, fHe: .1 },
-    expectedResult: GasMixName.TRIMIX
+    expectedResult: GasMixType.TRIMIX
   },
   {
     gasMix: { fO2: .20, fHe: .80 },
-    expectedResult: GasMixName.HELIOX
+    expectedResult: GasMixType.HELIOX
   },
   {
     gasMix: { fO2: .30, fHe: .70 },
-    expectedResult: GasMixName.HELIOX
+    expectedResult: GasMixType.HELIOX
   }
 ])('identifies (O2: $gasMix.fO2, He: $gasMix.fHe) as $expectedResult', ({ gasMix, expectedResult }) => {
-  const result = gasMixNameResolver.resolve(gasMix)
+  const result = gasMixTypeResolver.resolve(gasMix)
 
   expect(result).toBe(expectedResult)
 })

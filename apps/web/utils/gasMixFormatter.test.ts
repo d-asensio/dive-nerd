@@ -1,6 +1,6 @@
 import {when} from "jest-when"
 
-import {GasMix, GasMixName} from "@/utils/types";
+import {GasMix, GasMixType} from "@/utils/types";
 import {createGasMixFormatter} from "@/utils/gasMixFormatter";
 
 describe('createGasMixFormatter.format', () => {
@@ -12,7 +12,7 @@ describe('createGasMixFormatter.format', () => {
     const gasMixFormatter = createGasMixFormatter({ gasMixNameResolver })
     when(gasMixNameResolver.resolve)
       .calledWith(gasMix)
-      .mockReturnValue(GasMixName.NITROX)
+      .mockReturnValue(GasMixType.NITROX)
 
     const result = gasMixFormatter.format(gasMix)
 
@@ -27,7 +27,7 @@ describe('createGasMixFormatter.format', () => {
     const gasMixFormatter = createGasMixFormatter({ gasMixNameResolver })
     when(gasMixNameResolver.resolve)
       .calledWith(gasMix)
-      .mockReturnValue(GasMixName.OXYGEN)
+      .mockReturnValue(GasMixType.OXYGEN)
 
     const result = gasMixFormatter.format(gasMix)
 
@@ -37,17 +37,17 @@ describe('createGasMixFormatter.format', () => {
   it.each([
     {
       gasMix: { fO2: .21, fHe: .1 },
-      gasMixName: GasMixName.HELITROX,
+      gasMixName: GasMixType.HELITROX,
       expectedResult: "Helitrox 21/10"
     },
     {
       gasMix: { fO2: .18, fHe: .1 },
-      gasMixName: GasMixName.TRIMIX,
+      gasMixName: GasMixType.TRIMIX,
       expectedResult: "Trimix 18/10"
     },
     {
       gasMix: { fO2: .20, fHe: .80 },
-      gasMixName: GasMixName.HELIOX,
+      gasMixName: GasMixType.HELIOX,
       expectedResult: "Heliox 20/80"
     }
   ])('labels $gasMixName mixes with the 02 and He percentages', ({ gasMix, gasMixName, expectedResult }) => {
