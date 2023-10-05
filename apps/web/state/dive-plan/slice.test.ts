@@ -94,9 +94,9 @@ describe('addDiveLevel', () => {
     const diveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gas: {
-        fractionO2: 0.21,
-        fractionHe: 0
+      gasMix: {
+        fO2: 0.21,
+        fHe: 0
       }
     }
 
@@ -111,17 +111,17 @@ describe('addDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gas: {
-        fractionO2: 0.21,
-        fractionHe: 0
+      gasMix: {
+        fO2: 0.21,
+        fHe: 0
       }
     }
     const anotherDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gas: {
-        fractionO2: 0.21,
-        fractionHe: 0
+      gasMix: {
+        fO2: 0.21,
+        fHe: 0
       }
     }
     const slice = createStore(
@@ -146,9 +146,9 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gas: {
-        fractionO2: 0.21,
-        fractionHe: 0
+      gasMix: {
+        fO2: 0.21,
+        fHe: 0
       }
     }
     const slice = createStore(
@@ -182,9 +182,9 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gas: {
-        fractionO2: 0.21,
-        fractionHe: 0
+      gasMix: {
+        fO2: 0.21,
+        fHe: 0
       }
     }
     const slice = createStore(

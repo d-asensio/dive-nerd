@@ -3,9 +3,21 @@
 import * as React from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
 
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {Badge} from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
@@ -14,14 +26,18 @@ import {cn} from "@/lib/utils";
 import {useStore} from "@/state/store";
 
 
-import {diveLevelByIdSelector, diveLevelIdsSelector} from "@/state/dive-plan/selectors";
+import {
+  diveLevelByIdSelector,
+  diveLevelIdsSelector
+} from "@/state/dive-plan/selectors";
+import {GasBadge} from "@/components/app/gas-badge";
 
 interface PlanLevelRow {
   id: number;
 }
 
 function PlanLevelRow({ id }: PlanLevelRow) {
-  const { depth, duration } = useStore(diveLevelByIdSelector(id))
+  const { depth, duration, gasMix } = useStore(diveLevelByIdSelector(id))
 
   const isFirst = id === 0
   const alert = isFirst
@@ -65,25 +81,31 @@ function PlanLevelRow({ id }: PlanLevelRow) {
         />
       </TableCell>
       <TableCell>
-        <Select defaultValue="nitrox-50">
+        <Select defaultValue="0">
           <SelectTrigger>
             <SelectValue placeholder="-- no gas selected --"/>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="helitrox-21/22">
-              <Badge className="bg-indigo-400 hover:bg-indigo-400/80 select-none whitespace-nowrap">
-                Helitrox 21/22
-              </Badge>
+            <SelectItem value="0">
+              <GasBadge gasMix={gasMix} />
             </SelectItem>
-            <SelectItem value="nitrox-50">
-              <Badge className="bg-orange-400 hover:bg-orange-400/80 select-none whitespace-nowrap">
-                Nitrox 50
-              </Badge>
+            <SelectItem value="1">
+              <GasBadge gasMix={{ fO2: .21, fHe: 0 }} />
             </SelectItem>
-            <SelectItem value="oxygen-100">
-              <Badge className="bg-green-400 hover:bg-green-400/80 select-none whitespace-nowrap">
-                Oxygen 100
-              </Badge>
+            <SelectItem value="2">
+              <GasBadge gasMix={{ fO2: .50, fHe: 0 }} />
+            </SelectItem>
+            <SelectItem value="3">
+              <GasBadge gasMix={{ fO2: .93, fHe: 0 }} />
+            </SelectItem>
+            <SelectItem value="4">
+              <GasBadge gasMix={{ fO2: .21, fHe: .1 }} />
+            </SelectItem>
+            <SelectItem value="5">
+              <GasBadge gasMix={{ fO2: .18, fHe: .1 }} />
+            </SelectItem>
+            <SelectItem value="6">
+              <GasBadge gasMix={{ fO2: .20, fHe: .80 }} />
             </SelectItem>
           </SelectContent>
         </Select>

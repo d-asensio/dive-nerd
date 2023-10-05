@@ -19,6 +19,21 @@ describe('createGasMixFormatter.format', () => {
     expect(result).toBe("Nitrox 32")
   })
 
+  it('does not label air', () => {
+    const gasMix: GasMix = { fO2: .21, fHe: .0 }
+    const gasMixNameResolver = {
+      resolve: jest.fn()
+    }
+    const gasMixFormatter = createGasMixFormatter({ gasMixNameResolver })
+    when(gasMixNameResolver.resolve)
+      .calledWith(gasMix)
+      .mockReturnValue(GasMixType.AIR)
+
+    const result = gasMixFormatter.format(gasMix)
+
+    expect(result).toBe("Air")
+  })
+
   it('does not label pure (or nearly pure) oxygen mixes', () => {
     const gasMix: GasMix = { fO2: .99, fHe: .0 }
     const gasMixNameResolver = {

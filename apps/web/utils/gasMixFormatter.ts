@@ -16,7 +16,8 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterDependencies 
 
   function format(gasMix: GasMix) {
     const gasMixName = gasMixNameResolver.resolve(gasMix)
-    if (gasMixName === GasMixType.OXYGEN) return `${capitalize(gasMixName)}`
+
+    if ([GasMixType.OXYGEN, GasMixType.AIR].includes(gasMixName)) return `${capitalize(gasMixName)}`
     if (gasMixName === GasMixType.NITROX) return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}`
 
     return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}/${gasMix.fHe * 100}`
@@ -25,4 +26,4 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterDependencies 
   return {format}
 }
 
-export default createGasMixFormatter()
+export const gasMixFormatter = createGasMixFormatter()
