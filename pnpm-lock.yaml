@@ -50,6 +50,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.5
         version: 29.5.5
+      '@types/jest-when':
+        specifier: ^3.5.3
+        version: 3.5.3
       '@types/node':
         specifier: 20.6.3
         version: 20.6.3
@@ -89,6 +92,9 @@ importers:
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.6.3)
+      jest-when:
+        specifier: ^3.6.0
+        version: 3.6.0(jest@29.7.0)
       lucide-react:
         specifier: ^0.279.0
         version: 0.279.0(react@18.2.0)
@@ -2264,6 +2270,12 @@ packages:
     resolution: {integrity: sha512-kv43F9eb3Lhj+lr/Hn6OcLCs/sSM8bt+fIaP11rCYngfV6NVjzWXJ17owQtDQTL9tQ8WSLUrGsSJ6rJz0F1w1A==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.1
+    dev: false
+
+  /@types/jest-when@3.5.3:
+    resolution: {integrity: sha512-gJWLSCRWEkPHYXYjjrxEMfWopoA2bl9nUbwDomxIzRXfe0gLkmSDPD0lLcoAiO2RDpXDoHSeigy/rNa/ja0MfQ==}
+    dependencies:
+      '@types/jest': 29.5.5
     dev: false
 
   /@types/jest@29.5.5:
@@ -4617,6 +4629,14 @@ packages:
       emittery: 0.13.1
       jest-util: 29.7.0
       string-length: 4.0.2
+    dev: false
+
+  /jest-when@3.6.0(jest@29.7.0):
+    resolution: {integrity: sha512-+cZWTy0ekAJo7M9Om0Scdor1jm3wDiYJWmXE8U22UVnkH54YCXAuaqz3P+up/FdtOg8g4wHOxV7Thd7nKhT6Dg==}
+    peerDependencies:
+      jest: '>= 25'
+    dependencies:
+      jest: 29.7.0(@types/node@20.6.3)
     dev: false
 
   /jest-worker@29.7.0:

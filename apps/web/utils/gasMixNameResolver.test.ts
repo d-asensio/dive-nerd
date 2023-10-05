@@ -1,4 +1,5 @@
-import {GasMixName, gasMixName} from "@/utils/gasMixName";
+import { gasMixNameResolver } from "@/utils/gasMixNameResolver";
+import {GasMixName} from "@/utils/types";
 
 it.each([
   {
@@ -42,7 +43,7 @@ it.each([
     expectedResult: GasMixName.HELIOX
   }
 ])('identifies (O2: $gasMix.fO2, He: $gasMix.fHe) as $expectedResult', ({ gasMix, expectedResult }) => {
-  const result = gasMixName(gasMix)
+  const result = gasMixNameResolver.resolve(gasMix)
 
   expect(result).toBe(expectedResult)
 })
