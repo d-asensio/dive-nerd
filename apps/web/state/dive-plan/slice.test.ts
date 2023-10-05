@@ -1,10 +1,7 @@
 import { createStore } from 'zustand/vanilla'
 
-import {
-  createDivePlanSlice,
-  DivePlan,
-  DivePlanLevel
-} from "./createDivePlanSlice";
+import { createDivePlanSlice } from "./slice";
+import { DivePlan, DivePlanLevel } from "@/state/dive-plan/types";
 
 function divePlanBuilder () {
   const builder = {
@@ -17,7 +14,7 @@ function divePlanBuilder () {
   let divePlan: DivePlan = {
     descentRate: 10,
     ascentRate: 9,
-    levels: []
+    diveLevels: []
   }
 
   function withDescentRate (descentRate: number) {
@@ -31,7 +28,7 @@ function divePlanBuilder () {
   }
 
   function withLevels (levels: DivePlanLevel[]) {
-    divePlan.levels = levels
+    divePlan.diveLevels = levels
     return builder
   }
 
@@ -105,7 +102,7 @@ describe('addDiveLevel', () => {
 
     slice.getState().addDiveLevel(diveLevel)
 
-    expect(slice.getState().levels).toStrictEqual([
+    expect(slice.getState().diveLevels).toStrictEqual([
       diveLevel
     ])
   })
@@ -137,7 +134,7 @@ describe('addDiveLevel', () => {
 
     slice.getState().addDiveLevel(anotherDiveLevel)
 
-    expect(slice.getState().levels).toStrictEqual([
+    expect(slice.getState().diveLevels).toStrictEqual([
       aDiveLevel,
       anotherDiveLevel
     ])
@@ -164,7 +161,7 @@ describe('removeDiveLevel', () => {
 
     slice.getState().removeDiveLevel(0)
 
-    expect(slice.getState().levels).toStrictEqual([])
+    expect(slice.getState().diveLevels).toStrictEqual([])
   })
 
   it('does nothing when attempting to delete a level from an empty list', () => {
@@ -178,7 +175,7 @@ describe('removeDiveLevel', () => {
 
     slice.getState().removeDiveLevel(0)
 
-    expect(slice.getState().levels).toStrictEqual([])
+    expect(slice.getState().diveLevels).toStrictEqual([])
   })
 
   it('does nothing when attempting to delete a undefined index', () => {
@@ -200,6 +197,6 @@ describe('removeDiveLevel', () => {
 
     slice.getState().removeDiveLevel(1)
 
-    expect(slice.getState().levels).toStrictEqual([aDiveLevel])
+    expect(slice.getState().diveLevels).toStrictEqual([aDiveLevel])
   })
 })

@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
 
@@ -9,12 +11,18 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {InputWithUnits} from "@/components/app/input-with-units";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
+import {useStore} from "@/state/store";
+
+
+import {diveLevelByIdSelector, diveLevelIdsSelector} from "@/state/dive-plan/selectors";
 
 interface PlanLevelRow {
   id: number;
 }
 
 function PlanLevelRow({ id }: PlanLevelRow) {
+  const { depth, duration } = useStore(diveLevelByIdSelector(id))
+
   const isFirst = id === 0
   const alert = isFirst
     ? {
@@ -46,14 +54,14 @@ function PlanLevelRow({ id }: PlanLevelRow) {
         <InputWithUnits
           units="m"
           type="number"
-          defaultValue="45"
+          defaultValue={depth}
         />
       </TableCell>
       <TableCell>
         <InputWithUnits
           units="min."
           type="number"
-          defaultValue="25"
+          defaultValue={duration}
         />
       </TableCell>
       <TableCell>
@@ -99,6 +107,8 @@ function PlanLevelRow({ id }: PlanLevelRow) {
 }
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const diveLevelIds = useStore(diveLevelIdsSelector)
+
   return (
     <Table {...props}>
       <TableHeader>
@@ -116,8 +126,14 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <PlanLevelRow id={0} />
-        <PlanLevelRow id={1} />
+        {diveLevelIds.map(
+          diveLevelId => (
+            <PlanLevelRow
+              key={diveLevelId}
+              id={diveLevelId}
+            />
+          )
+        )}
         <TableRow className="hover:bg-background">
           <TableCell colSpan={5} className="text-right">
             <Button variant="ghost">

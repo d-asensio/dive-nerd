@@ -1,21 +1,5 @@
-import { immer } from 'zustand/middleware/immer'
-
-interface Gas {
-  fractionO2: number
-  fractionHe: number
-}
-
-interface DivePlanLevel {
-  depth: number
-  duration: number
-  gas: Gas
-}
-
-interface DivePlan {
-  descentRate: number
-  ascentRate: number
-  levels: DivePlanLevel[]
-}
+import {immer} from 'zustand/middleware/immer'
+import {DivePlan, DivePlanLevel} from "@/state/dive-plan/types";
 
 interface DivePlanActions {
   setDescentRate: (descentRate: number) => void
@@ -24,7 +8,7 @@ interface DivePlanActions {
   removeDiveLevel: (levelIndex: number) => void
 }
 
-type DivePlanSlice =
+export type DivePlanSlice =
   DivePlan &
   DivePlanActions
 
@@ -41,12 +25,10 @@ export const createDivePlanSlice =
       }),
     addDiveLevel: level =>
       set(state => {
-        state.levels.push(level)
+        state.diveLevels.push(level)
       }),
     removeDiveLevel: levelIndex =>
       set(state => {
-        state.levels.splice(levelIndex, 1)
+        state.diveLevels.splice(levelIndex, 1)
       }),
   }))
-
-export type { DivePlan, DivePlanLevel, DivePlanSlice }
