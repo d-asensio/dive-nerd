@@ -37,7 +37,13 @@ interface PlanLevelRow {
 }
 
 function PlanLevelRow({ id }: PlanLevelRow) {
-  const { depth, duration, gasMix } = useStore(diveLevelByIdSelector(id))
+  const {
+    diveLevel: { depth, duration, gasMix },
+    removeDiveLevel
+  } = useStore(state => ({
+    diveLevel: diveLevelByIdSelector(id)(state),
+    removeDiveLevel: state.removeDiveLevel
+  }))
 
   const isFirst = id === 0
   const alert = isFirst
@@ -51,6 +57,10 @@ function PlanLevelRow({ id }: PlanLevelRow) {
       )
     }
     : null
+
+  const onRemoveButtonClick = React.useCallback(() => {
+    removeDiveLevel(id)
+  }, [id, removeDiveLevel])
 
   return (
     <TableRow className={cn(alert && "bg-red-100 hover:bg-red-100/50")}>
@@ -113,7 +123,12 @@ function PlanLevelRow({ id }: PlanLevelRow) {
       <TableCell>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button size="icon" variant="outline" disabled={isFirst}>
+            <Button
+              size="icon"
+              variant="outline"
+              disabled={isFirst}
+              onClick={onRemoveButtonClick}
+            >
               <Minus className="h-4 w-4"/>
             </Button>
           </TooltipTrigger>
@@ -129,7 +144,18 @@ function PlanLevelRow({ id }: PlanLevelRow) {
 }
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const diveLevelIds = useStore(diveLevelIdsSelector)
+  const { diveLevelIds, addDiveLevel } = useStore(state => ({
+    diveLevelIds: diveLevelIdsSelector(state),
+    addDiveLevel: state.addDiveLevel
+  }))
+
+  const onAddLevelButtonClick = React.useCallback(() => {
+    addDiveLevel({
+      depth: 30,
+      duration: 20,
+      gasMix: { fO2: 0.21, fHe: 0 }
+    })
+  }, [addDiveLevel])
 
   return (
     <Table {...props}>
@@ -158,7 +184,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         )}
         <TableRow className="hover:bg-background">
           <TableCell colSpan={5} className="text-right">
-            <Button variant="ghost">
+            <Button variant="ghost" onClick={onAddLevelButtonClick}>
               <Plus className="mr-2 h-4 w-4"/>
               Add level
             </Button>
