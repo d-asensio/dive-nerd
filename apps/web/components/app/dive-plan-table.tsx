@@ -21,7 +21,7 @@ interface PlanLevelRow {
   id: string;
 }
 
-const PlanLevelRow = ({ id }: PlanLevelRow) => {
+const PlanLevelRow = React.memo(({ id }: PlanLevelRow) => {
   const isFirst = useSelector( isFirstDiveLevelSelector, id)
   const { depth, duration, gasMix } = useSelector(diveLevelByIdSelector, id)
 
@@ -141,7 +141,7 @@ const PlanLevelRow = ({ id }: PlanLevelRow) => {
       </TableCell>
     </TableRow>
   )
-}
+})
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const addDiveLevel = useStore.use.addDiveLevel()
