@@ -14,13 +14,16 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterFactoryDepend
     return `${word.charAt(0).toUpperCase()}${word.slice(1)}`
   }
 
+  const formatGasFraction = (gasFraction: number) =>
+    Math.trunc(gasFraction * 100)
+
   function format(gasMix: GasMix) {
     const gasMixName = gasMixNameResolver.resolve(gasMix)
 
     if ([GasMixType.OXYGEN, GasMixType.AIR].includes(gasMixName)) return `${capitalize(gasMixName)}`
-    if (gasMixName === GasMixType.NITROX) return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}`
+    if (gasMixName === GasMixType.NITROX) return `${capitalize(gasMixName)} ${formatGasFraction(gasMix.fO2)}`
 
-    return `${capitalize(gasMixName)} ${gasMix.fO2 * 100}/${gasMix.fHe * 100}`
+    return `${capitalize(gasMixName)} ${formatGasFraction(gasMix.fO2)}/${formatGasFraction(gasMix.fHe)}`
   }
 
   return {format}

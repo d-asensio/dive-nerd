@@ -23,6 +23,10 @@ it.each([
     expectedResult: GasMixType.OXYGEN
   },
   {
+    gasMix: { fO2: 1, fHe: 0 },
+    expectedResult: GasMixType.OXYGEN
+  },
+  {
     gasMix: { fO2: .21, fHe: .1 },
     expectedResult: GasMixType.HELITROX
   },

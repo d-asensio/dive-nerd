@@ -24,13 +24,13 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   const updateGasMix = useStore.use.updateGasMix()
 
   const handleO2FractionChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const fO2 = parseInt(e.target.value, 10) / 100
+    const fO2 = parseFloat(e.target.value)
 
     updateGasMix(id, { fO2 })
   }, [id, updateGasMix])
 
   const handleHeFractionChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const fHe = parseInt(e.target.value, 10) / 100
+    const fHe = parseFloat(e.target.value)
 
     updateGasMix(id, { fHe })
   }, [id, updateGasMix])
@@ -44,23 +44,23 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
       <TableCell>
         <div className='flex items-center space-x-2'>
           <InputWithUnits
-            units='% O2'
+            units='O2'
             type="number"
-            value={gasMix.fO2 * 100}
+            value={gasMix.fO2}
             onChange={handleO2FractionChange}
             min={0}
-            max={100}
-            step={1}
+            max={1}
+            step={.01}
           />
           <span>/</span>
           <InputWithUnits
-            units='% He'
+            units='He'
             type="number"
-            value={gasMix.fHe * 100}
+            value={gasMix.fHe}
             onChange={handleHeFractionChange}
             min={0}
-            max={100}
-            step={1}
+            max={1}
+            step={.01}
           />
         </div>
       </TableCell>

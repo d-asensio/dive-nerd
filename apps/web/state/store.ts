@@ -9,7 +9,6 @@ import {initialGases} from "@/state/dive-gases/initial";
 
 import {createSelectors} from "@/state/createSelectors";
 
-
 setAutoFreeze(false);
 
 export type StoreState =

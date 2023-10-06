@@ -51,9 +51,19 @@ describe('createGasMixFormatter.format', () => {
 
   it.each([
     {
+      gasMix: { fO2: .28, fHe: 0 },
+      gasMixName: GasMixType.NITROX,
+      expectedResult: "Nitrox 28"
+    },
+    {
       gasMix: { fO2: .21, fHe: .1 },
       gasMixName: GasMixType.HELITROX,
       expectedResult: "Helitrox 21/10"
+    },
+    {
+      gasMix: { fO2: .28, fHe: .07 },
+      gasMixName: GasMixType.HELITROX,
+      expectedResult: "Helitrox 28/7"
     },
     {
       gasMix: { fO2: .18, fHe: .1 },
@@ -65,7 +75,7 @@ describe('createGasMixFormatter.format', () => {
       gasMixName: GasMixType.HELIOX,
       expectedResult: "Heliox 20/80"
     }
-  ])('labels $gasMixName mixes with the 02 and He percentages', ({ gasMix, gasMixName, expectedResult }) => {
+  ])('labels $gasMixName mixes with (O2: $gasMix.fO2, He: $gasMix.fHe)', ({ gasMix, gasMixName, expectedResult }) => {
     const gasMixNameResolver = {
       resolve: jest.fn()
     }
