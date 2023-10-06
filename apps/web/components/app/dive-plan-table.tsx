@@ -3,46 +3,27 @@
 import * as React from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {useStore} from "@/state/store";
+import {useSelector, useStore} from "@/state/store";
 
 
-import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
+import {diveLevelByIdSelector, diveLevelIdsSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
 
 interface PlanLevelRow {
   id: string;
 }
 
-const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
-  const {
-    diveLevel: { depth, duration, gasMix },
-    removeDiveLevel,
-    isFirst
-  } = useStore(state => ({
-    diveLevel: diveLevelByIdSelector(state, id),
-    removeDiveLevel: state.removeDiveLevel,
-    isFirst: isFirstDiveLevelSelector(state, id)
-  }))
+const PlanLevelRow = ({ id }: PlanLevelRow) => {
+  const isFirst = useSelector(isFirstDiveLevelSelector, id)
+  const { depth, duration, gasMix } = useSelector(diveLevelByIdSelector, id)
+  const { removeDiveLevel } = useStore()
 
   const alert = isFirst
     ? {
@@ -139,10 +120,11 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
       </TableCell>
     </TableRow>
   )
-})
+}
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const { diveLevels, addDiveLevel } = useStore()
+  const { addDiveLevel } = useStore()
+  const diveLevelIds = useSelector(diveLevelIdsSelector)
 
   const onAddLevelButtonClick = React.useCallback(() => {
     addDiveLevel({
@@ -169,7 +151,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Object.keys(diveLevels).map(
+        {diveLevelIds.map(
           levelId => (
             <PlanLevelRow
               key={levelId}

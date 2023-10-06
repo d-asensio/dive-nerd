@@ -1,7 +1,17 @@
 import {DivePlan} from "@/state/dive-plan/types";
+import {createSelector} from 'reselect'
 
-export const isFirstDiveLevelSelector = ({diveLevels}: DivePlan, diveLevelId: string) =>
-  Object.keys(diveLevels)[0] === diveLevelId
+export const diveLevelIdsSelector = ({diveLevelsMap}: DivePlan) =>
+  Object.keys(diveLevelsMap)
 
-export const diveLevelByIdSelector =   ({diveLevels}: DivePlan, diveLevelId: string) =>
-  diveLevels[diveLevelId] || null
+export const isFirstDiveLevelSelector = createSelector([
+    diveLevelIdsSelector,
+    (_, diveLevelId: string) => diveLevelId
+  ],
+  ([firstLevelId], diveLevelId: string) =>
+    diveLevelId === firstLevelId
+)
+
+
+export const diveLevelByIdSelector =   ({diveLevelsMap}: DivePlan, diveLevelId: string) =>
+  diveLevelsMap[diveLevelId] || null

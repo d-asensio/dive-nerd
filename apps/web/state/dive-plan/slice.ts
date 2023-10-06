@@ -37,13 +37,13 @@ export const createDivePlanSlice =
         const newUuid = generateUUID()
 
         set(state => {
-          state.diveLevels[newUuid] = level
+          state.diveLevelsMap[newUuid] = level
         })
 
         return newUuid
       },
       removeDiveLevel: levelId =>
         set(state => {
-          delete state.diveLevels[levelId]
+          delete state.diveLevelsMap[levelId]
         }),
     }))

@@ -4,7 +4,7 @@ import {DivePlan} from "@/state/dive-plan/types";
 export const initialDivePlan: DivePlan = {
   descentRate: 10,
   ascentRate: 9,
-  diveLevels: {
+  diveLevelsMap: {
     [uuid()]: {
       depth: 20,
       duration: 30,

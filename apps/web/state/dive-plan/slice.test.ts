@@ -16,7 +16,7 @@ function divePlanBuilder () {
   let divePlan: DivePlan = {
     descentRate: 10,
     ascentRate: 9,
-    diveLevels: {}
+    diveLevelsMap: {}
   }
 
   function withDescentRate (descentRate: number) {
@@ -30,12 +30,12 @@ function divePlanBuilder () {
   }
 
   function withLevels (levels: Record<string, DivePlanLevel>) {
-    divePlan.diveLevels = levels
+    divePlan.diveLevelsMap = levels
     return builder
   }
 
   function withoutLevels () {
-    divePlan.diveLevels = {}
+    divePlan.diveLevelsMap = {}
     return builder
   }
 
@@ -112,7 +112,7 @@ describe('addDiveLevel', () => {
 
     sliceStore.getState().addDiveLevel(aDiveLevel)
 
-    expect(sliceStore.getState().diveLevels).toStrictEqual({
+    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
       'an-id': aDiveLevel
     })
   })
@@ -145,7 +145,7 @@ describe('addDiveLevel', () => {
 
     sliceStore.getState().addDiveLevel(anotherDiveLevel)
 
-    expect(sliceStore.getState().diveLevels).toStrictEqual({
+    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
       'an-id': aDiveLevel,
       'another-id': anotherDiveLevel
     })
@@ -172,7 +172,7 @@ describe('removeDiveLevel', () => {
 
     sliceStore.getState().removeDiveLevel('an-id')
 
-    expect(sliceStore.getState().diveLevels).toStrictEqual({})
+    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({})
   })
 
   it('does nothing when attempting to delete a level from an empty list', () => {
@@ -185,7 +185,7 @@ describe('removeDiveLevel', () => {
 
     sliceStore.getState().removeDiveLevel('a-undefined-id')
 
-    expect(sliceStore.getState().diveLevels).toStrictEqual({})
+    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({})
   })
 
   it('does nothing when attempting to delete a undefined id', () => {
@@ -207,6 +207,6 @@ describe('removeDiveLevel', () => {
 
     sliceStore.getState().removeDiveLevel('a-undefined-id')
 
-    expect(sliceStore.getState().diveLevels).toStrictEqual({ 'an-id': aDiveLevel })
+    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({ 'an-id': aDiveLevel })
   })
 })
