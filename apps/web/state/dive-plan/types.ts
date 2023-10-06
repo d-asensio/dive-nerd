@@ -1,5 +1,3 @@
-import {StoreApi, UseBoundStore} from "zustand";
-
 interface GasMix {
   fO2: number
   fHe: number

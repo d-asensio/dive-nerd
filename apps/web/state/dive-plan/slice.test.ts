@@ -115,8 +115,10 @@ describe('addDiveLevel', () => {
 
     sliceStore.getState().addDiveLevel(aDiveLevel)
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({ 'an-id': aDiveLevel })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id'])
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: { 'an-id': aDiveLevel },
+      diveLevelsIdList: ['an-id']
+    })
   })
 
   it('adds a level to levels list', () => {
@@ -147,11 +149,13 @@ describe('addDiveLevel', () => {
 
     sliceStore.getState().addDiveLevel(anotherDiveLevel)
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
-      'an-id': aDiveLevel,
-      'another-id': anotherDiveLevel
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: {
+        'an-id': aDiveLevel,
+        'another-id': anotherDiveLevel
+      },
+      diveLevelsIdList: ['an-id', 'another-id']
     })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id', 'another-id'])
   })
 });
 
@@ -177,10 +181,10 @@ describe('updateDiveLevel', () => {
 
     sliceStore.getState().updateDiveLevel("an-id", aNewDiveLevel)
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
-      'an-id': aNewDiveLevel
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: { 'an-id': aNewDiveLevel },
+      diveLevelsIdList: ['an-id']
     })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id'])
   })
 
   it('updates a single the property of a dive level', () => {
@@ -203,10 +207,10 @@ describe('updateDiveLevel', () => {
 
     sliceStore.getState().updateDiveLevel("an-id", { depth: 20 })
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
-      'an-id': aNewDiveLevel
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: { 'an-id': aNewDiveLevel },
+      diveLevelsIdList: ['an-id']
     })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id'])
   })
 
   it('does nothing if the provided id is not defined', () => {
@@ -230,10 +234,10 @@ describe('updateDiveLevel', () => {
 
     sliceStore.getState().updateDiveLevel("an-undefined-id", aNewDiveLevel)
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({
-      'an-id': aDiveLevel
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: { 'an-id': aDiveLevel },
+      diveLevelsIdList: ['an-id']
     })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id'])
   })
 });
 
@@ -257,8 +261,10 @@ describe('removeDiveLevel', () => {
 
     sliceStore.getState().removeDiveLevel('an-id')
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({})
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual([])
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: {},
+      diveLevelsIdList: []
+    })
   })
 
   it('does nothing when attempting to delete a level from an empty list', () => {
@@ -296,8 +302,6 @@ describe('removeDiveLevel', () => {
 
     sliceStore.getState().removeDiveLevel('a-undefined-id')
 
-    expect(sliceStore.getState().diveLevelsMap).toStrictEqual({ 'an-id': aDiveLevel })
-    expect(sliceStore.getState().diveLevelsIdList).toStrictEqual(['an-id'])
     expect(sliceStore.getState()).toMatchObject({
       diveLevelsMap: { 'an-id': aDiveLevel },
       diveLevelsIdList: ['an-id']
