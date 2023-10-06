@@ -10,13 +10,14 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {InputWithUnits} from "@/components/app/input-with-units";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {useSelector, useStore} from "@/state/store";
+import {useStore} from "@/state/store";
 
 
 import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
 import {ChangeEvent} from "react";
 import {Separator} from "@/components/ui/separator";
+import {useSelector} from "@/state/useSelector";
 
 interface PlanLevelRow {
   id: string;
