@@ -25,15 +25,19 @@ const fromPressureToDepth = ({
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
       <Tooltip open delayDuration={0}>
-        <TooltipTrigger/>
+        <TooltipTrigger asChild>
+          <div className="w-0 h-0" />
+        </TooltipTrigger>
         <TooltipPortal>
-          <TooltipContent>
-            <p className="pointer-events-none">
-              <span className="font-bold">Depth:</span> {point.data.yFormatted} m
-            </p>
-            <p className="pointer-events-none">
-              <span className="font-bold">Time:</span> {point.data.xFormatted} min.
-            </p>
+          <TooltipContent asChild>
+            <div className='pointer-events-none'>
+              <p>
+                <span className="font-bold">Depth:</span> {point.data.yFormatted} m
+              </p>
+              <p>
+                <span className="font-bold">Time:</span> {point.data.xFormatted} min.
+              </p>
+            </div>
           </TooltipContent>
         </TooltipPortal>
       </Tooltip>
