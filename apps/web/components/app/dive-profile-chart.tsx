@@ -6,6 +6,8 @@ import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 import {CompartmentInertGasLoad} from "dive-physics";
+import {useSelector} from "@/state/useSelector";
+import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 
 const GRAVITY = 9.80665
 const surfaceAmbientPressure = 1.0133 // bar
@@ -54,6 +56,8 @@ interface AdditionalProps {
 }
 
 export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAttributes<HTMLDivElement> & AdditionalProps) {
+  const diveIntervals = useSelector(diveIntervalsSelector)
+
   return (
     <div
       className={cn('min-w-0 min-h-[400px] max-h-[800px] overflow-x-auto', className)}
@@ -65,21 +69,30 @@ export function DiveProfileChart({className, dataPoints, ...props}: React.HTMLAt
           data={[
             {
               id: "Dive Profile",
-              data: dataPoints
+              data: [
+                {
+                  x: 0,
+                  y: 0
+                },
+              ...diveIntervals.map(({ endDepth, endTime }) => ({
+                  x: endTime,
+                  y: endDepth
+                }))
+              ]
             },
-            ...Array.from({ length: 16 }).map((_, i) => ({
-              id: `Compartment ${i}`,
-              data: dataPoints.map(({compartmentInertGasLoads, x, }) => ({
-                x,
-                y: fromPressureToDepth({
-                  pressure: compartmentInertGasLoads[i].N2 + compartmentInertGasLoads[i].He,
-                  surfaceAmbientPressure,
-                  waterDensity
-                })
-              }))
-            }))
+            // ...Array.from({ length: 16 }).map((_, i) => ({
+            //   id: `Compartment ${i}`,
+            //   data: dataPoints.map(({compartmentInertGasLoads, x, }) => ({
+            //     x,
+            //     y: fromPressureToDepth({
+            //       pressure: compartmentInertGasLoads[i].N2 + compartmentInertGasLoads[i].He,
+            //       surfaceAmbientPressure,
+            //       waterDensity
+            //     })
+            //   }))
+            // }))
           ]}
-          // colors={["rgb(96, 165, 250)"]}
+          colors={["rgb(96, 165, 250)"]}
           margin={{top: 12, right: 18, bottom: 62, left: 62}}
           xScale={{type: "linear"}}
           yScale={{
