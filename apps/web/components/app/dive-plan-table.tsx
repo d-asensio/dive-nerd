@@ -3,7 +3,7 @@
 import * as React from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
 
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
@@ -16,6 +16,7 @@ import {useSelector, useStore} from "@/state/store";
 import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
 import {ChangeEvent} from "react";
+import {Separator} from "@/components/ui/separator";
 
 interface PlanLevelRow {
   id: string;
@@ -143,9 +144,25 @@ const PlanLevelRow = React.memo(({ id }: PlanLevelRow) => {
   )
 })
 
+const DivePlanTableBody = () => {
+  const diveLevelsIdList = useStore.use.diveLevelsIdList()
+
+  return (
+    <TableBody>
+      {diveLevelsIdList.map(
+        levelId => (
+          <PlanLevelRow
+            key={levelId}
+            id={levelId}
+          />
+        )
+      )}
+    </TableBody>
+  )
+}
+
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const addDiveLevel = useStore.use.addDiveLevel()
-  const diveLevelsIdList = useStore.use.diveLevelsIdList()
 
   const onAddLevelButtonClick = React.useCallback(() => {
     addDiveLevel({
@@ -156,39 +173,31 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, [addDiveLevel])
 
   return (
-    <Table {...props}>
-      <TableHeader>
-        <TableRow>
-          <TableHead>
-            Depth
-          </TableHead>
-          <TableHead>
-            Duration
-          </TableHead>
-          <TableHead className="w-[200px]">
-            Gas
-          </TableHead>
-          <TableHead className="w-0"/>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {diveLevelsIdList.map(
-          levelId => (
-            <PlanLevelRow
-              key={levelId}
-              id={levelId}
-            />
-          )
-        )}
-        <TableRow className="hover:bg-background">
-          <TableCell colSpan={5} className="text-right">
-            <Button variant="ghost" onClick={onAddLevelButtonClick}>
-              <Plus className="mr-2 h-4 w-4"/>
-              Add level
-            </Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <div {...props}>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>
+              Depth
+            </TableHead>
+            <TableHead>
+              Duration
+            </TableHead>
+            <TableHead className="w-[200px]">
+              Gas
+            </TableHead>
+            <TableHead className="w-0"/>
+          </TableRow>
+        </TableHeader>
+        <DivePlanTableBody />
+      </Table>
+      <Separator />
+      <div className="text-right w-full p-4">
+        <Button variant="ghost" onClick={onAddLevelButtonClick}>
+          <Plus className="mr-2 h-4 w-4"/>
+          Add level
+        </Button>
+      </div>
+    </div>
   )
 }
