@@ -17,7 +17,7 @@ export function DiveSettingsPopover() {
           <Settings className="h-4 w-4"/>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px]">
+      <PopoverContent className="w-[300px]" align="start">
         <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-medium leading-none">
