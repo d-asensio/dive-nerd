@@ -1,3 +1,5 @@
+import {StoreApi, UseBoundStore} from "zustand";
+
 interface GasMix {
   fO2: number
   fHe: number
@@ -15,4 +17,8 @@ interface DivePlan {
   diveLevelsMap: Record<string, DivePlanLevel>
 }
 
-export type {DivePlan, DivePlanLevel};
+interface DivePlanState extends DivePlan {
+  diveLevelsIdList: string[]
+}
+
+export type {DivePlanState, DivePlanLevel};

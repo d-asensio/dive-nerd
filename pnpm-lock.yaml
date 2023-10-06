@@ -107,6 +107,9 @@ importers:
       postcss:
         specifier: 8.4.30
         version: 8.4.30
+      proxy-memoize:
+        specifier: ^2.0.4
+        version: 2.0.4
       ramda:
         specifier: ^0.29.0
         version: 0.29.0
@@ -116,9 +119,6 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
-      reselect:
-        specifier: ^4.1.8
-        version: 4.1.8
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -5305,6 +5305,16 @@ packages:
       react-is: 16.13.1
     dev: false
 
+  /proxy-compare@2.5.1:
+    resolution: {integrity: sha512-oyfc0Tx87Cpwva5ZXezSp5V9vht1c7dZBhvuV/y3ctkgMVUmiAGDVeeB0dKhGSyT0v1ZTEQYpe/RXlBVBNuCLA==}
+    dev: false
+
+  /proxy-memoize@2.0.4:
+    resolution: {integrity: sha512-sBANT5Xlw+g+G8hnTFSFITLdEMmohKp8mDslp381W+LK3yFeQrczPo5/E5cz3r1npUCYKfd4xuQj/239ggdKkw==}
+    dependencies:
+      proxy-compare: 2.5.1
+    dev: false
+
   /punycode@2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
@@ -5444,10 +5454,6 @@ packages:
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /reselect@4.1.8:
-    resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}
     dev: false
 
   /resolve-cwd@3.0.0:

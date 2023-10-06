@@ -1,17 +1,15 @@
-import {DivePlan} from "@/state/dive-plan/types";
-import {createSelector} from 'reselect'
+import { memoizeWithArgs } from 'proxy-memoize';
 
-export const diveLevelIdsSelector = ({diveLevelsMap}: DivePlan) =>
-  Object.keys(diveLevelsMap)
+import {DivePlanSlice} from "@/state/dive-plan/slice";
+import {DivePlanLevel} from "@/state/dive-plan/types";
 
-export const isFirstDiveLevelSelector = createSelector([
-    diveLevelIdsSelector,
-    (_, diveLevelId: string) => diveLevelId
-  ],
-  ([firstLevelId], diveLevelId: string) =>
+export const isFirstDiveLevelSelector = memoizeWithArgs<[DivePlanSlice, string], boolean>(
+  ({diveLevelsIdList: [firstLevelId]}: DivePlanSlice, diveLevelId: string) =>
     diveLevelId === firstLevelId
 )
 
+export const diveLevelByIdSelector = memoizeWithArgs<[DivePlanSlice, string], DivePlanLevel>(
+  ({diveLevelsMap}: DivePlanSlice, diveLevelId: string) =>
+    diveLevelsMap[diveLevelId] || null
+)
 
-export const diveLevelByIdSelector =   ({diveLevelsMap}: DivePlan, diveLevelId: string) =>
-  diveLevelsMap[diveLevelId] || null

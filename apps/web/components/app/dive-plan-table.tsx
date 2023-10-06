@@ -13,17 +13,24 @@ import {cn} from "@/lib/utils";
 import {useSelector, useStore} from "@/state/store";
 
 
-import {diveLevelByIdSelector, diveLevelIdsSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
+import {
+  diveLevelByIdSelector,
+  diveLevelsIdsSelector,
+  isFirstDiveLevelSelector
+} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
+import {ChangeEvent} from "react";
 
 interface PlanLevelRow {
   id: string;
 }
 
 const PlanLevelRow = ({ id }: PlanLevelRow) => {
-  const isFirst = useSelector(isFirstDiveLevelSelector, id)
+  const isFirst = useSelector( isFirstDiveLevelSelector, id)
   const { depth, duration, gasMix } = useSelector(diveLevelByIdSelector, id)
-  const { removeDiveLevel } = useStore()
+
+  const removeDiveLevel = useStore.use.removeDiveLevel()
+  const updateDiveLevel = useStore.use.updateDiveLevel()
 
   const alert = isFirst
     ? {
@@ -37,7 +44,19 @@ const PlanLevelRow = ({ id }: PlanLevelRow) => {
     }
     : null
 
-  const onRemoveButtonClick = React.useCallback(() => {
+  const handleDepthChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const depth = parseInt(e.target.value, 10)
+
+    updateDiveLevel(id, { depth })
+  }, [id, updateDiveLevel])
+
+  const handleDurationChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const duration = parseInt(e.target.value, 10)
+
+    updateDiveLevel(id, { duration })
+  }, [id, updateDiveLevel])
+
+  const handleRemoveButtonClick = React.useCallback(() => {
     removeDiveLevel(id)
   }, [id, removeDiveLevel])
 
@@ -59,14 +78,20 @@ const PlanLevelRow = ({ id }: PlanLevelRow) => {
         <InputWithUnits
           units="m"
           type="number"
-          defaultValue={depth}
+          value={depth}
+          onChange={handleDepthChange}
+          min={0}
+          step={1}
         />
       </TableCell>
       <TableCell>
         <InputWithUnits
           units="min."
           type="number"
-          defaultValue={duration}
+          value={duration}
+          onChange={handleDurationChange}
+          min={0}
+          step={1}
         />
       </TableCell>
       <TableCell>
@@ -106,7 +131,7 @@ const PlanLevelRow = ({ id }: PlanLevelRow) => {
               size="icon"
               variant="outline"
               disabled={isFirst}
-              onClick={onRemoveButtonClick}
+              onClick={handleRemoveButtonClick}
             >
               <Minus className="h-4 w-4"/>
             </Button>
@@ -123,8 +148,8 @@ const PlanLevelRow = ({ id }: PlanLevelRow) => {
 }
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const { addDiveLevel } = useStore()
-  const diveLevelIds = useSelector(diveLevelIdsSelector)
+  const addDiveLevel = useStore.use.addDiveLevel()
+  const diveLevelsIdList = useStore.use.diveLevelsIdList()
 
   const onAddLevelButtonClick = React.useCallback(() => {
     addDiveLevel({
@@ -151,7 +176,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {diveLevelIds.map(
+        {diveLevelsIdList.map(
           levelId => (
             <PlanLevelRow
               key={levelId}
