@@ -15,6 +15,7 @@ import {ChangeEvent} from "react";
 import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
 import {Separator} from "@/components/ui/separator";
+import {AddGasMixDropdown} from "@/components/app/add-gas-mix-dropdown";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   const isFirst = useSelector(isFirstMixSelector, id)
@@ -111,15 +112,6 @@ const GasTableBody = () => {
 }
 
 export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const addGasMix = useStore.use.addGasMix()
-
-  const onAddMixButtonClick = React.useCallback(() => {
-    addGasMix({
-      fO2: .21,
-      fHe: 0
-    })
-  }, [addGasMix])
-
   return (
     <div>
       <Table {...props}>
@@ -139,10 +131,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
       </Table>
       <Separator />
       <div className="text-right w-full p-4">
-        <Button variant="ghost" onClick={onAddMixButtonClick}>
-          <Plus className="mr-2 h-4 w-4"/>
-          Add mix
-        </Button>
+        <AddGasMixDropdown />
       </div>
     </div>
   )

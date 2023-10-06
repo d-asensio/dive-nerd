@@ -15,7 +15,7 @@ const gasMixTypeToColorClassMap = {
   [GasMixType.IMPOSSIBLE_MIX]: 'bg-red-400 hover:bg-red-400/80',
 }
 
-interface GasBadgeProps extends BadgeProps {
+export interface GasBadgeProps extends BadgeProps {
   gasMix: GasMix
 }
 
