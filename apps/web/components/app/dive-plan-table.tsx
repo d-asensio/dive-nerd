@@ -13,11 +13,7 @@ import {cn} from "@/lib/utils";
 import {useSelector, useStore} from "@/state/store";
 
 
-import {
-  diveLevelByIdSelector,
-  diveLevelsIdsSelector,
-  isFirstDiveLevelSelector
-} from "@/state/dive-plan/selectors";
+import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";
 import {ChangeEvent} from "react";
 
