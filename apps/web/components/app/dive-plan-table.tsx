@@ -24,7 +24,7 @@ interface PlanLevelRow {
 }
 
 const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
-  const isFirst = useSelector( isFirstDiveLevelSelector, id)
+  const isFirst = useSelector(isFirstDiveLevelSelector, id)
   const { depth, duration, gasMix } = useSelector(diveLevelByIdSelector, id)
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
