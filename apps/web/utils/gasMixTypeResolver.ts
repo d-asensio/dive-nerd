@@ -2,6 +2,8 @@ import {GasMix, GasMixType} from "@/utils/types";
 
 export const gasMixTypeResolver = {
   resolve: ({fO2, fHe}: GasMix) => {
+    if (fHe + fO2 > 1) return GasMixType.IMPOSSIBLE_MIX
+
     if (fO2 > .92) return GasMixType.OXYGEN
 
     if (fHe + fO2 === 1) return GasMixType.HELIOX

@@ -20,6 +20,7 @@ export const createGasMixFormatter = (dependencies: GasMixFormatterFactoryDepend
   function format(gasMix: GasMix) {
     const gasMixName = gasMixNameResolver.resolve(gasMix)
 
+    if ([GasMixType.IMPOSSIBLE_MIX].includes(gasMixName)) return 'Impossible Mix'
     if ([GasMixType.OXYGEN, GasMixType.AIR].includes(gasMixName)) return `${capitalize(gasMixName)}`
     if (gasMixName === GasMixType.NITROX) return `${capitalize(gasMixName)} ${formatGasFraction(gasMix.fO2)}`
 

@@ -12,6 +12,7 @@ const gasMixTypeToColorClassMap = {
   [GasMixType.TRIMIX]: 'bg-indigo-600 hover:bg-indigo-600/80',
   [GasMixType.HELIOX]: 'bg-teal-600 hover:bg-teal-600/80',
   [GasMixType.OXYGEN]: 'bg-green-400 hover:bg-green-400/80',
+  [GasMixType.IMPOSSIBLE_MIX]: 'bg-red-400 hover:bg-red-400/80',
 }
 
 interface GasBadgeProps extends BadgeProps {

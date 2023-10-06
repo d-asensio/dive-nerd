@@ -9,5 +9,6 @@ export enum GasMixType {
   HELITROX = 'helitrox',
   TRIMIX = 'trimix',
   HELIOX = 'heliox',
-  OXYGEN = 'oxygen'
+  OXYGEN = 'oxygen',
+  IMPOSSIBLE_MIX = 'impossible_mix'
 }

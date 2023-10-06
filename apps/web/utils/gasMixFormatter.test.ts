@@ -49,6 +49,21 @@ describe('createGasMixFormatter.format', () => {
     expect(result).toBe("Oxygen")
   })
 
+  it('formats impossible mixes', () => {
+    const gasMix: GasMix = { fO2: .99, fHe: .0 }
+    const gasMixNameResolver = {
+      resolve: jest.fn()
+    }
+    const gasMixFormatter = createGasMixFormatter({ gasMixNameResolver })
+    when(gasMixNameResolver.resolve)
+      .calledWith(gasMix)
+      .mockReturnValue(GasMixType.IMPOSSIBLE_MIX)
+
+    const result = gasMixFormatter.format(gasMix)
+
+    expect(result).toBe("Impossible Mix")
+  })
+
   it.each([
     {
       gasMix: { fO2: .28, fHe: 0 },

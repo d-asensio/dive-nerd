@@ -45,6 +45,10 @@ it.each([
   {
     gasMix: { fO2: .30, fHe: .70 },
     expectedResult: GasMixType.HELIOX
+  },
+  {
+    gasMix: { fO2: 1, fHe: .7 },
+    expectedResult: GasMixType.IMPOSSIBLE_MIX
   }
 ])('identifies (O2: $gasMix.fO2, He: $gasMix.fHe) as $expectedResult', ({ gasMix, expectedResult }) => {
   const result = gasMixTypeResolver.resolve(gasMix)
