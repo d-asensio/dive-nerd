@@ -17,6 +17,7 @@ import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan
 import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
 import {GasMixSelector} from "@/components/app/gas-mix-selector";
+import {mixMODSelector} from "@/state/dive-gases/selectors";
 
 interface PlanLevelRow {
   id: string;
@@ -25,11 +26,12 @@ interface PlanLevelRow {
 const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
   const isFirst = useSelector(isFirstDiveLevelSelector, id)
   const { depth, duration, gasMixId } = useSelector(diveLevelByIdSelector, id)
+  const gasMOD = useSelector(mixMODSelector, gasMixId)
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
   const updateDiveLevel = useStore.use.updateDiveLevel()
 
-  const alert = isFirst
+  const alert = gasMOD < depth
     ? {
       id: 'GAS_MOD_LOWER_THAN_DEPTH',
       message: (

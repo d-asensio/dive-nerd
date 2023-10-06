@@ -1,26 +1,9 @@
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-  PlusIcon
-} from "lucide-react"
+import {Plus} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuPortal,
@@ -35,6 +18,8 @@ import * as React from "react";
 import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
 import {GasMix} from "@/utils/types";
+import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
+
 
 function StandardGasMenuItem({ gasMix }: { gasMix: GasMix }) {
   const addGasMix = useStore.use.addGasMix()
@@ -46,7 +31,7 @@ function StandardGasMenuItem({ gasMix }: { gasMix: GasMix }) {
   return (
     <DropdownMenuItem onClick={onMenuItemClick}>
       <GasBadge gasMix={gasMix} className="mr-4"/>
-      <DropdownMenuShortcut>{"≤"} 33m</DropdownMenuShortcut>
+      <DropdownMenuShortcut>{"≤"} {maximumOperatingDepth(gasMix)}m</DropdownMenuShortcut>
     </DropdownMenuItem>
   );
 }

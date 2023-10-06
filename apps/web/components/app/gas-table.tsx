@@ -16,6 +16,7 @@ import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
 import {Separator} from "@/components/ui/separator";
 import {AddGasMixDropdown} from "@/components/app/add-gas-mix-dropdown";
+import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   const isFirst = useSelector(isFirstMixSelector, id)
@@ -69,7 +70,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
         <GasBadge gasMix={gasMix} />
       </TableCell>
       <TableCell className='text-right'>
-        57 m
+        {maximumOperatingDepth(gasMix)} m
       </TableCell>
       <TableCell>
         <Tooltip>
