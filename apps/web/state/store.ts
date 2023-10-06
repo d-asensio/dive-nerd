@@ -1,4 +1,5 @@
 import {create} from 'zustand'
+import { setAutoFreeze } from 'immer';
 
 import {createDivePlanSlice, DivePlanSlice} from "@/state/dive-plan/slice";
 import {initialDivePlan} from "@/state/dive-plan/initial";
@@ -7,6 +8,9 @@ import {createDiveGasesSlice, GasesSlice} from "@/state/dive-gases/slice";
 import {initialGases} from "@/state/dive-gases/initial";
 
 import {createSelectors} from "@/state/createSelectors";
+
+
+setAutoFreeze(false);
 
 export type StoreState =
   DivePlanSlice &
