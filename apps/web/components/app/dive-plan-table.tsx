@@ -71,7 +71,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
             <TooltipTrigger>
               <AlertTriangle className="h-4 w-4 text-red-500"/>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent align="start">
               <p className="max-w-[300px] text-red-500">
                 {alert.message}
               </p>
