@@ -1,12 +1,7 @@
-interface GasMix {
-  fO2: number
-  fHe: number
-}
-
 interface DivePlanLevel {
   depth: number
   duration: number
-  gasMix: GasMix
+  gasMixId?: string
 }
 
 interface DivePlan {

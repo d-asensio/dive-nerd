@@ -103,10 +103,7 @@ describe('addDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: {
-        fO2: 0.21,
-        fHe: 0
-      }
+      gasMixId: 'a-gas-mix-id'
     }
     const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan, generateUUID })
@@ -125,18 +122,12 @@ describe('addDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMix: {
-        fO2: 0.21,
-        fHe: 0
-      }
+      gasMixId: 'a-gas-mix-id'
     }
     const anotherDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: {
-        fO2: 0.21,
-        fHe: 0
-      }
+      gasMixId: 'a-gas-mix-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -164,12 +155,12 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMixId: 'a-gas-mix-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: { fO2: .30, fHe: .1 }
+      gasMixId: 'a-gas-mix-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -191,7 +182,7 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMixId: 'a-gas-mix-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       ...aDiveLevel,
@@ -217,12 +208,12 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMixId: 'a-gas-mix-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: { fO2: .30, fHe: .1 }
+      gasMixId: 'a-gas-mix-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -246,10 +237,7 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: {
-        fO2: 0.21,
-        fHe: 0
-      }
+      gasMixId: 'a-gas-mix-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -287,10 +275,7 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMix: {
-        fO2: 0.21,
-        fHe: 0
-      }
+      gasMixId: 'a-gas-mix-id'
     }
     const initialDivePlan =
       divePlanBuilder()

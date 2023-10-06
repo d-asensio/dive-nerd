@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react";
+import {ChangeEvent} from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
 
-import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
@@ -14,10 +14,9 @@ import {useStore} from "@/state/store";
 
 
 import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
-import {GasBadge} from "@/components/app/gas-badge";
-import {ChangeEvent} from "react";
 import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
+import {GasMixSelector} from "@/components/app/gas-mix-selector";
 
 interface PlanLevelRow {
   id: string;
@@ -25,7 +24,7 @@ interface PlanLevelRow {
 
 const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
   const isFirst = useSelector(isFirstDiveLevelSelector, id)
-  const { depth, duration, gasMix } = useSelector(diveLevelByIdSelector, id)
+  const { depth, duration, gasMixId } = useSelector(diveLevelByIdSelector, id)
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
   const updateDiveLevel = useStore.use.updateDiveLevel()
@@ -52,6 +51,10 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
     const duration = parseInt(e.target.value, 10)
 
     updateDiveLevel(id, { duration })
+  }, [id, updateDiveLevel])
+
+  const handleGasMixChange = React.useCallback((gasMixId: string) => {
+    updateDiveLevel(id, { gasMixId })
   }, [id, updateDiveLevel])
 
   const handleRemoveButtonClick = React.useCallback(() => {
@@ -93,34 +96,10 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
         />
       </TableCell>
       <TableCell>
-        <Select defaultValue="0">
-          <SelectTrigger>
-            <SelectValue placeholder="-- no gas selected --"/>
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="0">
-              <GasBadge gasMix={gasMix} />
-            </SelectItem>
-            <SelectItem value="1">
-              <GasBadge gasMix={{ fO2: .21, fHe: 0 }} />
-            </SelectItem>
-            <SelectItem value="2">
-              <GasBadge gasMix={{ fO2: .50, fHe: 0 }} />
-            </SelectItem>
-            <SelectItem value="3">
-              <GasBadge gasMix={{ fO2: .93, fHe: 0 }} />
-            </SelectItem>
-            <SelectItem value="4">
-              <GasBadge gasMix={{ fO2: .21, fHe: .1 }} />
-            </SelectItem>
-            <SelectItem value="5">
-              <GasBadge gasMix={{ fO2: .18, fHe: .1 }} />
-            </SelectItem>
-            <SelectItem value="6">
-              <GasBadge gasMix={{ fO2: .20, fHe: .80 }} />
-            </SelectItem>
-          </SelectContent>
-        </Select>
+        <GasMixSelector
+          value={gasMixId}
+          onValueChange={handleGasMixChange}
+        />
       </TableCell>
       <TableCell>
         <Tooltip>
@@ -168,8 +147,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const onAddLevelButtonClick = React.useCallback(() => {
     addDiveLevel({
       depth: 30,
-      duration: 20,
-      gasMix: { fO2: 0.21, fHe: 0 }
+      duration: 20
     })
   }, [addDiveLevel])
 
