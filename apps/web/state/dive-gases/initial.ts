@@ -1,8 +1,8 @@
-import { v1 as uuid } from 'uuid'
+import { NIL } from 'uuid'
 import {GasesState} from "@/state/dive-gases/types";
 
 
-const firstMixId = uuid()
+const firstMixId = NIL
 
 export const initialGases: GasesState = {
   mixesMap: {

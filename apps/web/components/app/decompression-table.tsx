@@ -30,7 +30,7 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
           </TableRow>
         </TableHeader>
         <TableBody>
-          {diveIntervals.map(({ type, endDepth, endTime, startTime}, i) => (
+          {diveIntervals.map(({ type, endDepth, endTime, startTime, gasMix}, i) => (
             <React.Fragment key={i}>
               {type === DiveProfileIntervalType.ASCENT && endDepth === 21 && (
                 <TableRow className="font-medium bg-muted/50">
@@ -65,7 +65,7 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
                   {Math.ceil(endTime - startTime)} min.
                 </TableCell>
                 <TableCell className="text-right">
-                  <GasBadge gasMix={{fO2: .21, fHe: 0 }} />
+                  <GasBadge gasMix={gasMix} />
                 </TableCell>
               </TableRow>
             </React.Fragment>

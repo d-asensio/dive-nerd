@@ -53,35 +53,43 @@ const intervals = calculatesIntervalsFromPlan({
   levels: [
     {
       depth: 45,
-      duration: 30
+      duration: 30,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 21,
-      duration: 2
+      duration: 2,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 18,
-      duration: 2
+      duration: 2,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 15,
-      duration: 4
+      duration: 4,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 12,
-      duration: 5
+      duration: 5,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 9,
-      duration: 8
+      duration: 8,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 6,
-      duration: 68
+      duration: 68,
+      gasMix: { fO2: .21, fHe: 0 }
     },
     {
       depth: 0,
-      duration: 0
+      duration: 0,
+      gasMix: { fO2: .21, fHe: 0 }
     }
   ]
 })
@@ -103,6 +111,7 @@ const intervals = calculatesIntervalsFromPlan({
       endTime: interval.startTime + (timeDelta * (i+1)),
       startDepth: interval.startDepth + (depthDelta * i),
       endDepth: interval.startDepth + (depthDelta * (i+1)),
+      gasMix: interval.gasMix
     }))
   ]
 }, [])

@@ -5,9 +5,15 @@ interface DivePlanConfiguration {
   ascentRate: number
 }
 
+export interface GasMix {
+  fO2: number
+  fHe: number
+}
+
 interface DivePlanLevel {
-  duration: number,
+  duration: number
   depth: number
+  gasMix: GasMix
 }
 
 export interface DivePlan {
@@ -28,6 +34,7 @@ export interface DiveProfileInterval {
   endTime: number
   startDepth: number
   endDepth: number
+  gasMix: GasMix
 }
 
 export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
@@ -42,7 +49,8 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
 
       const {
         duration,
-        depth: endDepth
+        depth: endDepth,
+        gasMix
       } = level
 
       const depthDelta = endDepth - startDepth
@@ -64,7 +72,8 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         startTime,
         endTime: startTime + timeDelta,
         startDepth,
-        endDepth
+        endDepth,
+        gasMix
       }
 
       if (timeDelta >= duration) {
@@ -79,7 +88,8 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         startTime: deltaInterval.endTime,
         endTime: deltaInterval.startTime + duration,
         startDepth: deltaInterval.endDepth,
-        endDepth: deltaInterval.endDepth
+        endDepth: deltaInterval.endDepth,
+        gasMix
       }
 
       if(timeDelta === 0) {
