@@ -122,10 +122,6 @@ interface DiveProfileIntervalWithAlveolarInertGasPressures extends DiveProfileIn
     N2: number
     He: number
   }
-  endAlveolarInertGasPressures: {
-    N2: number
-    He: number
-  }
 }
 
 const calculateAmbientPressure: (interval: DiveProfileInterval) => DiveProfileIntervalWithAmbientPressure =
@@ -162,18 +158,6 @@ const calculateAlveolarInertGasPressures: (interval: DiveProfileIntervalWithDesc
       }),
       He: alveolarInertGasPartialPressure({
         ambientPressure: interval.startAmbientPressure,
-        waterVaporPressure,
-        inertGasFraction: 0
-      })
-    },
-    endAlveolarInertGasPressures: {
-      N2: alveolarInertGasPartialPressure({
-        ambientPressure: interval.endAmbientPressure,
-        waterVaporPressure,
-        inertGasFraction: 0.79
-      }),
-      He: alveolarInertGasPartialPressure({
-        ambientPressure: interval.endAmbientPressure,
         waterVaporPressure,
         inertGasFraction: 0
       })
