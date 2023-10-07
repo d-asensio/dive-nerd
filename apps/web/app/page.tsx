@@ -25,6 +25,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
 import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {
@@ -243,30 +249,47 @@ const dive = calculatedIntervals.reduce(({ cumulativeCompartmentInertGasLoad, da
   ]
 })
 
+export function TabsDemo() {
+  return (
+    <Tabs defaultValue="levels">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="levels">Levels</TabsTrigger>
+        <TabsTrigger value="gases">Gases</TabsTrigger>
+      </TabsList>
+      <TabsContent value="levels">
+        <DivePlanTable/>
+      </TabsContent>
+      <TabsContent value="gases">
+        <GasTable/>
+      </TabsContent>
+    </Tabs>
+  )
+}
+
+
 export default function Home() {
   return (
     <main>
       <TopBar/>
       <div className="container p-6 space-y-6">
-        <div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div>
-              <div className="flex items-center justify-start space-x-2">
-                <DiveSettingsPopover />
-                <h2 className="text-2xl">
-                  Plan
-                </h2>
-              </div>
-              <DivePlanTable/>
-            </div>
-            <div>
-              <h2 className="text-2xl">
-                Gases
-              </h2>
-              <GasTable/>
-            </div>
-          </div>
+        <div className="flex items-center justify-start space-x-2">
+          <DiveSettingsPopover />
+          <h2 className="text-2xl">
+            Dive plan
+          </h2>
         </div>
+        <Tabs defaultValue="levels">
+          <TabsList className="grid grid-cols-2 max-w-lg">
+            <TabsTrigger value="levels">Levels</TabsTrigger>
+            <TabsTrigger value="gases">Gases</TabsTrigger>
+          </TabsList>
+          <TabsContent value="levels">
+            <DivePlanTable/>
+          </TabsContent>
+          <TabsContent value="gases">
+            <GasTable/>
+          </TabsContent>
+        </Tabs>
         <h2 className="text-2xl">
           Decompression profile
         </h2>
