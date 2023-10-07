@@ -15,7 +15,7 @@ import {TopBar} from "@/components/app/top-bar";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
-import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
+import {DiveSettings} from "@/components/app/dive-settings";
 import {
   CompartmentGasLoadChart
 } from "@/components/app/compartment-gas-load-chart";
@@ -31,6 +31,14 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {ChevronsUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {
@@ -249,56 +257,40 @@ const dive = calculatedIntervals.reduce(({ cumulativeCompartmentInertGasLoad, da
   ]
 })
 
-export function TabsDemo() {
-  return (
-    <Tabs defaultValue="levels">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="levels">Levels</TabsTrigger>
-        <TabsTrigger value="gases">Gases</TabsTrigger>
-      </TabsList>
-      <TabsContent value="levels">
-        <DivePlanTable/>
-      </TabsContent>
-      <TabsContent value="gases">
-        <GasTable/>
-      </TabsContent>
-    </Tabs>
-  )
-}
-
-
 export default function Home() {
   return (
     <main>
       <TopBar/>
       <div className="container p-6 space-y-6">
-        <div className="flex items-center justify-start space-x-2">
-          <DiveSettingsPopover />
-          <h2 className="text-2xl">
-            Dive plan
-          </h2>
+        <div className="grid w-full max-lg:hidden">
+          <DiveProfileChart dataPoints={dive.dataPoints}/>
         </div>
-        <Tabs defaultValue="levels">
-          <TabsList className="grid grid-cols-2 max-w-lg">
-            <TabsTrigger value="levels">Levels</TabsTrigger>
-            <TabsTrigger value="gases">Gases</TabsTrigger>
-          </TabsList>
-          <TabsContent value="levels">
-            <DivePlanTable/>
-          </TabsContent>
-          <TabsContent value="gases">
-            <GasTable/>
-          </TabsContent>
-        </Tabs>
-        <h2 className="text-2xl">
-          Decompression profile
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <DecompressionTable/>
-          <DiveProfileChart
-            dataPoints={dive.dataPoints}
-            className="lg:col-span-2"
-          />
+        <div className='grid lg:grid-cols-3'>
+          <Tabs defaultValue="levels" className="lg:col-span-2">
+            <TabsList className="grid grid-cols-3 max-w-lg">
+              <TabsTrigger value="levels">Levels</TabsTrigger>
+              <TabsTrigger value="gases">Gases</TabsTrigger>
+              <TabsTrigger value="config">Configuration</TabsTrigger>
+            </TabsList>
+            <TabsContent value="levels">
+              <DivePlanTable />
+            </TabsContent>
+            <TabsContent value="gases">
+              <GasTable/>
+            </TabsContent>
+            <TabsContent value="config">
+              <DiveSettings />
+            </TabsContent>
+          </Tabs>
+          <Card>
+            <CardHeader>
+              <CardTitle>Decompression Profile</CardTitle>
+              <CardDescription>25 minutes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <DecompressionTable/>
+            </CardContent>
+          </Card>
         </div>
         <Collapsible>
           <div className="flex items-center justify-start mb-6 space-x-2">
