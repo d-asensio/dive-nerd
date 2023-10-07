@@ -249,7 +249,7 @@ export default function Home() {
       <TopBar/>
       <div className="container p-6 space-y-6">
         <div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div>
               <div className="flex items-center justify-start space-x-2">
                 <DiveSettingsPopover />
@@ -270,11 +270,11 @@ export default function Home() {
         <h2 className="text-2xl">
           Decompression profile
         </h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <DecompressionTable/>
           <DiveProfileChart
             dataPoints={dive.dataPoints}
-            className="col-span-2"
+            className="lg:col-span-2"
           />
         </div>
         <Collapsible>
