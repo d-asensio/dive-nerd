@@ -38,7 +38,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
       message: (
         <>
           The maximum operating depth for the selected gas
-          is <span className="font-bold">21 meters</span>.
+          is <span className="font-bold">{gasMOD} meters</span>.
         </>
       )
     }
