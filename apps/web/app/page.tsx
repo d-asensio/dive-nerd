@@ -264,8 +264,8 @@ export default function Home() {
         <div className="grid w-full max-lg:hidden">
           <DiveProfileChart dataPoints={dive.dataPoints}/>
         </div>
-        <div className='grid lg:grid-cols-3'>
-          <Tabs defaultValue="levels" className="lg:col-span-2">
+        <div className='grid lg:grid-cols-2 xl:grid-cols-3'>
+          <Tabs defaultValue="levels" className="xl:col-span-2">
             <TabsList className="grid grid-cols-3 max-w-lg">
               <TabsTrigger value="levels">Levels</TabsTrigger>
               <TabsTrigger value="gases">Gases</TabsTrigger>
