@@ -67,67 +67,67 @@ const intervals = calculatesIntervalsFromPlan({
     {
       depth: 45,
       duration: 30,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 21,
       duration: 2,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 18,
       duration: 2,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 15,
       duration: 4,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 12,
       duration: 5,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 9,
       duration: 8,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 6,
       duration: 68,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     },
     {
       depth: 0,
       duration: 0,
-      gasMix: { fO2: .21, fHe: 0 }
+      gasMix: {fO2: .21, fHe: 0}
     }
   ]
 })
 
 
-.reduce((acc: DiveProfileInterval[], interval)  => {
-  const sampleEvery = 0.5 // seconds to minutes
-  const intervalTime = interval.endTime - interval.startTime
-  const totalIntervals = Math.round(intervalTime/sampleEvery)
+  .reduce((acc: DiveProfileInterval[], interval) => {
+    const sampleEvery = 0.5 // seconds to minutes
+    const intervalTime = interval.endTime - interval.startTime
+    const totalIntervals = Math.round(intervalTime / sampleEvery)
 
-  const timeDelta = intervalTime/totalIntervals
-  const depthDelta = (interval.endDepth - interval.startDepth) / totalIntervals
+    const timeDelta = intervalTime / totalIntervals
+    const depthDelta = (interval.endDepth - interval.startDepth) / totalIntervals
 
-  return [
-    ...acc,
-    ...Array.from({ length: totalIntervals }).map((_, i) => ({
-      type: interval.type,
-      startTime: interval.startTime + (timeDelta * i),
-      endTime: interval.startTime + (timeDelta * (i+1)),
-      startDepth: interval.startDepth + (depthDelta * i),
-      endDepth: interval.startDepth + (depthDelta * (i+1)),
-      gasMix: interval.gasMix
-    }))
-  ]
-}, [])
+    return [
+      ...acc,
+      ...Array.from({length: totalIntervals}).map((_, i) => ({
+        type: interval.type,
+        startTime: interval.startTime + (timeDelta * i),
+        endTime: interval.startTime + (timeDelta * (i + 1)),
+        startDepth: interval.startDepth + (depthDelta * i),
+        endDepth: interval.startDepth + (depthDelta * (i + 1)),
+        gasMix: interval.gasMix
+      }))
+    ]
+  }, [])
 
 
 interface DiveProfileIntervalWithAmbientPressure extends DiveProfileInterval {
@@ -165,7 +165,7 @@ const calculateAmbientPressure: (interval: DiveProfileInterval) => DiveProfileIn
 const calculateDescentRate: (interval: DiveProfileIntervalWithAmbientPressure) => DiveProfileIntervalWithDescentRate =
   interval => ({
     ...interval,
-    descentRate: (interval.endAmbientPressure - interval.startAmbientPressure)/(interval.endTime - interval.startTime)
+    descentRate: (interval.endAmbientPressure - interval.startAmbientPressure) / (interval.endTime - interval.startTime)
   })
 
 
@@ -202,7 +202,7 @@ const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentI
   waterVaporPressure
 })
 
-const dive = calculatedIntervals.reduce(({ cumulativeCompartmentInertGasLoad, dataPoints }, interval) => {
+const dive = calculatedIntervals.reduce(({cumulativeCompartmentInertGasLoad, dataPoints}, interval) => {
   const intervalTime = interval.endTime - interval.startTime
 
   const nextCumulativeCompartmentInertGasLoad = cumulativeCompartmentInertGasLoad.map((compartmentInertGasLoads, compartmentId) => ({
@@ -260,8 +260,8 @@ export default function Home() {
   return (
     <main>
       <TopBar/>
-      <div className="container p-6 space-y-6">
-        <Tabs defaultValue="profile" className="max-lg:hidden">
+      <div className="container p-6 gap-6 flex flex-col-reverse lg:flex-col">
+        <Tabs defaultValue="profile">
           <TabsList className="grid grid-cols-2 max-w-md">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="compartments">Compartments</TabsTrigger>
@@ -283,13 +283,13 @@ export default function Home() {
               <TabsTrigger value="config">Configuration</TabsTrigger>
             </TabsList>
             <TabsContent value="levels">
-              <DivePlanTable />
+              <DivePlanTable/>
             </TabsContent>
             <TabsContent value="gases">
               <GasTable/>
             </TabsContent>
             <TabsContent value="config">
-              <DiveSettings />
+              <DiveSettings/>
             </TabsContent>
           </Tabs>
           <Card className="overflow-x-auto">
@@ -302,30 +302,32 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
-        <Collapsible>
-          <div className="flex items-center justify-start mb-6 space-x-2">
-            <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <ChevronsUpDown className="h-4 w-4" />
-              </Button>
-            </CollapsibleTrigger>
-            <h2 className="text-2xl">
-              Compartment gas load
-            </h2>
-          </div>
-          <CollapsibleContent>
-            <div className="grid grid-cols-1 gap-y-4">
-              {buhlmannCompartments.map((_, id) => (
-                <CompartmentGasLoadChart
-                  key={id}
-                  compartmentId={id}
-                  dive={dive}
-                  surfaceAmbientPressure={surfaceAmbientPressure}
-                />
-              ))}
+        {false && (
+          <Collapsible>
+            <div className="flex items-center justify-start mb-6 space-x-2">
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <ChevronsUpDown className="h-4 w-4"/>
+                </Button>
+              </CollapsibleTrigger>
+              <h2 className="text-2xl">
+                Compartment gas load
+              </h2>
             </div>
-          </CollapsibleContent>
-        </Collapsible>
+            <CollapsibleContent>
+              <div className="grid grid-cols-1 gap-y-4">
+                {buhlmannCompartments.map((_, id) => (
+                  <CompartmentGasLoadChart
+                    key={id}
+                    compartmentId={id}
+                    dive={dive}
+                    surfaceAmbientPressure={surfaceAmbientPressure}
+                  />
+                ))}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        )}
       </div>
     </main>
   )
