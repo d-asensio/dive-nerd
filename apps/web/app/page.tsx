@@ -38,7 +38,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {ChevronsUpDown} from "lucide-react";
+import {ChevronsUpDown, Settings} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {
   calculatesIntervalsFromPlan,
@@ -276,11 +276,13 @@ export default function Home() {
           </TabsContent>
         </Tabs>
         <div className='grid lg:grid-cols-2 xl:grid-cols-3'>
-          <Tabs defaultValue="levels" className="xl:col-span-2">
+          <Tabs defaultValue="levels" className="xl:col-span-2 min-w-0">
             <TabsList className="grid grid-cols-3 max-w-lg mr-16 mb-4">
               <TabsTrigger value="levels">Levels</TabsTrigger>
               <TabsTrigger value="gases">Gases</TabsTrigger>
-              <TabsTrigger value="config">Configuration</TabsTrigger>
+              <TabsTrigger value="config">
+                <Settings className="w-4 h-4" />
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="levels">
               <DivePlanTable/>
