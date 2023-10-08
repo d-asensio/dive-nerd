@@ -53,6 +53,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
             min={0}
             max={1}
             step={.01}
+            className="max-w-[150px] min-w-[120px]"
           />
           <span>/</span>
           <InputWithUnits
@@ -63,6 +64,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
             min={0}
             max={1}
             step={.01}
+            className="max-w-[150px] min-w-[120px]"
           />
         </div>
       </TableCell>

@@ -86,6 +86,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
           onChange={handleDepthChange}
           min={0}
           step={1}
+          className="max-w-[150px] min-w-[120px]"
         />
       </TableCell>
       <TableCell>
@@ -96,6 +97,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
           onChange={handleDurationChange}
           min={0}
           step={1}
+          className="max-w-[150px] min-w-[120px]"
         />
       </TableCell>
       <TableCell>

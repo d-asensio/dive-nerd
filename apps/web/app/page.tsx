@@ -261,12 +261,23 @@ export default function Home() {
     <main>
       <TopBar/>
       <div className="container p-6 space-y-6">
-        <div className="grid w-full max-lg:hidden">
-          <DiveProfileChart dataPoints={dive.dataPoints}/>
-        </div>
+        <Tabs defaultValue="profile" className="max-lg:hidden">
+          <TabsList className="grid grid-cols-2 max-w-md">
+            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="compartments">Compartments</TabsTrigger>
+          </TabsList>
+          <TabsContent value="profile">
+            <div className="grid w-full">
+              <DiveProfileChart dataPoints={dive.dataPoints}/>
+            </div>
+          </TabsContent>
+          <TabsContent value="compartments">
+
+          </TabsContent>
+        </Tabs>
         <div className='grid lg:grid-cols-2 xl:grid-cols-3'>
           <Tabs defaultValue="levels" className="xl:col-span-2">
-            <TabsList className="grid grid-cols-3 max-w-lg">
+            <TabsList className="grid grid-cols-3 max-w-lg mr-16 mb-4">
               <TabsTrigger value="levels">Levels</TabsTrigger>
               <TabsTrigger value="gases">Gases</TabsTrigger>
               <TabsTrigger value="config">Configuration</TabsTrigger>
@@ -281,7 +292,7 @@ export default function Home() {
               <DiveSettings />
             </TabsContent>
           </Tabs>
-          <Card>
+          <Card className="overflow-x-auto">
             <CardHeader>
               <CardTitle>Decompression Profile</CardTitle>
               <CardDescription>25 minutes</CardDescription>
