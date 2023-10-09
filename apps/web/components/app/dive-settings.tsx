@@ -31,7 +31,7 @@ export function DiveSettings() {
   }, [setAscentRate])
 
   return (
-    <div className="grid grid-cols-4 gap-4 p-6">
+    <div className="grid md:grid-cols-2 gap-4 p-6">
       <div className="grid items-center gap-4">
         <Label htmlFor="descent_rate">Descent rate</Label>
         <InputWithUnits
