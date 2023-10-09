@@ -79,7 +79,7 @@ export default function Home() {
             </h2>
           </div>
           <CollapsibleContent>
-            <div className="grid grid-cols-1 gap-y-4">
+            <div className="grid grid-cols-2 gap-y-4">
               {buhlmannCompartments.map((_, id) => (
                 <CompartmentGasLoadChart
                   key={id}
