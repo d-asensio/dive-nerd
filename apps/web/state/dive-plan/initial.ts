@@ -1,6 +1,6 @@
 import { v1 as uuid } from 'uuid'
 import {DivePlanState} from "@/state/dive-plan/types";
-import {bottomMixId, deco21MixId, deco6MixId, initialGases} from "@/state/dive-gases/initial";
+import {bottomMixId, deco21MixId, deco6MixId} from "@/state/dive-gases/initial";
 
 
 const diveLevelsMap = {

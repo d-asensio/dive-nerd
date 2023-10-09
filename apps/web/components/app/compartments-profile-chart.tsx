@@ -7,6 +7,7 @@ import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
+import {calculateDiveProfile} from "@/utils/calculate-dive-profile";
 
 const PointTooltip = ({ point }: PointTooltipProps) => {
   return (
@@ -30,8 +31,9 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
   )
 }
 
-export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
+export function CompartmentsProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const diveIntervals = useSelector(diveIntervalsSelector)
+  const {intervals} = calculateDiveProfile(diveIntervals)
 
   return (
     <div
@@ -44,19 +46,16 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           data={[
             {
               id: "Dive Profile",
-              data: [
-                {
-                  x: 0,
-                  y: 0
-                },
-              ...diveIntervals.map(({ endDepth, endTime }) => ({
-                  x: endTime,
-                  y: endDepth
-                }))
-              ]
-            }
+              data: intervals
+            },
+            ...Array.from({ length: 16 }).map((_, i) => ({
+              id: `Compartment ${i}`,
+              data: intervals.map(({compartmentInertGasLoads, x, }) => ({
+                x,
+                y: compartmentInertGasLoads[i].N2 + compartmentInertGasLoads[i].He
+              }))
+            }))
           ]}
-          colors={["rgb(96, 165, 250)"]}
           margin={{top: 12, right: 18, bottom: 62, left: 62}}
           xScale={{type: "linear"}}
           yScale={{

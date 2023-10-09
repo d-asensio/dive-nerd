@@ -3,12 +3,14 @@
 import * as React from "react";
 import {ResponsiveLine} from '@nivo/line'
 
-import {buhlmannCompartments, CompartmentInertGasLoad} from "dive-physics";
+import {buhlmannCompartments} from "dive-physics";
 
 import {cn} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 
-import {useStore} from "@/state/store";
+import {calculateDiveProfile, surfaceAmbientPressure} from "@/utils/calculate-dive-profile";
+import {useSelector} from "@/state/useSelector";
+import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 
 const maxValueLineEq = ({
   coefficientA: a,
@@ -75,18 +77,10 @@ const gradientFactorsCeilingLineEq = ({
 
   return ceiling
 }
+export function CompartmentGasLoadChart({compartmentId, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number }) {
+  const diveIntervals = useSelector(diveIntervalsSelector)
+  const {intervals} = calculateDiveProfile(diveIntervals)
 
-interface Dive {
-  cumulativeCompartmentInertGasLoad: CompartmentInertGasLoad[]
-  dataPoints: {
-    compartmentInertGasLoads: CompartmentInertGasLoad[]
-    ambientPressure: number
-    x: number
-    y: number
-  }[];
-}
-
-export function CompartmentGasLoadChart({compartmentId, className, dive, surfaceAmbientPressure, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number, dive: Dive, surfaceAmbientPressure: number }) {
   const { N2 } = buhlmannCompartments[compartmentId]
 
   const coefficientA = N2.a
@@ -223,14 +217,14 @@ export function CompartmentGasLoadChart({compartmentId, className, dive, surface
             },
             {
               id: "Load",
-              data: dive.dataPoints.map(({ compartmentInertGasLoads, ambientPressure }) => ({
+              data: intervals.map(({ compartmentInertGasLoads, ambientPressure }) => ({
                 x: ambientPressure,
                 y: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He
               }))
             },
             {
               id: "Ceil",
-              data: dive.dataPoints.map(({ compartmentInertGasLoads, ambientPressure }) => ({
+              data: intervals.map(({ compartmentInertGasLoads, ambientPressure }) => ({
                 x: ambientPressure,
                 y: gradientFactorsCeilingLineEq({
                   ambientPressure,
