@@ -33,7 +33,7 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
 
 export function CompartmentsProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const diveIntervals = useSelector(diveIntervalsSelector)
-  const {intervals} = calculateDiveProfile(diveIntervals)
+  const intervals = calculateDiveProfile(diveIntervals)
 
   return (
     <div

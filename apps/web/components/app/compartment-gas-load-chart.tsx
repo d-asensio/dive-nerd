@@ -79,7 +79,7 @@ const gradientFactorsCeilingLineEq = ({
 }
 export function CompartmentGasLoadChart({compartmentId, className, ...props}: React.HTMLAttributes<HTMLDivElement> & { compartmentId: number }) {
   const diveIntervals = useSelector(diveIntervalsSelector)
-  const {intervals} = calculateDiveProfile(diveIntervals)
+  const intervals = calculateDiveProfile(diveIntervals)
 
   const { N2 } = buhlmannCompartments[compartmentId]
 

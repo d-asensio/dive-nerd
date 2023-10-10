@@ -9,7 +9,7 @@ import {
   schreinerEquation
 } from "dive-physics";
 import {DiveProfileInterval} from "dive-profile-generator";
-import {map, pipe} from "ramda";
+import { map, pipe} from "ramda";
 
 /**
  * Dive variables
@@ -105,10 +105,11 @@ const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentI
   waterVaporPressure
 })
 const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlveolarInertGasPressures[]) =>
-  intervals.reduce(({cumulativeCompartmentInertGasLoad, intervals}, interval) => {
+  intervals.reduce((intervals, interval) => {
+    const lastInterval = intervals[intervals.length - 1]
     const intervalTime = interval.endTime - interval.startTime
 
-    const nextCumulativeCompartmentInertGasLoad = cumulativeCompartmentInertGasLoad.map((compartmentInertGasLoads, compartmentId) => ({
+    const nextCumulativeCompartmentInertGasLoad = lastInterval.compartmentInertGasLoads.map((compartmentInertGasLoads, compartmentId) => ({
       N2: schreinerEquation({
         initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.N2,
         initialCompartmentGasPartialPressure: compartmentInertGasLoads.N2,
@@ -135,9 +136,7 @@ const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlve
       }),
     }))
 
-    return {
-      cumulativeCompartmentInertGasLoad: nextCumulativeCompartmentInertGasLoad,
-      intervals: [
+    return [
         ...intervals,
         {
           compartmentInertGasLoads: nextCumulativeCompartmentInertGasLoad,
@@ -146,18 +145,14 @@ const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlve
           y: interval.endAmbientPressure
         }
       ]
+  }, [
+    {
+      compartmentInertGasLoads: surfaceSaturatedCompartmentInertGasLoads,
+      ambientPressure: surfaceAmbientPressure,
+      x: 0,
+      y: surfaceAmbientPressure
     }
-  }, {
-    cumulativeCompartmentInertGasLoad: surfaceSaturatedCompartmentInertGasLoads,
-    intervals: [
-      {
-        compartmentInertGasLoads: surfaceSaturatedCompartmentInertGasLoads,
-        ambientPressure: surfaceAmbientPressure,
-        x: 0,
-        y: surfaceAmbientPressure
-      }
-    ]
-  })
+  ])
 export const calculateDiveProfile = pipe(
   interpolateIntervals,
   map(calculateInterval),
