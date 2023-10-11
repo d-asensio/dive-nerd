@@ -35,7 +35,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dive-physics": "*",
-    "dive-profile-generator": "*",
+    "dive-planner": "*",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "immer": "^10.0.3",

@@ -4,7 +4,7 @@ import * as React from "react";
 import {ArrowDown, ArrowRight, ArrowUp} from "lucide-react";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {DiveProfileIntervalType} from "dive-profile-generator";
+import {DiveProfileIntervalType} from "dive-planner";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {GasBadge} from "@/components/app/gas-badge";

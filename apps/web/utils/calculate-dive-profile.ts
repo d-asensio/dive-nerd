@@ -8,7 +8,7 @@ import {
   inspiredGasChangeRate,
   schreinerEquation
 } from "dive-physics";
-import {DiveProfileInterval} from "dive-profile-generator";
+import {DiveProfileInterval} from "dive-planner";
 import { map, pipe} from "ramda";
 
 /**

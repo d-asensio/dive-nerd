@@ -86,9 +86,9 @@ importers:
       dive-physics:
         specifier: '*'
         version: link:../../packages/dive-physics
-      dive-profile-generator:
+      dive-planner:
         specifier: '*'
-        version: link:../../packages/dive-profile-generator
+        version: link:../../packages/dive-planner
       eslint:
         specifier: 8.49.0
         version: 8.49.0
@@ -165,7 +165,7 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
 
-  packages/dive-profile-generator:
+  packages/dive-planner:
     dependencies:
       '@swc/core':
         specifier: ^1.3.90
