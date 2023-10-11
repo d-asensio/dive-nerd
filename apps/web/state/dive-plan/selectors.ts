@@ -2,7 +2,7 @@ import { memoize, memoizeWithArgs } from 'proxy-memoize';
 
 import {DivePlanSlice} from "@/state/dive-plan/slice";
 import {DivePlanLevel} from "@/state/dive-plan/types";
-import divePlanner, {DiveProfileInterval} from "dive-planner";
+import divePlanner, {DiveSegment} from "dive-planner";
 import {StoreState} from "@/state/store";
 
 export const isFirstDiveLevelSelector = memoizeWithArgs<[DivePlanSlice, string], boolean>(
@@ -16,7 +16,7 @@ export const diveLevelByIdSelector = memoizeWithArgs<[DivePlanSlice, string], Di
 )
 
 
-export const diveIntervalsSelector = memoize<StoreState, DiveProfileInterval[]>(
+export const diveIntervalsSelector = memoize<StoreState, DiveSegment[]>(
   ({descentRate, ascentRate, diveLevelsMap, gasesMap}: StoreState) =>
     divePlanner.calculateDiveProfileFromPlanV1({
       descentRate,

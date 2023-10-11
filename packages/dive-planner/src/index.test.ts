@@ -33,18 +33,18 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 4.5,
-        endTime: 25,
-        startDepth: 45,
-        endDepth: 45,
+        initialTime: 4.5,
+        finalTime: 25,
+        initialDepth: 45,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
@@ -69,10 +69,10 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
@@ -102,18 +102,18 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 4.5,
-        endTime: 29.5,
-        startDepth: 45,
-        endDepth: 45,
+        initialTime: 4.5,
+        finalTime: 29.5,
+        initialDepth: 45,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
@@ -138,10 +138,10 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
@@ -171,34 +171,34 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 4.5,
-        endTime: 25,
-        startDepth: 45,
-        endDepth: 45,
+        initialTime: 4.5,
+        finalTime: 25,
+        initialDepth: 45,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 25,
-        endTime: 25.5,
-        startDepth: 45,
-        endDepth: 50,
+        initialTime: 25,
+        finalTime: 25.5,
+        initialDepth: 45,
+        finalDepth: 50,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 25.5,
-        endTime: 35,
-        startDepth: 50,
-        endDepth: 50,
+        initialTime: 25.5,
+        finalTime: 35,
+        initialDepth: 50,
+        finalDepth: 50,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
@@ -228,36 +228,39 @@ describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
     expect(result).toStrictEqual([
       {
         type: DiveProfileIntervalType.DESCENT,
-        startTime: 0,
-        endTime: 4.5,
-        startDepth: 0,
-        endDepth: 45,
+        initialTime: 0,
+        finalTime: 4.5,
+        initialDepth: 0,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 4.5,
-        endTime: 25,
-        startDepth: 45,
-        endDepth: 45,
+        initialTime: 4.5,
+        finalTime: 25,
+        initialDepth: 45,
+        finalDepth: 45,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.ASCENT,
-        startTime: 25,
-        endTime: 26,
-        startDepth: 45,
-        endDepth: 40,
+        initialTime: 25,
+        finalTime: 26,
+        initialDepth: 45,
+        finalDepth: 40,
         gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
-        startTime: 26,
-        endTime: 40,
-        startDepth: 40,
-        endDepth: 40,
+        initialTime: 26,
+        finalTime: 40,
+        initialDepth: 40,
+        finalDepth: 40,
         gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
 })
+
+
+

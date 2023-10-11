@@ -1,5 +1,16 @@
 import {last, reduce} from "ramda";
 
+export interface DiveProfileIntervalDeprecated {
+  type: DiveProfileIntervalType
+  initialTime: number
+  finalTime: number
+  initialDepth: number
+  finalDepth: number
+  gas: Gas
+}
+
+// ####
+
 export interface Gas {
   fO2: number
   fHe: number
@@ -14,6 +25,7 @@ interface DivePlanLevel {
 export interface DivePlan {
   descentRate: number
   ascentRate: number
+  // gradientFactors: [number, number]
   levels: DivePlanLevel[]
 }
 
@@ -24,38 +36,70 @@ export enum DiveProfileIntervalType {
   DECO_STOP = 'DECO_STOP'
 }
 
-export interface DiveProfileInterval {
+interface InertGasPartialPressures {
+  ppN2: number
+  ppHe: number
+}
+
+interface DiveProfileInterval {
   type: DiveProfileIntervalType
-  startTime: number
-  endTime: number
-  startDepth: number
-  endDepth: number
+
+  duration: number // minutes
+  depth: number // meters
+  isGasSwitched: boolean
+  gas: Gas
+
+  ambientPressure: number // bars
+  compartmentInertGasPartialPressures: InertGasPartialPressures[] // bars
+  ceilingDepth: number // meters
+}
+
+interface DiveProfile {
+  // runTime: number
+  // decoTime: number
+  // averageDepth: number
+  // intervals: DiveProfileInterval[]
+  intervals: DiveSegment[]
+}
+
+interface DiveSegment {
+  type: DiveProfileIntervalType
+  initialDepth: number
+  finalDepth: number
+  initialTime: number
+  finalTime: number
   gas: Gas
 }
 
-interface DivePlannerDependencies {}
+// interface DecompressionAlgorithm {
+//   calculateDiveProfileFromSegments: (segments: DiveSegment) => DiveProfile
+// }
+
+interface DivePlannerDependencies {
+  // decompressionAlgorithm: DecompressionAlgorithm
+}
 
 interface DivePlanner {
-  calculateDiveProfileFromPlanV1: (configuration: DivePlan) => DiveProfileInterval[]
+  calculateDiveProfileFromPlanV1: (configuration: DivePlan) => DiveSegment[]
 }
 
 export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePlanner => {
 
-  const calculateDiveProfileFromPlanV1 = ({descentRate, ascentRate, levels} : DivePlan): DiveProfileInterval[] =>
+  const calculateDiveProfileFromPlanV1 = ({descentRate, ascentRate, levels} : DivePlan): DiveSegment[] =>
     reduce(
-      (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
+      (intervalsAcc: DiveSegment[], level: DivePlanLevel) => {
         const {
-          endDepth: startDepth = 0,
-          endTime: startTime = 0
+          finalDepth: initialDepth = 0,
+          finalTime: initialTime = 0
         } = last(intervalsAcc) ?? {}
 
         const {
           duration,
-          depth: endDepth,
+          depth: finalDepth,
           gas
         } = level
 
-        const depthDelta = endDepth - startDepth
+        const depthDelta = finalDepth - initialDepth
 
         const rate =
           depthDelta < 0
@@ -71,10 +115,10 @@ export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePl
 
         const deltaInterval = {
           type: deltaIntervalType,
-          startTime,
-          endTime: startTime + timeDelta,
-          startDepth,
-          endDepth,
+          initialTime,
+          finalTime: initialTime + timeDelta,
+          initialDepth,
+          finalDepth,
           gas
         }
 
@@ -87,10 +131,10 @@ export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePl
 
         const navigationInterval = {
           type: DiveProfileIntervalType.NAVIGATION,
-          startTime: deltaInterval.endTime,
-          endTime: deltaInterval.startTime + duration,
-          startDepth: deltaInterval.endDepth,
-          endDepth: deltaInterval.endDepth,
+          initialTime: deltaInterval.finalTime,
+          finalTime: deltaInterval.initialTime + duration,
+          initialDepth: deltaInterval.finalDepth,
+          finalDepth: deltaInterval.finalDepth,
           gas
         }
 

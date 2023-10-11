@@ -49,9 +49,9 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
                   x: 0,
                   y: 0
                 },
-              ...diveIntervals.map(({ endDepth, endTime }) => ({
-                  x: endTime,
-                  y: endDepth
+              ...diveIntervals.map(({ finalTime, finalDepth }) => ({
+                  x: finalTime,
+                  y: finalDepth
                 }))
               ]
             }

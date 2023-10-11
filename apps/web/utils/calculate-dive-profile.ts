@@ -8,7 +8,7 @@ import {
   inspiredGasChangeRate,
   schreinerEquation
 } from "dive-physics";
-import {DiveProfileInterval} from "dive-planner";
+import {DiveSegment} from "dive-planner";
 import { map, pipe} from "ramda";
 
 /**
@@ -21,31 +21,31 @@ const waterVaporPressure = alveolarWaterVaporPressure({
   carbonDioxidePressure: 0.0533,
   waterPressure: 0.0627
 })
-const interpolateIntervals = (intervals: DiveProfileInterval[]) =>
-  intervals.reduce((acc: DiveProfileInterval[], interval) => {
+const interpolateIntervals = (intervals: DiveSegment[]) =>
+  intervals.reduce((acc: DiveSegment[], interval) => {
     const sampleEvery = 0.5 // seconds to minutes
-    const intervalTime = interval.endTime - interval.startTime
+    const intervalTime = interval.finalTime - interval.initialTime
     const totalIntervals = Math.round(intervalTime / sampleEvery)
 
     const timeDelta = intervalTime / totalIntervals
-    const depthDelta = (interval.endDepth - interval.startDepth) / totalIntervals
+    const depthDelta = (interval.finalDepth - interval.initialDepth) / totalIntervals
 
     return [
       ...acc,
       ...Array.from({length: totalIntervals}).map((_, i) => ({
         type: interval.type,
-        startTime: interval.startTime + (timeDelta * i),
-        endTime: interval.startTime + (timeDelta * (i + 1)),
-        startDepth: interval.startDepth + (depthDelta * i),
-        endDepth: interval.startDepth + (depthDelta * (i + 1)),
+        initialTime: interval.initialTime + (timeDelta * i),
+        finalTime: interval.initialTime + (timeDelta * (i + 1)),
+        initialDepth: interval.initialDepth + (depthDelta * i),
+        finalDepth: interval.initialDepth + (depthDelta * (i + 1)),
         gas: interval.gas
       }))
     ]
   }, []);
 
-interface DiveProfileIntervalWithAmbientPressure extends DiveProfileInterval {
-  startAmbientPressure: number
-  endAmbientPressure: number
+interface DiveProfileIntervalWithAmbientPressure extends DiveSegment {
+  initialAmbientPressure: number
+  finalAmbientPressure: number
 }
 
 interface DiveProfileIntervalWithDescentRate extends DiveProfileIntervalWithAmbientPressure {
@@ -59,16 +59,16 @@ interface DiveProfileIntervalWithAlveolarInertGasPressures extends DiveProfileIn
   }
 }
 
-const calculateAmbientPressure: (interval: DiveProfileInterval) => DiveProfileIntervalWithAmbientPressure =
+const calculateAmbientPressure: (interval: DiveSegment) => DiveProfileIntervalWithAmbientPressure =
   interval => ({
     ...interval,
-    startAmbientPressure: fromDepthToHydrostaticPressure({
-      depth: interval.startDepth,
+    initialAmbientPressure: fromDepthToHydrostaticPressure({
+      depth: interval.initialDepth,
       surfaceAmbientPressure,
       waterDensity
     }),
-    endAmbientPressure: fromDepthToHydrostaticPressure({
-      depth: interval.endDepth,
+    finalAmbientPressure: fromDepthToHydrostaticPressure({
+      depth: interval.finalDepth,
       surfaceAmbientPressure,
       waterDensity
     }),
@@ -76,25 +76,25 @@ const calculateAmbientPressure: (interval: DiveProfileInterval) => DiveProfileIn
 const calculateDescentRate: (interval: DiveProfileIntervalWithAmbientPressure) => DiveProfileIntervalWithDescentRate =
   interval => ({
     ...interval,
-    descentRate: (interval.endAmbientPressure - interval.startAmbientPressure) / (interval.endTime - interval.startTime)
+    descentRate: (interval.finalAmbientPressure - interval.initialAmbientPressure) / (interval.finalTime - interval.initialTime)
   })
 const calculateAlveolarInertGasPressures: (interval: DiveProfileIntervalWithDescentRate) => DiveProfileIntervalWithAlveolarInertGasPressures =
   interval => ({
     ...interval,
     startAlveolarInertGasPressures: {
       N2: alveolarInertGasPartialPressure({
-        ambientPressure: interval.startAmbientPressure,
+        ambientPressure: interval.initialAmbientPressure,
         waterVaporPressure,
         inertGasFraction: 0.79
       }),
       He: alveolarInertGasPartialPressure({
-        ambientPressure: interval.startAmbientPressure,
+        ambientPressure: interval.initialAmbientPressure,
         waterVaporPressure,
         inertGasFraction: 0
       })
     }
   })
-const calculateInterval: (interval: DiveProfileInterval) => DiveProfileIntervalWithAlveolarInertGasPressures =
+const calculateInterval: (interval: DiveSegment) => DiveProfileIntervalWithAlveolarInertGasPressures =
   pipe(
     calculateAmbientPressure,
     calculateDescentRate,
@@ -107,7 +107,7 @@ const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentI
 const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlveolarInertGasPressures[]) =>
   intervals.reduce((intervals, interval) => {
     const lastInterval = intervals[intervals.length - 1]
-    const intervalTime = interval.endTime - interval.startTime
+    const intervalTime = interval.finalTime - interval.initialTime
 
     const nextCumulativeCompartmentInertGasLoad = lastInterval.compartmentInertGasLoads.map((compartmentInertGasLoads, compartmentId) => ({
       N2: schreinerEquation({
@@ -140,9 +140,9 @@ const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlve
         ...intervals,
         {
           compartmentInertGasLoads: nextCumulativeCompartmentInertGasLoad,
-          ambientPressure: interval.endAmbientPressure,
-          x: interval.endTime,
-          y: interval.endAmbientPressure
+          ambientPressure: interval.finalAmbientPressure,
+          x: interval.finalTime,
+          y: interval.finalAmbientPressure
         }
       ]
   }, [
