@@ -30,9 +30,9 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
           </TableRow>
         </TableHeader>
         <TableBody>
-          {diveIntervals.map(({ type, endDepth, endTime, startTime, gas}, i) => (
+          {diveIntervals.map(({ type, finalDepth, finalTime, initialTime, gas}, i) => (
             <React.Fragment key={i}>
-              {type === DiveProfileIntervalType.ASCENT && endDepth === 21 && (
+              {type === DiveProfileIntervalType.ASCENT && finalDepth === 21 && (
                 <TableRow className="font-medium bg-muted/50">
                   <TableCell colSpan={3}>
                     Deco stops from 21 m
@@ -42,7 +42,7 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
                   </TableCell>
                 </TableRow>
               )}
-              {type === DiveProfileIntervalType.ASCENT && endDepth === 6 && (
+              {type === DiveProfileIntervalType.ASCENT && finalDepth === 6 && (
                 <TableRow className="font-medium bg-muted/50">
                   <TableCell colSpan={3}>
                     Deco stops from 6 m
@@ -59,10 +59,10 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
                   {type === DiveProfileIntervalType.ASCENT && <ArrowUp className="text-red-500"/>}
                 </TableCell>
                 <TableCell className="font-medium">
-                  {endDepth} m
+                  {finalDepth} m
                 </TableCell>
                 <TableCell>
-                  {Math.ceil(endTime - startTime)} min.
+                  {Math.ceil(finalTime - initialTime)} min.
                 </TableCell>
                 <TableCell className="text-right">
                   <GasBadge gas={gas} />
