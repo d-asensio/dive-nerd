@@ -1,9 +1,9 @@
-export interface GasMix {
+export interface Gas {
   fO2: number
   fHe: number
 }
 
-export enum GasMixType {
+export enum GasType {
   AIR = 'air',
   NITROX = 'nitrox',
   HELITROX = 'helitrox',

@@ -21,7 +21,7 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 25,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         }
       ]
     }
@@ -35,7 +35,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -43,7 +43,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 25,
         startDepth: 45,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
@@ -56,7 +56,7 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 4,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         }
       ]
     }
@@ -70,7 +70,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
@@ -83,12 +83,12 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 4,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         },
         {
           duration: 25,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         },
       ]
     }
@@ -102,7 +102,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -110,7 +110,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 29.5,
         startDepth: 45,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
@@ -123,7 +123,7 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 4.5,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         }
       ]
     }
@@ -137,7 +137,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
@@ -150,12 +150,12 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 25,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         },
         {
           duration: 10,
           depth: 50,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         }
       ]
     }
@@ -169,7 +169,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -177,7 +177,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 25,
         startDepth: 45,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.DESCENT,
@@ -185,7 +185,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 25.5,
         startDepth: 45,
         endDepth: 50,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -193,7 +193,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 35,
         startDepth: 50,
         endDepth: 50,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })
@@ -206,12 +206,12 @@ describe('calculatesIntervalsFromPlan', () => {
         {
           duration: 25,
           depth: 45,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         },
         {
           duration: 15,
           depth: 40,
-          gasMix: { fO2: .21, fHe: 0 }
+          gas: { fO2: .21, fHe: 0 }
         }
       ]
     }
@@ -225,7 +225,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 4.5,
         startDepth: 0,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -233,7 +233,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 25,
         startDepth: 45,
         endDepth: 45,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.ASCENT,
@@ -241,7 +241,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 26,
         startDepth: 45,
         endDepth: 40,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       },
       {
         type: DiveProfileIntervalType.NAVIGATION,
@@ -249,7 +249,7 @@ describe('calculatesIntervalsFromPlan', () => {
         endTime: 40,
         startDepth: 40,
         endDepth: 40,
-        gasMix: { fO2: .21, fHe: 0 }
+        gas: { fO2: .21, fHe: 0 }
       }
     ])
   })

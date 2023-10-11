@@ -17,15 +17,15 @@ export const diveLevelByIdSelector = memoizeWithArgs<[DivePlanSlice, string], Di
 
 
 export const diveIntervalsSelector = memoize<StoreState, DiveProfileInterval[]>(
-  ({descentRate, ascentRate, diveLevelsMap, mixesMap}: StoreState) =>
+  ({descentRate, ascentRate, diveLevelsMap, gasesMap}: StoreState) =>
     calculatesIntervalsFromPlan({
       descentRate,
       ascentRate,
       levels:
         Object.values(diveLevelsMap)
-          .map(({gasMixId, ...diveLevel}) => ({
+          .map(({gasId, ...diveLevel}) => ({
           ...diveLevel,
-          gasMix: mixesMap[gasMixId]
+          gas: gasesMap[gasId]
         }))
     })
 )

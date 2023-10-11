@@ -3,7 +3,7 @@ interface Gas {
   fHe: number
 }
 
-interface DiveLevel {
+interface DivePlanLevel {
   duration: number
   depth: number
   gas: Gas
@@ -13,7 +13,7 @@ interface DivePlan {
   descentRate: number
   ascentRate: number
   gradientFactors: [number, number]
-  bottomLevels: DiveLevel[]
+  levels: DivePlanLevel[]
 }
 
 enum DiveProfileIntervalType {

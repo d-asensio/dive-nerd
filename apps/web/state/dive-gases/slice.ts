@@ -1,12 +1,12 @@
 import {v1 as defaultGenerateUUID} from 'uuid'
 import {immer} from 'zustand/middleware/immer'
-import {GasMix} from "@/utils/types";
+import {Gas} from "@/utils/types";
 import {GasesState} from "@/state/dive-gases/types";
 
 interface GasesActions {
-  addGasMix: (mix: GasMix) => string
-  updateGasMix: (mixId: string, newProps: Partial<GasMix>) => void
-  removeGasMix: (mixId: string) => void
+  addGas: (gas: Gas) => string
+  updateGas: (gasId: string, newProps: Partial<Gas>) => void
+  removeGas: (gasId: string) => void
 }
 
 export type GasesSlice =
@@ -25,28 +25,28 @@ export const createDiveGasesSlice =
    }: DivePlanSliceFactoryDependencies) =>
     immer<GasesSlice>((set) => ({
       ...initialGases,
-      addGasMix: mix => {
+      addGas: gas => {
         const newUuid = generateUUID()
 
         set(state => {
-          state.mixesMap[newUuid] = mix
-          state.mixesIdList.push(newUuid)
+          state.gasesMap[newUuid] = gas
+          state.gasesIdList.push(newUuid)
         })
 
         return newUuid
       },
-      updateGasMix: (mixId, newProps) =>
+      updateGas: (gasId, newProps) =>
         set(state => {
-          if (!state.mixesMap[mixId]) return
+          if (!state.gasesMap[gasId]) return
 
-          state.mixesMap[mixId] = {
-            ...state.mixesMap[mixId],
+          state.gasesMap[gasId] = {
+            ...state.gasesMap[gasId],
             ...newProps
           }
         }),
-      removeGasMix: mixId =>
+      removeGas: gasId =>
         set(state => {
-          delete state.mixesMap[mixId]
-          state.mixesIdList = state.mixesIdList.filter(id => id !== mixId)
+          delete state.gasesMap[gasId]
+          state.gasesIdList = state.gasesIdList.filter(id => id !== gasId)
         }),
     }))

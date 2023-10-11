@@ -1,30 +1,30 @@
 import {createStore} from "zustand/vanilla";
 import {createDiveGasesSlice} from "@/state/dive-gases/slice";
 import {when} from "jest-when";
-import {GasMix} from "@/utils/types";
+import {Gas} from "@/utils/types";
 import {GasesState} from "@/state/dive-gases/types";
 
 function gasesBuilder () {
   const builder = {
-    withMixes,
-    withoutMixes,
+    withGases,
+    withoutGases,
     build
   }
 
   let gases: GasesState = {
-    mixesMap: {},
-    mixesIdList: []
+    gasesMap: {},
+    gasesIdList: []
   }
 
-  function withMixes (mixes: Record<string, GasMix>) {
-    gases.mixesMap = mixes
-    gases.mixesIdList = Object.keys(gases.mixesMap)
+  function withGases (gasesMap: Record<string, Gas>) {
+    gases.gasesMap = gasesMap
+    gases.gasesIdList = Object.keys(gases.gasesMap)
     return builder
   }
 
-  function withoutMixes () {
-    gases.mixesMap = {}
-    gases.mixesIdList = []
+  function withoutGases () {
+    gases.gasesMap = {}
+    gases.gasesIdList = []
     return builder
   }
 
@@ -36,14 +36,14 @@ function gasesBuilder () {
 }
 
 
-describe('addGasMix', () => {
+describe('addGas', () => {
   const generateUUID = jest.fn()
 
-  it('adds a mix to an empty list', () => {
+  it('adds a gas to an empty list', () => {
     const initialGases = gasesBuilder()
-      .withoutMixes()
+      .withoutGases()
       .build()
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: 0.21,
       fHe: 0
     }
@@ -52,26 +52,26 @@ describe('addGasMix', () => {
     )
     when(generateUUID).mockReturnValue('an-id')
 
-    sliceStore.getState().addGasMix(aMix)
+    sliceStore.getState().addGas(aGas)
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: { 'an-id': aMix },
-      mixesIdList: ['an-id']
+      gasesMap: { 'an-id': aGas },
+      gasesIdList: ['an-id']
     })
   })
 
-  it('adds a mix to the list', () => {
-    const aMix: GasMix = {
+  it('adds a gas to the list', () => {
+    const aGas: Gas = {
       fO2: 0.21,
       fHe: 0
     }
-    const anotherMix: GasMix = {
+    const anotherGas: Gas = {
       fO2: 0.30,
       fHe: 0
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
@@ -79,162 +79,162 @@ describe('addGasMix', () => {
     )
     when(generateUUID).mockReturnValue('another-id')
 
-    sliceStore.getState().addGasMix(anotherMix)
+    sliceStore.getState().addGas(anotherGas)
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {
-        'an-id': aMix,
-        'another-id': anotherMix
+      gasesMap: {
+        'an-id': aGas,
+        'another-id': anotherGas
       },
-      mixesIdList: ['an-id', 'another-id']
+      gasesIdList: ['an-id', 'another-id']
     })
   })
 });
 
-describe('updateGasMix', () => {
+describe('updateGas', () => {
   it('updates all the properties of a mix', () => {
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: .21,
       fHe: 0
     }
-    const aNewMix: GasMix = {
+    const aNewGas: Gas = {
       fO2: .30,
       fHe: .70
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().updateGasMix("an-id", aNewMix)
+    sliceStore.getState().updateGas("an-id", aNewGas)
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {
-        'an-id': aNewMix
+      gasesMap: {
+        'an-id': aNewGas
       },
-      mixesIdList: ['an-id']
+      gasesIdList: ['an-id']
     })
   })
 
   it('updates a single the property of a mix', () => {
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: .21,
       fHe: 0
     }
-    const aNewMix: GasMix = {
-      ...aMix,
+    const aNewGas: Gas = {
+      ...aGas,
       fO2: .3
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().updateGasMix("an-id", { fO2: .3 })
+    sliceStore.getState().updateGas("an-id", { fO2: .3 })
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {
-        'an-id': aNewMix
+      gasesMap: {
+        'an-id': aNewGas
       },
-      mixesIdList: ['an-id']
+      gasesIdList: ['an-id']
     })
   })
 
   it('does nothing if the provided id is not defined', () => {
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: .21,
       fHe: 0
     }
-    const aNewMix: GasMix = {
+    const aNewGas: Gas = {
       fO2: .30,
       fHe: .70
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().updateGasMix("an-undefined-id", aNewMix)
+    sliceStore.getState().updateGas("an-undefined-id", aNewGas)
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {
-        'an-id': aMix
+      gasesMap: {
+        'an-id': aGas
       },
-      mixesIdList: ['an-id']
+      gasesIdList: ['an-id']
     })
   })
 });
 
-describe('removeGasMix', () => {
+describe('removeGas', () => {
   it('removes a mix by id', () => {
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: .21,
       fHe: 0
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().removeGasMix('an-id')
+    sliceStore.getState().removeGas('an-id')
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {},
-      mixesIdList: []
+      gasesMap: {},
+      gasesIdList: []
     })
   })
 
   it('does nothing when attempting to delete a mix from an empty list', () => {
     const initialGases = gasesBuilder()
-      .withoutMixes()
+      .withoutGases()
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().removeGasMix('a-undefined-id')
+    sliceStore.getState().removeGas('a-undefined-id')
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: {},
-      mixesIdList: []
+      gasesMap: {},
+      gasesIdList: []
     })
   })
 
   it('does nothing when attempting to delete a undefined id', () => {
-    const aMix: GasMix = {
+    const aGas: Gas = {
       fO2: .21,
       fHe: 0
     }
     const initialGases = gasesBuilder()
-      .withMixes({
-        'an-id': aMix
+      .withGases({
+        'an-id': aGas
       })
       .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases })
     )
 
-    sliceStore.getState().removeGasMix('a-undefined-id')
+    sliceStore.getState().removeGas('a-undefined-id')
 
     expect(sliceStore.getState()).toMatchObject({
-      mixesMap: { 'an-id': aMix },
-      mixesIdList: ['an-id']
+      gasesMap: { 'an-id': aGas },
+      gasesIdList: ['an-id']
     })
   })
 })

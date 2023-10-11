@@ -38,7 +38,7 @@ const interpolateIntervals = (intervals: DiveProfileInterval[]) =>
         endTime: interval.startTime + (timeDelta * (i + 1)),
         startDepth: interval.startDepth + (depthDelta * i),
         endDepth: interval.startDepth + (depthDelta * (i + 1)),
-        gasMix: interval.gasMix
+        gas: interval.gas
       }))
     ]
   }, []);

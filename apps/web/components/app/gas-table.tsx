@@ -10,36 +10,36 @@ import {InputWithUnits} from "@/components/app/input-with-units";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 import {useSelector} from "@/state/useSelector";
-import {isFirstMixSelector, mixByIdSelector} from "@/state/dive-gases/selectors";
+import {isFirstGasSelector, gasByIdSelector} from "@/state/dive-gases/selectors";
 import {ChangeEvent} from "react";
 import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
 import {Separator} from "@/components/ui/separator";
-import {AddGasMixDropdown} from "@/components/app/add-gas-mix-dropdown";
+import {AddGasDropdown} from "@/components/app/add-gas-dropdown";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
-  const isFirst = useSelector(isFirstMixSelector, id)
-  const gasMix = useSelector(mixByIdSelector, id)
+  const isFirst = useSelector(isFirstGasSelector, id)
+  const gas = useSelector(gasByIdSelector, id)
 
-  const removeGasMix = useStore.use.removeGasMix()
-  const updateGasMix = useStore.use.updateGasMix()
+  const removeGas = useStore.use.removeGas()
+  const updateGas = useStore.use.updateGas()
 
   const handleO2FractionChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const fO2 = parseFloat(e.target.value)
 
-    updateGasMix(id, { fO2 })
-  }, [id, updateGasMix])
+    updateGas(id, { fO2 })
+  }, [id, updateGas])
 
   const handleHeFractionChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const fHe = parseFloat(e.target.value)
 
-    updateGasMix(id, { fHe })
-  }, [id, updateGasMix])
+    updateGas(id, { fHe })
+  }, [id, updateGas])
 
   const handleRemoveButtonClick = React.useCallback(() => {
-    removeGasMix(id)
-  }, [id, removeGasMix])
+    removeGas(id)
+  }, [id, removeGas])
 
   return (
     <TableRow>
@@ -48,7 +48,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           <InputWithUnits
             units='O2'
             type="number"
-            value={gasMix.fO2}
+            value={gas.fO2}
             onChange={handleO2FractionChange}
             min={0}
             max={1}
@@ -59,7 +59,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           <InputWithUnits
             units='He'
             type="number"
-            value={gasMix.fHe}
+            value={gas.fHe}
             onChange={handleHeFractionChange}
             min={0}
             max={1}
@@ -69,10 +69,10 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
         </div>
       </TableCell>
       <TableCell>
-        <GasBadge gasMix={gasMix} />
+        <GasBadge gas={gas} />
       </TableCell>
       <TableCell className='text-right'>
-        {maximumOperatingDepth(gasMix)} m
+        {maximumOperatingDepth(gas)} m
       </TableCell>
       <TableCell>
         <Tooltip>
@@ -98,15 +98,15 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
 })
 
 const GasTableBody = () => {
-  const mixesIdList = useStore.use.mixesIdList()
+  const gasesIdList = useStore.use.gasesIdList()
 
   return (
     <TableBody>
-      {mixesIdList.map(
-        mixId => (
+      {gasesIdList.map(
+        gasId => (
           <GasRow
-            key={mixId}
-            id={mixId}
+            key={gasId}
+            id={gasId}
           />
         )
       )}
@@ -134,7 +134,7 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
       </Table>
       <Separator />
       <div className="text-right w-full p-4">
-        <AddGasMixDropdown />
+        <AddGasDropdown />
       </div>
     </div>
   )

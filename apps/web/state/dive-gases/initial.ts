@@ -2,24 +2,24 @@ import { NIL, v1 as uuid } from 'uuid'
 import {GasesState} from "@/state/dive-gases/types";
 
 
-export const bottomMixId = NIL
-export const deco21MixId = uuid()
-export const deco6MixId = uuid()
+export const bottomGasId = NIL
+export const deco21GasId = uuid()
+export const deco6GasId = uuid()
 
 export const initialGases: GasesState = {
-  mixesMap: {
-    [bottomMixId]: {
+  gasesMap: {
+    [bottomGasId]: {
       fO2: 0.21,
       fHe: 0.22
     },
-    [deco21MixId]: {
+    [deco21GasId]: {
       fO2: 0.50,
       fHe: 0
     },
-    [deco6MixId]: {
+    [deco6GasId]: {
       fO2: 1,
       fHe: 0
     }
   },
-  mixesIdList: [bottomMixId, deco21MixId, deco6MixId]
+  gasesIdList: [bottomGasId, deco21GasId, deco6GasId]
 };

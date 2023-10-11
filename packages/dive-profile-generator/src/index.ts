@@ -1,6 +1,6 @@
 import {last, reduce} from "ramda";
 
-export interface GasMix {
+export interface Gas {
   fO2: number
   fHe: number
 }
@@ -8,7 +8,7 @@ export interface GasMix {
 interface DivePlanLevel {
   duration: number
   depth: number
-  gasMix: GasMix
+  gas: Gas
 }
 
 export interface DivePlan {
@@ -30,7 +30,7 @@ export interface DiveProfileInterval {
   endTime: number
   startDepth: number
   endDepth: number
-  gasMix: GasMix
+  gas: Gas
 }
 
 export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
@@ -46,7 +46,7 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
       const {
         duration,
         depth: endDepth,
-        gasMix
+        gas
       } = level
 
       const depthDelta = endDepth - startDepth
@@ -69,7 +69,7 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         endTime: startTime + timeDelta,
         startDepth,
         endDepth,
-        gasMix
+        gas
       }
 
       if (timeDelta >= duration) {
@@ -85,7 +85,7 @@ export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInte
         endTime: deltaInterval.startTime + duration,
         startDepth: deltaInterval.endDepth,
         endDepth: deltaInterval.endDepth,
-        gasMix
+        gas
       }
 
       if(timeDelta === 0) {

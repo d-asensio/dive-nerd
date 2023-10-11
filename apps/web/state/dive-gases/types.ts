@@ -1,9 +1,9 @@
-import {GasMix} from "@/utils/types";
+import {Gas} from "@/utils/types";
 
 export interface Gases {
-  mixesMap: Record<string, GasMix>,
+  gasesMap: Record<string, Gas>,
 }
 
 export interface GasesState extends Gases {
-  mixesIdList: string[]
+  gasesIdList: string[]
 }

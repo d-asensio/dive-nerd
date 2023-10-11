@@ -17,41 +17,41 @@ import {
 import * as React from "react";
 import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
-import {GasMix} from "@/utils/types";
+import {Gas} from "@/utils/types";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
 
 
-function StandardGasMenuItem({ gasMix }: { gasMix: GasMix }) {
-  const addGasMix = useStore.use.addGasMix()
+function StandardGasMenuItem({ gas }: { gas: Gas }) {
+  const addGas = useStore.use.addGas()
 
   const onMenuItemClick = React.useCallback(() => {
-    addGasMix(gasMix)
-  }, [addGasMix, gasMix])
+    addGas(gas)
+  }, [addGas, gas])
 
   return (
     <DropdownMenuItem onClick={onMenuItemClick}>
-      <GasBadge gasMix={gasMix} className="mr-4"/>
-      <DropdownMenuShortcut>{"≤"} {maximumOperatingDepth(gasMix)}m</DropdownMenuShortcut>
+      <GasBadge gas={gas} className="mr-4"/>
+      <DropdownMenuShortcut>{"≤"} {maximumOperatingDepth(gas)}m</DropdownMenuShortcut>
     </DropdownMenuItem>
   );
 }
 
-export function AddGasMixDropdown() {
-  const addGasMix = useStore.use.addGasMix()
+export function AddGasDropdown() {
+  const addGas = useStore.use.addGas()
 
-  const onAddMixButtonClick = React.useCallback(() => {
-    addGasMix({
+  const onAddGasButtonClick = React.useCallback(() => {
+    addGas({
       fO2: 0,
       fHe: 0
     })
-  }, [addGasMix])
+  }, [addGas])
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
           <Plus className="mr-2 h-4 w-4"/>
-          Add mix
+          Add gas
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
@@ -62,14 +62,14 @@ export function AddGasMixDropdown() {
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <StandardGasMenuItem gasMix={{fO2: .32, fHe: 0}} />
-              <StandardGasMenuItem gasMix={{fO2: .25, fHe: .25}}/>
-              <StandardGasMenuItem gasMix={{fO2: .21, fHe: .35}}/>
-              <StandardGasMenuItem gasMix={{fO2: .18, fHe: .45}}/>
-              <StandardGasMenuItem gasMix={{fO2: .15, fHe: .55}}/>
-              <StandardGasMenuItem gasMix={{fO2: .12, fHe: .60}}/>
-              <StandardGasMenuItem gasMix={{fO2: .12, fHe: .65}}/>
-              <StandardGasMenuItem gasMix={{fO2: .10, fHe: .70}}/>
+              <StandardGasMenuItem gas={{fO2: .32, fHe: 0}} />
+              <StandardGasMenuItem gas={{fO2: .25, fHe: .25}}/>
+              <StandardGasMenuItem gas={{fO2: .21, fHe: .35}}/>
+              <StandardGasMenuItem gas={{fO2: .18, fHe: .45}}/>
+              <StandardGasMenuItem gas={{fO2: .15, fHe: .55}}/>
+              <StandardGasMenuItem gas={{fO2: .12, fHe: .60}}/>
+              <StandardGasMenuItem gas={{fO2: .12, fHe: .65}}/>
+              <StandardGasMenuItem gas={{fO2: .10, fHe: .70}}/>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
@@ -79,15 +79,15 @@ export function AddGasMixDropdown() {
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <StandardGasMenuItem gasMix={{fO2: 1, fHe: 0}}/>
-              <StandardGasMenuItem gasMix={{fO2: .5, fHe: 0}}/>
-              <StandardGasMenuItem gasMix={{fO2: .35, fHe: .25}}/>
-              <StandardGasMenuItem gasMix={{fO2: .21, fHe: .35}}/>
+              <StandardGasMenuItem gas={{fO2: 1, fHe: 0}}/>
+              <StandardGasMenuItem gas={{fO2: .5, fHe: 0}}/>
+              <StandardGasMenuItem gas={{fO2: .35, fHe: .25}}/>
+              <StandardGasMenuItem gas={{fO2: .21, fHe: .35}}/>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
         <DropdownMenuSeparator/>
-        <DropdownMenuItem onClick={onAddMixButtonClick}>
+        <DropdownMenuItem onClick={onAddGasButtonClick}>
           <Plus className="mr-2 h-4 w-4"/>
           <span>Custom gas</span>
         </DropdownMenuItem>

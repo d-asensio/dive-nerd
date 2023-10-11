@@ -103,7 +103,7 @@ describe('addDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const sliceStore = createStore(
       createDivePlanSlice({ initialDivePlan, generateUUID })
@@ -122,12 +122,12 @@ describe('addDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const anotherDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -155,12 +155,12 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -182,7 +182,7 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       ...aDiveLevel,
@@ -208,12 +208,12 @@ describe('updateDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 10,
       duration: 10,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const aNewDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -237,7 +237,7 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const initialDivePlan =
       divePlanBuilder()
@@ -275,7 +275,7 @@ describe('removeDiveLevel', () => {
     const aDiveLevel: DivePlanLevel = {
       depth: 20,
       duration: 30,
-      gasMixId: 'a-gas-mix-id'
+      gasId: 'a-gas-id'
     }
     const initialDivePlan =
       divePlanBuilder()

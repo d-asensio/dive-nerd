@@ -1,7 +1,7 @@
 interface DivePlanLevel {
   depth: number
   duration: number
-  gasMixId: string
+  gasId: string
 }
 
 interface DivePlan {

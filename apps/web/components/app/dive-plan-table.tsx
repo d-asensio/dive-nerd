@@ -17,8 +17,8 @@ import {useStore} from "@/state/store";
 import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
-import {GasMixSelector} from "@/components/app/gas-mix-selector";
-import {mixMODSelector} from "@/state/dive-gases/selectors";
+import {GasSelector} from "@/components/app/gas-selector";
+import {gasMODSelector} from "@/state/dive-gases/selectors";
 
 interface PlanLevelRow {
   id: string;
@@ -26,8 +26,8 @@ interface PlanLevelRow {
 
 const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
   const isFirst = useSelector(isFirstDiveLevelSelector, id)
-  const { depth, duration, gasMixId } = useSelector(diveLevelByIdSelector, id)
-  const gasMOD = useSelector(mixMODSelector, gasMixId)
+  const { depth, duration, gasId } = useSelector(diveLevelByIdSelector, id)
+  const gasMOD = useSelector(gasMODSelector, gasId)
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
   const updateDiveLevel = useStore.use.updateDiveLevel()
@@ -56,8 +56,8 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
     updateDiveLevel(id, { duration })
   }, [id, updateDiveLevel])
 
-  const handleGasMixChange = React.useCallback((gasMixId: string) => {
-    updateDiveLevel(id, { gasMixId })
+  const handleGasChange = React.useCallback((gasId: string) => {
+    updateDiveLevel(id, { gasId })
   }, [id, updateDiveLevel])
 
   const handleRemoveButtonClick = React.useCallback(() => {
@@ -101,9 +101,9 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
         />
       </TableCell>
       <TableCell>
-        <GasMixSelector
-          value={gasMixId}
-          onValueChange={handleGasMixChange}
+        <GasSelector
+          value={gasId}
+          onValueChange={handleGasChange}
         />
       </TableCell>
       <TableCell>
@@ -153,7 +153,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
     addDiveLevel({
       depth: 30,
       duration: 20,
-      gasMixId: NIL
+      gasId: NIL
     })
   }, [addDiveLevel])
 
