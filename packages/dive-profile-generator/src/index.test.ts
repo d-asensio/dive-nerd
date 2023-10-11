@@ -3,10 +3,8 @@ import {calculatesIntervalsFromPlan, DivePlan, DiveProfileIntervalType} from "./
 describe('calculatesIntervalsFromPlan', () => {
   it('returns an empty intervals if the plan has no levels', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: []
     }
 
@@ -17,10 +15,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('calculates the intervals of the descent and navigation for a single level dive of 25min. @ 45m', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 25,
@@ -54,10 +50,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('does not return the interval for the navigation if the descent takes more than the whole duration of the level', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 4,
@@ -83,10 +77,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('does not return the interval for the descent if it takes no time to reach the depth between intervals', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 4,
@@ -125,10 +117,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('does not return the interval for the navigation if the descent takes exactly the same as duration of the level', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 4.5,
@@ -154,10 +144,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('calculates the intervals of the descent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 25,
@@ -212,10 +200,8 @@ describe('calculatesIntervalsFromPlan', () => {
 
   it('calculates the intervals of the descent, navigation ascent and navigation for a multi level dive of 25min@45m -> 15min@40m', () => {
     const plan: DivePlan = {
-      configuration: {
-        descentRate: 10,
-        ascentRate: 5
-      },
+      descentRate: 10,
+      ascentRate: 5,
       levels: [
         {
           duration: 25,

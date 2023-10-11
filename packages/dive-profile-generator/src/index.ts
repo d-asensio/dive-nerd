@@ -1,10 +1,5 @@
 import {last, reduce} from "ramda";
 
-interface DivePlanConfiguration {
-  descentRate: number
-  ascentRate: number
-}
-
 export interface GasMix {
   fO2: number
   fHe: number
@@ -17,7 +12,8 @@ interface DivePlanLevel {
 }
 
 export interface DivePlan {
-  configuration: DivePlanConfiguration
+  descentRate: number
+  ascentRate: number
   levels: DivePlanLevel[]
 }
 
@@ -38,7 +34,7 @@ export interface DiveProfileInterval {
 }
 
 export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
-  const {descentRate, ascentRate} = divePlan.configuration
+  const {descentRate, ascentRate} = divePlan
 
   return reduce(
     (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
