@@ -65,7 +65,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Depth (in meters)",
+            legend: "Pressure (in bars)",
             legendOffset: -40,
             legendPosition: "middle"
           }}
