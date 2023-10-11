@@ -75,7 +75,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
           pointLabelYOffset={-12}
           useMesh
           tooltip={() => null}
-          crosshairType="bottom"
+          enableCrosshair={false}
         />
       </div>
     </div>
