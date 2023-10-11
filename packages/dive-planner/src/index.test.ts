@@ -1,19 +1,21 @@
-import {calculatesIntervalsFromPlan, DivePlan, DiveProfileIntervalType} from "./index";
+import {createDivePlanner, DivePlan, DiveProfileIntervalType} from "./index";
 
-describe('calculatesIntervalsFromPlan', () => {
+describe('divePlanner.calculateDiveProfileFromPlan', () => {
   it('returns an empty intervals if the plan has no levels', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
       levels: []
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([])
   })
 
   it('calculates the intervals of the descent and navigation for a single level dive of 25min. @ 45m', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -26,7 +28,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {
@@ -49,6 +51,7 @@ describe('calculatesIntervalsFromPlan', () => {
   })
 
   it('does not return the interval for the navigation if the descent takes more than the whole duration of the level', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -61,7 +64,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {
@@ -76,6 +79,7 @@ describe('calculatesIntervalsFromPlan', () => {
   })
 
   it('does not return the interval for the descent if it takes no time to reach the depth between intervals', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -93,7 +97,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {
@@ -116,6 +120,7 @@ describe('calculatesIntervalsFromPlan', () => {
   })
 
   it('does not return the interval for the navigation if the descent takes exactly the same as duration of the level', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -128,7 +133,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {
@@ -143,6 +148,7 @@ describe('calculatesIntervalsFromPlan', () => {
   })
 
   it('calculates the intervals of the descent and navigation for a multi level dive of 25min@45m -> 10min@50m', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -160,7 +166,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {
@@ -199,6 +205,7 @@ describe('calculatesIntervalsFromPlan', () => {
   })
 
   it('calculates the intervals of the descent, navigation ascent and navigation for a multi level dive of 25min@45m -> 15min@40m', () => {
+    const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
       descentRate: 10,
       ascentRate: 5,
@@ -216,7 +223,7 @@ describe('calculatesIntervalsFromPlan', () => {
       ]
     }
 
-    const result = calculatesIntervalsFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlan(plan)
 
     expect(result).toStrictEqual([
       {

@@ -33,75 +33,90 @@ export interface DiveProfileInterval {
   gas: Gas
 }
 
-export const calculatesIntervalsFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
-  const {descentRate, ascentRate} = divePlan
+interface DivePlannerDependencies {}
 
-  return reduce(
-    (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
-      const {
-        endDepth: startDepth = 0,
-        endTime: startTime = 0
-      } = last(intervalsAcc) ?? {}
+interface DivePlanner {
+  calculateDiveProfileFromPlan: (configuration: DivePlan) => DiveProfileInterval[]
+}
 
-      const {
-        duration,
-        depth: endDepth,
-        gas
-      } = level
+export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePlanner => {
 
-      const depthDelta = endDepth - startDepth
+  const calculateDiveProfileFromPlan = (divePlan: DivePlan): DiveProfileInterval[] => {
+    const {descentRate, ascentRate} = divePlan
 
-      const rate =
-        depthDelta < 0
-          ? ascentRate
-          : descentRate
+    return reduce(
+      (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
+        const {
+          endDepth: startDepth = 0,
+          endTime: startTime = 0
+        } = last(intervalsAcc) ?? {}
 
-      const deltaIntervalType =
-        depthDelta < 0
-          ? DiveProfileIntervalType.ASCENT
-          : DiveProfileIntervalType.DESCENT
+        const {
+          duration,
+          depth: endDepth,
+          gas
+        } = level
 
-      const timeDelta = Math.abs(depthDelta / rate)
+        const depthDelta = endDepth - startDepth
 
-      const deltaInterval = {
-        type: deltaIntervalType,
-        startTime,
-        endTime: startTime + timeDelta,
-        startDepth,
-        endDepth,
-        gas
-      }
+        const rate =
+          depthDelta < 0
+            ? ascentRate
+            : descentRate
 
-      if (timeDelta >= duration) {
+        const deltaIntervalType =
+          depthDelta < 0
+            ? DiveProfileIntervalType.ASCENT
+            : DiveProfileIntervalType.DESCENT
+
+        const timeDelta = Math.abs(depthDelta / rate)
+
+        const deltaInterval = {
+          type: deltaIntervalType,
+          startTime,
+          endTime: startTime + timeDelta,
+          startDepth,
+          endDepth,
+          gas
+        }
+
+        if (timeDelta >= duration) {
+          return [
+            ...intervalsAcc,
+            deltaInterval
+          ]
+        }
+
+        const navigationInterval = {
+          type: DiveProfileIntervalType.NAVIGATION,
+          startTime: deltaInterval.endTime,
+          endTime: deltaInterval.startTime + duration,
+          startDepth: deltaInterval.endDepth,
+          endDepth: deltaInterval.endDepth,
+          gas
+        }
+
+        if(timeDelta === 0) {
+          return [
+            ...intervalsAcc,
+            navigationInterval
+          ]
+        }
+
         return [
           ...intervalsAcc,
-          deltaInterval
-        ]
-      }
-
-      const navigationInterval = {
-        type: DiveProfileIntervalType.NAVIGATION,
-        startTime: deltaInterval.endTime,
-        endTime: deltaInterval.startTime + duration,
-        startDepth: deltaInterval.endDepth,
-        endDepth: deltaInterval.endDepth,
-        gas
-      }
-
-      if(timeDelta === 0) {
-        return [
-          ...intervalsAcc,
+          deltaInterval,
           navigationInterval
         ]
-      }
+      },
+      [],
+      divePlan.levels
+    )
+  }
 
-      return [
-        ...intervalsAcc,
-        deltaInterval,
-        navigationInterval
-      ]
-    },
-    [],
-    divePlan.levels
-  )
+  return {
+    calculateDiveProfileFromPlan
+  }
 }
+
+export default createDivePlanner({})
