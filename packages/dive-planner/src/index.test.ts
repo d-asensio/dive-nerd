@@ -1,6 +1,6 @@
 import {createDivePlanner, DivePlan, DiveProfileIntervalType} from "./index";
 
-describe('divePlanner.calculateDiveProfileFromPlan', () => {
+describe('divePlanner.calculateDiveProfileFromPlanV1', () => {
   it('returns an empty intervals if the plan has no levels', () => {
     const divePlanner = createDivePlanner({})
     const plan: DivePlan = {
@@ -9,7 +9,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       levels: []
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([])
   })
@@ -28,7 +28,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {
@@ -64,7 +64,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {
@@ -97,7 +97,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {
@@ -133,7 +133,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {
@@ -166,7 +166,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {
@@ -223,7 +223,7 @@ describe('divePlanner.calculateDiveProfileFromPlan', () => {
       ]
     }
 
-    const result = divePlanner.calculateDiveProfileFromPlan(plan)
+    const result = divePlanner.calculateDiveProfileFromPlanV1(plan)
 
     expect(result).toStrictEqual([
       {

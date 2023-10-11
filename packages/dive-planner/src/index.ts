@@ -36,12 +36,12 @@ export interface DiveProfileInterval {
 interface DivePlannerDependencies {}
 
 interface DivePlanner {
-  calculateDiveProfileFromPlan: (configuration: DivePlan) => DiveProfileInterval[]
+  calculateDiveProfileFromPlanV1: (configuration: DivePlan) => DiveProfileInterval[]
 }
 
 export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePlanner => {
 
-  const calculateDiveProfileFromPlan = ({descentRate, ascentRate, levels} : DivePlan): DiveProfileInterval[] =>
+  const calculateDiveProfileFromPlanV1 = ({descentRate, ascentRate, levels} : DivePlan): DiveProfileInterval[] =>
     reduce(
       (intervalsAcc: DiveProfileInterval[], level: DivePlanLevel) => {
         const {
@@ -112,7 +112,7 @@ export const createDivePlanner = (dependencies: DivePlannerDependencies): DivePl
     )
 
   return {
-    calculateDiveProfileFromPlan
+    calculateDiveProfileFromPlanV1
   }
 }
 
