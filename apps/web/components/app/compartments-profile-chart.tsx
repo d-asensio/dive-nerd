@@ -9,28 +9,6 @@ import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {calculateDiveProfile} from "@/utils/calculate-dive-profile";
 
-const PointTooltip = ({ point }: PointTooltipProps) => {
-  return (
-      <Tooltip open delayDuration={0}>
-        <TooltipTrigger asChild>
-          <div className="w-0 h-0" />
-        </TooltipTrigger>
-        <TooltipPortal>
-          <TooltipContent asChild>
-            <div className='pointer-events-none'>
-              <p>
-                <span className="font-bold">Depth:</span> {point.data.yFormatted} m
-              </p>
-              <p>
-                <span className="font-bold">Time:</span> {point.data.xFormatted} min.
-              </p>
-            </div>
-          </TooltipContent>
-        </TooltipPortal>
-      </Tooltip>
-  )
-}
-
 export function CompartmentsProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const diveIntervals = useSelector(diveIntervalsSelector)
   const intervals = calculateDiveProfile(diveIntervals)
@@ -96,7 +74,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
           pointBorderColor={{from: "serieColor"}}
           pointLabelYOffset={-12}
           useMesh
-          tooltip={PointTooltip}
+          tooltip={() => null}
           crosshairType="bottom"
         />
       </div>
