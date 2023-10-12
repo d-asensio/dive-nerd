@@ -2,7 +2,7 @@ import { memoize, memoizeWithArgs } from 'proxy-memoize';
 
 import {DivePlanSlice} from "@/state/dive-plan/slice";
 import {DivePlanLevel} from "@/state/dive-plan/types";
-import divePlanner, {DiveSegment} from "dive-planner";
+import divePlanner, {type DiveSegment} from "dive-planner";
 import {StoreState} from "@/state/store";
 
 export const isFirstDiveLevelSelector = memoizeWithArgs<[DivePlanSlice, string], boolean>(
