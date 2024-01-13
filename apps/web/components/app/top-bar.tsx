@@ -6,9 +6,9 @@ import {Separator} from "@/components/ui/separator";
 import {MainNav} from "@/components/app/main-nav";
 
 export const TopBar = () => (
-  <div className="hidden h-full flex-col md:flex">
+  <div className="h-full flex-col flex">
     <div
-      className="container flex flex-col items-start justify-between space-y-2 space-x-8 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
+      className="container flex items-center justify-between space-y-2 space-x-8 py-4 sm:items-center sm:space-y-0 md:h-16">
       <div className="flex items-center space-x-2">
         <span className="text-4xl">
           🤿
