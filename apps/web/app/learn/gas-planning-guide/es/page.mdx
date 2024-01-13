@@ -1,0 +1,153 @@
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+# Guía de Planificación de Gas
+
+El buceo es una emocionante aventura que sumerge a los buceadores en el cautivador mundo submarino. Una riguroso planificación, especialmente en la gestión del gas, es clave para tener una inmersión segura. A través de esta guía, revelamos el núcleo de la seguridad del buceo - **segmentos** y **planificación de gas mínimo**.
+
+## Presión: Un factor fundamental del buceo
+
+La presión es un concepto central en la ciencia del buceo, que influye fundamentalmente tanto en los procesos fisiológicos como en la funcionalidad del equipo. Resulta más relevante con la profundidad a la que se bucea, dado a el peso del agua ejerce presión sobre el buceador.
+
+A nivel del mar, vivimos bajo la presión de la atmósfera terrestre, que se mide como 1 bar o 1 atmósfera (atm). Sin embargo, cuando buceamos, por cada 10 metros de profundidad en agua marina, esta presión aumenta en 1 bar o 1 atm. Así, a una profundidad de 10 metros, la presión es de 2 bares (o 2 atm), a 20 metros es de 3 bares, y así sucesivamente - una correlación directa entre la profundidad y la presión bajo el agua.
+
+Este aumento de la presión afecta al cuerpo y al gas, que respiramos de nuestras botellas de buceo. El aire se vuelve más denso con el aumento de la presión, lo que significa que las moléculas de aire se comprimen y se acercan entre sí. Esto resulta en un aumento del consumo de gas a mayor profundidad.
+
+Comprender bien cómo funciona la presión es vital para los buceadores. Influye en varios aspectos de la inmersión, incluyendo la planificación de las inmersiones, la ecualización, la descompresión y el cálculo de las necesidades de gas.
+
+## Segmentos
+
+Los **segmentos** en el buceo aproximan el consumo de gas de un buceador a diferentes profundidades. Esta regla tiene en cuenta el aumento de la presión y la densidad del aire respirado bajo el agua.
+
+La tasa de consumo depende de la capacidad de la botella de aire del buceador, su tasa media de consumo de aire en superficie, su nivel de aptitud física, estrés y temperatura. Estas tasas se calculan normalmente en un periodo de 5 minutos para ayudar en los cálculos bajo el agua.
+
+Con la presión aumentando aproximadamente 1 atm cada 10 metros en agua de mar, la tasa de consumo de gas también aumenta, siendo el segmento de superficie veces la presión a la profundidad dada.
+
+Entender y usar eficazmente las reglas de los segmentos ayuda en la planificación del buceo y en el seguimiento del consumo de gas bajo el agua. También verifican las lecturas de tu equipo de buceo, asegurando la seguridad de la inmersión.
+
+Las diferentes botellas de buceo tienen diferentes volúmenes, y por tanto proporcionan diferentes cantidades de flujo de aire a la misma presión. Los segmentos varían con el tamaño del tanque. Cuanto más grande es el tanque, más aire contiene, y por tanto menos bar se consume por 5 minutos a una presión dada.
+
+Aquí tienes una tabla que muestra el consumo hipotético de diferentes tamaños de botellas a diferentes profundidades:
+
+<Table>
+  <TableCaption>Correlación entre la Profundidad de los Segmentos y el Consumo per Tanque</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead></TableHead>
+      <TableHead>Superficie</TableHead>
+      <TableHead>10m (2 atm)</TableHead>
+      <TableHead>20m (3 atm)</TableHead>
+      <TableHead>30m (4 atm)</TableHead>
+      <TableHead>40m (5 atm)</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">10l</TableCell>
+      <TableCell>10 bar</TableCell>
+      <TableCell>20 bar</TableCell>
+      <TableCell>30 bar</TableCell>
+      <TableCell>40 bar</TableCell>
+      <TableCell>50 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">12l</TableCell>
+      <TableCell>8.5 bar</TableCell>
+      <TableCell>17 bar</TableCell>
+      <TableCell>25.5 bar</TableCell>
+      <TableCell>34 bar</TableCell>
+      <TableCell>42.5 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">15l</TableCell>
+      <TableCell>7 bar</TableCell>
+      <TableCell>14 bar</TableCell>
+      <TableCell>21 bar</TableCell>
+      <TableCell>28 bar</TableCell>
+      <TableCell>35 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">18l</TableCell>
+      <TableCell>5.5 bar</TableCell>
+      <TableCell>11 bar</TableCell>
+      <TableCell>16.5 bar</TableCell>
+      <TableCell>22 bar</TableCell>
+      <TableCell>27.5 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">10l x2</TableCell>
+      <TableCell>5 bar</TableCell>
+      <TableCell>10 bar</TableCell>
+      <TableCell>15 bar</TableCell>
+      <TableCell>20 bar</TableCell>
+      <TableCell>25 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">12l x2</TableCell>
+      <TableCell>4.5 bar</TableCell>
+      <TableCell>9 bar</TableCell>
+      <TableCell>13.5 bar</TableCell>
+      <TableCell>18 bar</TableCell>
+      <TableCell>22.5 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">15l x2</TableCell>
+      <TableCell>3.5 bar</TableCell>
+      <TableCell>7 bar</TableCell>
+      <TableCell>10.5 bar</TableCell>
+      <TableCell>14 bar</TableCell>
+      <TableCell>17.5 bar</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">18l x2</TableCell>
+      <TableCell>3 bar</TableCell>
+      <TableCell>6 bar</TableCell>
+      <TableCell>9 bar</TableCell>
+      <TableCell>12 bar</TableCell>
+      <TableCell>15 bar</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+> **Nota:** Los valores son hipotéticos, destinados sólo a fines ilustrativos, y pueden variar basados en varios factores, incluyendo el nivel de fitness del buceador, estrés, temperatura, y más. Esta tabla ayuda a entender cómo diferentes volúmenes de tanque afectan el consumo de aire a distintas presiones submarinas.
+
+## Gas Mínimo
+
+El concepto de **Gas Mínimo** proporciona una guía de la cantidad de gas necesaria para abortar una inmersión de manera segura desde cualquier profundidad y ascender a la superficie con una reserva. El cálculo asume dos buceadores, teniendo en cuenta la posibilidad de compartir el suministro de aire.
+
+El gas mínimo se calcula de la siguiente manera:
+
+**Gas Mínimo en litros = Presión Promedio (Ap) * Tiempo de Ascenso (t) * Consumo (c) * 2 (buceadores)**
+
+Estos componentes representan:
+
+1. **Presión promedio (Ap):** Es la media de la presión a la profundidad actual y la superficie.
+2. **Tiempo de ascenso (t):** El tiempo seguro de ascenso a la superficie más un minuto para contingencias.
+3. **Consumo (c):** El consumo de aire por minuto en litros, típicamente alrededor de 20 litros para una inmersión cómoda.
+4. **2 (buceadores):** Se incluye para contemplar un posible escenario de compartición de aire.
+
+Finalmente, el gas mínimo se convierte en presión en el tanque:
+
+**Presión en bares = Volumen de gas necesario (en litros) / Volumen total de los tanques (en litros)**
+
+Los valores finales se redondean al múltiplo de cinco más cercano por simplicidad y seguridad.
+
+##  Precauciones de Seguridad
+
+El cálculo de gas mínimo es una precaución para los peores escenarios, detalla cuánto gas se debe mantener en reserva para la seguridad. Siempre se debe considerar como un requisito mínimo, no un límite máximo.
+
+Recuerda:
+
+-    Realizar una comprobación de seguridad antes de la inmersión.
+-    Monitorizar tu gas regularmente durante la inmersión.
+-    Ascender lentamente y con cuidado.
+-    Considerar las condiciones de la inmersión, tu esfuerzo y otros factores en tu planificación de gas.
+
+Una gestión efectiva del gas puede hacer que tus inmersiones sean más seguras y agradables. Tómate el tiempo para entender y usar estas directrices y cálculos. Esto te ayudará a garantizar tu seguridad mientras exploras las maravillas bajo las olas. ¡Bucea seguro y diviértete!
