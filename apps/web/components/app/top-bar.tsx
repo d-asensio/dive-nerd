@@ -8,7 +8,7 @@ import {MainNav} from "@/components/app/main-nav";
 export const TopBar = () => (
   <div className="h-full flex-col flex">
     <div
-      className="container flex items-center justify-between space-y-2 space-x-8 py-4 sm:items-center sm:space-y-0 md:h-16">
+      className="container flex items-center justify-between space-y-2 space-x-8 py-4 sm:space-y-0 md:h-16">
       <div className="flex items-center space-x-2">
         <span className="text-4xl">
           🤿
@@ -18,7 +18,7 @@ export const TopBar = () => (
         </h2>
       </div>
       <MainNav/>
-      <div className="ml-auto flex w-full space-x-2 sm:justify-end">
+      <div className="hidden md:flex ml-auto w-full space-x-2 sm:justify-end">
         <div className="hidden space-x-2 md:flex">
           <ShareButton/>
           <LanguageSelector/>
