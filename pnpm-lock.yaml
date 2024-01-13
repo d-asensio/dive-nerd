@@ -71,6 +71,9 @@ importers:
       '@types/jest-when':
         specifier: ^3.5.3
         version: 3.5.3
+      '@types/matter-js':
+        specifier: ^0.19.6
+        version: 0.19.6
       '@types/mdx':
         specifier: ^2.0.10
         version: 2.0.10
@@ -125,6 +128,9 @@ importers:
       lucide-react:
         specifier: ^0.279.0
         version: 0.279.0(react@18.2.0)
+      matter-js:
+        specifier: ^0.19.0
+        version: 0.19.0
       next:
         specifier: 13.5.2
         version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
@@ -2598,6 +2604,10 @@ packages:
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: false
+
+  /@types/matter-js@0.19.6:
+    resolution: {integrity: sha512-ffk6tqJM5scla+ThXmnox+mdfCo3qYk6yMjQsNcrbo6eQ5DqorVdtnaL+1agCoYzxUjmHeiNB7poBMAmhuLY7w==}
     dev: false
 
   /@types/mdast@4.0.3:
@@ -5563,6 +5573,10 @@ packages:
   /markdown-extensions@2.0.0:
     resolution: {integrity: sha512-o5vL7aDWatOTX8LzaS1WMoaoxIiLRQJuIKKe2wAw6IeULDHaqbiqiggmx+pKvZDb1Sj+pE46Sn1T7lCqfFtg1Q==}
     engines: {node: '>=16'}
+    dev: false
+
+  /matter-js@0.19.0:
+    resolution: {integrity: sha512-v2huwvQGOHTGOkMqtHd2hercCG3f6QAObTisPPHg8TZqq2lz7eIY/5i/5YUV8Ibf3mEioFEmwibcPUF2/fnKKQ==}
     dev: false
 
   /mdast-util-from-markdown@2.0.0:

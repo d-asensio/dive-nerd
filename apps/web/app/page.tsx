@@ -20,6 +20,7 @@ import {
 import {
   IndividualCompartmentCharts
 } from "@/components/app/individual-compartment-charts";
+import {BuoyancySimulator} from "@/components/app/buoyancy-simulator";
 
 export default function Home() {
   return (
