@@ -267,7 +267,8 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
         pointBorderColor={{from: "serieColor"}}
         pointLabelYOffset={-12}
         useMesh
-        crosshairType="bottom"
+        tooltip={() => null}
+        enableCrosshair={false}
       />
     </div>
   )
