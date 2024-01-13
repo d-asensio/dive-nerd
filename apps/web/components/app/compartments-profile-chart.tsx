@@ -1,10 +1,9 @@
 "use client"
 
 import * as React from "react";
-import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
+import {ResponsiveLine} from '@nivo/line'
 
 import {cn} from "@/lib/utils";
-import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {calculateDiveProfile} from "@/utils/calculate-dive-profile";
