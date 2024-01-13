@@ -14,6 +14,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^3.3.4
+        version: 3.3.4(react-hook-form@7.49.3)
       '@mdx-js/loader':
         specifier: ^3.0.0
         version: 3.0.0(webpack@5.89.0)
@@ -140,6 +143,9 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.49.3
+        version: 7.49.3(react@18.2.0)
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -155,6 +161,9 @@ importers:
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
       zustand:
         specifier: ^4.4.2
         version: 4.4.2(@types/react@18.2.22)(immer@10.0.3)(react@18.2.0)
@@ -833,6 +842,14 @@ packages:
 
   /@floating-ui/utils@0.1.4:
     resolution: {integrity: sha512-qprfWkn82Iw821mcKofJ5Pk9wgioHicxcQMxx+5zt5GSKoqdWvgG5AxVmpmUUjzTLPVSH5auBrhI93Deayn/DA==}
+    dev: false
+
+  /@hookform/resolvers@3.3.4(react-hook-form@7.49.3):
+    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.49.3(react@18.2.0)
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
@@ -6425,6 +6442,15 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-hook-form@7.49.3(react@18.2.0):
+    resolution: {integrity: sha512-foD6r3juidAT1cOZzpmD/gOKt7fRsDhXXZ0y28+Al1CHgX+AY1qIN9VSIIItXRq1dN68QrRwl1ORFlwjBaAqeQ==}
+    engines: {node: '>=18', pnpm: '8'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -7628,6 +7654,10 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
   /zustand@4.4.2(@types/react@18.2.22)(immer@10.0.3)(react@18.2.0):

@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {MinGasTable} from "../../../components/app/min-gas-table";
 
 # Gas Planning Guide
 
@@ -139,6 +140,10 @@ Minimum gas is eventually converted to tank pressure:
 **Pressure in bars = Volume of gas needed (in liters) / Total volume of the tanks (in liters)**
 
 Final values are then rounded to the nearest multiple of five for simplicity and safety.
+
+Here is a table displaying the minimum gas of different tank sizes at different depths:
+
+<MinGasTable />
 
 ## Safety Precautions
 

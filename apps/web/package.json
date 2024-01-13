@@ -11,6 +11,7 @@
     "test:watch": "jest --watch --verbose"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.0.4",
@@ -53,11 +54,13 @@
     "ramda": "^0.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.49.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "uuid": "^9.0.1",
+    "zod": "^3.22.4",
     "zustand": "^4.4.2"
   },
   "devDependencies": {
