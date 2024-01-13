@@ -20,7 +20,6 @@ import {CompartmentsProfileChart} from "@/components/app/compartments-profile-ch
 export default function Home() {
   return (
     <main>
-      <TopBar/>
       <div className="container p-6 gap-6 flex flex-col-reverse lg:flex-col">
         <Tabs defaultValue="profile">
           <TabsList className="grid grid-cols-2 max-w-md">
