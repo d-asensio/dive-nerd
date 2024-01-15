@@ -1,19 +1,16 @@
 "use client";
 
-import {MouseEventHandler, useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 import { Engine, Render, Bodies, World, Body, Events } from 'matter-js'
 
 export function BuoyancySimulator() {
   const scene = useRef<HTMLElement>()
-  const isPressed = useRef(false)
   const engine = useRef(Engine.create())
   const waterLevel = 600
-  const waterHeight = 200
 
   useEffect(() => {
     const cw = document.body.clientWidth
     const ch = waterLevel
-    const water = Bodies.rectangle(cw / 2, waterLevel - waterHeight / 2, cw, waterHeight, { isStatic: true, render: { fillStyle: '#0000FF' } });
 
     const render = Render.create({
       element: scene.current,
@@ -30,16 +27,38 @@ export function BuoyancySimulator() {
       Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true }),
       Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true }),
       Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true }),
-      Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true }),
-      water
+      Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true })
     ])
+
+    // Create small circle bodies (represents liquid particles)
+    for(let i = 0; i < 3000; i++) {
+      World.add(engine.current.world,
+        Bodies.circle(Math.random() * 800, Math.random() * 600, 5, {
+        friction: 0,
+        restitution: 0.5,
+        density: 0.0001,
+        render: { fillStyle: '#3cb9ff' }
+      }));
+    }
 
     Engine.run(engine.current)
     Render.run(render)
 
+    // Setup interval to drop 'liquid particles' every second
+    const dropInterval = setInterval(() => {
+      World.add(engine.current.world,
+        Bodies.circle(Math.random() * 800, 0, 15, {
+          friction: 0,
+          restitution: 0.5,
+          density: 0.01 * Math.random()
+        })
+      );
+    }, 1000);  // 1 drop per second
+
     return () => {
       Render.stop(render)
       World.clear(engine.current.world, false)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       Engine.clear(engine.current)
       render.canvas.remove()
       // @ts-ignore
@@ -47,6 +66,7 @@ export function BuoyancySimulator() {
       // @ts-ignore
       render.context = null
       render.textures = {}
+      clearInterval(dropInterval)  // Clear interval when component unmounts
     }
   }, [])
 
@@ -59,51 +79,21 @@ export function BuoyancySimulator() {
           const displacement = (body.position.y - waterLevel) / 200
           Body.applyForce(body, body.position, {
             x: 0,
-            y: -displacement * 1
+            y: -displacement
           })
         }
       })
     })
   }, [])
 
-  const handleDown = () => {
-    isPressed.current = true
-  }
-
-  const handleUp = () => {
-    isPressed.current = false
-  }
-
-  const handleAddCircle: MouseEventHandler = e => {
-    if (isPressed.current) {
-      const ball = Bodies.circle(
-        e.clientX,
-        e.clientY,
-        10 + Math.random() * 30,
-        {
-          mass: 10,
-          restitution: 0.9,
-          friction: 0.005,
-          render: {
-            fillStyle: '#ff0000'
-          }
-        })
-
-      World.add(engine.current.world, [ball])
-    }
-  }
-
   return (
     <div
-      onMouseDown={handleDown}
-      onMouseUp={handleUp}
-      onMouseMove={handleAddCircle}
-    >
-      <div
-        // @ts-ignore
-        ref={scene}
-        style={{ width: '100%', height: '600px' }}
-      />
-    </div>
+      style={{
+        width: '100px',
+        height: '600px'
+    }}
+      // @ts-ignore
+      ref={scene}
+    />
   )
 }
