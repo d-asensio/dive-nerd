@@ -17,6 +17,8 @@ import {GasBadge} from "@/components/app/gas-badge";
 import {Separator} from "@/components/ui/separator";
 import {AddGasDropdown} from "@/components/app/add-gas-dropdown";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
+import {Switch} from "@/components/ui/switch";
+import {Label} from "@/components/ui/label";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   const isFirst = useSelector(isFirstGasSelector, id)
@@ -71,7 +73,10 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
       <TableCell>
         <GasBadge gas={gas} />
       </TableCell>
-      <TableCell className='text-right'>
+      <TableCell>
+        <Switch />
+      </TableCell>
+      <TableCell className='text-right whitespace-nowrap'>
         {maximumOperatingDepth(gas)} m
       </TableCell>
       <TableCell>
@@ -124,6 +129,9 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
               Gas
             </TableHead>
             <TableHead className="w-0"/>
+            <TableHead className='w-full'>
+              Is deco gas
+            </TableHead>
             <TableHead className='text-right'>
               MOD
             </TableHead>
