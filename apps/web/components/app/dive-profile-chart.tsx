@@ -82,7 +82,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             tickRotation: 0,
             legend: "Time (in minutes)",
             legendOffset: 40,
-            legendPosition: "middle"
+            legendPosition: "start"
           }}
           axisLeft={{
             tickSize: 5,
@@ -90,7 +90,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             tickRotation: 0,
             legend: "Depth (in meters)",
             legendOffset: -40,
-            legendPosition: "middle"
+            legendPosition: "start"
           }}
           pointSize={5}
           pointBorderWidth={1}

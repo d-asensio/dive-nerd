@@ -58,7 +58,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
             tickRotation: 0,
             legend: "Time (in minutes)",
             legendOffset: 40,
-            legendPosition: "middle"
+            legendPosition: "start"
           }}
           axisLeft={{
             tickSize: 5,
@@ -66,7 +66,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
             tickRotation: 0,
             legend: "Pressure (in bars)",
             legendOffset: -40,
-            legendPosition: "middle"
+            legendPosition: "start"
           }}
           pointSize={5}
           pointBorderWidth={1}
