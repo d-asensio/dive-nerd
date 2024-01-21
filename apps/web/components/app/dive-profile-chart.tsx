@@ -67,14 +67,6 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             reverse: true
           }}
           yFormat=" >-.2f"
-          motionConfig={{
-            mass: 2,
-            tension: 200,
-            friction: 26,
-            clamp: true,
-            precision: 0.01,
-            velocity: 0
-          }}
           axisRight={null}
           axisBottom={{
             tickSize: 5,
