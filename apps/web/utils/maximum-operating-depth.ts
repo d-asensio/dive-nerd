@@ -32,8 +32,9 @@ function nearestMultipleOfThree(num: number): number {
   }
 }
 
-export const maximumOperatingDepth = ({ fO2 }: Pick<Gas, 'fO2'>) => {
-  const maxAmbientPressure = ambientPressureOfFractionPartialPressure(1.6, fO2)
+export const maximumOperatingDepth = ({ isDecoGas, fO2 }: Pick<Gas, 'fO2' | 'isDecoGas'>) => {
+  const ppO2max = isDecoGas ? 1.6 : 1.2
+  const maxAmbientPressure = ambientPressureOfFractionPartialPressure(ppO2max, fO2)
   const depth = fromPressureToDepth({
     pressure: maxAmbientPressure,
     surfaceAmbientPressure,
