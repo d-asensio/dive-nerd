@@ -38,6 +38,10 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
     updateGas(id, { fHe })
   }, [id, updateGas])
 
+  const handleIsDecoGasChange = React.useCallback((isDecoGas: boolean) => {
+    updateGas(id, { isDecoGas })
+  }, [id, updateGas])
+
   const handleRemoveButtonClick = React.useCallback(() => {
     removeGas(id)
   }, [id, removeGas])
@@ -73,7 +77,10 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
         <GasBadge gas={gas} />
       </TableCell>
       <TableCell>
-        <Switch checked={gas.isDecoGas} />
+        <Switch
+          checked={gas.isDecoGas}
+          onCheckedChange={handleIsDecoGasChange}
+        />
       </TableCell>
       <TableCell className='text-right whitespace-nowrap'>
         {maximumOperatingDepth(gas)} m
