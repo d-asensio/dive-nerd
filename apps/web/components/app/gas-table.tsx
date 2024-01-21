@@ -25,6 +25,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
 
   const removeGas = useStore.use.removeGas()
   const updateGas = useStore.use.updateGas()
+  const unlinkGasFromLevels = useStore.use.unlinkGasFromLevels()
 
   const handleO2FractionChange = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const fO2 = parseInt(e.target.value, 10) / 100
@@ -39,12 +40,14 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   }, [id, updateGas])
 
   const handleIsDecoGasChange = React.useCallback((isDecoGas: boolean) => {
+    unlinkGasFromLevels(id)
     updateGas(id, { isDecoGas })
-  }, [id, updateGas])
+  }, [id, unlinkGasFromLevels, updateGas])
 
   const handleRemoveButtonClick = React.useCallback(() => {
+    unlinkGasFromLevels(id)
     removeGas(id)
-  }, [id, removeGas])
+  }, [id, removeGas, unlinkGasFromLevels])
 
   return (
     <TableRow>
@@ -77,10 +80,22 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
         <GasBadge gas={gas} />
       </TableCell>
       <TableCell>
-        <Switch
-          checked={gas.isDecoGas}
-          onCheckedChange={handleIsDecoGasChange}
-        />
+        <Tooltip>
+          <TooltipTrigger>
+            <Switch
+              disabled={isFirst}
+              checked={gas.isDecoGas}
+              onCheckedChange={handleIsDecoGasChange}
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            {isFirst
+              ? 'First gas cannot be marked as a decompression gas'
+              : gas.isDecoGas
+                ? 'Mark as bottom gas'
+                : 'Mark as decompression gas'}
+          </TooltipContent>
+        </Tooltip>
       </TableCell>
       <TableCell className='text-right whitespace-nowrap'>
         {maximumOperatingDepth(gas)} m

@@ -3,6 +3,7 @@ import {createStore} from 'zustand/vanilla'
 import {createDivePlanSlice} from "./slice";
 import {DivePlanLevel} from "@/state/dive-plan/types";
 import {divePlanBuilder} from "@/model-builders/dive-plan-builder";
+import {NIL} from "uuid";
 
 it('initializes state', () => {
   const initialDivePlan = divePlanBuilder().build()
@@ -241,6 +242,45 @@ describe('removeDiveLevel', () => {
     expect(sliceStore.getState()).toMatchObject({
       diveLevelsMap: { 'an-id': aDiveLevel },
       diveLevelsIdList: ['an-id']
+    })
+  })
+})
+
+describe('unlinkGasFromLevels', () => {
+  it('resets all the levels linked to the given "gasId" to point to the default gas', () => {
+    const aDiveLevel: DivePlanLevel = {
+      depth: 20,
+      duration: 30,
+      gasId: 'a-gas-id'
+    }
+    const anotherDiveLevel: DivePlanLevel = {
+      depth: 15,
+      duration: 5,
+      gasId: 'another-gas-id'
+    }
+    const initialDivePlan =
+      divePlanBuilder()
+        .withLevels({
+          'an-id': aDiveLevel,
+          'another-id': anotherDiveLevel,
+        })
+        .build()
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
+
+    sliceStore.getState().unlinkGasFromLevels('a-gas-id')
+
+    expect(sliceStore.getState()).toMatchObject({
+      diveLevelsMap: {
+        'an-id': {
+          depth: 20,
+          duration: 30,
+          gasId: NIL
+        },
+        'another-id': anotherDiveLevel
+      },
+      diveLevelsIdList: ['an-id', 'another-id']
     })
   })
 })

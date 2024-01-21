@@ -1,5 +1,7 @@
 import {immer} from 'zustand/middleware/immer'
 import {DivePlanState, DivePlanLevel} from "@/state/dive-plan/types";
+import {mapObjIndexed} from "ramda";
+import {NIL} from "uuid";
 
 interface DivePlanActions {
   setDescentRate: (descentRate: number) => void
@@ -7,6 +9,7 @@ interface DivePlanActions {
   addDiveLevel: (levelId: string, level: DivePlanLevel) => void
   updateDiveLevel: (levelId: string, newProps: Partial<DivePlanLevel>) => void
   removeDiveLevel: (levelId: string) => void
+  unlinkGasFromLevels: (gasId: string) => void
 }
 
 export type DivePlanSlice =
@@ -51,4 +54,16 @@ export const createDivePlanSlice =
           delete state.diveLevelsMap[levelId]
           state.diveLevelsIdList = state.diveLevelsIdList.filter(id => id !== levelId)
         }),
+      unlinkGasFromLevels: (gasId) => {
+        set(state => {
+          state.diveLevelsMap = mapObjIndexed(level => {
+            if (level.gasId !== gasId) return level
+
+            return {
+              ...level,
+              gasId: NIL
+            }
+          }, state.diveLevelsMap)
+        })
+      },
     }))
