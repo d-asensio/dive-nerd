@@ -17,6 +17,12 @@ it.each([
   },
   {
     gas: gasBuilder()
+      .withFractions({ fO2: .20, fHe: 0 })
+      .build(),
+    expectedResult: GasType.NITROX
+  },
+  {
+    gas: gasBuilder()
       .withFractions({ fO2: .50, fHe: 0 })
       .build(),
     expectedResult: GasType.NITROX

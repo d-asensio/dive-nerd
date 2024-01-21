@@ -1,13 +1,13 @@
-import { gasTypeResolver as defaultGasNameResolver } from "@/utils/gas-type-resolver";
+import { gasTypeResolver as defaultGasTypeResolver } from "@/utils/gas-type-resolver";
 import {Gas, GasType} from "@/utils/types";
 
 interface Dependencies {
-  gasNameResolver?: typeof defaultGasNameResolver
+  gasTypeResolver?: typeof defaultGasTypeResolver
 }
 
 export const createGasFormatter = (dependencies: Dependencies = {}) => {
   const {
-    gasNameResolver = defaultGasNameResolver
+    gasTypeResolver = defaultGasTypeResolver
   } = dependencies
 
   function capitalize(word: string) {
@@ -18,7 +18,7 @@ export const createGasFormatter = (dependencies: Dependencies = {}) => {
     Math.trunc(gasFraction * 100)
 
   function format(gas: Gas) {
-    const gasName = gasNameResolver.resolve(gas)
+    const gasName = gasTypeResolver.resolve(gas)
 
     if ([GasType.IMPOSSIBLE_MIX].includes(gasName)) return 'Impossible Mix'
     if ([GasType.OXYGEN, GasType.AIR].includes(gasName)) return `${capitalize(gasName)}`

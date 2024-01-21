@@ -12,7 +12,7 @@ describe('createGasFormatter.format', () => {
     const gasNameResolver = {
       resolve: jest.fn()
     }
-    const gasFormatter = createGasFormatter({ gasNameResolver })
+    const gasFormatter = createGasFormatter({ gasTypeResolver: gasNameResolver })
     when(gasNameResolver.resolve)
       .calledWith(gas)
       .mockReturnValue(GasType.NITROX)
@@ -29,7 +29,7 @@ describe('createGasFormatter.format', () => {
     const gasNameResolver = {
       resolve: jest.fn()
     }
-    const gasFormatter = createGasFormatter({ gasNameResolver })
+    const gasFormatter = createGasFormatter({ gasTypeResolver: gasNameResolver })
     when(gasNameResolver.resolve)
       .calledWith(gas)
       .mockReturnValue(GasType.AIR)
@@ -46,7 +46,7 @@ describe('createGasFormatter.format', () => {
     const gasNameResolver = {
       resolve: jest.fn()
     }
-    const gasFormatter = createGasFormatter({ gasNameResolver })
+    const gasFormatter = createGasFormatter({ gasTypeResolver: gasNameResolver })
     when(gasNameResolver.resolve)
       .calledWith(gas)
       .mockReturnValue(GasType.OXYGEN)
@@ -63,7 +63,7 @@ describe('createGasFormatter.format', () => {
     const gasNameResolver = {
       resolve: jest.fn()
     }
-    const gasFormatter = createGasFormatter({ gasNameResolver })
+    const gasFormatter = createGasFormatter({ gasTypeResolver: gasNameResolver })
     when(gasNameResolver.resolve)
       .calledWith(gas)
       .mockReturnValue(GasType.IMPOSSIBLE_MIX)
@@ -113,7 +113,7 @@ describe('createGasFormatter.format', () => {
     const gasNameResolver = {
       resolve: jest.fn()
     }
-    const gasFormatter = createGasFormatter({ gasNameResolver })
+    const gasFormatter = createGasFormatter({ gasTypeResolver: gasNameResolver })
     when(gasNameResolver.resolve)
       .calledWith(gas)
       .mockReturnValue(gasName)

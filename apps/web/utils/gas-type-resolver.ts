@@ -10,7 +10,7 @@ export const gasTypeResolver = {
     if (fHe > 0 && fO2 < .19) return GasType.TRIMIX
     if (fHe > 0) return GasType.HELITROX
 
-    if (fO2 > .21) return GasType.NITROX
+    if (fO2 > .21 || fO2 < .21) return GasType.NITROX
 
     return GasType.AIR
   }
