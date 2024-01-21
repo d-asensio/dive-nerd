@@ -1,6 +1,7 @@
 export interface Gas {
   fO2: number
   fHe: number
+  isDecoGas: boolean;
 }
 
 export interface DivePlanLevel {
