@@ -3,7 +3,7 @@
 import * as React from "react";
 import {ChangeEvent} from "react";
 import {AlertTriangle, Minus, Plus} from "lucide-react";
-import {NIL} from "uuid";
+import {NIL, v1 as uuid} from "uuid";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
@@ -150,11 +150,14 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const addDiveLevel = useStore.use.addDiveLevel()
 
   const onAddLevelButtonClick = React.useCallback(() => {
-    addDiveLevel({
-      depth: 30,
-      duration: 20,
-      gasId: NIL
-    })
+    addDiveLevel(
+      uuid(),
+      {
+        depth: 30,
+        duration: 20,
+        gasId: NIL
+      }
+    )
   }, [addDiveLevel])
 
   return (

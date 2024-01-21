@@ -1,14 +1,10 @@
 import {createStore} from "zustand/vanilla";
 import {createDiveGasesSlice} from "@/state/dive-gases/slice";
-import {when} from "jest-when";
 import {Gas} from "@/utils/types";
 import {diveGasesBuilder} from "@/model-builders/dive-gases-builder";
 import {gasBuilder} from "@/model-builders/gas-builder";
 
-
 describe('addGas', () => {
-  const generateUUID = jest.fn()
-
   it('adds a gas to an empty list', () => {
     const initialGases = diveGasesBuilder()
       .withoutGases()
@@ -20,11 +16,10 @@ describe('addGas', () => {
       })
       .build()
     const sliceStore = createStore(
-      createDiveGasesSlice({ initialGases, generateUUID })
+      createDiveGasesSlice({ initialGases })
     )
-    when(generateUUID).mockReturnValue('an-id')
 
-    sliceStore.getState().addGas(aGas)
+    sliceStore.getState().addGas('an-id', aGas)
 
     expect(sliceStore.getState()).toMatchObject({
       gasesMap: { 'an-id': aGas },
@@ -51,11 +46,10 @@ describe('addGas', () => {
       })
       .build()
     const sliceStore = createStore(
-      createDiveGasesSlice({ initialGases, generateUUID })
+      createDiveGasesSlice({ initialGases })
     )
-    when(generateUUID).mockReturnValue('another-id')
 
-    sliceStore.getState().addGas(anotherGas)
+    sliceStore.getState().addGas('another-id', anotherGas)
 
     expect(sliceStore.getState()).toMatchObject({
       gasesMap: {

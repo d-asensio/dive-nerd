@@ -1,5 +1,5 @@
 import {Plus} from "lucide-react"
-
+import { v1 as uuid} from "uuid"
 import {Button} from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ function StandardGasMenuItem({ gas }: { gas: Gas }) {
   const addGas = useStore.use.addGas()
 
   const onMenuItemClick = React.useCallback(() => {
-    addGas(gas)
+    addGas(uuid(), gas)
   }, [addGas, gas])
 
   return (
@@ -40,11 +40,14 @@ export function AddGasDropdown() {
   const addGas = useStore.use.addGas()
 
   const onAddGasButtonClick = React.useCallback(() => {
-    addGas({
-      isDecoGas: false,
-      fO2: 0,
-      fHe: 0
-    })
+    addGas(
+      uuid(),
+      {
+        isDecoGas: false,
+        fO2: .21,
+        fHe: 0
+      }
+    )
   }, [addGas])
 
   return (

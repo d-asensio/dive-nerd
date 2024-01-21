@@ -4,7 +4,7 @@ import {Gas} from "@/utils/types";
 import {GasesState} from "@/state/dive-gases/types";
 
 interface GasesActions {
-  addGas: (gas: Gas) => string
+  addGas: (gasId: string, gas: Gas) => void
   updateGas: (gasId: string, newProps: Partial<Gas>) => void
   removeGas: (gasId: string) => void
 }
@@ -15,25 +15,19 @@ export type GasesSlice =
 
 interface DivePlanSliceFactoryDependencies {
   initialGases: GasesState
-  generateUUID?: typeof defaultGenerateUUID
 }
 
 export const createDiveGasesSlice =
   ({
-     initialGases,
-     generateUUID = defaultGenerateUUID
+     initialGases
    }: DivePlanSliceFactoryDependencies) =>
     immer<GasesSlice>((set) => ({
       ...initialGases,
-      addGas: gas => {
-        const newUuid = generateUUID()
-
+      addGas: (gasId, gas) => {
         set(state => {
-          state.gasesMap[newUuid] = gas
-          state.gasesIdList.push(newUuid)
+          state.gasesMap[gasId] = gas
+          state.gasesIdList.push(gasId)
         })
-
-        return newUuid
       },
       updateGas: (gasId, newProps) =>
         set(state => {

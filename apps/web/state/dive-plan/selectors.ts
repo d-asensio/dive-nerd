@@ -15,7 +15,6 @@ export const diveLevelByIdSelector = memoizeWithArgs<[DivePlanSlice, string], Di
     diveLevelsMap[diveLevelId] || null
 )
 
-
 export const diveIntervalsSelector = memoize<StoreState, DiveSegment[]>(
   ({descentRate, ascentRate, diveLevelsMap, gasesMap}: StoreState) =>
     divePlanner.calculateDiveProfileFromPlanV1({
