@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react";
-import {Minus, Plus} from "lucide-react";
+import {Minus} from "lucide-react";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Button} from "@/components/ui/button";
@@ -18,7 +18,6 @@ import {Separator} from "@/components/ui/separator";
 import {AddGasDropdown} from "@/components/app/add-gas-dropdown";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
 import {Switch} from "@/components/ui/switch";
-import {Label} from "@/components/ui/label";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
   const isFirst = useSelector(isFirstGasSelector, id)
@@ -74,7 +73,7 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
         <GasBadge gas={gas} />
       </TableCell>
       <TableCell>
-        <Switch />
+        <Switch checked={gas.isDecoGas} />
       </TableCell>
       <TableCell className='text-right whitespace-nowrap'>
         {maximumOperatingDepth(gas)} m

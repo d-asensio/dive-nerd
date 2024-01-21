@@ -1,3 +1,5 @@
+import {Gas} from "@/utils/types";
+
 const GRAVITY = 9.80665
 const surfaceAmbientPressure = 1.0133 // bar
 const waterDensity = 1023.6 // kg/m3
@@ -5,7 +7,6 @@ const waterDensity = 1023.6 // kg/m3
 const ambientPressureOfFractionPartialPressure =
   (ppGas: number, fGas: number) =>
     ppGas / fGas
-
 
 const fromBarsToPascals = (bars: number) => bars * 100000
 
@@ -31,7 +32,7 @@ function nearestMultipleOfThree(num: number): number {
   }
 }
 
-export const maximumOperatingDepth = ({fO2}: { fO2: number }) => {
+export const maximumOperatingDepth = ({ fO2 }: Pick<Gas, 'fO2'>) => {
   const maxAmbientPressure = ambientPressureOfFractionPartialPressure(1.6, fO2)
   const depth = fromPressureToDepth({
     pressure: maxAmbientPressure,

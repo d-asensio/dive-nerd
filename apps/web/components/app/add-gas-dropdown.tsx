@@ -41,6 +41,7 @@ export function AddGasDropdown() {
 
   const onAddGasButtonClick = React.useCallback(() => {
     addGas({
+      isDecoGas: false,
       fO2: 0,
       fHe: 0
     })
@@ -62,14 +63,14 @@ export function AddGasDropdown() {
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <StandardGasMenuItem gas={{fO2: .32, fHe: 0}} />
-              <StandardGasMenuItem gas={{fO2: .25, fHe: .25}}/>
-              <StandardGasMenuItem gas={{fO2: .21, fHe: .35}}/>
-              <StandardGasMenuItem gas={{fO2: .18, fHe: .45}}/>
-              <StandardGasMenuItem gas={{fO2: .15, fHe: .55}}/>
-              <StandardGasMenuItem gas={{fO2: .12, fHe: .60}}/>
-              <StandardGasMenuItem gas={{fO2: .12, fHe: .65}}/>
-              <StandardGasMenuItem gas={{fO2: .10, fHe: .70}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .32, fHe: 0}} />
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .25, fHe: .25}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .21, fHe: .35}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .18, fHe: .45}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .15, fHe: .55}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .12, fHe: .60}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .12, fHe: .65}}/>
+              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .10, fHe: .70}}/>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
@@ -79,10 +80,10 @@ export function AddGasDropdown() {
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <StandardGasMenuItem gas={{fO2: 1, fHe: 0}}/>
-              <StandardGasMenuItem gas={{fO2: .5, fHe: 0}}/>
-              <StandardGasMenuItem gas={{fO2: .35, fHe: .25}}/>
-              <StandardGasMenuItem gas={{fO2: .21, fHe: .35}}/>
+              <StandardGasMenuItem gas={{isDecoGas: true, fO2: 1, fHe: 0}}/>
+              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .5, fHe: 0}}/>
+              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .35, fHe: .25}}/>
+              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .21, fHe: .35}}/>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>

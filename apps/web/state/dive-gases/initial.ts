@@ -9,14 +9,17 @@ export const deco6GasId = uuid()
 export const initialGases: GasesState = {
   gasesMap: {
     [bottomGasId]: {
+      isDecoGas: false,
       fO2: 0.21,
       fHe: 0.22
     },
     [deco21GasId]: {
+      isDecoGas: true,
       fO2: 0.50,
       fHe: 0
     },
     [deco6GasId]: {
+      isDecoGas: true,
       fO2: 1,
       fHe: 0
     }

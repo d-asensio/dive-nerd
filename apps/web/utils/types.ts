@@ -1,4 +1,5 @@
 export interface Gas {
+  isDecoGas: boolean
   fO2: number
   fHe: number
 }

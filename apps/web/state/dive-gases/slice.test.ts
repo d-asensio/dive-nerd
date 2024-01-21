@@ -2,51 +2,23 @@ import {createStore} from "zustand/vanilla";
 import {createDiveGasesSlice} from "@/state/dive-gases/slice";
 import {when} from "jest-when";
 import {Gas} from "@/utils/types";
-import {GasesState} from "@/state/dive-gases/types";
-
-function gasesBuilder () {
-  const builder = {
-    withGases,
-    withoutGases,
-    build
-  }
-
-  let gases: GasesState = {
-    gasesMap: {},
-    gasesIdList: []
-  }
-
-  function withGases (gasesMap: Record<string, Gas>) {
-    gases.gasesMap = gasesMap
-    gases.gasesIdList = Object.keys(gases.gasesMap)
-    return builder
-  }
-
-  function withoutGases () {
-    gases.gasesMap = {}
-    gases.gasesIdList = []
-    return builder
-  }
-
-  function build () {
-    return gases
-  }
-
-  return builder
-}
+import {diveGasesBuilder} from "@/model-builders/dive-gases-builder";
+import {gasBuilder} from "@/model-builders/gas-builder";
 
 
 describe('addGas', () => {
   const generateUUID = jest.fn()
 
   it('adds a gas to an empty list', () => {
-    const initialGases = gasesBuilder()
+    const initialGases = diveGasesBuilder()
       .withoutGases()
       .build()
-    const aGas: Gas = {
-      fO2: 0.21,
-      fHe: 0
-    }
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: 0.21,
+        fHe: 0
+      })
+      .build()
     const sliceStore = createStore(
       createDiveGasesSlice({ initialGases, generateUUID })
     )
@@ -61,15 +33,19 @@ describe('addGas', () => {
   })
 
   it('adds a gas to the list', () => {
-    const aGas: Gas = {
-      fO2: 0.21,
-      fHe: 0
-    }
-    const anotherGas: Gas = {
-      fO2: 0.30,
-      fHe: 0
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: 0.21,
+        fHe: 0
+      })
+      .build()
+    const anotherGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: 0.30,
+        fHe: 0
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
@@ -93,15 +69,19 @@ describe('addGas', () => {
 
 describe('updateGas', () => {
   it('updates all the properties of a mix', () => {
-    const aGas: Gas = {
-      fO2: .21,
-      fHe: 0
-    }
-    const aNewGas: Gas = {
-      fO2: .30,
-      fHe: .70
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .21,
+        fHe: 0
+      })
+      .build()
+    const aNewGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .30,
+        fHe: .70
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
@@ -121,15 +101,19 @@ describe('updateGas', () => {
   })
 
   it('updates a single the property of a mix', () => {
-    const aGas: Gas = {
-      fO2: .21,
-      fHe: 0
-    }
-    const aNewGas: Gas = {
-      ...aGas,
-      fO2: .3
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .21,
+        fHe: 0
+      })
+      .build()
+    const expectedGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .3,
+        fHe: 0
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
@@ -142,22 +126,26 @@ describe('updateGas', () => {
 
     expect(sliceStore.getState()).toMatchObject({
       gasesMap: {
-        'an-id': aNewGas
+        'an-id': expectedGas
       },
       gasesIdList: ['an-id']
     })
   })
 
   it('does nothing if the provided id is not defined', () => {
-    const aGas: Gas = {
-      fO2: .21,
-      fHe: 0
-    }
-    const aNewGas: Gas = {
-      fO2: .30,
-      fHe: .70
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .21,
+        fHe: 0
+      })
+      .build()
+    const aNewGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .30,
+        fHe: .70
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
@@ -179,11 +167,13 @@ describe('updateGas', () => {
 
 describe('removeGas', () => {
   it('removes a mix by id', () => {
-    const aGas: Gas = {
-      fO2: .21,
-      fHe: 0
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .21,
+        fHe: 0
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
@@ -201,7 +191,7 @@ describe('removeGas', () => {
   })
 
   it('does nothing when attempting to delete a mix from an empty list', () => {
-    const initialGases = gasesBuilder()
+    const initialGases = diveGasesBuilder()
       .withoutGases()
       .build()
     const sliceStore = createStore(
@@ -217,11 +207,13 @@ describe('removeGas', () => {
   })
 
   it('does nothing when attempting to delete a undefined id', () => {
-    const aGas: Gas = {
-      fO2: .21,
-      fHe: 0
-    }
-    const initialGases = gasesBuilder()
+    const aGas: Gas = gasBuilder()
+      .withFractions({
+        fO2: .21,
+        fHe: 0
+      })
+      .build()
+    const initialGases = diveGasesBuilder()
       .withGases({
         'an-id': aGas
       })
