@@ -9,6 +9,11 @@ export const isFirstGasSelector = memoizeWithArgs<[GasesSlice, string], boolean>
     gasId === firstGasId
 )
 
+export const bottomGasesIdListSelector = memoizeWithArgs<[GasesSlice], string[]>(
+  ({gasesIdList, gasesMap}: GasesSlice) =>
+    gasesIdList.filter(gasId => !gasesMap[gasId].isDecoGas)
+)
+
 export const gasByIdSelector = memoizeWithArgs<[GasesSlice, string], Gas>(
   ({gasesMap}: GasesSlice, gasId: string) =>
     gasesMap[gasId] || null

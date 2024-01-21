@@ -1,5 +1,8 @@
 import {useSelector} from "@/state/useSelector";
-import {gasByIdSelector} from "@/state/dive-gases/selectors";
+import {
+  bottomGasesIdListSelector,
+  gasByIdSelector
+} from "@/state/dive-gases/selectors";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {GasBadge} from "@/components/app/gas-badge";
 import * as React from "react";
@@ -15,8 +18,8 @@ function GasSelectorItem({id}: { id: string }) {
   )
 }
 
-export const GasSelector: typeof Select = props => {
-  const gasesIdList = useStore.use.gasesIdList()
+export const BottomGasSelector: typeof Select = props => {
+  const bottomGasesIdList = useStore(bottomGasesIdListSelector)
 
   return (
     <Select {...props}>
@@ -24,7 +27,7 @@ export const GasSelector: typeof Select = props => {
         <SelectValue placeholder="-- no gas --"/>
       </SelectTrigger>
       <SelectContent>
-        {gasesIdList.map(
+        {bottomGasesIdList.map(
           gasId => (
             <GasSelectorItem
               key={gasId}

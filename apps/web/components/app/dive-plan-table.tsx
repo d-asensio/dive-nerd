@@ -17,7 +17,7 @@ import {useStore} from "@/state/store";
 import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan/selectors";
 import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
-import {GasSelector} from "@/components/app/gas-selector";
+import {BottomGasSelector} from "@/components/app/bottom-gas-selector";
 import {gasMODSelector} from "@/state/dive-gases/selectors";
 
 interface PlanLevelRow {
@@ -101,7 +101,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
         />
       </TableCell>
       <TableCell>
-        <GasSelector
+        <BottomGasSelector
           value={gasId}
           onValueChange={handleGasChange}
         />
