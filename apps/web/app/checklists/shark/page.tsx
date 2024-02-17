@@ -4,11 +4,13 @@ import {DateField} from "./components/date-field";
 import {NameField} from "./components/name-field";
 import {ChecklistSection} from "./components/checklist-section";
 import {ChecklistStep} from "./components/checklist-step";
+import {UsageDisclaimerAlert} from "./components/usage-disclaimer-alert";
 
 export default function SharkChecklist() {
   return (
     <div className="container p-6">
       <div className="max-w-4xl space-y-6 m-auto">
+        <UsageDisclaimerAlert />
         <div className="grid w-full gap-4">
           <NameField/>
           <DateField/>
