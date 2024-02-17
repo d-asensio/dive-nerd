@@ -14,7 +14,7 @@ export function DateField() {
 
   return (
     <div className="grid w-full items-center gap-1.5">
-      <Label htmlFor="text">Date</Label>
+      <Label>Date</Label>
       <Popover>
         <PopoverTrigger asChild>
           <Button
