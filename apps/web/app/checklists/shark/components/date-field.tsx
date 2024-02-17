@@ -11,7 +11,7 @@ import {Calendar} from "@/components/ui/calendar";
 
 export function DateField() {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
-  
+
   return (
     <div className="grid w-full items-center gap-1.5">
       <Label htmlFor="text">Date</Label>
@@ -24,7 +24,7 @@ export function DateField() {
               !date && "text-muted-foreground"
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4"/>
+            <CalendarIcon className="mr-4 h-4 w-4"/>
             {date ? format(date, "PPP") : <span>Pick a date</span>}
           </Button>
         </PopoverTrigger>
