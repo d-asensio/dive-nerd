@@ -14,16 +14,11 @@ export const InputWithUnits = React.forwardRef<HTMLInputElement, InputWithUnitsP
     <Input
       ref={ref}
       decorator={
-        <>
-          <Separator orientation={"vertical"}/>
-          <span
-            className={cn(
-              "p-2 min-w-[40px] w-auto border-l-0 rounded-l-none text-center text-muted-foreground select-none whitespace-nowrap"
-            )}
+          <div
+            className="p-2 min-w-[40px] w-auto border-l rounded-l-none text-center text-muted-foreground select-none whitespace-nowrap"
           >
-          {units}
-        </span>
-        </>
+            {units}
+          </div>
       }
       {...props}
     />
