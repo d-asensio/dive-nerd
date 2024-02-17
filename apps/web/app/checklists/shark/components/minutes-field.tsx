@@ -3,21 +3,21 @@ import {InputWithUnits} from "@/components/app/input-with-units";
 import * as React from "react";
 
 interface MinutesFieldProps {
-  id: string,
+  name: string,
   label: string
 }
 
-export function MinutesField({id, label}: MinutesFieldProps) {
+export function MinutesField({name, label}: MinutesFieldProps) {
   return (
-    <div className="grid max-w-sm items-center gap-1.5">
-      <Label htmlFor={id}>{label}</Label>
+    <div className="grid items-center gap-1.5">
+      <Label htmlFor={name}>{label}</Label>
       <InputWithUnits
-        id={id}
+        id={name}
         units="minutos"
         type="number"
         min={0}
         step={1}
-        className="max-w-[150px] min-w-[120px]"
+        className="w-[200px] min-w-[120px]"
       />
     </div>
   );

@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
 import * as React from "react";
+import {Toaster} from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <TopBar/>
           {children}
         </TooltipProvider>
+        <Toaster />
       </body>
     </html>
   )

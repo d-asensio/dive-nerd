@@ -4,18 +4,18 @@ import * as React from "react";
 import {PropsWithChildren} from "react";
 
 type ChecklistStepProps = PropsWithChildren<{
-  id: string,
+  name: string,
   description: string
 }>
 
-export function ChecklistStep({id, description, children}: ChecklistStepProps) {
+export function ChecklistStep({name, description, children}: ChecklistStepProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between space-x-2">
-        <Label htmlFor={id}>
+        <Label htmlFor={name}>
           {description}
         </Label>
-        <Switch id={id}/>
+        <Switch id={name}/>
       </div>
       {children && (
         <div className="rounded-lg bg-accent px-6 py-4 flex items-start gap-3 flex-wrap">
