@@ -16,7 +16,7 @@ export const InputWithUnits = ({units, ...props}: InputWithUnitsProps) => (
         <Separator orientation={"vertical"}/>
         <span
           className={cn(
-            "flex p-2 items-center w-auto border-l-0 rounded-l-none text-muted-foreground select-none whitespace-nowrap"
+            "p-2 min-w-[40px] w-auto border-l-0 rounded-l-none text-center text-muted-foreground select-none whitespace-nowrap"
           )}
         >
           {units}

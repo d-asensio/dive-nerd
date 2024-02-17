@@ -8,11 +8,11 @@ import {
   RebreatherChecklistDisclaimerAlert
 } from "./components/rebreather-checklist-disclaimer-alert";
 import {
-  InternalBatteryVoltsField
-} from "@/app/checklists/shark/components/internal-battery-volts-field";
+  BatteryVoltsField
+} from "@/app/checklists/shark/components/battery-volts-field";
 import {
-  ExternalBatteryVoltsField
-} from "@/app/checklists/shark/components/external-battery-volts-field";
+  OxygenCellMillivoltsField
+} from "@/app/checklists/shark/components/oxygen-cell-millivolts-field";
 
 export default function SharkChecklist() {
   return (
@@ -31,13 +31,32 @@ export default function SharkChecklist() {
             id="check-controller-battery"
             description="Conectar controlador (Shearwater) y comprobar la batería"
           >
-            <InternalBatteryVoltsField/>
-            <ExternalBatteryVoltsField/>
+            <BatteryVoltsField
+              id="internal-battery-volts-input"
+              label="Batería interna"
+            />
+            <BatteryVoltsField
+              id="external-battery-volts-input"
+              label="Batería externa"
+            />
           </ChecklistStep>
           <ChecklistStep
             id="check-oxygen-cells-voltage"
-            description="Voltaje de la célula en aire >9mv"
-          />
+            description="Voltaje de las célula de oxígeno en aire >9mv"
+          >
+            <OxygenCellMillivoltsField
+              id="02-cell-one-millivolts-input"
+              label="Célula 1"
+            />
+            <OxygenCellMillivoltsField
+              id="02-cell-two-millivolts-input"
+              label="Célula 2"
+            />
+            <OxygenCellMillivoltsField
+              id="02-cell-three-millivolts-input"
+              label="Célula 3"
+            />
+          </ChecklistStep>
           <ChecklistStep
             id="check-oxygen-cells-installation-date"
             description="Comprobar fecha de instalación las células, máximo 6 meses y cambiar"
