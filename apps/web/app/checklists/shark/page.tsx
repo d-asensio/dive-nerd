@@ -19,6 +19,7 @@ import {
 import {
   TankPressureField
 } from "@/app/checklists/shark/components/tank-pressure-field";
+import {MinutesField} from "@/app/checklists/shark/components/minutes-field";
 
 export default function SharkChecklist() {
   return (
@@ -38,11 +39,11 @@ export default function SharkChecklist() {
             description="Conectar controlador (Shearwater) y comprobar la batería"
           >
             <BatteryVoltsField
-              id="internal-battery-volts-input"
+              id="internal-battery-volts-field"
               label="Batería interna"
             />
             <BatteryVoltsField
-              id="external-battery-volts-input"
+              id="external-battery-volts-field"
               label="Batería externa"
             />
           </ChecklistStep>
@@ -51,15 +52,15 @@ export default function SharkChecklist() {
             description="Voltaje de las célula de oxígeno en aire >9mv"
           >
             <OxygenCellMillivoltsField
-              id="02-cell-one-millivolts-input"
+              id="02-cell-one-millivolts-field"
               label="Célula 1"
             />
             <OxygenCellMillivoltsField
-              id="02-cell-two-millivolts-input"
+              id="02-cell-two-millivolts-field"
               label="Célula 2"
             />
             <OxygenCellMillivoltsField
-              id="02-cell-three-millivolts-input"
+              id="02-cell-three-millivolts-field"
               label="Célula 3"
             />
           </ChecklistStep>
@@ -81,11 +82,11 @@ export default function SharkChecklist() {
             description="Análisis y presión de la botella de oxígeno"
           >
             <GasOxygenPercentageField
-              id='oxygen-percentage-reading'
+              id='oxygen-percentage-reading-field'
               label="Análisis"
             />
             <TankPressureField
-              id='oxygen-pressure'
+              id='oxygen-pressure-field'
               label="Presión"
             />
           </ChecklistStep>
@@ -94,11 +95,11 @@ export default function SharkChecklist() {
             description="Analisis y presión de la botella de diluyente"
           >
             <GasOxygenPercentageField
-              id='diluent-percentage-reading'
+              id='diluent-percentage-reading-field'
               label="Análisis"
             />
             <TankPressureField
-              id='diluent-pressure'
+              id='diluent-pressure-field'
               label="Presión"
             />
           </ChecklistStep>
@@ -110,7 +111,12 @@ export default function SharkChecklist() {
           <ChecklistStep
             id="check-carbon-dioxide-absorbent-remaining-time"
             description="Tiempo restante de la vida de la cal reemplazar si es necesario"
-          />
+          >
+            <MinutesField
+              id="carbon-dioxide-absorbent-remaining-time-field"
+              label="Tiempo restante"
+            />
+          </ChecklistStep>
           <ChecklistStep
             id="install-diluent-and-oxygen-tanks"
             description="Instalar las botellas en la unidad y colocar pasadores"
