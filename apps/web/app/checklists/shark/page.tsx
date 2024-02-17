@@ -23,21 +23,54 @@ import {OxygenCellInstallationDateField} from "./components/oxygen-cell-installa
 import {Button} from "@/components/ui/button";
 
 const FormSchema = z.object({
+  // ---
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
       message: "Este paso es obligatorio"
     })
   }),
+  internal_battery_volts_field: z.coerce.number()
+    .gt(0, {
+      message: "Este valor debe ser superior a 0"
+    }),
+  external_battery_volts_field: z.coerce.number()
+    .gt(0, {
+      message: "Este valor debe ser superior a 0"
+    }),
+  // ---
   check_oxygen_cells_voltage: z.literal(true, {
     errorMap: () => ({
       message: "Este paso es obligatorio"
     })
   }),
+  cell_one_millivolts_field: z.coerce.number()
+    .gt(9, {
+      message: "Este valor debe ser superior a 9mv"
+    }),
+  cell_two_millivolts_field: z.coerce.number()
+    .gt(9, {
+      message: "Este valor debe ser superior a 9mv"
+    }),
+  cell_three_millivolts_field: z.coerce.number()
+    .gt(9, {
+      message: "Este valor debe ser superior a 9mv"
+    }),
+  // ---
   check_oxygen_cells_installation_date: z.literal(true, {
     errorMap: () => ({
       message: "Este paso es obligatorio"
     })
   }),
+  cell_one_installation_date_field: z.date({
+    required_error: "Este campo es obligatorio",
+  }),
+  cell_two_installation_date_field: z.date({
+    required_error: "Este campo es obligatorio",
+  }),
+  cell_three_installation_date_field: z.date({
+    required_error: "Este campo es obligatorio",
+  }),
+  // ---
   check_dive_parameters: z.literal(true, {
     errorMap: () => ({
       message: "Este paso es obligatorio"
@@ -202,21 +235,24 @@ const FormSchema = z.object({
     errorMap: () => ({
       message: "Este paso es obligatorio"
     })
-  }),
-  cell_one_installation_date_field: z.date({
-    required_error: "Este campo es obligatorio",
-  }),
-  cell_two_installation_date_field: z.date({
-    required_error: "Este campo es obligatorio",
-  }),
-  cell_three_installation_date_field: z.date({
-    required_error: "Este campo es obligatorio",
-  }),
+  })
 })
+
 
 export default function SharkChecklist() {
   const form = useForm<z.infer<typeof FormSchema>>({
+    mode: "onChange",
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      // ---
+      internal_battery_volts_field: 0,
+      external_battery_volts_field: 0,
+      // ---
+      cell_one_millivolts_field: 0,
+      cell_two_millivolts_field: 0,
+      cell_three_millivolts_field: 0,
+      // ---
+    }
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -251,12 +287,14 @@ export default function SharkChecklist() {
                   control={form.control}
                 >
                   <BatteryVoltsField
-                    name="internal_battery_volts_field"
                     label="Batería interna"
+                    name="internal_battery_volts_field"
+                    control={form.control}
                   />
                   <BatteryVoltsField
-                    name="external_battery_volts_field"
                     label="Batería externa"
+                    name="external_battery_volts_field"
+                    control={form.control}
                   />
                 </ChecklistStep>
                 <ChecklistStep
@@ -265,16 +303,19 @@ export default function SharkChecklist() {
                   control={form.control}
                 >
                   <OxygenCellMillivoltsField
-                    name="cell_one_millivolts_field"
                     label="Célula 1"
+                    name="cell_one_millivolts_field"
+                    control={form.control}
                   />
                   <OxygenCellMillivoltsField
-                    name="cell_two_millivolts_field"
                     label="Célula 2"
+                    name="cell_two_millivolts_field"
+                    control={form.control}
                   />
                   <OxygenCellMillivoltsField
-                    name="cell_three_millivolts_field"
                     label="Célula 3"
+                    name="cell_three_millivolts_field"
+                    control={form.control}
                   />
                 </ChecklistStep>
                 <ChecklistStep

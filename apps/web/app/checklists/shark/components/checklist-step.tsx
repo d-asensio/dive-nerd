@@ -35,6 +35,7 @@ export function ChecklistStep<
             </div>
             <FormControl>
               <Switch
+                ref={field.ref}
                 checked={field.value}
                 onCheckedChange={field.onChange}
               />

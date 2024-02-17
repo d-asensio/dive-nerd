@@ -1,24 +1,47 @@
-import {Label} from "@/components/ui/label";
-import {InputWithUnits} from "@/components/app/input-with-units";
 import * as React from "react";
+import {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 
-interface OxygenCellMillivoltsFieldProps {
-  name: string,
+import {InputWithUnits} from "@/components/app/input-with-units";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+
+type OxygenCellMillivoltsFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & {
   label: string
 }
 
-export function OxygenCellMillivoltsField({name, label}: OxygenCellMillivoltsFieldProps) {
+export function OxygenCellMillivoltsField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>({ label, name, control }: OxygenCellMillivoltsFieldProps<TFieldValues, TName>) {
   return (
-    <div className="grid items-center gap-1.5">
-      <Label htmlFor={name}>{label}</Label>
-      <InputWithUnits
-        id={name}
-        units="mV"
-        type="number"
-        min={0}
-        step={50}
-        className="w-[200px] min-w-[120px]"
-      />
-    </div>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <InputWithUnits
+              id={name}
+              units="mV"
+              type="number"
+              min={0}
+              step={1}
+              className="w-[230px]"
+              {...field}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

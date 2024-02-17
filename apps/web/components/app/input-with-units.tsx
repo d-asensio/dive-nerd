@@ -9,20 +9,25 @@ interface InputWithUnitsProps extends Omit<InputProps, "decorator"> {
   units: string
 }
 
-export const InputWithUnits = ({units, ...props}: InputWithUnitsProps) => (
-  <Input
-    decorator={
-      <>
-        <Separator orientation={"vertical"}/>
-        <span
-          className={cn(
-            "p-2 min-w-[40px] w-auto border-l-0 rounded-l-none text-center text-muted-foreground select-none whitespace-nowrap"
-          )}
-        >
+export const InputWithUnits = React.forwardRef<HTMLInputElement, InputWithUnitsProps>(
+  ({units, ...props}, ref) => (
+    <Input
+      ref={ref}
+      decorator={
+        <>
+          <Separator orientation={"vertical"}/>
+          <span
+            className={cn(
+              "p-2 min-w-[40px] w-auto border-l-0 rounded-l-none text-center text-muted-foreground select-none whitespace-nowrap"
+            )}
+          >
           {units}
         </span>
-      </>
-    }
-    {...props}
-  />
+        </>
+      }
+      {...props}
+    />
+  )
 )
+
+InputWithUnits.displayName = "InputWithUnits"
