@@ -24,6 +24,186 @@ import {Button} from "@/components/ui/button";
 
 
 const FormSchema = z.object({
+  check_controller_battery: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_oxygen_cells_voltage: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_oxygen_cells_installation_date: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_dive_parameters: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_oxygen_percentage_and_pressure: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_diluent_percentage_and_pressure: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_carbon_dioxide_absorbent_remaining_time: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_diluent_and_oxygen_tanks: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_water_trap_and_cannister: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_canister_head_grommets: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_counterlungs: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_counterlungs_cover: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_head_connectors_and_hoses: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_breathing_hoses_stereo: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_breathing_hoses_grommets: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  install_heads_up_display_cable: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_negative_test: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_negative_seal_test: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_positive_seal_test: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_mouthpiece_seal_test: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_main_and_backup_computers: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_oxygen_pressure_and_manual_addition: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_oxygen_flush: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_main_and_backup_calibration: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_setpoint: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_constant_mass_valve: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_diluent_pressure_and_manual_addition: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_automatic_diluent_valve: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_diluent_flush: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_diluent_leakage: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_diluent_purge: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_bailout_pressure: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_bailout_connections: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_dive_gases_and_sorbent_time: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_dive_computer_connection: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
+  check_dive_gear: z.literal(true, {
+    errorMap: () => ({
+      message: "Este paso es obligatorio"
+    })
+  }),
   cell_one_installation_date_field: z.date({
     required_error: "Este campo es obligatorio",
   }),
@@ -67,11 +247,12 @@ export default function SharkChecklist() {
                 subtitle="The DiveCan is cool"
               >
                 <ChecklistStep
+                  description="Conectar controlador (Shearwater) y comprobar las baterías"
                   name="check_controller_battery"
-                  description="Conectar controlador (Shearwater) y comprobar la batería"
+                  control={form.control}
                 >
                   <BatteryVoltsField
-                    name="internal_battery_volts_"
+                    name="internal_battery_volts_field"
                     label="Batería interna"
                   />
                   <BatteryVoltsField
@@ -80,8 +261,9 @@ export default function SharkChecklist() {
                   />
                 </ChecklistStep>
                 <ChecklistStep
-                  name="check_oxygen_cells_voltage"
                   description="Voltaje de las célula de oxígeno en aire >9mv"
+                  name="check_oxygen_cells_voltage"
+                  control={form.control}
                 >
                   <OxygenCellMillivoltsField
                     name="cell_one_millivolts_field"
@@ -97,8 +279,9 @@ export default function SharkChecklist() {
                   />
                 </ChecklistStep>
                 <ChecklistStep
-                  name="check_oxygen_cells_installation_date"
                   description="Comprobar fecha de instalación las células, máximo 6 meses y cambiar"
+                  name="check_oxygen_cells_installation_date"
+                  control={form.control}
                 >
                   <OxygenCellInstallationDateField
                     label="Célula 1"
@@ -117,8 +300,9 @@ export default function SharkChecklist() {
                   />
                 </ChecklistStep>
                 <ChecklistStep
-                  name="check_dive_parameters"
                   description="Verificar los parametros de buceo"
+                  name="check_dive_parameters"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -128,6 +312,7 @@ export default function SharkChecklist() {
                 <ChecklistStep
                   name="check_oxygen_percentage_and_pressure"
                   description="Análisis y presión de la botella de oxígeno"
+                  control={form.control}
                 >
                   <GasOxygenPercentageField
                     name='oxygen-percentage-reading-field'
@@ -139,8 +324,9 @@ export default function SharkChecklist() {
                   />
                 </ChecklistStep>
                 <ChecklistStep
-                  name="check_diluent_percentage_and_pressure"
                   description="Analisis y presión de la botella de diluyente"
+                  name="check_diluent_percentage_and_pressure"
+                  control={form.control}
                 >
                   <GasOxygenPercentageField
                     name='diluent-percentage-reading-field'
@@ -157,8 +343,9 @@ export default function SharkChecklist() {
                 subtitle="Putting it altoghether"
               >
                 <ChecklistStep
-                  name="check_carbon_dioxide_absorbent_remaining_time"
                   description="Tiempo restante de la vida de la cal reemplazar si es necesario"
+                  name="check_carbon_dioxide_absorbent_remaining_time"
+                  control={form.control}
                 >
                   <MinutesField
                     name="carbon_dioxide_absorbent_remaining_time_field"
@@ -166,44 +353,54 @@ export default function SharkChecklist() {
                   />
                 </ChecklistStep>
                 <ChecklistStep
-                  name="install_diluent_and_oxygen_tanks"
                   description="Instalar las botellas en la unidad y colocar los pasadores"
+                  name="install_diluent_and_oxygen_tanks"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="install_water_trap_and_cannister"
                   description="Instalar el soporte (trampa de agua) e introducir el canister dentro del tubo"
+                  name="install_water_trap_and_cannister"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_cannister_head_grommets"
                   description="Revisar las toricas y piezas del cabezal, engrasar con grasa compatible O2 y montar el cabezal"
+                  name="check_canister_head_grommets"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="install-counterlungs"
                   description="Instalar contrapulmones y asegurarnos que quedan fijados (clack)"
+                  name="install_counterlungs"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="install_counterlungs_cover"
                   description="Instalar soporte de la tapa de los contrapulmones"
+                  name="install_counterlungs_cover"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="install_head_connectors_and_hoses"
                   description="Instalar conectores electricos de los controladores y conectar latiguillos de ADV, MAV O2 y MAV DIL"
+                  name="install_head_connectors_and_hoses"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_breathing_hoses_stereo"
                   description="Revisar traqueas y hacer prueba estereo (mirar las dos direcciones del gas)"
+                  name="check_breathing_hoses_stereo"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_breathing_hoses_grommets"
                   description="Revisar tóricas de las tráqueas"
+                  name="check_breathing_hoses_grommets"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="install_heads_up_display_cable"
                   description="Colocar cable HUD a la tráquea"
+                  name="install_heads_up_display_cable"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_negative_test"
                   description="Realizar test negativo"
+                  name="check_negative_test"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -211,16 +408,19 @@ export default function SharkChecklist() {
                 subtitle="Not a single leak"
               >
                 <ChecklistStep
-                  name="check_negative_seal_test"
                   description="Test negativo: Poner el equipo en presion negativa mirar si es estanco o no tiene fugas"
+                  name="check_negative_seal_test"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_positive_seal_test"
                   description="Test positivo: Dar presión al equipo, comprobar que la válvula de sobrepresión funciona y no tiene fugas"
+                  name="check_positive_seal_test"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_mouthpiece_seal_test"
                   description="Revisar la boquilla de la tráquea y que no tenga fugas"
+                  name="check_mouthpiece_seal_test"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -228,28 +428,34 @@ export default function SharkChecklist() {
                 subtitle="Know what you breath"
               >
                 <ChecklistStep
-                  name="check_main_and_backup_computers"
                   description="Encender el controlador Shearwater configurar setpoint a 0,7 ppO2 y encender el backup. Comprobar que ambos funcionan. Comprobar bateria interna y externa"
+                  name="check_main_and_backup_computers"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_oxygen_pressure_and_manual_addition"
                   description="Abrir O2, comprobar presión manómetro y la adición manual"
+                  name="check_oxygen_pressure_and_manual_addition"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_oxygen_flush"
                   description="Llenar el circuito con O2 realizando 3 test negativos"
+                  name="check_oxygen_flush"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_main_and_backup_calibration"
                   description="Calibrar controlador principal y secundario"
+                  name="check_main_and_backup_calibration"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_setpoint"
                   description="Configurar setpoint a 0,19 ppO2"
+                  name="check_setpoint"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_constant_mass_valve"
                   description="Cerrar O2, verificar manómetro y válvula flujo constante, mirar el tiempo que tarda en perder 10bar (control de la válvula de flujo constante)"
+                  name="check_constant_mass_valve"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -257,24 +463,29 @@ export default function SharkChecklist() {
                 subtitle="Know what you breath"
               >
                 <ChecklistStep
-                  name="check_diluent_pressure_and_manual_addition"
                   description="Abrir diluyente, comprobar manómetro y adición manual"
+                  name="check_diluent_pressure_and_manual_addition"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_automatic_diluent_valve"
                   description="Comprobar ADV si funciona e inflar ala al máximo"
+                  name="check_automatic_diluent_valve"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_diluent_flush"
                   description="Limpiar circuito con diluyente, comprobar la ppO2 esta entre 0,20/0,22"
+                  name="check_diluent_flush"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_diluent_leakage"
                   description="Cerrar el diluyente y comprobar con el manómetro que no hay fugas"
+                  name="check_diluent_leakage"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_diluent_purge"
                   description="Purgar el diluyente"
+                  name="check_diluent_purge"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -282,12 +493,14 @@ export default function SharkChecklist() {
                 subtitle="Checking your safety net"
               >
                 <ChecklistStep
-                  name="check_bailout_pressure"
                   description="Abrir el bailout, comprobar funcionamiento y presión"
+                  name="check_bailout_pressure"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_bailout_connections"
                   description="Controlar las conexiones y cerrar bailout"
+                  name="check_bailout_connections"
+                  control={form.control}
                 />
               </ChecklistSection>
               <ChecklistSection
@@ -295,16 +508,19 @@ export default function SharkChecklist() {
                 subtitle="Let's get ready to dive"
               >
                 <ChecklistStep
-                  name="check_dive_gases_and_sorbent_time"
                   description="Lista de gases para el buceo, tiempo restante de cal"
+                  name="check_dive_gases_and_sorbent_time"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_dive_computer_connection"
                   description="Conectar ordenador"
+                  name="check_dive_computer_connection"
+                  control={form.control}
                 />
                 <ChecklistStep
-                  name="check_dive_gear"
                   description="Control de material para el buceo"
+                  name="check_dive_gear"
+                  control={form.control}
                 />
               </ChecklistSection>
             </div>

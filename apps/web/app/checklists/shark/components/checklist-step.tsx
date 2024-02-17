@@ -1,22 +1,47 @@
-import {Label} from "@/components/ui/label";
-import {Switch} from "@/components/ui/switch";
 import * as React from "react";
 import {PropsWithChildren} from "react";
+import {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 
-type ChecklistStepProps = PropsWithChildren<{
-  name: string,
+import {Switch} from "@/components/ui/switch";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage
+} from "@/components/ui/form";
+import {Label} from "@/components/ui/label";
+
+type ChecklistStepProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & PropsWithChildren<{
   description: string
 }>
 
-export function ChecklistStep({name, description, children}: ChecklistStepProps) {
+export function ChecklistStep<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>({name, description, control, children, ...rest}: ChecklistStepProps<TFieldValues, TName>) {
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between space-x-2">
-        <Label htmlFor={name}>
-          {description}
-        </Label>
-        <Switch id={name}/>
-      </div>
+      <FormField
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <FormItem className="flex items-center justify-between space-x-2">
+            <div className="flex flex-col">
+              <Label className="text-base">{description}</Label>
+              <FormMessage />
+            </div>
+            <FormControl>
+              <Switch
+                checked={field.value}
+                onCheckedChange={field.onChange}
+              />
+            </FormControl>
+          </FormItem>
+        )}
+      />
       {children && (
         <div className="rounded-lg bg-accent px-6 py-4 flex items-start gap-3 flex-wrap">
           {children}
