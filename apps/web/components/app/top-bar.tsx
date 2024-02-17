@@ -4,6 +4,7 @@ import {ShareButton} from "@/components/app/share-button";
 import {LanguageSelector} from "@/components/app/language-selector";
 import {Separator} from "@/components/ui/separator";
 import {MainNav} from "@/components/app/main-nav";
+import {Badge} from "@/components/ui/badge";
 
 export const TopBar = () => (
   <div className="h-full flex-col flex">
@@ -16,6 +17,7 @@ export const TopBar = () => (
         <h2 className="text-2xl font-semibold">
           DiveNerd
         </h2>
+        <Badge>BETA</Badge>
       </div>
       <MainNav/>
       <div className="hidden md:flex ml-auto w-full space-x-2 sm:justify-end">

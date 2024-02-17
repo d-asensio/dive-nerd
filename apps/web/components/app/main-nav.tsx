@@ -1,6 +1,7 @@
 import * as React from "react";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
+import {Badge} from "@/components/ui/badge";
 
 export const MainNav = ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
   return (
