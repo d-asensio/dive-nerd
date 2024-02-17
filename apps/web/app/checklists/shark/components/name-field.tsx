@@ -5,8 +5,8 @@ import * as React from "react";
 export function NameField() {
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="text">Full name</Label>
-      <Input type="text" id="name" placeholder="Enter your full name..."/>
+      <Label htmlFor="full-name">Full name</Label>
+      <Input type="text" id="full-name" placeholder="Enter your full name..."/>
     </div>
   );
 }

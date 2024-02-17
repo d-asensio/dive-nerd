@@ -4,13 +4,21 @@ import {DateField} from "./components/date-field";
 import {NameField} from "./components/name-field";
 import {ChecklistSection} from "./components/checklist-section";
 import {ChecklistStep} from "./components/checklist-step";
-import {RebreatherChecklistDisclaimerAlert} from "./components/rebreather-checklist-disclaimer-alert";
+import {
+  RebreatherChecklistDisclaimerAlert
+} from "./components/rebreather-checklist-disclaimer-alert";
+import {
+  InternalBatteryVoltsField
+} from "@/app/checklists/shark/components/internal-battery-volts-field";
+import {
+  ExternalBatteryVoltsField
+} from "@/app/checklists/shark/components/external-battery-volts-field";
 
 export default function SharkChecklist() {
   return (
     <div className="container p-6">
       <div className="max-w-4xl space-y-6 m-auto">
-        <RebreatherChecklistDisclaimerAlert />
+        <RebreatherChecklistDisclaimerAlert/>
         <div className="grid w-full gap-4">
           <NameField/>
           <DateField/>
@@ -22,7 +30,10 @@ export default function SharkChecklist() {
           <ChecklistStep
             id="check-controller-battery"
             description="Conectar controlador (Shearwater) y comprobar la batería"
-          />
+          >
+            <InternalBatteryVoltsField/>
+            <ExternalBatteryVoltsField/>
+          </ChecklistStep>
           <ChecklistStep
             id="check-oxygen-cells-voltage"
             description="Voltaje de la célula en aire >9mv"
