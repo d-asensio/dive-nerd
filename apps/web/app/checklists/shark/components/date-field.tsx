@@ -10,7 +10,7 @@ import {format} from "date-fns";
 import {Calendar} from "@/components/ui/calendar";
 
 export function DateField() {
-  const [date, setDate] = React.useState<Date>()
+  const [date, setDate] = React.useState<Date>(new Date())
 
   return (
     <div className="grid w-full items-center gap-1.5">
