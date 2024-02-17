@@ -22,7 +22,6 @@ import {MinutesField} from "./components/minutes-field";
 import {OxygenCellInstallationDateField} from "./components/oxygen-cell-installation-date-field";
 import {Button} from "@/components/ui/button";
 
-
 const FormSchema = z.object({
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
@@ -237,7 +236,7 @@ export default function SharkChecklist() {
         <RebreatherChecklistDisclaimerAlert/>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid w-full gap-4 grid-cols-2">
+            <div className="grid w-full gap-4 sm:grid-cols-2">
               <NameField/>
               <DateField/>
             </div>
