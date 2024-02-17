@@ -13,13 +13,19 @@ import {
 import {
   OxygenCellMillivoltsField
 } from "@/app/checklists/shark/components/oxygen-cell-millivolts-field";
+import {
+  GasOxygenPercentageField
+} from "@/app/checklists/shark/components/gas-oxygen-percentage-field";
+import {
+  TankPressureField
+} from "@/app/checklists/shark/components/tank-pressure-field";
 
 export default function SharkChecklist() {
   return (
     <div className="container p-6">
       <div className="max-w-4xl space-y-6 m-auto">
         <RebreatherChecklistDisclaimerAlert/>
-        <div className="grid w-full gap-4">
+        <div className="grid w-full gap-4 grid-cols-2">
           <NameField/>
           <DateField/>
         </div>
@@ -68,16 +74,34 @@ export default function SharkChecklist() {
         </ChecklistSection>
         <ChecklistSection
           title="Gas"
-          subtitle="Know what you breath"
+          subtitle="Always know what you breath"
         >
           <ChecklistStep
             id="check-oxygen-percentage-and-pressure"
-            description="Analizar y presión de O2"
-          />
+            description="Análisis y presión de la botella de oxígeno"
+          >
+            <GasOxygenPercentageField
+              id='oxygen-percentage-reading'
+              label="Análisis"
+            />
+            <TankPressureField
+              id='oxygen-pressure'
+              label="Presión"
+            />
+          </ChecklistStep>
           <ChecklistStep
             id="check-diluent-percentage-and-pressure"
-            description="Analizar y presión del diluyente"
-          />
+            description="Analisis y presión de la botella de diluyente"
+          >
+            <GasOxygenPercentageField
+              id='diluent-percentage-reading'
+              label="Análisis"
+            />
+            <TankPressureField
+              id='diluent-pressure'
+              label="Presión"
+            />
+          </ChecklistStep>
         </ChecklistSection>
         <ChecklistSection
           title="Instalación rebreather"
