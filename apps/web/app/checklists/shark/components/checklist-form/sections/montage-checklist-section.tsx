@@ -21,6 +21,7 @@ export function MontageChecklistSection() {
     'install_water_trap_and_cannister',
     'check_canister_head_grommets',
     'install_counterlungs',
+    'install_counterlungs_cover',
     'install_head_connectors_and_hoses',
     'check_breathing_hoses_stereo',
     'check_breathing_hoses_grommets',

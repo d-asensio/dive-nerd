@@ -3,6 +3,7 @@
 import type {PropsWithChildren} from "react";
 import * as React from "react";
 import {CheckCircle2} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 type ChecklistSectionProps = PropsWithChildren<{
   title: string,
@@ -19,7 +20,10 @@ export function ChecklistSection({ title, subtitle, completePercentage = 0, chil
       <div className="sticky top-0 bg-background z-10 border-t">
         <div className="w-full relative border-b p-4 overflow-hidden">
           <div
-            className="bg-green-100 absolute left-0 top-0 h-full w-full -z-10 transition-transform ease-in-out"
+            className={cn(
+              "absolute left-0 top-0 h-full w-full -z-10 transition-all ease-in-out",
+              isComplete ? 'bg-green-200' : 'bg-green-100'
+            )}
             style={{
               transform: `translateX(-${complementaryPercentage}%)`
             }}
