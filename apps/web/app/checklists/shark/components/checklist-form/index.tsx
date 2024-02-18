@@ -51,7 +51,7 @@ export function ChecklistForm() {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid w-full gap-4 sm:grid-cols-2">
+        <div className="w-full p-6 grid gap-4 sm:grid-cols-2">
           <NameField/>
           <DateField/>
         </div>
@@ -65,7 +65,7 @@ export function ChecklistForm() {
           <BailoutChecklistSection/>
           <GeneralChecksChecklistSection/>
         </div>
-        <div className="flex justify-end w-full">
+        <div className="flex justify-end w-full p-6">
           <Button type="submit">
             Confirmar compobaciones
           </Button>
