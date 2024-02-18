@@ -1,5 +1,6 @@
 "use client"
 
+import type {FieldErrors} from "react-hook-form";
 import * as React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -37,20 +38,25 @@ export function ChecklistForm() {
     }
   })
 
-  function onSubmit(data: FormValues) {
+  function onSubmitValid(data: FormValues) {
+    console.log(data)
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[500px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: "Lista completada, Bien hecho! 🎉",
+    })
+  }
+
+  function onSubmitInvalid(errors: FieldErrors) {
+    console.log(errors)
+    toast({
+      title: "Ups! Te has dejado campos por completar 💀",
+      description: "Revisa el formulario y completa los campos restantes para continuar",
+      variant: "destructive"
     })
   }
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmitValid, onSubmitInvalid)}>
         <div className="w-full p-6 grid gap-4 sm:grid-cols-2">
           <NameField/>
           <DateField/>
