@@ -1,6 +1,8 @@
+"use client"
+
+import type {PropsWithChildren} from "react";
+import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 import * as React from "react";
-import {PropsWithChildren} from "react";
-import {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 
 import {Switch} from "@/components/ui/switch";
 import {

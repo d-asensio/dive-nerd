@@ -1,7 +1,8 @@
-import * as React from "react";
-import {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
+"use client"
 
-import {InputWithUnits} from "@/components/app/input-with-units";
+import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
+import * as React from "react";
+
 import {
   FormControl,
   FormField,
@@ -9,6 +10,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import {InputWithUnits} from "@/components/app/input-with-units";
 
 type BatteryVoltsFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -20,12 +22,12 @@ type BatteryVoltsFieldProps<
 export function BatteryVoltsField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({ label, name, control }: BatteryVoltsFieldProps<TFieldValues, TName>) {
+>({label, name, control}: BatteryVoltsFieldProps<TFieldValues, TName>) {
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({field}) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
@@ -39,7 +41,7 @@ export function BatteryVoltsField<
               {...field}
             />
           </FormControl>
-          <FormMessage />
+          <FormMessage/>
         </FormItem>
       )}
     />

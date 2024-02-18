@@ -1,22 +1,26 @@
-import {Label} from "@/components/ui/label";
-import {InputWithUnits} from "@/components/app/input-with-units";
+"use client"
+
 import * as React from "react";
 
-interface MinutesFieldProps {
+import {Label} from "@/components/ui/label";
+import {InputWithUnits} from "@/components/app/input-with-units";
+
+interface TankPressureFieldProps {
   name: string,
   label: string
 }
 
-export function MinutesField({name, label}: MinutesFieldProps) {
+export function TankPressureField({name, label}: TankPressureFieldProps) {
   return (
     <div className="grid items-center gap-1.5">
       <Label htmlFor={name}>{label}</Label>
       <InputWithUnits
         id={name}
-        units="minutos"
+        units="bar"
         type="number"
         min={0}
-        step={1}
+        max={300}
+        step={10}
         className="w-[200px] min-w-[120px]"
       />
     </div>

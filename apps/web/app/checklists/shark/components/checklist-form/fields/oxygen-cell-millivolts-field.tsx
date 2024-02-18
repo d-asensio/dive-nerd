@@ -1,5 +1,7 @@
+"use client"
+
+import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 import * as React from "react";
-import {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
 import {

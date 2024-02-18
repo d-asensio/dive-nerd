@@ -22,7 +22,6 @@ const useIsFocused = (props: React.InputHTMLAttributes<HTMLInputElement>): UseIs
     setIsFocused(false)
   }
 
-
   return {
     isFocused,
     inputProps: {

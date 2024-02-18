@@ -1,6 +1,9 @@
+"use client"
+
+import * as React from "react";
+
 import {Label} from "@/components/ui/label";
 import {InputWithUnits} from "@/components/app/input-with-units";
-import * as React from "react";
 
 interface GasOxygenPercentageFieldProps {
   name: string,
