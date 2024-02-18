@@ -30,11 +30,12 @@ export function ChecklistStep<
       <FormField
         control={control}
         name={name}
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <div
             className={cn(
               "p-4 space-y-4 transition-colors",
-              field.value && "bg-green-50"
+              field.value && "bg-green-50",
+              fieldState.error && "bg-red-50"
             )}
           >
             <FormItem className="flex items-center justify-between space-x-2">
@@ -52,7 +53,7 @@ export function ChecklistStep<
             </FormItem>
             {children && (
               <div
-                className="rounded-lg bg-accent px-6 py-4 flex items-start gap-3 flex-wrap">
+                className="rounded-lg bg-gray-200 px-6 py-4 flex items-start gap-3 flex-wrap">
                 {children}
               </div>
             )}

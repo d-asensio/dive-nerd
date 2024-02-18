@@ -24,7 +24,6 @@ import {GeneralChecksChecklistSection} from "./sections/general-checks-checklist
 
 export function ChecklistForm() {
   const form = useForm<FormValues>({
-    mode: "onChange",
     resolver: zodResolver(formSchema),
     defaultValues: {
       // ---
