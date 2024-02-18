@@ -17,10 +17,10 @@ export function ChecklistSection({ title, subtitle, completePercentage = 0, chil
 
   return (
     <div>
-      <div className="sticky top-0 bg-background z-10 border-t">
+      <div className="sticky top-0 bg-background z-10">
         <div
           className={cn(
-            "w-full relative border-b p-4 overflow-hidden",
+            "w-full relative border-t border-b p-4 overflow-hidden",
              isComplete ? 'border-green-200' : 'border-border'
            )}
         >
