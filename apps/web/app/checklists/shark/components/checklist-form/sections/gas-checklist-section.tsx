@@ -5,6 +5,7 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
@@ -14,11 +15,16 @@ import {TankPressureField} from "../fields/tank-pressure-field";
 
 export function GasChecklistSection() {
   const form = useFormContext<FormValues>()
+  const completePercentage = useWatchTruthyFieldsPercentage([
+    'check_oxygen_percentage_and_pressure',
+    'check_diluent_percentage_and_pressure'
+  ])
 
   return (
     <ChecklistSection
       title="Gas"
       subtitle="Always know what you breath"
+      completePercentage={completePercentage}
     >
       <ChecklistStep
         name="check_oxygen_percentage_and_pressure"

@@ -4,6 +4,7 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
@@ -12,13 +13,21 @@ import {OxygenCellMillivoltsField} from "../fields/oxygen-cell-millivolts-field"
 import {OxygenCellInstallationDateField} from "../fields/oxygen-cell-installation-date-field";
 import {BatteryVoltsField} from "../fields/battery-volts-field";
 
+
 export function ControllersChecklistSection() {
   const form = useFormContext<FormValues>()
+  const completePercentage = useWatchTruthyFieldsPercentage([
+    'check_controller_battery',
+    'check_oxygen_cells_voltage',
+    'check_oxygen_cells_installation_date',
+    'check_dive_parameters'
+  ])
 
   return (
     <ChecklistSection
       title="Controladores"
       subtitle="The rebreather brain"
+      completePercentage={completePercentage}
     >
       <ChecklistStep
         description="Conectar controlador (Shearwater) y comprobar las baterías"

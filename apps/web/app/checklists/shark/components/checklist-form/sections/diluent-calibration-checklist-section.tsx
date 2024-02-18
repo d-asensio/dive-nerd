@@ -5,17 +5,26 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
 
 export function DiluentCalibrationChecklistSection() {
   const form = useFormContext<FormValues>()
+  const completePercentage = useWatchTruthyFieldsPercentage([
+    'check_diluent_pressure_and_manual_addition',
+    'check_automatic_diluent_valve',
+    'check_diluent_flush',
+    'check_diluent_leakage',
+    'check_diluent_purge'
+  ])
 
   return (
     <ChecklistSection
       title="Comprobar y calibrar diluyente"
       subtitle="Know what you breath"
+      completePercentage={completePercentage}
     >
       <ChecklistStep
         description="Abrir diluyente, comprobar manómetro y adición manual"

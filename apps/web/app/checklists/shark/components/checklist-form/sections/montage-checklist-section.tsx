@@ -5,6 +5,7 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
@@ -14,11 +15,24 @@ import {MinutesField} from "../fields/minutes-field";
 
 export function MontageChecklistSection() {
   const form = useFormContext<FormValues>()
+  const completePercentage = useWatchTruthyFieldsPercentage([
+    'check_carbon_dioxide_absorbent_remaining_time',
+    'install_diluent_and_oxygen_tanks',
+    'install_water_trap_and_cannister',
+    'check_canister_head_grommets',
+    'install_counterlungs',
+    'install_head_connectors_and_hoses',
+    'check_breathing_hoses_stereo',
+    'check_breathing_hoses_grommets',
+    'install_heads_up_display_cable',
+    'check_negative_test'
+  ])
 
   return (
     <ChecklistSection
       title="Montaje rebreather"
       subtitle="Putting it altoghether"
+      completePercentage={completePercentage}
     >
       <ChecklistStep
         description="Tiempo restante de la vida de la cal reemplazar si es necesario"

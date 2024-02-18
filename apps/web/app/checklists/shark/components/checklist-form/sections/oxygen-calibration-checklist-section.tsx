@@ -5,17 +5,27 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
 
 export function OxygenCalibrationChecklistSection() {
   const form = useFormContext<FormValues>()
+  const completePercentage = useWatchTruthyFieldsPercentage([
+    'check_main_and_backup_computers',
+    'check_oxygen_pressure_and_manual_addition',
+    'check_oxygen_flush',
+    'check_main_and_backup_calibration',
+    'check_setpoint',
+    'check_constant_mass_valve'
+  ])
 
   return (
     <ChecklistSection
       title="Comprobar y calibrar oxigeno"
       subtitle="Know what you breath"
+      completePercentage={completePercentage}
     >
       <ChecklistStep
         description="Encender el controlador Shearwater configurar setpoint a 0,7 ppO2 y encender el backup. Comprobar que ambos funcionan. Comprobar bateria interna y externa"
