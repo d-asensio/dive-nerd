@@ -4,6 +4,8 @@ import type {PropsWithChildren} from "react";
 import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 import * as React from "react";
 
+import {cn} from "@/lib/utils";
+
 import {Switch} from "@/components/ui/switch";
 import {
   FormControl,
@@ -25,31 +27,37 @@ export function ChecklistStep<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({name, description, control, children, ...rest}: ChecklistStepProps<TFieldValues, TName>) {
   return (
-    <div className="space-y-4">
       <FormField
         control={control}
         name={name}
         render={({ field }) => (
-          <FormItem className="flex items-center justify-between space-x-2">
-            <div className="flex flex-col">
-              <Label className="text-base">{description}</Label>
-              <FormMessage />
-            </div>
-            <FormControl>
-              <Switch
-                ref={field.ref}
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            </FormControl>
-          </FormItem>
+          <div
+            className={cn(
+              "p-4 space-y-4 transition-colors",
+              field.value && "bg-green-50"
+            )}
+          >
+            <FormItem className="flex items-center justify-between space-x-2">
+              <div className="flex flex-col">
+                <Label className="text-base">{description}</Label>
+                <FormMessage />
+              </div>
+              <FormControl>
+                <Switch
+                  ref={field.ref}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+            {children && (
+              <div
+                className="rounded-lg bg-accent px-6 py-4 flex items-start gap-3 flex-wrap">
+                {children}
+              </div>
+            )}
+          </div>
         )}
       />
-      {children && (
-        <div className="rounded-lg bg-accent px-6 py-4 flex items-start gap-3 flex-wrap">
-          {children}
-        </div>
-      )}
-    </div>
   );
 }

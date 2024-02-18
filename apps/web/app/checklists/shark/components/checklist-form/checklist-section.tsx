@@ -18,7 +18,12 @@ export function ChecklistSection({ title, subtitle, completePercentage = 0, chil
   return (
     <div>
       <div className="sticky top-0 bg-background z-10 border-t">
-        <div className="w-full relative border-b p-4 overflow-hidden">
+        <div
+          className={cn(
+            "w-full relative border-b p-4 overflow-hidden",
+             isComplete ? 'border-green-200' : 'border-border'
+           )}
+        >
           <div
             className={cn(
               "absolute left-0 top-0 h-full w-full -z-10 transition-all ease-in-out",
@@ -41,9 +46,7 @@ export function ChecklistSection({ title, subtitle, completePercentage = 0, chil
           </div>
         </div>
       </div>
-      <div className="p-4 space-y-6">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
