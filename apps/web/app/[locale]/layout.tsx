@@ -1,11 +1,13 @@
 import '../globals.css'
 import type { Metadata, Viewport } from 'next'
+import type {PropsWithPageParams} from "@/app/types";
 import * as React from "react";
 import { Inter } from 'next/font/google'
 
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
 import {Toaster} from "@/components/ui/toaster";
+import {PropsWithChildren} from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,12 +23,7 @@ export const viewport: Viewport = {
   userScalable: false
 }
 
-interface LayoutProps {
-  children: React.ReactNode,
-  params: {
-   locale: string
-  }
-}
+type LayoutProps = PropsWithChildren<PropsWithPageParams>
 
 export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
   return (
