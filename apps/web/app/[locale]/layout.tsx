@@ -1,10 +1,10 @@
-import './globals.css'
+import '../globals.css'
 import type { Metadata, Viewport } from 'next'
+import * as React from "react";
 import { Inter } from 'next/font/google'
 
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
-import * as React from "react";
 import {Toaster} from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,13 +21,16 @@ export const viewport: Viewport = {
   userScalable: false
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+interface LayoutProps {
+  children: React.ReactNode,
+  params: {
+   locale: string
+  }
+}
+
+export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>
         <TooltipProvider>
           <TopBar/>

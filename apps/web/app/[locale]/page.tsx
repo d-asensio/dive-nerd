@@ -24,7 +24,7 @@ import {
   DivePlannerDisclaimerAlert
 } from "@/components/app/dive-planner-disclaimer-alert";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <div className="container p-6 space-y-4">

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {PropsWithChildren} from "react";
-import {Sidebar} from "@/app/learn/components/sidebar";
+import {Sidebar} from "./components/sidebar";
 
 export default function DocsLayout({ children }: PropsWithChildren) {
   return (
