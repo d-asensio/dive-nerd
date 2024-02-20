@@ -4,7 +4,9 @@ import * as React from "react";
 import {useFormContext} from "react-hook-form";
 
 import type {FormValues} from "../schema";
-import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
+import {
+  useWatchTruthyFieldsPercentage
+} from "../hooks/use-watch-truthy-fields-percentage";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
@@ -13,23 +15,30 @@ import {OxygenCellMillivoltsField} from "../fields/oxygen-cell-millivolts-field"
 import {OxygenCellInstallationDateField} from "../fields/oxygen-cell-installation-date-field";
 import {BatteryVoltsField} from "../fields/battery-volts-field";
 import {useScopedI18n} from "@/locales/client";
+import {
+  useWatchHasErrors
+} from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
+
+const CHILD_FIELDS = [
+  'check_controller_battery',
+  'check_oxygen_cells_voltage',
+  'check_oxygen_cells_installation_date',
+  'check_dive_parameters'
+]
 
 
 export function ControllersChecklistSection() {
   const t = useScopedI18n("rebreather_checklists.shark.controllers_section")
   const form = useFormContext<FormValues>()
-  const completePercentage = useWatchTruthyFieldsPercentage([
-    'check_controller_battery',
-    'check_oxygen_cells_voltage',
-    'check_oxygen_cells_installation_date',
-    'check_dive_parameters'
-  ])
+  const completePercentage = useWatchTruthyFieldsPercentage(CHILD_FIELDS)
+  const hasErrors = useWatchHasErrors(CHILD_FIELDS)
 
   return (
     <ChecklistSection
       title={t('title')}
       subtitle={t('subtitle')}
       completePercentage={completePercentage}
+      hasErrors={hasErrors}
     >
       <ChecklistStep
         description={t('check_controller_battery_step')}

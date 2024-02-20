@@ -19,3 +19,4 @@ export function useWatchTruthyFieldsPercentage(fieldNames: string[]) {
     [fields]
   )
 }
+
