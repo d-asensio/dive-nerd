@@ -9,8 +9,10 @@ import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-p
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
+import {useScopedI18n} from "@/locales/client";
 
 export function BailoutChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.bailout_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_bailout_pressure',
@@ -19,17 +21,17 @@ export function BailoutChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Bailout"
-      subtitle="Checking your safety net"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Abrir el bailout, comprobar funcionamiento y presión"
+        description={t('check_bailout_pressure_step')}
         name="check_bailout_pressure"
         control={form.control}
       />
       <ChecklistStep
-        description="Controlar las conexiones y cerrar bailout"
+        description={t('check_bailout_connections_step')}
         name="check_bailout_connections"
         control={form.control}
       />

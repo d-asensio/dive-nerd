@@ -11,9 +11,11 @@ import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
 
 import {MinutesField} from "../fields/minutes-field";
+import {useScopedI18n} from "@/locales/client";
 
 
 export function MontageChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.montage_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_carbon_dioxide_absorbent_remaining_time',
@@ -31,67 +33,68 @@ export function MontageChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Montaje rebreather"
-      subtitle="Putting it altoghether"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Tiempo restante de la vida de la cal reemplazar si es necesario"
+        description={t('check_carbon_dioxide_absorbent_remaining_time_step')}
         name="check_carbon_dioxide_absorbent_remaining_time"
         control={form.control}
       >
         <MinutesField
           name="carbon_dioxide_absorbent_remaining_time_field"
-          label="Tiempo restante"
+          label={t('carbon_dioxide_absorbent_remaining_time_field.label')}
+          units={t('carbon_dioxide_absorbent_remaining_time_field.units')}
         />
       </ChecklistStep>
       <ChecklistStep
-        description="Instalar las botellas en la unidad y colocar los pasadores"
+        description={t('install_diluent_and_oxygen_tanks_step')}
         name="install_diluent_and_oxygen_tanks"
         control={form.control}
       />
       <ChecklistStep
-        description="Instalar el soporte (trampa de agua) e introducir el canister dentro del tubo"
+        description={t('install_water_trap_and_cannister_step')}
         name="install_water_trap_and_cannister"
         control={form.control}
       />
       <ChecklistStep
-        description="Revisar las toricas y piezas del cabezal, engrasar con grasa compatible O2 y montar el cabezal"
+        description={t('check_canister_head_grommets_step')}
         name="check_canister_head_grommets"
         control={form.control}
       />
       <ChecklistStep
-        description="Instalar contrapulmones y asegurarnos que quedan fijados (clack)"
+        description={t('install_counterlungs_step')}
         name="install_counterlungs"
         control={form.control}
       />
       <ChecklistStep
-        description="Instalar soporte de la tapa de los contrapulmones"
+        description={t('install_counterlungs_cover_step')}
         name="install_counterlungs_cover"
         control={form.control}
       />
       <ChecklistStep
-        description="Instalar conectores electricos de los controladores y conectar latiguillos de ADV, MAV O2 y MAV DIL"
+        description={t('install_head_connectors_and_hoses_step')}
         name="install_head_connectors_and_hoses"
         control={form.control}
       />
       <ChecklistStep
-        description="Revisar traqueas y hacer prueba estereo (mirar las dos direcciones del gas)"
+        description={t('check_breathing_hoses_stereo_step')}
         name="check_breathing_hoses_stereo"
         control={form.control}
       />
       <ChecklistStep
-        description="Revisar tóricas de las tráqueas"
+        description={t('check_breathing_hoses_grommets_step')}
         name="check_breathing_hoses_grommets"
         control={form.control}
       />
       <ChecklistStep
-        description="Colocar cable HUD a la tráquea"
+        description={t('install_heads_up_display_cable_step')}
         name="install_heads_up_display_cable"
         control={form.control}
       />
       <ChecklistStep
-        description="Realizar test negativo"
+        description={t('check_negative_test_step')}
         name="check_negative_test"
         control={form.control}
       />

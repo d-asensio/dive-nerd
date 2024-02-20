@@ -21,8 +21,10 @@ import {OxygenCalibrationChecklistSection} from "./sections/oxygen-calibration-c
 import {DiluentCalibrationChecklistSection} from "./sections/diluent-calibration-checklist-section";
 import {BailoutChecklistSection} from "./sections/bailout-checklist-section";
 import {GeneralChecksChecklistSection} from "./sections/general-checks-checklist-section";
+import {useScopedI18n} from "@/locales/client";
 
 export function ChecklistForm() {
+  const t = useScopedI18n("rebreather_checklists.shark.confirmation")
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,15 +42,15 @@ export function ChecklistForm() {
   function onSubmitValid(data: FormValues) {
     console.log(data)
     toast({
-      title: "Lista completada, Bien hecho! 🎉",
+      title: t('success_toast.title'),
     })
   }
 
   function onSubmitInvalid(errors: FieldErrors) {
     console.log(errors)
     toast({
-      title: "Ups! Te has dejado campos por completar 💀",
-      description: "Revisa el formulario y completa los campos restantes para continuar",
+      title: t('fail_toast.title'),
+      description: t('fail_toast.description'),
       variant: "destructive"
     })
   }
@@ -72,7 +74,7 @@ export function ChecklistForm() {
         </div>
         <div className="flex justify-end w-full p-6">
           <Button type="submit">
-            Confirmar compobaciones
+            {t('button')}
           </Button>
         </div>
       </form>

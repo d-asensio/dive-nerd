@@ -11,6 +11,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import {useI18n} from "@/locales/client";
 
 type OxygenCellMillivoltsFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -23,11 +24,12 @@ export function OxygenCellMillivoltsField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({ label, name, control }: OxygenCellMillivoltsFieldProps<TFieldValues, TName>) {
+  const t = useI18n()
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
@@ -41,7 +43,14 @@ export function OxygenCellMillivoltsField<
               {...field}
             />
           </FormControl>
-          <FormMessage />
+          {error && (
+            <div className="text-sm font-medium text-destructive">
+              {t(
+                // @ts-ignore
+                error.message
+              )}
+            </div>
+          )}
         </FormItem>
       )}
     />

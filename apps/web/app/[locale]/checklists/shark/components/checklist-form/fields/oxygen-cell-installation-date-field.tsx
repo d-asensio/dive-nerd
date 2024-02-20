@@ -22,23 +22,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import {useI18n} from "@/locales/client";
 
 type OxygenCellInstallationDateFieldProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & {
   label: string
+  placeholder: string
 }
 
 export function OxygenCellInstallationDateField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({ label, name, control }: OxygenCellInstallationDateFieldProps<TFieldValues, TName>) {
+>({ label, placeholder, name, control }: OxygenCellInstallationDateFieldProps<TFieldValues, TName>) {
+  const t = useI18n()
   return (
     <FormField
       control={control}
       name={name}
-      render={({field}) => (
+      render={({field, fieldState: { error }}) => (
         <FormItem className="flex flex-col">
           <FormLabel>{label}</FormLabel>
           <Popover>
@@ -54,7 +57,7 @@ export function OxygenCellInstallationDateField<
                   {field.value ? (
                     format(field.value, "PP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>{placeholder}</span>
                   )}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50"/>
                 </Button>
@@ -72,7 +75,14 @@ export function OxygenCellInstallationDateField<
               />
             </PopoverContent>
           </Popover>
-          <FormMessage/>
+          {error && (
+            <div className="text-sm font-medium text-destructive">
+              {t(
+                  // @ts-ignore
+                  error.message
+              )}
+            </div>
+          )}
         </FormItem>
       )}
     />

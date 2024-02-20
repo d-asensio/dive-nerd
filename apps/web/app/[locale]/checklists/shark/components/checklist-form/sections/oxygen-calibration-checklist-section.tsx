@@ -9,8 +9,10 @@ import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-p
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
+import {useScopedI18n} from "@/locales/client";
 
 export function OxygenCalibrationChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.oxygen_calibration_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_main_and_backup_computers',
@@ -23,37 +25,37 @@ export function OxygenCalibrationChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Comprobar y calibrar oxigeno"
-      subtitle="Know what you breath"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Encender el controlador Shearwater configurar setpoint a 0,7 ppO2 y encender el backup. Comprobar que ambos funcionan. Comprobar bateria interna y externa"
+        description={t('check_main_and_backup_computers_step')}
         name="check_main_and_backup_computers"
         control={form.control}
       />
       <ChecklistStep
-        description="Abrir O2, comprobar presión manómetro y la adición manual"
+        description={t('check_oxygen_pressure_and_manual_addition_step')}
         name="check_oxygen_pressure_and_manual_addition"
         control={form.control}
       />
       <ChecklistStep
-        description="Llenar el circuito con O2 realizando 3 test negativos"
+        description={t('check_oxygen_flush_step')}
         name="check_oxygen_flush"
         control={form.control}
       />
       <ChecklistStep
-        description="Calibrar controlador principal y secundario"
+        description={t('check_main_and_backup_calibration_step')}
         name="check_main_and_backup_calibration"
         control={form.control}
       />
       <ChecklistStep
-        description="Configurar setpoint a 0,19 ppO2"
+        description={t('check_setpoint_step')}
         name="check_setpoint"
         control={form.control}
       />
       <ChecklistStep
-        description="Cerrar O2, verificar manómetro y válvula flujo constante, mirar el tiempo que tarda en perder 10bar (control de la válvula de flujo constante)"
+        description={t('check_constant_mass_valve_step')}
         name="check_constant_mass_valve"
         control={form.control}
       />

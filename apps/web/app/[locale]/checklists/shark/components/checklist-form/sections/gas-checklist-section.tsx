@@ -12,8 +12,10 @@ import {ChecklistStep} from "../checklist-step";
 
 import {GasOxygenPercentageField} from "../fields/gas-oxygen-percentage-field";
 import {TankPressureField} from "../fields/tank-pressure-field";
+import {useScopedI18n} from "@/locales/client";
 
 export function GasChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.gas_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_oxygen_percentage_and_pressure',
@@ -22,36 +24,36 @@ export function GasChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Gas"
-      subtitle="Always know what you breath"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
         name="check_oxygen_percentage_and_pressure"
-        description="Análisis y presión de la botella de oxígeno"
+        description={t('check_oxygen_percentage_and_pressure_step')}
         control={form.control}
       >
         <GasOxygenPercentageField
-          name='oxygen-percentage-reading-field'
-          label="Análisis"
+          name='oxygen_percentage_reading_field'
+          label={t('oxygen_percentage_reading_field.label')}
         />
         <TankPressureField
-          name='oxygen-pressure-field'
-          label="Presión"
+          name='oxygen_pressure_field'
+          label={t('oxygen_pressure_field.label')}
         />
       </ChecklistStep>
       <ChecklistStep
-        description="Analisis y presión de la botella de diluyente"
+        description={t('check_diluent_percentage_and_pressure_step')}
         name="check_diluent_percentage_and_pressure"
         control={form.control}
       >
         <GasOxygenPercentageField
-          name='diluent-percentage-reading-field'
-          label="Análisis"
+          name='diluent_percentage_reading_field'
+          label={t('diluent_percentage_reading_field.label')}
         />
         <TankPressureField
-          name='diluent-pressure-field'
-          label="Presión"
+          name='diluent_pressure_field'
+          label={t('diluent_pressure_field.label')}
         />
       </ChecklistStep>
     </ChecklistSection>

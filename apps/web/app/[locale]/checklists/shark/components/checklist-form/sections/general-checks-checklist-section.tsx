@@ -9,8 +9,10 @@ import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-p
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
+import {useScopedI18n} from "@/locales/client";
 
 export function GeneralChecksChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.general_checks_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_dive_gases_and_sorbent_time',
@@ -20,22 +22,22 @@ export function GeneralChecksChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Comprobaciones generales"
-      subtitle="Let's get ready to dive"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Lista de gases para el buceo, tiempo restante de cal"
+        description={t('check_dive_gases_and_sorbent_time_step')}
         name="check_dive_gases_and_sorbent_time"
         control={form.control}
       />
       <ChecklistStep
-        description="Conectar ordenador"
+        description={t('check_dive_computer_connection_step')}
         name="check_dive_computer_connection"
         control={form.control}
       />
       <ChecklistStep
-        description="Control de material para el buceo"
+        description={t('check_dive_gear_step')}
         name="check_dive_gear"
         control={form.control}
       />

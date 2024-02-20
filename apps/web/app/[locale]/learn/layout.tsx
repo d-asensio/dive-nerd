@@ -1,5 +1,5 @@
+import type {PropsWithChildren} from "react";
 import * as React from "react";
-import {PropsWithChildren} from "react";
 import {Sidebar} from "./components/sidebar";
 
 export default function DocsLayout({ children }: PropsWithChildren) {

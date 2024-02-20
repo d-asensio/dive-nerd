@@ -9,8 +9,10 @@ import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-p
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
+import {useScopedI18n} from "@/locales/client";
 
 export function DiluentCalibrationChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.diluent_calibration_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_diluent_pressure_and_manual_addition',
@@ -22,32 +24,32 @@ export function DiluentCalibrationChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Comprobar y calibrar diluyente"
-      subtitle="Know what you breath"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Abrir diluyente, comprobar manómetro y adición manual"
+        description={t('check_diluent_pressure_and_manual_addition_step')}
         name="check_diluent_pressure_and_manual_addition"
         control={form.control}
       />
       <ChecklistStep
-        description="Comprobar ADV si funciona e inflar ala al máximo"
+        description={t('check_automatic_diluent_valve_step')}
         name="check_automatic_diluent_valve"
         control={form.control}
       />
       <ChecklistStep
-        description="Limpiar circuito con diluyente, comprobar la ppO2 esta entre 0,20/0,22"
+        description={t('check_diluent_flush_step')}
         name="check_diluent_flush"
         control={form.control}
       />
       <ChecklistStep
-        description="Cerrar el diluyente y comprobar con el manómetro que no hay fugas"
+        description={t('check_diluent_leakage_step')}
         name="check_diluent_leakage"
         control={form.control}
       />
       <ChecklistStep
-        description="Purgar el diluyente"
+        description={t('check_diluent_purge_step')}
         name="check_diluent_purge"
         control={form.control}
       />

@@ -14,6 +14,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import {Label} from "@/components/ui/label";
+import {useI18n} from "@/locales/client";
 
 type ChecklistStepProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -26,6 +27,7 @@ export function ChecklistStep<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({name, description, control, children, ...rest}: ChecklistStepProps<TFieldValues, TName>) {
+  const t = useI18n()
   return (
       <FormField
         control={control}
@@ -41,7 +43,14 @@ export function ChecklistStep<
             <FormItem className="flex items-center justify-between space-x-2">
               <div className="flex flex-col">
                 <Label className="text-base">{description}</Label>
-                <FormMessage />
+                {fieldState.error && (
+                  <div className="text-sm font-medium text-destructive">
+                    {t(
+                      // @ts-ignore
+                      fieldState.error.message
+                    )}
+                  </div>
+                )}
               </div>
               <FormControl>
                 <Switch

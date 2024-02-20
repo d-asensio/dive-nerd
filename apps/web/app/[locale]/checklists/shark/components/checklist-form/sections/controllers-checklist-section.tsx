@@ -12,9 +12,11 @@ import {ChecklistStep} from "../checklist-step";
 import {OxygenCellMillivoltsField} from "../fields/oxygen-cell-millivolts-field";
 import {OxygenCellInstallationDateField} from "../fields/oxygen-cell-installation-date-field";
 import {BatteryVoltsField} from "../fields/battery-volts-field";
+import {useScopedI18n} from "@/locales/client";
 
 
 export function ControllersChecklistSection() {
+  const t = useScopedI18n("rebreather_checklists.shark.controllers_section")
   const form = useFormContext<FormValues>()
   const completePercentage = useWatchTruthyFieldsPercentage([
     'check_controller_battery',
@@ -25,70 +27,73 @@ export function ControllersChecklistSection() {
 
   return (
     <ChecklistSection
-      title="Controladores"
-      subtitle="The rebreather brain"
+      title={t('title')}
+      subtitle={t('subtitle')}
       completePercentage={completePercentage}
     >
       <ChecklistStep
-        description="Conectar controlador (Shearwater) y comprobar las baterías"
+        description={t('check_controller_battery_step')}
         name="check_controller_battery"
         control={form.control}
       >
         <BatteryVoltsField
-          label="Batería interna"
+          label={t('internal_battery_voltage_field.label')}
           name="internal_battery_volts_field"
           control={form.control}
         />
         <BatteryVoltsField
-          label="Batería externa"
+          label={t('external_battery_voltage_field.label')}
           name="external_battery_volts_field"
           control={form.control}
         />
       </ChecklistStep>
       <ChecklistStep
-        description="Voltaje de las célula de oxígeno en aire >9mv"
+        description={t('check_oxygen_cells_voltage_step')}
         name="check_oxygen_cells_voltage"
         control={form.control}
       >
         <OxygenCellMillivoltsField
-          label="Célula 1"
+          label={t('cell_one_voltage_field.label')}
           name="cell_one_millivolts_field"
           control={form.control}
         />
         <OxygenCellMillivoltsField
-          label="Célula 2"
+          label={t('cell_two_voltage_field.label')}
           name="cell_two_millivolts_field"
           control={form.control}
         />
         <OxygenCellMillivoltsField
-          label="Célula 3"
+          label={t('cell_three_voltage_field.label')}
           name="cell_three_millivolts_field"
           control={form.control}
         />
       </ChecklistStep>
       <ChecklistStep
-        description="Comprobar fecha de instalación las células, máximo 6 meses y cambiar"
+        description={t('check_oxygen_cells_installation_date_step')}
         name="check_oxygen_cells_installation_date"
         control={form.control}
       >
         <OxygenCellInstallationDateField
-          label="Célula 1"
+          label={t('cell_one_date_field.label')}
+          placeholder={t('cell_one_date_field.placeholder')}
           name="cell_one_installation_date_field"
           control={form.control}
         />
         <OxygenCellInstallationDateField
-          label="Célula 2"
+          label={t('cell_two_date_field.label')}
+          placeholder={t('cell_two_date_field.placeholder')}
           name="cell_two_installation_date_field"
           control={form.control}
         />
         <OxygenCellInstallationDateField
-          label="Célula 3"
+          label={t('cell_three_date_field.label')}
+          placeholder={t('cell_three_date_field.placeholder')}
           name="cell_three_installation_date_field"
           control={form.control}
         />
       </ChecklistStep>
       <ChecklistStep
-        description="Verificar los parametros de buceo"
+        description={t('check_dive_parameters_step')}
         name="check_dive_parameters"
         control={form.control}
       />
