@@ -22,7 +22,6 @@ export function MinutesField({name, label, units}: MinutesFieldProps) {
         type="number"
         min={0}
         step={1}
-        className="w-[200px] min-w-[120px]"
       />
     </div>
   );

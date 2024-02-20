@@ -39,7 +39,6 @@ export function BatteryVoltsField<
               type="number"
               min={0}
               step={0.1}
-              className="w-[230px]"
               {...field}
             />
           </FormControl>

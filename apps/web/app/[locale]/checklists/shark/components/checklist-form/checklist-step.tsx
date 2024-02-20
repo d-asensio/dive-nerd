@@ -62,7 +62,7 @@ export function ChecklistStep<
             </FormItem>
             {children && (
               <div
-                className="rounded-lg bg-gray-200 px-6 py-4 flex items-start gap-3 flex-wrap">
+                className="rounded-lg bg-gray-200 px-6 py-4 grid items-start sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
                 {children}
               </div>
             )}

@@ -21,7 +21,6 @@ export function GasOxygenPercentageField({name, label}: GasOxygenPercentageField
         min={1}
         max={100}
         step={1}
-        className="w-[200px] min-w-[120px]"
       />
     </div>
   );

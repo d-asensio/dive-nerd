@@ -39,7 +39,6 @@ export function OxygenCellMillivoltsField<
               type="number"
               min={0}
               step={1}
-              className="w-[230px]"
               {...field}
             />
           </FormControl>
