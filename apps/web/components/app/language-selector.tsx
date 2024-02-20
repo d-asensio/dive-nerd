@@ -22,10 +22,10 @@ export const LanguageSelector = () => {
           English
         </SelectItem>
         <SelectItem value="es">
-          Spanish
+          Español
         </SelectItem>
         <SelectItem value="ca">
-          Catalan
+          Català
         </SelectItem>
       </SelectContent>
     </Select>
