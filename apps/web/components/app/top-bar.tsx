@@ -5,6 +5,7 @@ import {LanguageSelector} from "@/components/app/language-selector";
 import {Separator} from "@/components/ui/separator";
 import {MainNav} from "@/components/app/main-nav";
 import {Badge} from "@/components/ui/badge";
+import {UserNav} from "@/components/app/user-nav";
 
 export const TopBar = () => (
   <div className="h-full flex-col flex">
@@ -21,9 +22,10 @@ export const TopBar = () => (
       </div>
       <MainNav/>
       <div className="hidden md:flex ml-auto w-full space-x-2 sm:justify-end">
-        <div className="hidden space-x-2 md:flex">
+        <div className="hidden space-x-2 md:flex items-center">
           <ShareButton/>
           <LanguageSelector/>
+          <UserNav />
         </div>
       </div>
     </div>
