@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import {ShareButton} from "@/components/app/share-button";
-import {LanguageSelector} from "@/components/app/language-selector";
 import {Separator} from "@/components/ui/separator";
 import {MainNav} from "@/components/app/main-nav";
 import {Badge} from "@/components/ui/badge";
