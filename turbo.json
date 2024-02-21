@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [".env"],
   "pipeline": {
     "build": {
       "outputs": ["dist/**", "storybook-static/**"],
@@ -7,6 +8,7 @@
     },
     "lint": {},
     "dev": {
+      "dotEnv": [".env.local"],
       "cache": false,
       "persistent": true
     },

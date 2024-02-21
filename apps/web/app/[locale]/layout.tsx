@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import type {PropsWithPageParams} from "@/app/types";
 import * as React from "react";
 import { Inter } from 'next/font/google'
+import {UserProvider} from "@auth0/nextjs-auth0/client";
 
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
@@ -28,13 +29,15 @@ type LayoutProps = PropsWithChildren<PropsWithPageParams>
 export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
   return (
     <html lang={locale}>
-      <body className={inter.className}>
-        <TooltipProvider>
-          <TopBar/>
-          {children}
-        </TooltipProvider>
-        <Toaster />
-      </body>
+      <UserProvider>
+        <body className={inter.className}>
+          <TooltipProvider>
+            <TopBar/>
+            {children}
+          </TooltipProvider>
+          <Toaster />
+        </body>
+      </UserProvider>
     </html>
   )
 }
