@@ -21,12 +21,8 @@ export const TopBar = () => (
         <Badge>BETA</Badge>
       </div>
       <MainNav/>
-      <div className="hidden md:flex ml-auto w-full space-x-2 sm:justify-end">
-        <div className="hidden space-x-2 md:flex items-center">
-          <ShareButton/>
-          <LanguageSelector/>
-          <UserNav />
-        </div>
+      <div className="flex ml-auto w-full space-x-2 sm:justify-end">
+        <UserNav />
       </div>
     </div>
     <Separator/>

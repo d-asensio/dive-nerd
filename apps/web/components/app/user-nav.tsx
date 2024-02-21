@@ -1,26 +1,39 @@
+import {getSession} from "@auth0/nextjs-auth0";
+
 import {
   Avatar,
-  AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import {getSession} from "@auth0/nextjs-auth0";
-import Link from "next/link";
+import {Button, buttonVariants} from "@/components/ui/button"
+import {LanguageSelector} from "@/components/app/language-selector";
 
 export async function UserNav() {
   const session = await getSession();
 
-  if (!session?.user) return null
+  if (!session?.user) {
+    return (
+      <a
+        href="/api/auth/login"
+        className={buttonVariants({ variant: "ghost" })}
+      >
+        Login
+      </a>
+    )
+  }
 
   const { user } = session
 
@@ -42,6 +55,15 @@ export async function UserNav() {
             </p>
           </div>
         </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Language</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <LanguageSelector />
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <a href="/api/auth/logout">

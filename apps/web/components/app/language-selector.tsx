@@ -2,32 +2,24 @@
 
 import * as React from "react";
 
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import { useChangeLocale, useCurrentLocale } from '@/locales/client'
+import {
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem
+} from "@/components/ui/dropdown-menu";
 
 export const LanguageSelector = () => {
   const changeLocale = useChangeLocale()
   const locale = useCurrentLocale()
 
   return (
-    <Select
+    <DropdownMenuRadioGroup
       value={locale}
-      onValueChange={changeLocale}
+      onValueChange={(value: string) => changeLocale(value as "en" | "es" | "ca")}
     >
-      <SelectTrigger>
-        <SelectValue/>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en">
-          English
-        </SelectItem>
-        <SelectItem value="es">
-          Español
-        </SelectItem>
-        <SelectItem value="ca">
-          Català
-        </SelectItem>
-      </SelectContent>
-    </Select>
+      <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="ca">Català</DropdownMenuRadioItem>
+    </DropdownMenuRadioGroup>
   )
 }
