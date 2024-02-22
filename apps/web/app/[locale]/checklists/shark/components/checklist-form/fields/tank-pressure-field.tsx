@@ -21,7 +21,6 @@ export function TankPressureField({name, label}: TankPressureFieldProps) {
         min={0}
         max={300}
         step={10}
-        className="w-[200px] min-w-[120px]"
       />
     </div>
   );

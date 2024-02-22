@@ -10,16 +10,20 @@ import {Switch} from "@/components/ui/switch";
 import {
   FormControl,
   FormField,
-  FormItem,
-  FormMessage
+  FormItem
 } from "@/components/ui/form";
 import {Label} from "@/components/ui/label";
 import {useI18n} from "@/locales/client";
 import {
   Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
+  CollapsibleContent
 } from "@/components/ui/collapsible";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TOOLTIP_OPEN_AUTO,
+} from "@/components/ui/tooltip";
 
 type ChecklistStepProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -68,12 +72,21 @@ export function ChecklistStep<
                 )}
               </div>
               <FormControl>
-                <Switch
-                  ref={field.ref}
-                  checked={field.value}
-                  disabled={disabled}
-                  onCheckedChange={field.onChange}
-                />
+                <Tooltip delayDuration={300} open={disabled ? TOOLTIP_OPEN_AUTO : false}>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <Switch
+                        ref={field.ref}
+                        checked={field.value}
+                        disabled={disabled}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent sideOffset={12} collisionPadding={12}>
+                    <p>Please, fill all the fields before completing this step</p>
+                  </TooltipContent>
+                </Tooltip>
               </FormControl>
             </FormItem>
             {children && (

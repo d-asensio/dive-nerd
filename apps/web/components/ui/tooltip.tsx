@@ -29,4 +29,6 @@ const TooltipContent = React.forwardRef<
 ))
 TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
-export { Tooltip, TooltipPortal, TooltipTrigger, TooltipContent, TooltipProvider }
+const TOOLTIP_OPEN_AUTO = undefined
+
+export { Tooltip, TooltipPortal, TooltipTrigger, TooltipContent, TooltipProvider, TOOLTIP_OPEN_AUTO }
