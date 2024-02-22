@@ -32,6 +32,7 @@ type ChecklistStepProps<
   Pick<ControllerProps<TFieldValues, TName>, "name" | "control">
   & PropsWithChildren<{
   description: string
+  disabledExplanation: string
   disabled?: boolean
 }>
 
@@ -43,7 +44,8 @@ export function ChecklistStep<
     description,
     control,
     children,
-    disabled
+    disabled,
+    disabledExplanation
   }: ChecklistStepProps<TFieldValues, TName>) {
   const t = useI18n()
   return (
@@ -84,7 +86,7 @@ export function ChecklistStep<
                     </div>
                   </TooltipTrigger>
                   <TooltipContent sideOffset={12} collisionPadding={12}>
-                    <p>Please, fill all the fields before completing this step</p>
+                    <p>{disabledExplanation}</p>
                   </TooltipContent>
                 </Tooltip>
               </FormControl>

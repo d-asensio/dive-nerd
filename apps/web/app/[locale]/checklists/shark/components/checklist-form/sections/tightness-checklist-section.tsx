@@ -11,7 +11,7 @@ import {
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
-import {useScopedI18n} from "@/locales/client";
+import {useI18n, useScopedI18n} from "@/locales/client";
 import {
   useWatchHasErrors
 } from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
@@ -23,7 +23,8 @@ const CHILD_FIELDS = [
 ]
 
 export function TightnessChecklistSection() {
-  const t = useScopedI18n("rebreather_checklists.shark.tightness_section")
+  const t = useI18n()
+  const scopedT = useScopedI18n("rebreather_checklists.shark.tightness_section")
   const form = useFormContext<FormValues>()
 
   const completePercentage = useWatchTruthyFieldsPercentage(CHILD_FIELDS)
@@ -31,25 +32,28 @@ export function TightnessChecklistSection() {
 
   return (
     <ChecklistSection
-      title={t('title')}
-      subtitle={t('subtitle')}
+      title={scopedT('title')}
+      subtitle={scopedT('subtitle')}
       completePercentage={completePercentage}
       hasErrors={hasErrors}
     >
       <ChecklistStep
-        description={t('check_negative_seal_test_step')}
+        description={scopedT('check_negative_seal_test_step')}
         name="check_negative_seal_test"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_positive_seal_test_step')}
+        description={scopedT('check_positive_seal_test_step')}
         name="check_positive_seal_test"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_mouthpiece_seal_test_step')}
+        description={scopedT('check_mouthpiece_seal_test_step')}
         name="check_mouthpiece_seal_test"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
     </ChecklistSection>
   )

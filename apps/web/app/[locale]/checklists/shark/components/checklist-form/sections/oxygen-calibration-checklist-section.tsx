@@ -11,7 +11,7 @@ import {
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
-import {useScopedI18n} from "@/locales/client";
+import {useI18n, useScopedI18n} from "@/locales/client";
 import {
   useWatchHasErrors
 } from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
@@ -26,7 +26,8 @@ const CHILD_FIELDS = [
 ]
 
 export function OxygenCalibrationChecklistSection() {
-  const t = useScopedI18n("rebreather_checklists.shark.oxygen_calibration_section")
+  const t = useI18n()
+  const scopedT = useScopedI18n("rebreather_checklists.shark.oxygen_calibration_section")
   const form = useFormContext<FormValues>()
 
   const completePercentage = useWatchTruthyFieldsPercentage(CHILD_FIELDS)
@@ -34,40 +35,46 @@ export function OxygenCalibrationChecklistSection() {
 
   return (
     <ChecklistSection
-      title={t('title')}
-      subtitle={t('subtitle')}
+      title={scopedT('title')}
+      subtitle={scopedT('subtitle')}
       completePercentage={completePercentage}
       hasErrors={hasErrors}
     >
       <ChecklistStep
-        description={t('check_main_and_backup_computers_step')}
+        description={scopedT('check_main_and_backup_computers_step')}
         name="check_main_and_backup_computers"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_oxygen_pressure_and_manual_addition_step')}
+        description={scopedT('check_oxygen_pressure_and_manual_addition_step')}
         name="check_oxygen_pressure_and_manual_addition"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_oxygen_flush_step')}
+        description={scopedT('check_oxygen_flush_step')}
         name="check_oxygen_flush"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_main_and_backup_calibration_step')}
+        description={scopedT('check_main_and_backup_calibration_step')}
         name="check_main_and_backup_calibration"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_setpoint_step')}
+        description={scopedT('check_setpoint_step')}
         name="check_setpoint"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_constant_mass_valve_step')}
+        description={scopedT('check_constant_mass_valve_step')}
         name="check_constant_mass_valve"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
     </ChecklistSection>
   )

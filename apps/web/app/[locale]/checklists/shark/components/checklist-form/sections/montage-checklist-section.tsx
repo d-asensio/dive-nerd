@@ -13,7 +13,7 @@ import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
 
 import {MinutesField} from "../fields/minutes-field";
-import {useScopedI18n} from "@/locales/client";
+import {useI18n, useScopedI18n} from "@/locales/client";
 import {
   useWatchHasErrors
 } from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
@@ -33,7 +33,8 @@ const CHILD_FIELDS = [
 ]
 
 export function MontageChecklistSection() {
-  const t = useScopedI18n("rebreather_checklists.shark.montage_section")
+  const t = useI18n()
+  const scopedT = useScopedI18n("rebreather_checklists.shark.montage_section")
   const form = useFormContext<FormValues>()
 
   const completePercentage = useWatchTruthyFieldsPercentage(CHILD_FIELDS)
@@ -41,71 +42,82 @@ export function MontageChecklistSection() {
 
   return (
     <ChecklistSection
-      title={t('title')}
-      subtitle={t('subtitle')}
+      title={scopedT('title')}
+      subtitle={scopedT('subtitle')}
       completePercentage={completePercentage}
       hasErrors={hasErrors}
     >
       <ChecklistStep
-        description={t('check_carbon_dioxide_absorbent_remaining_time_step')}
+        description={scopedT('check_carbon_dioxide_absorbent_remaining_time_step')}
         name="check_carbon_dioxide_absorbent_remaining_time"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
         <MinutesField
           name="carbon_dioxide_absorbent_remaining_time_field"
-          label={t('carbon_dioxide_absorbent_remaining_time_field.label')}
-          units={t('carbon_dioxide_absorbent_remaining_time_field.units')}
+          label={scopedT('carbon_dioxide_absorbent_remaining_time_field.label')}
+          units={scopedT('carbon_dioxide_absorbent_remaining_time_field.units')}
         />
       </ChecklistStep>
       <ChecklistStep
-        description={t('install_diluent_and_oxygen_tanks_step')}
+        description={scopedT('install_diluent_and_oxygen_tanks_step')}
         name="install_diluent_and_oxygen_tanks"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('install_water_trap_and_cannister_step')}
+        description={scopedT('install_water_trap_and_cannister_step')}
         name="install_water_trap_and_cannister"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_canister_head_grommets_step')}
+        description={scopedT('check_canister_head_grommets_step')}
         name="check_canister_head_grommets"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('install_counterlungs_step')}
+        description={scopedT('install_counterlungs_step')}
         name="install_counterlungs"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('install_counterlungs_cover_step')}
+        description={scopedT('install_counterlungs_cover_step')}
         name="install_counterlungs_cover"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('install_head_connectors_and_hoses_step')}
+        description={scopedT('install_head_connectors_and_hoses_step')}
         name="install_head_connectors_and_hoses"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_breathing_hoses_stereo_step')}
+        description={scopedT('check_breathing_hoses_stereo_step')}
         name="check_breathing_hoses_stereo"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_breathing_hoses_grommets_step')}
+        description={scopedT('check_breathing_hoses_grommets_step')}
         name="check_breathing_hoses_grommets"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('install_heads_up_display_cable_step')}
+        description={scopedT('install_heads_up_display_cable_step')}
         name="install_heads_up_display_cable"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
       <ChecklistStep
-        description={t('check_negative_test_step')}
+        description={scopedT('check_negative_test_step')}
         name="check_negative_test"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       />
     </ChecklistSection>
   )

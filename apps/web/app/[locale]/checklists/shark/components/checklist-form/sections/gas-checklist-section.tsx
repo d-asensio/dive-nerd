@@ -14,7 +14,7 @@ import {ChecklistStep} from "../checklist-step";
 
 import {GasOxygenPercentageField} from "../fields/gas-oxygen-percentage-field";
 import {TankPressureField} from "../fields/tank-pressure-field";
-import {useScopedI18n} from "@/locales/client";
+import {useI18n, useScopedI18n} from "@/locales/client";
 import {
   useWatchHasErrors
 } from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
@@ -25,7 +25,8 @@ const CHILD_FIELDS = [
 ]
 
 export function GasChecklistSection() {
-  const t = useScopedI18n("rebreather_checklists.shark.gas_section")
+  const t = useI18n()
+  const scopedT = useScopedI18n("rebreather_checklists.shark.gas_section")
   const form = useFormContext<FormValues>()
 
   const completePercentage = useWatchTruthyFieldsPercentage(CHILD_FIELDS)
@@ -33,37 +34,39 @@ export function GasChecklistSection() {
 
   return (
     <ChecklistSection
-      title={t('title')}
-      subtitle={t('subtitle')}
+      title={scopedT('title')}
+      subtitle={scopedT('subtitle')}
       completePercentage={completePercentage}
       hasErrors={hasErrors}
     >
       <ChecklistStep
         name="check_oxygen_percentage_and_pressure"
-        description={t('check_oxygen_percentage_and_pressure_step')}
+        description={scopedT('check_oxygen_percentage_and_pressure_step')}
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
         <GasOxygenPercentageField
           name='oxygen_percentage_reading_field'
-          label={t('oxygen_percentage_reading_field.label')}
+          label={scopedT('oxygen_percentage_reading_field.label')}
         />
         <TankPressureField
           name='oxygen_pressure_field'
-          label={t('oxygen_pressure_field.label')}
+          label={scopedT('oxygen_pressure_field.label')}
         />
       </ChecklistStep>
       <ChecklistStep
-        description={t('check_diluent_percentage_and_pressure_step')}
+        description={scopedT('check_diluent_percentage_and_pressure_step')}
         name="check_diluent_percentage_and_pressure"
         control={form.control}
+        disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
         <GasOxygenPercentageField
           name='diluent_percentage_reading_field'
-          label={t('diluent_percentage_reading_field.label')}
+          label={scopedT('diluent_percentage_reading_field.label')}
         />
         <TankPressureField
           name='diluent_pressure_field'
-          label={t('diluent_pressure_field.label')}
+          label={scopedT('diluent_pressure_field.label')}
         />
       </ChecklistStep>
     </ChecklistSection>
