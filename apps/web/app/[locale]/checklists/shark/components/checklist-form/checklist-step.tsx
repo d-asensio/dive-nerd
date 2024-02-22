@@ -15,11 +15,18 @@ import {
 } from "@/components/ui/form";
 import {Label} from "@/components/ui/label";
 import {useI18n} from "@/locales/client";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "@/components/ui/collapsible";
 
 type ChecklistStepProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & PropsWithChildren<{
+> =
+  Pick<ControllerProps<TFieldValues, TName>, "name" | "control">
+  & PropsWithChildren<{
   description: string
   disabled?: boolean
 }>
@@ -27,13 +34,20 @@ type ChecklistStepProps<
 export function ChecklistStep<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({name, description, control, children, disabled }: ChecklistStepProps<TFieldValues, TName>) {
+>({
+    name,
+    description,
+    control,
+    children,
+    disabled
+  }: ChecklistStepProps<TFieldValues, TName>) {
   const t = useI18n()
   return (
-      <FormField
-        control={control}
-        name={name}
-        render={({ field, fieldState }) => (
+    <FormField
+      control={control}
+      name={name}
+      render={({field, fieldState}) => (
+        <Collapsible open={!field.value}>
           <div
             className={cn(
               "p-4 space-y-4 transition-colors",
@@ -63,13 +77,16 @@ export function ChecklistStep<
               </FormControl>
             </FormItem>
             {children && (
-              <div
-                className="rounded-lg bg-gray-200 px-6 py-4 grid items-start sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
-                {children}
-              </div>
+              <CollapsibleContent>
+                <div
+                  className="rounded-lg bg-gray-200 px-6 py-4 grid items-start sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
+                  {children}
+                </div>
+              </CollapsibleContent>
             )}
           </div>
-        )}
-      />
+        </Collapsible>
+      )}
+    />
   );
 }
