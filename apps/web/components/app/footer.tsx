@@ -4,11 +4,13 @@ import * as React from "react";
 
 export function Footer() {
   return (
-    <>
+    <div>
       <Separator/>
-      <div className="p-8 flex justify-end w-full">
-        <LanguageSelector/>
+      <div className="container p-8">
+        <div className="flex justify-end">
+          <LanguageSelector/>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
