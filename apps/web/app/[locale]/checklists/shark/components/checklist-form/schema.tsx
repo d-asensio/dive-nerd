@@ -1,15 +1,9 @@
 import {z} from "zod";
-import {
-  cellInstallationDateFields,
-  cellVoltageFieldsSchema, controllerBatteryFieldsSchema, sectionStepsSchema
-} from "./sections/controllers-checklist-section";
+import {controllersSectionSchema} from "./sections/controllers-checklist-section";
 
 export const formSchema = z.object({
-  ...sectionStepsSchema.shape,
-  ...controllerBatteryFieldsSchema.shape,
-  ...cellVoltageFieldsSchema.shape,
-  ...cellInstallationDateFields.shape,
-  
+  ...controllersSectionSchema.shape,
+
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_controller_battery_step.error.is_required"

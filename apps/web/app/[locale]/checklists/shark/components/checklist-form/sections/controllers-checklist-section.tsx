@@ -25,7 +25,7 @@ const CHILD_FIELDS = [
   'check_dive_parameters'
 ]
 
-export const sectionStepsSchema = z.object({
+const sectionStepsSchema = z.object({
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_controller_battery_step.error.is_required"
@@ -48,7 +48,7 @@ export const sectionStepsSchema = z.object({
   }),
 })
 
-export const cellVoltageFieldsSchema = z.object({
+const cellVoltageFieldsSchema = z.object({
   cell_one_millivolts_field: z.coerce.number()
     .gt(9, {
       message: "rebreather_checklists.shark.controllers_section.cell_one_voltage_field.error.is_too_low"
@@ -63,7 +63,7 @@ export const cellVoltageFieldsSchema = z.object({
     }),
 })
 
-export const controllerBatteryFieldsSchema = z.object({
+const controllerBatteryFieldsSchema = z.object({
   internal_battery_volts_field: z.coerce.number()
     .gt(0, {
       message: "rebreather_checklists.shark.controllers_section.internal_battery_voltage_field.error.is_too_low"
@@ -74,7 +74,7 @@ export const controllerBatteryFieldsSchema = z.object({
     }),
 })
 
-export const cellInstallationDateFields = z.object({
+const cellInstallationDateFields = z.object({
   cell_one_installation_date_field: z.date({
     required_error: "rebreather_checklists.shark.controllers_section.cell_one_date_field.error.is_required",
   }),
@@ -84,6 +84,13 @@ export const cellInstallationDateFields = z.object({
   cell_three_installation_date_field: z.date({
     required_error: "rebreather_checklists.shark.controllers_section.cell_three_date_field.error.is_required",
   }),
+})
+
+export const controllersSectionSchema = z.object({
+  ...sectionStepsSchema.shape,
+  ...controllerBatteryFieldsSchema.shape,
+  ...cellVoltageFieldsSchema.shape,
+  ...cellInstallationDateFields.shape,
 })
 
 export function ControllersChecklistSection() {
