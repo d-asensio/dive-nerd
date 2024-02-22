@@ -28,14 +28,16 @@ export function ChecklistForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // ---
       internal_battery_volts_field: 0,
       external_battery_volts_field: 0,
-      // ---
       cell_one_millivolts_field: 0,
       cell_two_millivolts_field: 0,
       cell_three_millivolts_field: 0,
-      // ---
+      carbon_dioxide_absorbent_remaining_time_field: 0,
+      oxygen_percentage_reading_field: 0,
+      oxygen_pressure_field: 0,
+      diluent_percentage_reading_field: 0,
+      diluent_pressure_field: 0
     }
   })
 

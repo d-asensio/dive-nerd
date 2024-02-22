@@ -18,12 +18,13 @@ type OxygenCellMillivoltsFieldProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & {
   label: string
+  units: string
 }
 
-export function OxygenCellMillivoltsField<
+export function NumberWithUnitsField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({ label, name, control }: OxygenCellMillivoltsFieldProps<TFieldValues, TName>) {
+>({ label, name, units, control }: OxygenCellMillivoltsFieldProps<TFieldValues, TName>) {
   const t = useI18n()
   return (
     <FormField
@@ -35,7 +36,7 @@ export function OxygenCellMillivoltsField<
           <FormControl>
             <InputWithUnits
               id={name}
-              units="mV"
+              units={units}
               type="number"
               min={0}
               step={1}

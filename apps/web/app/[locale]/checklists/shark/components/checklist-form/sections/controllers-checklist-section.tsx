@@ -2,6 +2,7 @@
 
 import type {FormValues} from "../schema";
 import * as React from "react";
+
 import {useFormContext} from "react-hook-form";
 import {z} from "zod";
 
@@ -12,9 +13,8 @@ import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-p
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
 
-import {OxygenCellMillivoltsField} from "../fields/oxygen-cell-millivolts-field";
+import {NumberWithUnitsField} from "../fields/number-with-units-field";
 import {OxygenCellInstallationDateField} from "../fields/oxygen-cell-installation-date-field";
-import {BatteryVoltsField} from "../fields/battery-volts-field";
 import {useWatchHasErrors} from "../hooks/use-watch-has-errors";
 import {useWatchValidSchema} from "../hooks/use-watch-valid-schema";
 
@@ -118,13 +118,15 @@ export function ControllersChecklistSection() {
         disabled={!controllerBatteryFieldsValid}
         disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
-        <BatteryVoltsField
+        <NumberWithUnitsField
           label={scopedT('internal_battery_voltage_field.label')}
+          units="V"
           name="internal_battery_volts_field"
           control={form.control}
         />
-        <BatteryVoltsField
+        <NumberWithUnitsField
           label={scopedT('external_battery_voltage_field.label')}
+          units="V"
           name="external_battery_volts_field"
           control={form.control}
         />
@@ -136,18 +138,21 @@ export function ControllersChecklistSection() {
         disabled={!cellVoltageFieldsValid}
         disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
-        <OxygenCellMillivoltsField
+        <NumberWithUnitsField
           label={scopedT('cell_one_voltage_field.label')}
+          units="mV"
           name="cell_one_millivolts_field"
           control={form.control}
         />
-        <OxygenCellMillivoltsField
+        <NumberWithUnitsField
           label={scopedT('cell_two_voltage_field.label')}
+          units="mV"
           name="cell_two_millivolts_field"
           control={form.control}
         />
-        <OxygenCellMillivoltsField
+        <NumberWithUnitsField
           label={scopedT('cell_three_voltage_field.label')}
+          units="mV"
           name="cell_three_millivolts_field"
           control={form.control}
         />

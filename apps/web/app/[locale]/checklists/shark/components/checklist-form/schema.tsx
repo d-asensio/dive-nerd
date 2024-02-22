@@ -1,9 +1,13 @@
 import {z} from "zod";
+
 import {controllersSectionSchema} from "./sections/controllers-checklist-section";
+import {montageSectionSchema} from "./sections/montage-checklist-section";
+import {gasSectionSchema} from "./sections/gas-checklist-section";
 
 export const formSchema = z.object({
   ...controllersSectionSchema.shape,
-
+  ...montageSectionSchema.shape,
+  ...gasSectionSchema.shape,
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.steps.error.is_required"
@@ -20,71 +24,6 @@ export const formSchema = z.object({
     })
   }),
   check_dive_parameters: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_oxygen_percentage_and_pressure: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_diluent_percentage_and_pressure: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_carbon_dioxide_absorbent_remaining_time: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_diluent_and_oxygen_tanks: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_water_trap_and_cannister: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_canister_head_grommets: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_counterlungs: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_counterlungs_cover: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_head_connectors_and_hoses: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_breathing_hoses_stereo: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_breathing_hoses_grommets: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  install_heads_up_display_cable: z.literal(true, {
-    errorMap: () => ({
-      message: "rebreather_checklists.steps.error.is_required"
-    })
-  }),
-  check_negative_test: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.steps.error.is_required"
     })

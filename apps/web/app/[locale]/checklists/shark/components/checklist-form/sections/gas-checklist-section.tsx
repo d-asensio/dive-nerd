@@ -1,28 +1,53 @@
 "use client"
 
+import type {FormValues} from "../schema";
 import * as React from "react";
+import {z} from "zod";
 
 import {useFormContext} from "react-hook-form";
 
-import type {FormValues} from "../schema";
-import {
-  useWatchTruthyFieldsPercentage
-} from "../hooks/use-watch-truthy-fields-percentage";
+import {useI18n, useScopedI18n} from "@/locales/client";
+
+import {useWatchTruthyFieldsPercentage} from "../hooks/use-watch-truthy-fields-percentage";
+import {useWatchHasErrors} from "../hooks/use-watch-has-errors";
+import {NumberWithUnitsField} from "../fields/number-with-units-field";
 
 import {ChecklistSection} from "../checklist-section";
 import {ChecklistStep} from "../checklist-step";
-
-import {GasOxygenPercentageField} from "../fields/gas-oxygen-percentage-field";
-import {TankPressureField} from "../fields/tank-pressure-field";
-import {useI18n, useScopedI18n} from "@/locales/client";
-import {
-  useWatchHasErrors
-} from "@/app/[locale]/checklists/shark/components/checklist-form/hooks/use-watch-has-errors";
 
 const CHILD_FIELDS = [
   'check_oxygen_percentage_and_pressure',
   'check_diluent_percentage_and_pressure'
 ]
+
+const sectionStepsSchema = z.object({
+  check_oxygen_percentage_and_pressure: z.literal(true, {
+    errorMap: () => ({
+      message: "rebreather_checklists.steps.error.is_required"
+    })
+  }),
+  check_diluent_percentage_and_pressure: z.literal(true, {
+    errorMap: () => ({
+      message: "rebreather_checklists.steps.error.is_required"
+    })
+  })
+})
+
+const oxygenTankFields = z.object({
+  oxygen_percentage_reading_field: z.coerce.number(),
+  oxygen_pressure_field: z.coerce.number()
+})
+
+const diluentTankFields = z.object({
+  diluent_percentage_reading_field: z.coerce.number(),
+  diluent_pressure_field: z.coerce.number()
+})
+
+export const gasSectionSchema = z.object({
+  ...sectionStepsSchema.shape,
+  ...oxygenTankFields.shape,
+  ...diluentTankFields.shape,
+})
 
 export function GasChecklistSection() {
   const t = useI18n()
@@ -45,13 +70,17 @@ export function GasChecklistSection() {
         control={form.control}
         disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
-        <GasOxygenPercentageField
-          name='oxygen_percentage_reading_field'
+        <NumberWithUnitsField
           label={scopedT('oxygen_percentage_reading_field.label')}
+          units="% O2"
+          name='oxygen_percentage_reading_field'
+          control={form.control}
         />
-        <TankPressureField
-          name='oxygen_pressure_field'
+        <NumberWithUnitsField
           label={scopedT('oxygen_pressure_field.label')}
+          units="bar"
+          name='oxygen_pressure_field'
+          control={form.control}
         />
       </ChecklistStep>
       <ChecklistStep
@@ -60,13 +89,17 @@ export function GasChecklistSection() {
         control={form.control}
         disabledExplanation={t('rebreather_checklists.steps.error.is_disabled')}
       >
-        <GasOxygenPercentageField
-          name='diluent_percentage_reading_field'
+        <NumberWithUnitsField
           label={scopedT('diluent_percentage_reading_field.label')}
+          units="% O2"
+          name='diluent_percentage_reading_field'
+          control={form.control}
         />
-        <TankPressureField
-          name='diluent_pressure_field'
+        <NumberWithUnitsField
+          units="bar"
           label={scopedT('diluent_pressure_field.label')}
+          name='diluent_pressure_field'
+          control={form.control}
         />
       </ChecklistStep>
     </ChecklistSection>
