@@ -21,12 +21,13 @@ type ChecklistStepProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> & PropsWithChildren<{
   description: string
+  disabled?: boolean
 }>
 
 export function ChecklistStep<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({name, description, control, children, ...rest}: ChecklistStepProps<TFieldValues, TName>) {
+>({name, description, control, children, disabled }: ChecklistStepProps<TFieldValues, TName>) {
   const t = useI18n()
   return (
       <FormField
@@ -56,6 +57,7 @@ export function ChecklistStep<
                 <Switch
                   ref={field.ref}
                   checked={field.value}
+                  disabled={disabled}
                   onCheckedChange={field.onChange}
                 />
               </FormControl>

@@ -1,54 +1,30 @@
 import {z} from "zod";
+import {
+  cellInstallationDateFields,
+  cellVoltageFieldsSchema, controllerBatteryFieldsSchema, sectionStepsSchema
+} from "./sections/controllers-checklist-section";
 
 export const formSchema = z.object({
-  // ---
+  ...sectionStepsSchema.shape,
+  ...controllerBatteryFieldsSchema.shape,
+  ...cellVoltageFieldsSchema.shape,
+  ...cellInstallationDateFields.shape,
+  
   check_controller_battery: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_controller_battery_step.error.is_required"
     })
   }),
-  internal_battery_volts_field: z.coerce.number()
-    .gt(0, {
-      message: "rebreather_checklists.shark.controllers_section.internal_battery_voltage_field.error.is_too_low"
-    }),
-  external_battery_volts_field: z.coerce.number()
-    .gt(0, {
-      message: "rebreather_checklists.shark.controllers_section.external_battery_voltage_field.error.is_too_low"
-    }),
-  // ---
   check_oxygen_cells_voltage: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_oxygen_cells_voltage_step.error.is_required"
     })
   }),
-  cell_one_millivolts_field: z.coerce.number()
-    .gt(9, {
-      message: "rebreather_checklists.shark.controllers_section.cell_one_voltage_field.error.is_too_low"
-    }),
-  cell_two_millivolts_field: z.coerce.number()
-    .gt(9, {
-      message: "rebreather_checklists.shark.controllers_section.cell_two_voltage_field.error.is_too_low"
-    }),
-  cell_three_millivolts_field: z.coerce.number()
-    .gt(9, {
-      message: "rebreather_checklists.shark.controllers_section.cell_three_voltage_field.error.is_too_low"
-    }),
-  // ---
   check_oxygen_cells_installation_date: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_oxygen_cells_installation_date_step.error.is_required"
     })
   }),
-  cell_one_installation_date_field: z.date({
-    required_error: "rebreather_checklists.shark.controllers_section.cell_one_date_field.error.is_required",
-  }),
-  cell_two_installation_date_field: z.date({
-    required_error: "rebreather_checklists.shark.controllers_section.cell_two_date_field.error.is_required",
-  }),
-  cell_three_installation_date_field: z.date({
-    required_error: "rebreather_checklists.shark.controllers_section.cell_three_date_field.error.is_required",
-  }),
-  // ---
   check_dive_parameters: z.literal(true, {
     errorMap: () => ({
       message: "rebreather_checklists.shark.controllers_section.check_dive_parameters_step.error.is_required"
