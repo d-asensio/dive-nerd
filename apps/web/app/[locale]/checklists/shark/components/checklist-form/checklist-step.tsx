@@ -79,6 +79,7 @@ export function ChecklistStep<
                     <div>
                       <Switch
                         ref={field.ref}
+                        variant="success"
                         checked={field.value}
                         disabled={disabled}
                         onCheckedChange={field.onChange}
