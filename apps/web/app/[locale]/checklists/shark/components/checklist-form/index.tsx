@@ -4,6 +4,11 @@ import type {FieldErrors} from "react-hook-form";
 import * as React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useQueryStates} from "nuqs";
+import {parseAsFloat, parseAsInteger, parseAsIsoDateTime} from "nuqs/parsers";
+import { sub } from "date-fns";
+
+import {useScopedI18n} from "@/locales/client";
 
 import {toast} from "@/components/ui/use-toast";
 import {Button} from "@/components/ui/button";
@@ -21,28 +26,42 @@ import {OxygenCalibrationChecklistSection} from "./sections/oxygen-calibration-c
 import {DiluentCalibrationChecklistSection} from "./sections/diluent-calibration-checklist-section";
 import {BailoutChecklistSection} from "./sections/bailout-checklist-section";
 import {GeneralChecksChecklistSection} from "./sections/general-checks-checklist-section";
-import {useScopedI18n} from "@/locales/client";
+
 
 export function ChecklistForm() {
   const t = useScopedI18n("rebreather_checklists.shark.confirmation")
+
+  const [formInitialValues, setFormQueryStringValues] = useQueryStates(
+    {
+      internal_battery_volts_field: parseAsFloat.withDefault(0),
+      external_battery_volts_field: parseAsFloat.withDefault(0),
+      cell_one_millivolts_field: parseAsFloat.withDefault(0),
+      cell_two_millivolts_field: parseAsFloat.withDefault(0),
+      cell_three_millivolts_field: parseAsFloat.withDefault(0),
+      carbon_dioxide_absorbent_remaining_time_field: parseAsInteger.withDefault(0),
+      oxygen_percentage_reading_field: parseAsInteger.withDefault(0),
+      oxygen_pressure_field: parseAsInteger.withDefault(0),
+      diluent_percentage_reading_field: parseAsInteger.withDefault(0),
+      diluent_pressure_field: parseAsInteger.withDefault(0),
+      cell_one_installation_date_field: parseAsIsoDateTime.withDefault(sub(new Date(), { months: 3 })),
+      cell_two_installation_date_field: parseAsIsoDateTime.withDefault(sub(new Date(), { months: 3 })),
+      cell_three_installation_date_field: parseAsIsoDateTime.withDefault(sub(new Date(), { months: 3 })),
+    },
+    {
+      history: 'push'
+    }
+  )
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      internal_battery_volts_field: 0,
-      external_battery_volts_field: 0,
-      cell_one_millivolts_field: 0,
-      cell_two_millivolts_field: 0,
-      cell_three_millivolts_field: 0,
-      carbon_dioxide_absorbent_remaining_time_field: 0,
-      oxygen_percentage_reading_field: 0,
-      oxygen_pressure_field: 0,
-      diluent_percentage_reading_field: 0,
-      diluent_pressure_field: 0
-    }
+    defaultValues: formInitialValues
   })
 
   function onSubmitValid(data: FormValues) {
     console.log(data)
+
+    setFormQueryStringValues(data)
+
     toast({
       title: t('success_toast.title'),
     })

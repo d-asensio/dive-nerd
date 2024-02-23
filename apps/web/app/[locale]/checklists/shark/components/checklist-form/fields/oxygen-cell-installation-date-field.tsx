@@ -3,10 +3,11 @@
 import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 import * as React from "react";
 
-import {format} from "date-fns"
+import {format, sub} from "date-fns"
 import {CalendarIcon} from "lucide-react"
 
 import {cn} from "@/lib/utils"
+import {useI18n} from "@/locales/client";
 
 import {Button} from "@/components/ui/button"
 import {Calendar} from "@/components/ui/calendar"
@@ -15,14 +16,12 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {useI18n} from "@/locales/client";
 
 type OxygenCellInstallationDateFieldProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -69,7 +68,7 @@ export function OxygenCellInstallationDateField<
                 selected={field.value}
                 onSelect={field.onChange}
                 disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
+                  date > new Date() || date < sub(new Date(), { months: 6 })
                 }
                 initialFocus
               />

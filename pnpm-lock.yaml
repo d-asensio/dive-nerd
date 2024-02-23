@@ -167,6 +167,9 @@ importers:
       next-mdx-remote:
         specifier: ^4.4.1
         version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
+      nuqs:
+        specifier: ^1.17.0
+        version: 1.17.0(next@14.1.0)
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -6813,6 +6816,10 @@ packages:
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: false
+
   /mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -6935,6 +6942,15 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-key: 3.1.1
+    dev: false
+
+  /nuqs@1.17.0(next@14.1.0):
+    resolution: {integrity: sha512-Lp2qLETMb7AAYhDtRtx20oAZNkYYTPApZcaX7Q5nQz7bfy893TCIe92IYVIfl9ZUqQLTsl9855KGEsA57dylPQ==}
+    peerDependencies:
+      next: '>=13.4 <14.0.2 || ^14.0.3'
+    dependencies:
+      mitt: 3.0.1
+      next: 14.1.0(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /oauth4webapi@2.10.3:
