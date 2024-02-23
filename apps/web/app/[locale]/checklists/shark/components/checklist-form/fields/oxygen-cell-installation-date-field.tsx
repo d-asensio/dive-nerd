@@ -66,7 +66,7 @@ export function OxygenCellInstallationDateField<
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={value => field.onChange(value || null)}
                 disabled={(date) =>
                   date > new Date() || date < sub(new Date(), { months: 6 })
                 }
