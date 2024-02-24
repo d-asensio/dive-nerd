@@ -6,7 +6,10 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules",
+    "db:generate": "dotenv -e .env.local -- turbo run db:generate",
+    "db:push": "dotenv -e .env.local -- turbo run db:push",
+    "db:studio": "dotenv -e .env.local -- turbo run db:studio"
   },
   "devDependencies": {
     "turbo": "latest",
