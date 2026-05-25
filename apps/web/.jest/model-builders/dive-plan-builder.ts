@@ -12,6 +12,10 @@ export function divePlanBuilder() {
   let divePlan: DivePlanState = {
     descentRate: 10,
     ascentRate: 9,
+    gradientFactorLow: 0.3,
+    gradientFactorHigh: 0.85,
+    switchAtMod: true,
+    lastStopDepth: 6,
     diveLevelsMap: {},
     diveLevelsIdList: []
   }

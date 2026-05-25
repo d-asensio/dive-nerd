@@ -6,6 +6,10 @@ import {NIL} from "uuid";
 interface DivePlanActions {
   setDescentRate: (descentRate: number) => void
   setAscentRate: (ascentRate: number) => void
+  setGradientFactorLow: (value: number) => void
+  setGradientFactorHigh: (value: number) => void
+  setSwitchAtMod: (value: boolean) => void
+  setLastStopDepth: (value: number) => void
   addDiveLevel: (levelId: string, level: DivePlanLevel) => void
   updateDiveLevel: (levelId: string, newProps: Partial<DivePlanLevel>) => void
   removeDiveLevel: (levelId: string) => void
@@ -33,6 +37,22 @@ export const createDivePlanSlice =
       setAscentRate: ascentRate =>
         set(state => {
           state.ascentRate = ascentRate
+        }),
+      setGradientFactorLow: value =>
+        set(state => {
+          state.gradientFactorLow = value
+        }),
+      setGradientFactorHigh: value =>
+        set(state => {
+          state.gradientFactorHigh = value
+        }),
+      setSwitchAtMod: value =>
+        set(state => {
+          state.switchAtMod = value
+        }),
+      setLastStopDepth: value =>
+        set(state => {
+          state.lastStopDepth = value
         }),
       addDiveLevel: (levelId, level) => {
         set(state => {

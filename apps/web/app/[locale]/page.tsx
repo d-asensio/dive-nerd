@@ -23,6 +23,8 @@ import {
 import {
   DivePlannerDisclaimerAlert
 } from "@/components/app/dive-planner-disclaimer-alert";
+import {DecompressionSummary} from "@/components/app/decompression-summary";
+import {DiveMetricsCards} from "@/components/app/dive-metrics-cards";
 
 export default async function Home() {
   return (
@@ -30,6 +32,7 @@ export default async function Home() {
       <div className="container p-6 space-y-4">
         <DivePlannerDisclaimerAlert />
         <div className="gap-6 flex flex-col-reverse lg:flex-col">
+          <DiveMetricsCards/>
           <Tabs defaultValue="profile">
             <TabsList className="grid grid-cols-3 max-w-xl">
               <TabsTrigger value="profile">Profile</TabsTrigger>
@@ -73,7 +76,9 @@ export default async function Home() {
             <Card className="overflow-x-auto">
               <CardHeader>
                 <CardTitle>Decompression Profile</CardTitle>
-                <CardDescription>25 minutes</CardDescription>
+                <CardDescription>
+                  <DecompressionSummary/>
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <DecompressionTable/>
