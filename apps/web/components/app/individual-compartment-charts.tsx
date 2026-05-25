@@ -12,8 +12,10 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
+import {useI18n} from "@/locales/client"
 
 export function IndividualCompartmentCharts() {
+  const t = useI18n()
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
@@ -45,7 +47,7 @@ export function IndividualCompartmentCharts() {
         <CarouselNext />
       </Carousel>
       <div className="py-2 text-center text-sm text-muted-foreground">
-        Compartment {current} of {count}
+        {t('planner.chart.compartment_counter', { current, total: count })}
       </div>
     </div>
   )

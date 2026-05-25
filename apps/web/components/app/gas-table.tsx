@@ -18,8 +18,10 @@ import {Separator} from "@/components/ui/separator";
 import {AddGasDropdown} from "@/components/app/add-gas-dropdown";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
 import {Switch} from "@/components/ui/switch";
+import {useI18n} from "@/locales/client";
 
 const GasRow = React.memo(function GasRow({ id }: { id: string }) {
+  const t = useI18n()
   const isFirst = useSelector(isFirstGasSelector, id)
   const gas = useSelector(gasByIdSelector, id)
 
@@ -90,10 +92,10 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           </TooltipTrigger>
           <TooltipContent>
             {isFirst
-              ? 'First gas cannot be marked as a decompression gas'
+              ? t('planner.gases.first_is_deco_disabled')
               : gas.isDecoGas
-                ? 'Mark as bottom gas'
-                : 'Mark as decompression gas'}
+                ? t('planner.gases.mark_as_bottom')
+                : t('planner.gases.mark_as_deco')}
           </TooltipContent>
         </Tooltip>
       </TableCell>
@@ -114,8 +116,8 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           </TooltipTrigger>
           <TooltipContent>
             {isFirst
-              ? 'First gas cannot be removed'
-              : 'Remove gas'}
+              ? t('planner.gases.first_remove_disabled')
+              : t('planner.gases.remove_tooltip')}
           </TooltipContent>
         </Tooltip>
       </TableCell>
@@ -141,21 +143,16 @@ const GasTableBody = () => {
 }
 
 export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const t = useI18n()
   return (
     <div>
       <Table {...props}>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[300px]">
-              Gas
-            </TableHead>
+            <TableHead className="w-[300px]">{t('planner.gases.gas')}</TableHead>
             <TableHead className="w-0"/>
-            <TableHead className='w-full'>
-              Is deco gas
-            </TableHead>
-            <TableHead className='text-right'>
-              MOD
-            </TableHead>
+            <TableHead className='w-full'>{t('planner.gases.is_deco_gas')}</TableHead>
+            <TableHead className='text-right'>{t('planner.gases.mod')}</TableHead>
             <TableHead className="w-0"/>
           </TableRow>
         </TableHeader>

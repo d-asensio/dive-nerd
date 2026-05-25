@@ -77,10 +77,8 @@ export function OxygenCellInstallationDateField<
           </Popover>
           {error && (
             <div className="text-sm font-medium text-destructive">
-              {t(
-                  // @ts-ignore
-                  error.message
-              )}
+              {/* @ts-expect-error error.message is a dynamic locale key */}
+              {t(error.message, {})}
             </div>
           )}
         </FormItem>

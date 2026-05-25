@@ -11,6 +11,7 @@ import {
 } from "@/utils/calculate-dive-profile";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
+import {useI18n} from "@/locales/client";
 
 const maxValueLineEq = ({ coefficientA: a, coefficientB: b, ambientPressure: Pa }: {
   coefficientA: number,
@@ -64,6 +65,7 @@ const gradientFactorsCeilingLineEq = ({ surfaceAmbientPressure: Ps,  ambientPres
 export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }: React.HTMLAttributes<HTMLDivElement> & {
   compartmentId: number
 }) {
+  const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
   const intervals = calculateDiveProfile(diveIntervals)
 
@@ -250,7 +252,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Ambient pressure (in bar)",
+          legend: t('planner.chart.axis.ambient_pressure_bar'),
           legendOffset: 30,
           legendPosition: "start"
         }}
@@ -258,7 +260,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Inert gas load (in bar)",
+          legend: t('planner.chart.axis.inert_gas_load_bar'),
           legendOffset: -30,
           legendPosition: "start"
         }}

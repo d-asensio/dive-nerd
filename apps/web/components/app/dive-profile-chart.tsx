@@ -7,8 +7,10 @@ import {cn} from "@/lib/utils";
 import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
+import {useI18n} from "@/locales/client";
 
 const PointTooltip = ({ point }: PointTooltipProps) => {
+  const t = useI18n()
   return (
       <Tooltip open delayDuration={0}>
         <TooltipTrigger asChild>
@@ -18,10 +20,10 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
           <TooltipContent asChild>
             <div className='pointer-events-none'>
               <p>
-                <span className="font-bold">Depth:</span> {point.data.yFormatted} m
+                <span className="font-bold">{t('planner.chart.tooltip.depth')}:</span> {point.data.yFormatted} m
               </p>
               <p>
-                <span className="font-bold">Time:</span> {point.data.xFormatted} min.
+                <span className="font-bold">{t('planner.chart.tooltip.time')}:</span> {point.data.xFormatted} min.
               </p>
             </div>
           </TooltipContent>
@@ -31,6 +33,7 @@ const PointTooltip = ({ point }: PointTooltipProps) => {
 }
 
 export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
+  const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
 
   return (
@@ -72,7 +75,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Time (in minutes)",
+            legend: t('planner.chart.axis.time_minutes'),
             legendOffset: 40,
             legendPosition: "start"
           }}
@@ -80,7 +83,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Depth (in meters)",
+            legend: t('planner.chart.axis.depth_meters'),
             legendOffset: -40,
             legendPosition: "start"
           }}

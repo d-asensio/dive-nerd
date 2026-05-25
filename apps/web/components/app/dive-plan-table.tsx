@@ -19,12 +19,14 @@ import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
 import {BottomGasSelector} from "@/components/app/bottom-gas-selector";
 import {gasMODSelector} from "@/state/dive-gases/selectors";
+import {useI18n} from "@/locales/client";
 
 interface PlanLevelRow {
   id: string;
 }
 
 const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
+  const t = useI18n()
   const isFirst = useSelector(isFirstDiveLevelSelector, id)
   const { depth, duration, gasId } = useSelector(diveLevelByIdSelector, id)
   const gasMOD = useSelector(gasMODSelector, gasId)
@@ -37,8 +39,8 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
       id: 'GAS_MOD_LOWER_THAN_DEPTH',
       message: (
         <>
-          The maximum operating depth for the selected gas
-          is <span className="font-bold">{gasMOD} meters</span>.
+          {t('planner.levels.gas_mod_warning_prefix')}{' '}
+          <span className="font-bold">{gasMOD} {t('planner.levels.gas_mod_warning_suffix')}</span>.
         </>
       )
     }
@@ -120,8 +122,8 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
           </TooltipTrigger>
           <TooltipContent>
             {isFirst
-              ? 'First depth level can not be removed'
-              : 'Remove depth level'}
+              ? t('planner.levels.first_remove_disabled')
+              : t('planner.levels.remove_tooltip')}
           </TooltipContent>
         </Tooltip>
       </TableCell>
@@ -147,6 +149,7 @@ const DivePlanTableBody = () => {
 }
 
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const t = useI18n()
   const addDiveLevel = useStore.use.addDiveLevel()
 
   const onAddLevelButtonClick = React.useCallback(() => {
@@ -165,15 +168,9 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>
-              Depth
-            </TableHead>
-            <TableHead>
-              Duration
-            </TableHead>
-            <TableHead className="w-[200px]">
-              Gas
-            </TableHead>
+            <TableHead>{t('planner.levels.depth')}</TableHead>
+            <TableHead>{t('planner.levels.duration')}</TableHead>
+            <TableHead className="w-[200px]">{t('planner.levels.gas')}</TableHead>
             <TableHead className="w-0"/>
           </TableRow>
         </TableHeader>
@@ -183,7 +180,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <div className="text-right w-full p-4">
         <Button variant="ghost" onClick={onAddLevelButtonClick}>
           <Plus className="mr-2 h-4 w-4"/>
-          Add level
+          {t('planner.levels.add_button')}
         </Button>
       </div>
     </div>

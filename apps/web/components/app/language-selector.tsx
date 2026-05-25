@@ -18,15 +18,13 @@ export const LanguageSelector = () => {
         <SelectValue/>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">
-          English
-        </SelectItem>
-        <SelectItem value="es">
-          Español
-        </SelectItem>
-        <SelectItem value="ca">
-          Català
-        </SelectItem>
+        <SelectItem value="en">English</SelectItem>
+        <SelectItem value="es">Español</SelectItem>
+        <SelectItem value="ca">Català</SelectItem>
+        <SelectItem value="de">Deutsch</SelectItem>
+        <SelectItem value="fr">Français</SelectItem>
+        <SelectItem value="it">Italiano</SelectItem>
+        <SelectItem value="pl">Polski</SelectItem>
       </SelectContent>
     </Select>
   )

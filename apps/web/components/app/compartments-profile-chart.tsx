@@ -7,8 +7,10 @@ import {cn} from "@/lib/utils";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {calculateDiveProfile} from "@/utils/calculate-dive-profile";
+import {useI18n} from "@/locales/client";
 
 export function CompartmentsProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
+  const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
   const intervals = calculateDiveProfile(diveIntervals)
 
@@ -48,7 +50,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Time (in minutes)",
+            legend: t('planner.chart.axis.time_minutes'),
             legendOffset: 40,
             legendPosition: "start"
           }}
@@ -56,7 +58,7 @@ export function CompartmentsProfileChart({className, ...props}: React.HTMLAttrib
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Pressure (in bars)",
+            legend: t('planner.chart.axis.pressure_bars'),
             legendOffset: -40,
             legendPosition: "start"
           }}

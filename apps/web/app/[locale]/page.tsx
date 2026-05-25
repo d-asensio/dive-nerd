@@ -25,8 +25,10 @@ import {
 } from "@/components/app/dive-planner-disclaimer-alert";
 import {DecompressionSummary} from "@/components/app/decompression-summary";
 import {DiveMetricsCards} from "@/components/app/dive-metrics-cards";
+import {getI18n} from "@/locales/server";
 
 export default async function Home() {
+  const t = await getI18n()
   return (
     <main>
       <div className="container p-6 space-y-4">
@@ -35,10 +37,9 @@ export default async function Home() {
           <DiveMetricsCards/>
           <Tabs defaultValue="profile">
             <TabsList className="grid grid-cols-3 max-w-xl">
-              <TabsTrigger value="profile">Profile</TabsTrigger>
-              <TabsTrigger value="compartments">Compartments</TabsTrigger>
-              <TabsTrigger value="individual-compartments">Individual
-                compartments</TabsTrigger>
+              <TabsTrigger value="profile">{t('planner.tabs.profile')}</TabsTrigger>
+              <TabsTrigger value="compartments">{t('planner.tabs.compartments')}</TabsTrigger>
+              <TabsTrigger value="individual-compartments">{t('planner.tabs.individual_compartments')}</TabsTrigger>
             </TabsList>
             <TabsContent value="profile">
               <div className="grid w-full">
@@ -57,8 +58,8 @@ export default async function Home() {
           <div className='grid lg:grid-cols-2 xl:grid-cols-3'>
             <Tabs defaultValue="levels" className="xl:col-span-2 min-w-0">
               <TabsList className="grid grid-cols-3 max-w-lg mr-16 mb-4">
-                <TabsTrigger value="levels">Levels</TabsTrigger>
-                <TabsTrigger value="gases">Gases</TabsTrigger>
+                <TabsTrigger value="levels">{t('planner.tabs.levels')}</TabsTrigger>
+                <TabsTrigger value="gases">{t('planner.tabs.gases')}</TabsTrigger>
                 <TabsTrigger value="config">
                   <Settings className="w-4 h-4"/>
                 </TabsTrigger>
@@ -75,7 +76,7 @@ export default async function Home() {
             </Tabs>
             <Card className="overflow-x-auto">
               <CardHeader>
-                <CardTitle>Decompression Profile</CardTitle>
+                <CardTitle>{t('planner.decompression.title')}</CardTitle>
                 <CardDescription>
                   <DecompressionSummary/>
                 </CardDescription>

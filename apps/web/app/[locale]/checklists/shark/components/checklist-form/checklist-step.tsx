@@ -66,10 +66,8 @@ export function ChecklistStep<
                 <Label className="text-base">{description}</Label>
                 {fieldState.error && (
                   <div className="text-sm font-medium text-destructive">
-                    {t(
-                      // @ts-ignore
-                      fieldState.error.message
-                    )}
+                    {/* @ts-expect-error error.message is a dynamic locale key */}
+                    {t(fieldState.error.message, {})}
                   </div>
                 )}
               </div>

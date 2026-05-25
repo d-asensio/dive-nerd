@@ -4,15 +4,13 @@ import * as React from "react"
 
 import {useSelector} from "@/state/useSelector"
 import {totalDecoMinutesSelector} from "@/state/dive-plan/selectors"
-
-const formatDuration = (minutes: number): string => {
-  if (minutes <= 0) return "No decompression required"
-  if (minutes < 1)  return "< 1 minute"
-  return `${Math.ceil(minutes)} minutes`
-}
+import {useI18n} from "@/locales/client"
 
 export function DecompressionSummary() {
+  const t = useI18n()
   const totalDecoMinutes = useSelector(totalDecoMinutesSelector)
 
-  return <>{formatDuration(totalDecoMinutes)}</>
+  if (totalDecoMinutes <= 0) return <>{t('planner.decompression.no_deco_required')}</>
+  if (totalDecoMinutes < 1)  return <>{t('planner.units.minutes_long_less_than_one')}</>
+  return <>{t('planner.units.minutes_long', { count: Math.ceil(totalDecoMinutes) })}</>
 }

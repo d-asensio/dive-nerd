@@ -20,9 +20,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {Button, buttonVariants} from "@/components/ui/button"
 import {LanguageSelector} from "@/components/app/language-selector";
+import {getI18n} from "@/locales/server";
 
 export async function UserNav() {
   const session = await getSession();
+  const t = await getI18n()
 
   if (!session?.user) {
     return (
@@ -30,7 +32,7 @@ export async function UserNav() {
         href="/api/auth/login"
         className={buttonVariants({ variant: "ghost" })}
       >
-        Login
+        {t('nav.login')}
       </a>
     )
   }
@@ -58,7 +60,7 @@ export async function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <a href="/api/auth/logout">
-            Log out
+            {t('nav.logout')}
           </a>
         </DropdownMenuItem>
       </DropdownMenuContent>

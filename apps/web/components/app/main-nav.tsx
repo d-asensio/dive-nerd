@@ -1,9 +1,14 @@
+"use client"
+
 import * as React from "react";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
-import {Badge} from "@/components/ui/badge";
+
+import {useI18n} from "@/locales/client";
 
 export const MainNav = ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
+  const t = useI18n()
+
   return (
     <nav
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
@@ -13,13 +18,13 @@ export const MainNav = ({ className, ...props }: React.HTMLAttributes<HTMLElemen
         href="/"
         className="text-sm whitespace-nowrap font-medium transition-colors hover:text-primary"
       >
-        Planner
+        {t('nav.planner')}
       </Link>
       <Link
         href="/learn/gas-planning-guide"
         className="text-sm whitespace-nowrap font-medium transition-colors hover:text-primary"
       >
-        Learn
+        {t('nav.learn')}
       </Link>
     </nav>
   )

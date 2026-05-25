@@ -10,6 +10,7 @@ import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
 import {Toaster} from "@/components/ui/toaster";
 import {Footer} from "@/components/app/footer";
+import {I18nProviderClient} from "@/locales/client";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,12 +33,14 @@ export default async function RootLayout({ children, params: { locale } }: Layou
     <html lang={locale}>
     <UserProvider>
       <body className={inter.className}>
-      <TooltipProvider>
-        <TopBar/>
-        {children}
-        <Footer/>
-      </TooltipProvider>
-      <Toaster/>
+      <I18nProviderClient locale={locale}>
+        <TooltipProvider>
+          <TopBar/>
+          {children}
+          <Footer/>
+        </TooltipProvider>
+        <Toaster/>
+      </I18nProviderClient>
       </body>
     </UserProvider>
     </html>
