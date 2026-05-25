@@ -1,4 +1,10 @@
-export  { buhlmannCompartments } from './buhlmannCompartments'
+export { buhlmannCompartments } from './buhlmannCompartments'
+export { buhlmannMValue } from './m-value'
+export { coupledBuhlmannCoefficients } from './coupled-buhlmann-coefficients'
+export { gradientFactorAt } from './gradient-factor'
+export type { GradientFactorBounds } from './gradient-factor'
+export { compartmentCeilingAmbientPressure } from './compartment-ceiling'
+export { divingCeilingAmbientPressure } from './diving-ceiling'
 
 /**
  * Gravitational acceleration in meters * second^2
