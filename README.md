@@ -14,7 +14,7 @@ dive-nerd/
 
 ## Prerequisites
 
-- Node.js `18.17.0` (managed via [Volta](https://volta.sh) — `volta install node@18.17.0`)
+- Node.js `22.x` LTS (managed via [Volta](https://volta.sh) — `volta install node@22.12.0`, or via [nvm](https://github.com/nvm-sh/nvm) using the included `.nvmrc`)
 - pnpm `8.15.3` (`volta install pnpm@8.15.3`)
 - A Postgres database (local Docker, [Neon](https://neon.tech), [Supabase](https://supabase.com), or [Vercel Postgres](https://vercel.com/storage/postgres))
 - An [Auth0](https://manage.auth0.com) tenant + Application (Regular Web App)
