@@ -22,8 +22,25 @@ import {Button, buttonVariants} from "@/components/ui/button"
 import {LanguageSelector} from "@/components/app/language-selector";
 import {getI18n} from "@/locales/server";
 
+/**
+ * Returns the current Auth0 session, or `null` if Auth0 isn't configured
+ * (typically in local dev without `.env.local`). The SDK throws synchronously
+ * with `"secret" is required` when env vars are missing — we swallow that
+ * specific case so the planner still renders without auth credentials.
+ */
+async function safeGetSession() {
+  try {
+    return await getSession()
+  } catch (error) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('Auth0 session unavailable, rendering logged-out state:', (error as Error).message)
+    }
+    return null
+  }
+}
+
 export async function UserNav() {
-  const session = await getSession();
+  const session = await safeGetSession()
   const t = await getI18n()
 
   if (!session?.user) {
