@@ -67,7 +67,13 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
 }) {
   const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
-  const intervals = calculateDiveProfile(diveIntervals)
+  const gfLow = useSelector(state => state.gradientFactorLow)
+  const gfHigh = useSelector(state => state.gradientFactorHigh)
+  const intervals = calculateDiveProfile(diveIntervals, {
+    gfLow,
+    gfHigh,
+    firstStopAmbientPressure: surfaceAmbientPressure, // placeholder — chart ignores ceiling
+  })
 
   const {N2} = buhlmannCompartments[compartmentId]
 

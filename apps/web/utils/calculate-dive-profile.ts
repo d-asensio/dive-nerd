@@ -2,6 +2,7 @@ import {
   alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
   buhlmannCompartments,
+  CompartmentInertGasLoad,
   fromDepthToHydrostaticPressure,
   getSurfaceSaturatedCompartmentInertGasLoads,
   inertGasTimeConstant,
@@ -9,7 +10,7 @@ import {
   schreinerEquation
 } from "dive-physics";
 import {DiveSegment} from "dive-planner";
-import { map, pipe} from "ramda";
+import { pipe} from "ramda";
 
 /**
  * Dive variables
@@ -104,57 +105,89 @@ const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentI
   surfaceAmbientPressure,
   waterVaporPressure
 })
-const calculateCompartmentInertGasLoad = (intervals: DiveProfileIntervalWithAlveolarInertGasPressures[]) =>
-  intervals.reduce((intervals, interval) => {
-    const lastInterval = intervals[intervals.length - 1]
-    const intervalTime = interval.finalTime - interval.initialTime
+export interface CalculateDiveProfileOptions {
+  gfLow: number
+  gfHigh: number
+  firstStopAmbientPressure: number
+}
 
-    const nextCumulativeCompartmentInertGasLoad = lastInterval.compartmentInertGasLoads.map((compartmentInertGasLoads, compartmentId) => ({
-      N2: schreinerEquation({
-        initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.N2,
-        initialCompartmentGasPartialPressure: compartmentInertGasLoads.N2,
-        gasChangeRate: inspiredGasChangeRate({
-          descentRate: interval.descentRate,
-          inertGasFraction: 0.79
-        }),
-        gasTimeConstant: inertGasTimeConstant({
-          inertGasHalfTime: buhlmannCompartments[compartmentId].N2.halfTime
-        }),
-        intervalTime
-      }),
-      He: schreinerEquation({
-        initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.He,
-        initialCompartmentGasPartialPressure: compartmentInertGasLoads.He,
-        gasChangeRate: inspiredGasChangeRate({
-          descentRate: interval.descentRate,
-          inertGasFraction: 0
-        }),
-        gasTimeConstant: inertGasTimeConstant({
-          inertGasHalfTime: buhlmannCompartments[compartmentId].He.halfTime
-        }),
-        intervalTime
-      }),
-    }))
+export interface DiveProfileSample {
+  x: number                                   // time in minutes
+  y: number                                   // ambient pressure in bar (legacy nivo field name)
+  depth: number                               // meters
+  ambientPressure: number                     // bar
+  compartmentInertGasLoads: CompartmentInertGasLoad[]
+  ceilingDepth: number                        // meters, clamped to ≥ 0
+}
 
-    return [
-        ...intervals,
+const calculateCompartmentInertGasLoad = (
+  intervals: DiveProfileIntervalWithAlveolarInertGasPressures[],
+): Omit<DiveProfileSample, 'ceilingDepth'>[] =>
+  intervals.reduce<Omit<DiveProfileSample, 'ceilingDepth'>[]>(
+    (acc, interval) => {
+      const lastSample = acc[acc.length - 1]
+      const intervalTime = interval.finalTime - interval.initialTime
+
+      const nextCompartmentInertGasLoads = lastSample.compartmentInertGasLoads.map(
+        (compartmentInertGasLoads, compartmentId) => ({
+          N2: schreinerEquation({
+            initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.N2,
+            initialCompartmentGasPartialPressure: compartmentInertGasLoads.N2,
+            gasChangeRate: inspiredGasChangeRate({
+              descentRate: interval.descentRate,
+              inertGasFraction: 0.79,
+            }),
+            gasTimeConstant: inertGasTimeConstant({
+              inertGasHalfTime: buhlmannCompartments[compartmentId].N2.halfTime,
+            }),
+            intervalTime,
+          }),
+          He: schreinerEquation({
+            initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.He,
+            initialCompartmentGasPartialPressure: compartmentInertGasLoads.He,
+            gasChangeRate: inspiredGasChangeRate({
+              descentRate: interval.descentRate,
+              inertGasFraction: 0,
+            }),
+            gasTimeConstant: inertGasTimeConstant({
+              inertGasHalfTime: buhlmannCompartments[compartmentId].He.halfTime,
+            }),
+            intervalTime,
+          }),
+        }),
+      )
+
+      return [
+        ...acc,
         {
-          compartmentInertGasLoads: nextCumulativeCompartmentInertGasLoad,
+          compartmentInertGasLoads: nextCompartmentInertGasLoads,
           ambientPressure: interval.finalAmbientPressure,
+          depth: interval.finalDepth,
           x: interval.finalTime,
-          y: interval.finalAmbientPressure
-        }
+          y: interval.finalAmbientPressure,
+        },
       ]
-  }, [
-    {
-      compartmentInertGasLoads: surfaceSaturatedCompartmentInertGasLoads,
-      ambientPressure: surfaceAmbientPressure,
-      x: 0,
-      y: surfaceAmbientPressure
-    }
-  ])
-export const calculateDiveProfile = pipe(
-  interpolateIntervals,
-  map(calculateInterval),
-  calculateCompartmentInertGasLoad
-)
+    },
+    [
+      {
+        compartmentInertGasLoads: surfaceSaturatedCompartmentInertGasLoads,
+        ambientPressure: surfaceAmbientPressure,
+        depth: 0,
+        x: 0,
+        y: surfaceAmbientPressure,
+      },
+    ],
+  )
+
+export const calculateDiveProfile = (
+  segments: DiveSegment[],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- consumed in Task 3
+  _options: CalculateDiveProfileOptions,
+): DiveProfileSample[] => {
+  const intervals = interpolateIntervals(segments)
+  const enriched = intervals.map(calculateInterval)
+  const samplesWithoutCeiling = calculateCompartmentInertGasLoad(enriched)
+
+  // Ceiling pass arrives in Task 3 — placeholder of 0 keeps the type honest.
+  return samplesWithoutCeiling.map(sample => ({ ...sample, ceilingDepth: 0 }))
+}

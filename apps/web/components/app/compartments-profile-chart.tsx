@@ -6,13 +6,19 @@ import {ResponsiveLine} from '@nivo/line'
 import {cn} from "@/lib/utils";
 import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
-import {calculateDiveProfile} from "@/utils/calculate-dive-profile";
+import {calculateDiveProfile, surfaceAmbientPressure} from "@/utils/calculate-dive-profile";
 import {useI18n} from "@/locales/client";
 
 export function CompartmentsProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
-  const intervals = calculateDiveProfile(diveIntervals)
+  const gfLow = useSelector(state => state.gradientFactorLow)
+  const gfHigh = useSelector(state => state.gradientFactorHigh)
+  const intervals = calculateDiveProfile(diveIntervals, {
+    gfLow,
+    gfHigh,
+    firstStopAmbientPressure: surfaceAmbientPressure, // placeholder — chart ignores ceiling
+  })
 
   return (
     <div
