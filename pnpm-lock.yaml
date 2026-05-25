@@ -257,6 +257,9 @@ importers:
       '@types/ramda':
         specifier: ^0.29.5
         version: 0.29.5
+      dive-physics:
+        specifier: workspace:*
+        version: link:../dive-physics
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.6.3)
@@ -3182,6 +3185,7 @@ packages:
 
   /acorn-import-assertions@1.9.0(acorn@8.10.0):
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
     dependencies:
