@@ -4,13 +4,15 @@ import {useEffect, useRef} from 'react'
 import { Engine, Render, Bodies, World, Body, Events } from 'matter-js'
 
 export function BuoyancySimulator() {
-  const scene = useRef<HTMLElement>()
+  const scene = useRef<HTMLDivElement>(null)
   const engine = useRef(Engine.create())
   const waterLevel = 600
 
   useEffect(() => {
     const cw = document.body.clientWidth
     const ch = waterLevel
+
+    if (!scene.current) return
 
     const render = Render.create({
       element: scene.current,
@@ -92,7 +94,6 @@ export function BuoyancySimulator() {
         width: '100px',
         height: '600px'
     }}
-      // @ts-ignore
       ref={scene}
     />
   )

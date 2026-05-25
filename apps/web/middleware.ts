@@ -1,15 +1,23 @@
-import { createI18nMiddleware } from 'next-international/middleware'
-import { NextRequest } from 'next/server'
+import { createI18nMiddleware } from "next-international/middleware";
+import type { NextRequest } from "next/server";
+
+import { auth0 } from "@/lib/auth0";
 
 const I18nMiddleware = createI18nMiddleware({
-  locales: ['en', 'es', 'ca', 'de', 'fr', 'it', 'pl'],
-  defaultLocale: 'en'
-})
+  locales: ["en", "es", "ca", "de", "fr", "it", "pl"],
+  defaultLocale: "en",
+});
 
-export function middleware(request: NextRequest) {
-  return I18nMiddleware(request)
+export async function middleware(request: NextRequest) {
+  const authResponse = await auth0.middleware(request);
+
+  if (request.nextUrl.pathname.startsWith("/auth")) {
+    return authResponse;
+  }
+
+  return I18nMiddleware(request);
 }
 
 export const config = {
-  matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)']
-}
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|robots.txt|.*\\..*).*)"],
+};

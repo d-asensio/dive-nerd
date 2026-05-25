@@ -4,8 +4,7 @@ import type {FieldErrors} from "react-hook-form";
 import * as React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useQueryStates} from "nuqs";
-import {parseAsFloat, parseAsInteger, parseAsIsoDateTime} from "nuqs/parsers";
+import {useQueryStates, parseAsFloat, parseAsInteger, parseAsIsoDateTime} from "nuqs";
 import { sub } from "date-fns";
 
 import {useScopedI18n} from "@/locales/client";

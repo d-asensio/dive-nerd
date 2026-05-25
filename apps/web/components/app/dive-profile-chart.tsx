@@ -9,7 +9,12 @@ import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {useI18n} from "@/locales/client";
 
-const PointTooltip = ({ point }: PointTooltipProps) => {
+type DiveProfileSeries = {
+  id: string
+  data: readonly { x: number; y: number }[]
+}
+
+const PointTooltip = ({ point }: PointTooltipProps<DiveProfileSeries>) => {
   const t = useI18n()
   return (
       <Tooltip open delayDuration={0}>

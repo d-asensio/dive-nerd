@@ -4,7 +4,7 @@ import type {PropsWithPageParams} from "@/app/types";
 import * as React from "react";
 import {PropsWithChildren} from "react";
 import {Inter} from 'next/font/google'
-import {UserProvider} from "@auth0/nextjs-auth0/client";
+import {NuqsAdapter} from 'nuqs/adapters/next/app'
 
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {TopBar} from "@/components/app/top-bar";
@@ -28,21 +28,22 @@ export const viewport: Viewport = {
 
 type LayoutProps = PropsWithChildren<PropsWithPageParams>
 
-export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
+export default async function RootLayout({ children, params }: LayoutProps) {
+  const { locale } = await params
   return (
     <html lang={locale}>
-    <UserProvider>
       <body className={inter.className}>
-      <I18nProviderClient locale={locale}>
-        <TooltipProvider>
-          <TopBar/>
-          {children}
-          <Footer/>
-        </TooltipProvider>
-        <Toaster/>
-      </I18nProviderClient>
+        <NuqsAdapter>
+          <I18nProviderClient locale={locale}>
+            <TooltipProvider>
+              <TopBar/>
+              {children}
+              <Footer/>
+            </TooltipProvider>
+            <Toaster/>
+          </I18nProviderClient>
+        </NuqsAdapter>
       </body>
-    </UserProvider>
     </html>
   )
 }

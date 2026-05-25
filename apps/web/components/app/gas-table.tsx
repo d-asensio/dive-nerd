@@ -83,12 +83,14 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
       </TableCell>
       <TableCell>
         <Tooltip>
-          <TooltipTrigger>
-            <Switch
-              disabled={isFirst}
-              checked={gas.isDecoGas}
-              onCheckedChange={handleIsDecoGasChange}
-            />
+          <TooltipTrigger asChild>
+            <div>
+              <Switch
+                disabled={isFirst}
+                checked={gas.isDecoGas}
+                onCheckedChange={handleIsDecoGasChange}
+              />
+            </div>
           </TooltipTrigger>
           <TooltipContent>
             {isFirst

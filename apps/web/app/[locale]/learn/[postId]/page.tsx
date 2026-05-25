@@ -28,8 +28,8 @@ const components = {
 }
 
 
-export default async function DocsLayout({ params: { locale, postId } }: PropsWithPageParams<{ postId: string }>) {
-  console.log(postId)
+export default async function DocsLayout({ params }: PropsWithPageParams<{ postId: string }>) {
+  const { locale, postId } = await params
   const source = getDocBySlug(postId, locale)
 
   if (!source) {

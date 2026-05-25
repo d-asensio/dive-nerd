@@ -1,5 +1,5 @@
 export interface PropsWithPageParams<T = {}> {
-  params: {
+  params: Promise<{
     locale: string
-  } & T
+  } & T>
 }

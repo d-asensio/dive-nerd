@@ -71,7 +71,7 @@ export function OxygenCellInstallationDateField<
                 disabled={(date) =>
                   date > new Date() || date < sub(new Date(), { months: 6 })
                 }
-                initialFocus
+                autoFocus
               />
             </PopoverContent>
           </Popover>

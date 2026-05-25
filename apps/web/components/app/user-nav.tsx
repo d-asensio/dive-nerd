@@ -1,4 +1,4 @@
-import {getSession} from "@auth0/nextjs-auth0";
+import {auth0} from "@/lib/auth0";
 
 import {
   Avatar,
@@ -30,7 +30,7 @@ import {getI18n} from "@/locales/server";
  */
 async function safeGetSession() {
   try {
-    return await getSession()
+    return await auth0.getSession()
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
       console.warn('Auth0 session unavailable, rendering logged-out state:', (error as Error).message)
@@ -45,8 +45,9 @@ export async function UserNav() {
 
   if (!session?.user) {
     return (
+      // eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 routes are handled by middleware, not Next pages; <Link> would bypass the OAuth redirect.
       <a
-        href="/api/auth/login"
+        href="/auth/login"
         className={buttonVariants({ variant: "ghost" })}
       >
         {t('nav.login')}
@@ -76,7 +77,8 @@ export async function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <a href="/api/auth/logout">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 routes are handled by middleware, not Next pages; <Link> would bypass the OAuth redirect. */}
+          <a href="/auth/logout">
             {t('nav.logout')}
           </a>
         </DropdownMenuItem>
