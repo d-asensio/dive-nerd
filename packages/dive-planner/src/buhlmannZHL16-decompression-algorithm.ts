@@ -25,6 +25,7 @@ import {
   DepthPressureConverter
 } from './depth-pressure-conversion'
 import { roundUpToStopGrid, nextShallowerStop } from './stop-depth'
+import { mergeConsecutiveAscents } from './merge-consecutive-ascents'
 import {
   BestDecoGasSelector,
   createBestDecoGasSelector
@@ -372,7 +373,7 @@ export const createBuhlmannZHL16Algorithm = (
 
     if (decoFirstStop <= 0) {
       const surfaceRun = appendAscentTo({ run: userRun, targetDepth: 0, gas: backGas })
-      return { intervals: surfaceRun.intervals }
+      return { intervals: mergeConsecutiveAscents(surfaceRun.intervals) }
     }
 
     // If decompression is required, the first stop is never shallower than
@@ -397,7 +398,7 @@ export const createBuhlmannZHL16Algorithm = (
       backGas
     })
 
-    return { intervals: runAfterStops.intervals }
+    return { intervals: mergeConsecutiveAscents(runAfterStops.intervals) }
   }
 
   // Legacy adapter: previous callers passed a bare `DiveSegment[]`.

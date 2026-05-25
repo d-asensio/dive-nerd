@@ -319,6 +319,29 @@ describe('Bühlmann ZH-L16C + GF — verification cases', () => {
     })
   })
 
+  it('never emits two consecutive ASCENT segments on the same gas (merged)', () => {
+    const algorithm = createBuhlmannZHL16Algorithm(
+      {},
+      {
+        ascentRate: 9,
+        gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+        availableGases: [ean50, oxygen]
+      }
+    )
+    const segments = buildSegments([{ depth: 45, duration: 25, gas: air }])
+    const profile = algorithm.calculateDiveProfileFromSegments(segments)
+
+    profile.intervals.forEach((segment, index) => {
+      const previous = profile.intervals[index - 1]
+      if (!previous) return
+      const bothAscent =
+        segment.type === DiveProfileIntervalType.ASCENT &&
+        previous.type === DiveProfileIntervalType.ASCENT
+      const sameGas = segment.gas === previous.gas
+      expect(bothAscent && sameGas).toBe(false)
+    })
+  })
+
   it('produces a final ascent ending at the surface for every dive', () => {
     const algorithm = createBuhlmannZHL16Algorithm(
       {},
