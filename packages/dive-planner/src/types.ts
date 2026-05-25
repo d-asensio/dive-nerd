@@ -15,16 +15,46 @@ export interface DivePlanSpeedOptions {
   ascentRate: number
 }
 
-// interface DivePlanAlgorithmOptions {
-//   gradientFactors: [number, number]
-// }
+export interface DivePlanAlgorithmOptions {
+  gradientFactorLow: number  // 0..1
+  gradientFactorHigh: number // 0..1
+  /**
+   * When `true` (default), the algorithm forces a procedural stop at each
+   * deco gas's MOD even if Bühlmann's ceiling would not otherwise require
+   * one there. Matches the Subsurface / MultiDeco convention
+   * ("EAN50 at 21 m, O₂ at 6 m").
+   *
+   * When `false`, gas switches happen at the first natural deco stop
+   * where the new gas is safe — which can be shallower than its MOD.
+   */
+  switchAtMod: boolean
+  /**
+   * Depth (in meters, on the 3 m stop grid) of the **last** decompression
+   * stop. Conventionally either `3` (default, universal Bühlmann) or `6`
+   * (DAN / Marroni philosophy — skip the 3 m stop because gas elimination
+   * there is marginal and the diver is in a higher-risk position).
+   *
+   * When the natural last stop would be shallower than this value, the
+   * algorithm holds longer at `lastStopDepth` (until the surface ceiling
+   * clears) and then ascends directly to the surface.
+   */
+  lastStopDepth: number
+}
+
+export interface DivePlanEnvironmentOptions {
+  surfaceAmbientPressure: number // bar
+  waterDensity: number           // kg/m³
+  waterVaporPressure: number     // bar
+}
 
 export type DivePlanOptions =
   DivePlanSpeedOptions
-// & DivePlanAlgorithmOptions
+  & Partial<DivePlanAlgorithmOptions>
+  & Partial<DivePlanEnvironmentOptions>
 
 export interface DivePlan extends DivePlanOptions {
   levels: DivePlanLevel[]
+  availableGases?: Gas[]
 }
 
 export enum DiveProfileIntervalType {
@@ -53,10 +83,6 @@ interface DiveProfileInterval {
 }
 
 export interface DiveProfile {
-  // runTime: number
-  // decoTime: number
-  // averageDepth: number
-  // intervals: DiveProfileInterval[]
   intervals: DiveSegment[]
 }
 
@@ -67,4 +93,12 @@ export interface DiveSegment {
   initialTime: number
   finalTime: number
   gas: Gas
+  /**
+   * `true` if this segment starts with a gas switch (the breathing gas
+   * differs from the previous segment's gas). The user-supplied segments
+   * produced by `levels-to-segments-interpolator` never set this flag; it
+   * is populated by the decompression algorithm for the ascent / deco-stop
+   * phase so the UI can render "switch to <gas> at <depth>" indicators.
+   */
+  isGasSwitch?: boolean
 }

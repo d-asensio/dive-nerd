@@ -1,83 +1,65 @@
-import {pipe} from "ramda";
+import { DivePlan, DiveProfile, DiveSegment } from './types'
 
-import {DivePlan, DivePlanLevel, DiveProfile, DiveSegment, Gas} from "./types";
+import { createBuhlmannZHL16Algorithm } from './buhlmannZHL16-decompression-algorithm'
+import defaultLevelsToSegmentsInterpolator from './levels-to-segments-interpolator'
 
-import buhlmannZHL16DecompressionAlgorithm from "./buhlmannZHL16-decompression-algorithm";
-import defaultLevelsToSegmentsInterpolator from "./levels-to-segments-interpolator";
+interface DecompressionAlgorithm {
+  calculateDiveProfileFromSegments: (segments: DiveSegment[]) => DiveProfile
+}
 
 interface DivePlannerDependencies {
-  decompressionAlgorithm?: typeof buhlmannZHL16DecompressionAlgorithm,
+  buildDecompressionAlgorithm?: (plan: DivePlan) => DecompressionAlgorithm
   levelsToSegmentsInterpolator?: typeof defaultLevelsToSegmentsInterpolator
 }
 
 interface DivePlanner {
-  calculateDiveProfileFromPlanV1: (configuration: DivePlan) => DiveSegment[]
-  calculateDiveProfileFromPlan: (configuration: DivePlan) => DiveProfile
+  /** @deprecated use `calculateDiveProfileFromPlan`. Retained for the legacy
+   *  fake-deco visualisation that the web app no longer uses. */
+  calculateDiveProfileFromPlanV1: (plan: DivePlan) => DiveSegment[]
+  calculateDiveProfileFromPlan: (plan: DivePlan) => DiveProfile
 }
 
-export const createDivePlanner = (dependencies: DivePlannerDependencies = {}): DivePlanner => {
+const defaultBuildDecompressionAlgorithm = (plan: DivePlan): DecompressionAlgorithm =>
+  createBuhlmannZHL16Algorithm({}, {
+    ascentRate: plan.ascentRate,
+    gradientFactors:
+      plan.gradientFactorLow !== undefined && plan.gradientFactorHigh !== undefined
+        ? { gfLow: plan.gradientFactorLow, gfHigh: plan.gradientFactorHigh }
+        : undefined,
+    environment:
+      plan.surfaceAmbientPressure !== undefined &&
+      plan.waterDensity !== undefined &&
+      plan.waterVaporPressure !== undefined
+        ? {
+            surfaceAmbientPressure: plan.surfaceAmbientPressure,
+            waterDensity: plan.waterDensity,
+            waterVaporPressure: plan.waterVaporPressure
+          }
+        : undefined,
+    availableGases: plan.availableGases,
+    switchAtMod: plan.switchAtMod,
+    lastStopDepth: plan.lastStopDepth
+  })
 
+export const createDivePlanner = (dependencies: DivePlannerDependencies = {}): DivePlanner => {
   const {
-    decompressionAlgorithm = buhlmannZHL16DecompressionAlgorithm,
+    buildDecompressionAlgorithm = defaultBuildDecompressionAlgorithm,
     levelsToSegmentsInterpolator = defaultLevelsToSegmentsInterpolator
   } = dependencies
 
-  const calculateNearestMultipleOf3 = (num: number): number => {
-    const residual = num % 3;
+  const calculateUserSegments = (plan: DivePlan): DiveSegment[] =>
+    levelsToSegmentsInterpolator.interpolate(plan.levels, {
+      descentRate: plan.descentRate,
+      ascentRate: plan.ascentRate
+    })
 
-    if (residual === 0) return num;
-
-    return residual >= 1.5 ? num - residual + 3 : num - residual;
-  };
-
-  const calculateMinimumDecoLevels = (lastDepth: number, totalTime: number, gas: Gas): DivePlanLevel[] => {
-    const initialDepth = calculateNearestMultipleOf3(Math.round(lastDepth / 2));
-
-    const levelsAbove6 = Math.floor(6 / 3) + 1;
-    const levelsBelow6 = Math.floor((initialDepth - 6) / 3) + 1;
-
-    const timeBelow6 = totalTime / 3;
-    const timeAbove6 = (2 * totalTime) / 3;
-
-    const timePerLevelAbove6 = timeAbove6 / levelsAbove6;
-    const timePerLevelBelow6 = timeBelow6 / levelsBelow6;
-
-    const decoLevelsAbove6 = Array.from({ length: levelsAbove6 }, (_, i) => ({
-      depth: 6 - i * 3,
-      duration: timePerLevelAbove6,
-      gas
-    }));
-
-    const decoLevelsBelow6 = Array.from({ length: levelsBelow6 }, (_, i) => ({
-      depth: initialDepth - i * 3,
-      duration: timePerLevelBelow6,
-      gas
-    }));
-
-    return [...decoLevelsBelow6, ...decoLevelsAbove6];
-  };
-
-  const calculateDivePlanSegments = ({ descentRate, ascentRate, levels }: DivePlan): DiveSegment[] => {
-    const totalTime = levels.reduce((acc, { duration }) => acc + duration, 0);
-    const { depth: lastDepth, gas } = levels[levels.length - 1];
-
-    const minimumDecoLevels = calculateMinimumDecoLevels(lastDepth, totalTime, gas);
-
-    const allLevels = [
-      ...levels,
-      ...minimumDecoLevels
-    ]
-
-    return levelsToSegmentsInterpolator.interpolate(allLevels, {descentRate, ascentRate});
-  };
-
-  const calculateDiveProfileFromPlan = pipe(
-    calculateDivePlanSegments,
-    decompressionAlgorithm.calculateDiveProfileFromSegments
-  )
+  const calculateDiveProfileFromPlan = (plan: DivePlan): DiveProfile => {
+    const segments = calculateUserSegments(plan)
+    return buildDecompressionAlgorithm(plan).calculateDiveProfileFromSegments(segments)
+  }
 
   return {
-    calculateDiveProfileFromPlanV1: calculateDivePlanSegments,
+    calculateDiveProfileFromPlanV1: calculateUserSegments,
     calculateDiveProfileFromPlan
   }
 }
