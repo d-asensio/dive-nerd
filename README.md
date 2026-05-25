@@ -1,7 +1,7 @@
 # dive-nerd
 
-A monorepo for dive planning and physics tooling, built with Next.js 14, Prisma,
-Auth0, and Turborepo + pnpm workspaces.
+A monorepo for dive planning and physics tooling, built with Next.js 14, Auth0,
+and Turborepo + pnpm workspaces.
 
 ```
 dive-nerd/
@@ -16,7 +16,6 @@ dive-nerd/
 
 - Node.js `22.x` LTS (managed via [Volta](https://volta.sh) — `volta install node@22.12.0`, or via [nvm](https://github.com/nvm-sh/nvm) using the included `.nvmrc`)
 - pnpm `8.15.3` (`volta install pnpm@8.15.3`)
-- A Postgres database (local Docker, [Neon](https://neon.tech), [Supabase](https://supabase.com), or [Vercel Postgres](https://vercel.com/storage/postgres))
 - An [Auth0](https://manage.auth0.com) tenant + Application (Regular Web App)
 
 ## 1. Install dependencies
@@ -67,53 +66,7 @@ any of its required vars are missing, you will see a runtime error like:
 For production, set `AUTH0_BASE_URL` to your deployed URL and add the matching
 Callback / Logout / Web Origin URLs in Auth0.
 
-### Database (Prisma + Postgres)
-
-The Prisma schema (`apps/web/prisma/schema.prisma`) expects two URLs:
-
-- `POSTGRES_PRISMA_URL` — pooled connection used by the app at runtime
-- `POSTGRES_URL_NON_POOLING` — direct connection used by Prisma for migrations
-
-**Option A — Vercel Postgres** (easiest if you deploy to Vercel):
-
-```bash
-vercel link
-vercel env pull .env.local
-```
-
-This will populate both URLs automatically.
-
-**Option B — Local Postgres via Docker**:
-
-```bash
-docker run --name dive-nerd-pg -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
-```
-
-Then in `.env.local`:
-
-```bash
-POSTGRES_PRISMA_URL=postgresql://postgres:postgres@localhost:5432/postgres?schema=public
-POSTGRES_URL_NON_POOLING=postgresql://postgres:postgres@localhost:5432/postgres?schema=public
-```
-
-**Option C — Neon / Supabase**: create a project and paste the pooled
-connection string into `POSTGRES_PRISMA_URL` and the direct connection string
-into `POSTGRES_URL_NON_POOLING`.
-
-## 3. Set up the database schema
-
-```bash
-pnpm db:generate   # generate the Prisma client
-pnpm db:push       # push the schema to your database
-```
-
-Optional: open Prisma Studio to inspect data.
-
-```bash
-pnpm db:studio
-```
-
-## 4. Run the dev server
+## 3. Run the dev server
 
 ```bash
 pnpm dev
@@ -130,9 +83,6 @@ The web app is served at http://localhost:3000.
 | `pnpm lint`        | Lint all workspaces                           |
 | `pnpm test`        | Run all tests                                 |
 | `pnpm test:watch`  | Run tests in watch mode                       |
-| `pnpm db:generate` | Regenerate the Prisma client                  |
-| `pnpm db:push`     | Push the Prisma schema to the database        |
-| `pnpm db:studio`   | Open Prisma Studio                            |
 | `pnpm clean`       | Remove `node_modules` everywhere              |
 
 ## Troubleshooting
@@ -143,8 +93,3 @@ The web app is served at http://localhost:3000.
 - **Auth0 callback mismatch** — make sure `AUTH0_BASE_URL` exactly matches the
   origin you visit in the browser, and that the same origin is registered as an
   Allowed Callback URL in the Auth0 dashboard.
-- **Prisma "Environment variable not found: POSTGRES_PRISMA_URL"** — your
-  `.env.local` is not at the repo root, or the database URLs are blank. The
-  Prisma scripts only see env vars because the root `db:*` scripts wrap them
-  with `dotenv -e .env.local`; running `prisma` directly inside `apps/web`
-  without exporting the vars first will fail.
