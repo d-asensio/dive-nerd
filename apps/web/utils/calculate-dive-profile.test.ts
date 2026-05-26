@@ -1,6 +1,6 @@
 import { DiveProfileIntervalType } from 'dive-planner'
 
-import { calculateDiveProfile } from './calculate-dive-profile'
+import { calculateDiveProfile, fromAmbientPressureToDepth } from './calculate-dive-profile'
 
 const SURFACE_AMBIENT_PRESSURE = 1.0133
 
@@ -47,5 +47,19 @@ describe('calculateDiveProfile', () => {
         expect(samples[i].depth).toBeGreaterThanOrEqual(samples[i - 1].depth)
       }
     })
+  })
+})
+
+describe('fromAmbientPressureToDepth', () => {
+  it('returns 0 m at the surface ambient pressure', () => {
+    expect(fromAmbientPressureToDepth(SURFACE_AMBIENT_PRESSURE)).toBeCloseTo(0, 3)
+  })
+
+  it('round-trips through fromDepthToHydrostaticPressure', () => {
+    // 30 m on standard seawater ≈ 4.024 bar absolute
+    const depth = 30
+    const pressureAtDepth = 1.0133 + (depth * 1023.6 * 9.80665) / 100000
+
+    expect(fromAmbientPressureToDepth(pressureAtDepth)).toBeCloseTo(depth, 3)
   })
 })
