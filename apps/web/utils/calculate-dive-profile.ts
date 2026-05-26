@@ -3,8 +3,10 @@ import {
   alveolarWaterVaporPressure,
   buhlmannCompartments,
   CompartmentInertGasLoad,
+  divingCeilingAmbientPressure,
   fromDepthToHydrostaticPressure,
   getSurfaceSaturatedCompartmentInertGasLoads,
+  gradientFactorAt,
   inertGasTimeConstant,
   inspiredGasChangeRate,
   schreinerEquation
@@ -106,6 +108,12 @@ const surfaceSaturatedCompartmentInertGasLoads = getSurfaceSaturatedCompartmentI
   surfaceAmbientPressure,
   waterVaporPressure
 })
+
+const compartmentCoefficients = buhlmannCompartments.map(compartment => ({
+  nitrogen: { a: compartment.N2.a, b: compartment.N2.b },
+  helium:   { a: compartment.He.a, b: compartment.He.b },
+}))
+
 export interface CalculateDiveProfileOptions {
   gfLow: number
   gfHigh: number
@@ -185,13 +193,31 @@ export const fromAmbientPressureToDepth = (ambientPressure: number): number =>
 
 export const calculateDiveProfile = (
   segments: DiveSegment[],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- consumed in Task 3
-  _options: CalculateDiveProfileOptions,
+  options: CalculateDiveProfileOptions,
 ): DiveProfileSample[] => {
   const intervals = interpolateIntervals(segments)
   const enriched = intervals.map(calculateInterval)
   const samplesWithoutCeiling = calculateCompartmentInertGasLoad(enriched)
 
-  // Ceiling pass arrives in Task 3 — placeholder of 0 keeps the type honest.
-  return samplesWithoutCeiling.map(sample => ({ ...sample, ceilingDepth: 0 }))
+  return samplesWithoutCeiling.map(sample => {
+    const gradientFactor = gradientFactorAt({
+      bounds: { gfLow: options.gfLow, gfHigh: options.gfHigh },
+      firstStopAmbientPressure: options.firstStopAmbientPressure,
+      surfaceAmbientPressure,
+      ambientPressure: sample.ambientPressure,
+    })
+
+    const ceilingPressure = divingCeilingAmbientPressure({
+      compartmentLoads: sample.compartmentInertGasLoads.map(load => ({
+        nitrogenPartialPressure: load.N2,
+        heliumPartialPressure: load.He,
+      })),
+      compartmentCoefficients,
+      gradientFactor,
+    })
+
+    const ceilingDepth = Math.max(0, fromAmbientPressureToDepth(ceilingPressure))
+
+    return { ...sample, ceilingDepth }
+  })
 }

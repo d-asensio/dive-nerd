@@ -63,3 +63,84 @@ describe('fromAmbientPressureToDepth', () => {
     expect(fromAmbientPressureToDepth(pressureAtDepth)).toBeCloseTo(depth, 3)
   })
 })
+
+describe('ceilingDepth field', () => {
+  it('is 0 on the surface seed sample', () => {
+    const samples = calculateDiveProfile([], {
+      gfLow: 0.3,
+      gfHigh: 0.7,
+      firstStopAmbientPressure: SURFACE_AMBIENT_PRESSURE,
+    })
+
+    expect(samples[0].ceilingDepth).toBe(0)
+  })
+
+  it('stays at 0 throughout an NDL dive (18 m × 10 min on air, GF 100/100)', () => {
+    const samples = calculateDiveProfile(
+      [
+        {
+          type: DiveProfileIntervalType.DESCENT,
+          initialTime: 0,
+          finalTime: 2,
+          initialDepth: 0,
+          finalDepth: 18,
+          gas: air,
+        },
+        {
+          type: DiveProfileIntervalType.NAVIGATION,
+          initialTime: 2,
+          finalTime: 12,
+          initialDepth: 18,
+          finalDepth: 18,
+          gas: air,
+        },
+      ],
+      {
+        gfLow: 1,
+        gfHigh: 1,
+        firstStopAmbientPressure: SURFACE_AMBIENT_PRESSURE,
+      },
+    )
+
+    samples.forEach(sample => {
+      expect(sample.ceilingDepth).toBe(0)
+    })
+  })
+
+  it('rises above 0 on a deco dive (40 m × 25 min on air, GF 30/70)', () => {
+    // First stop on this profile is around 6 m → ≈ 1.616 bar absolute.
+    const firstStopAmbientPressure = 1.0133 + (6 * 1023.6 * 9.80665) / 100000
+    const samples = calculateDiveProfile(
+      [
+        {
+          type: DiveProfileIntervalType.DESCENT,
+          initialTime: 0,
+          finalTime: 4,
+          initialDepth: 0,
+          finalDepth: 40,
+          gas: air,
+        },
+        {
+          type: DiveProfileIntervalType.NAVIGATION,
+          initialTime: 4,
+          finalTime: 29,
+          initialDepth: 40,
+          finalDepth: 40,
+          gas: air,
+        },
+      ],
+      {
+        gfLow: 0.3,
+        gfHigh: 0.7,
+        firstStopAmbientPressure,
+      },
+    )
+
+    const maxCeiling = samples.reduce((acc, s) => Math.max(acc, s.ceilingDepth), 0)
+
+    expect(maxCeiling).toBeGreaterThan(0)
+    // Sanity bound: a 40 m × 25 min dive on air shouldn't produce a ceiling
+    // deeper than the bottom depth.
+    expect(maxCeiling).toBeLessThan(40)
+  })
+})
