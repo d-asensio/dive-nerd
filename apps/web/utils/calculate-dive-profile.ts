@@ -18,7 +18,7 @@ import { pipe} from "ramda";
  * Dive variables
  */
 export const surfaceAmbientPressure = 1.0133 // bar
-const waterDensity = 1023.6 // kg/m3
+export const waterDensity = 1023.6 // kg/m3
 const GRAVITY = 9.80665  // m/s² — dive-physics declares this internally but doesn't export it
 const waterVaporPressure = alveolarWaterVaporPressure({
   respiratoryQuotient: 0.9,
