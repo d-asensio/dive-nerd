@@ -1,4 +1,4 @@
-import { DiveProfileIntervalType } from 'dive-planner'
+import divePlanner, { DiveProfileIntervalType, type DivePlan } from 'dive-planner'
 
 import { calculateDiveProfile, fromAmbientPressureToDepth } from './calculate-dive-profile'
 
@@ -142,5 +142,41 @@ describe('ceilingDepth field', () => {
     // Sanity bound: a 40 m × 25 min dive on air shouldn't produce a ceiling
     // deeper than the bottom depth.
     expect(maxCeiling).toBeLessThan(40)
+  })
+
+  it('max ceiling lines up with the planner-computed first deco stop (40 m × 25 min on air, GF 30/70)', () => {
+    // Independent computation by the planner — gives us the actual first DECO_STOP depth.
+    const plan: DivePlan = {
+      descentRate: 18,
+      ascentRate: 9,
+      gradientFactorLow: 0.3,
+      gradientFactorHigh: 0.7,
+      switchAtMod: true,
+      lastStopDepth: 3,
+      levels: [{ depth: 40, duration: 25, gas: air }],
+      availableGases: [air],
+    }
+    const intervals = divePlanner.calculateDiveProfileFromPlan(plan).intervals
+    const firstStop = intervals.find(({ type }) => type === DiveProfileIntervalType.DECO_STOP)
+
+    if (!firstStop) {
+      throw new Error('Test profile expected to produce a deco stop')
+    }
+
+    const firstStopAmbientPressure = 1.0133 + (firstStop.finalDepth * 1023.6 * 9.80665) / 100000
+
+    // Compute the per-sample ceiling for the same plan.
+    const samples = calculateDiveProfile(intervals, {
+      gfLow: 0.3,
+      gfHigh: 0.7,
+      firstStopAmbientPressure,
+    })
+
+    const maxCeiling = samples.reduce((acc, s) => Math.max(acc, s.ceilingDepth), 0)
+
+    // The two independent computations should agree on the first-stop depth within 3 m.
+    // (Tolerance accounts for the 0.5 s integration step and the 3 m stop-grid rounding
+    //  the planner applies; both are documented and stable.)
+    expect(Math.abs(maxCeiling - firstStop.finalDepth)).toBeLessThan(3)
   })
 })
