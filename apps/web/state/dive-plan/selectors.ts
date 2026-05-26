@@ -4,6 +4,9 @@ import {DivePlanSlice} from "@/state/dive-plan/slice";
 import {DivePlanLevel} from "@/state/dive-plan/types";
 import divePlanner, {DiveProfileIntervalType, type DiveSegment} from "dive-planner";
 import {StoreState} from "@/state/store";
+import { fromDepthToHydrostaticPressure } from 'dive-physics';
+
+import { calculateDiveProfile, type DiveProfileSample } from '@/utils/calculate-dive-profile';
 
 export const isFirstDiveLevelSelector = memoizeWithArgs<[DivePlanSlice, string], boolean>(
   ({diveLevelsIdList: [firstLevelId]}: DivePlanSlice, diveLevelId: string) =>
@@ -109,3 +112,29 @@ export const decoStopsSelector = memoize<StoreState, DecoStopSummary[]>(
   }
 )
 
+const SURFACE_AMBIENT_PRESSURE = 1.0133
+const WATER_DENSITY = 1023.6
+
+export const firstStopAmbientPressureSelector = memoize<StoreState, number>(
+  (state: StoreState) => {
+    const intervals = diveIntervalsSelector(state)
+    const firstStop = intervals.find(({ type }) => type === DiveProfileIntervalType.DECO_STOP)
+
+    if (!firstStop) return SURFACE_AMBIENT_PRESSURE
+
+    return fromDepthToHydrostaticPressure({
+      depth: firstStop.finalDepth,
+      surfaceAmbientPressure: SURFACE_AMBIENT_PRESSURE,
+      waterDensity: WATER_DENSITY,
+    })
+  },
+)
+
+export const diveProfileSamplesSelector = memoize<StoreState, DiveProfileSample[]>(
+  (state: StoreState) =>
+    calculateDiveProfile(diveIntervalsSelector(state), {
+      gfLow: state.gradientFactorLow,
+      gfHigh: state.gradientFactorHigh,
+      firstStopAmbientPressure: firstStopAmbientPressureSelector(state),
+    }),
+)
