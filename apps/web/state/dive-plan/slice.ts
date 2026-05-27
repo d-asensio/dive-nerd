@@ -10,6 +10,7 @@ interface DivePlanActions {
   setGradientFactorHigh: (value: number) => void
   setSwitchAtMod: (value: boolean) => void
   setLastStopDepth: (value: number) => void
+  setShowCeiling: (value: boolean) => void
   addDiveLevel: (levelId: string, level: DivePlanLevel) => void
   updateDiveLevel: (levelId: string, newProps: Partial<DivePlanLevel>) => void
   removeDiveLevel: (levelId: string) => void
@@ -53,6 +54,10 @@ export const createDivePlanSlice =
       setLastStopDepth: value =>
         set(state => {
           state.lastStopDepth = value
+        }),
+      setShowCeiling: value =>
+        set(state => {
+          state.showCeiling = value
         }),
       addDiveLevel: (levelId, level) => {
         set(state => {

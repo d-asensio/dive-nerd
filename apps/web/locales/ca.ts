@@ -134,6 +134,8 @@ export default {
   "planner.settings.switch_at_mod_description": "Forçar una parada procedimental a la MOD de cada gas de deco (p. ex. EAN50 a 21 m, O₂ a 6 m), fins i tot quan Bühlmann no la requereixi de manera natural.",
   "planner.settings.last_stop_at_6_label": "Última parada a 6 m",
   "planner.settings.last_stop_at_6_description": "Finalitzar la fase de deco a 6 m en lloc de 3 m. L'algorisme es manté més estona a 6 m per descarregar el sostre en superfície, després ascendeix directament.",
+  "planner.settings.show_ceiling_label": "Mostrar la línia de sostre",
+  "planner.settings.show_ceiling_description": "Superposar el sostre de descompressió de Bühlmann i la zona prohibida sobre el perfil d'immersió.",
   "planner.decompression.title": "Perfil de descompressió",
   "planner.decompression.switch_gas_at": "Canviar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sense descompressió necessària",

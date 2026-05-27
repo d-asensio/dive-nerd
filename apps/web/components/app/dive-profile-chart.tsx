@@ -43,6 +43,7 @@ const PointTooltip = ({ point }: PointTooltipProps<DiveProfileSeries>) => {
 export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const t = useI18n()
   const samples = useSelector(diveProfileSamplesSelector)
+  const showCeiling = useSelector(state => state.showCeiling)
 
   const profileData = React.useMemo(
     () => samples.map(s => ({ x: s.x, y: s.depth })),
@@ -56,7 +57,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
 
   const CeilingLayer = React.useCallback(
     ({ xScale, yScale }: { xScale: (v: number) => number; yScale: (v: number) => number }) => {
-      if (ceilingData.length < 2) return null
+      if (!showCeiling || ceilingData.length < 2) return null
 
       const x = xScale
       const y = yScale
@@ -82,7 +83,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
         </g>
       )
     },
-    [ceilingData],
+    [ceilingData, showCeiling],
   )
 
   return (

@@ -134,6 +134,8 @@ export default {
   "planner.settings.switch_at_mod_description": "Erzwingt einen prozeduralen Stopp am MOD jedes Deko-Gases (z. B. EAN50 bei 21 m, O₂ bei 6 m), auch wenn Bühlmann dort keinen Stopp verlangen würde.",
   "planner.settings.last_stop_at_6_label": "Letzter Stopp bei 6 m",
   "planner.settings.last_stop_at_6_description": "Die Dekophase bei 6 m statt 3 m beenden. Der Algorithmus hält länger bei 6 m, um die Oberflächengrenze zu klären, und steigt dann direkt an die Oberfläche.",
+  "planner.settings.show_ceiling_label": "Deckenlinie anzeigen",
+  "planner.settings.show_ceiling_description": "Die Bühlmann-Dekompressionsdecke und die verbotene Zone darüber im Tauchprofil-Diagramm einblenden.",
   "planner.decompression.title": "Dekompressionsprofil",
   "planner.decompression.switch_gas_at": "Gas bei {depth} m wechseln",
   "planner.decompression.no_deco_required": "Keine Dekompression erforderlich",

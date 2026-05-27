@@ -49,6 +49,22 @@ describe('setDescentRate', () => {
   })
 })
 
+describe('setShowCeiling', () => {
+  it('toggles the showCeiling flag', () => {
+    const initialDivePlan =
+      divePlanBuilder()
+        .withShowCeiling(true)
+        .build()
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
+
+    sliceStore.getState().setShowCeiling(false)
+
+    expect(sliceStore.getState().showCeiling).toBe(false)
+  })
+})
+
 describe('addDiveLevel', () => {
   it('adds a level to an empty levels list', () => {
     const initialDivePlan = divePlanBuilder()

@@ -134,6 +134,8 @@ export default {
   "planner.settings.switch_at_mod_description": "Forzar una parada procedimental en la MOD de cada gas de deco (p. ej. EAN50 a 21 m, O₂ a 6 m), incluso cuando Bühlmann no la requiera naturalmente.",
   "planner.settings.last_stop_at_6_label": "Última parada a 6 m",
   "planner.settings.last_stop_at_6_description": "Finalizar la fase de deco a 6 m en lugar de 3 m. El algoritmo se mantiene más tiempo a 6 m para despejar el techo en superficie, luego asciende directamente.",
+  "planner.settings.show_ceiling_label": "Mostrar línea de techo",
+  "planner.settings.show_ceiling_description": "Superponer el techo de descompresión de Bühlmann y la zona prohibida sobre el perfil de inmersión.",
   "planner.decompression.title": "Perfil de descompresión",
   "planner.decompression.switch_gas_at": "Cambiar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sin descompresión requerida",

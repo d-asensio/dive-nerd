@@ -11,6 +11,7 @@ interface DivePlan {
   gradientFactorHigh: number // 0..1
   switchAtMod: boolean       // force a procedural switch stop at each deco gas's MOD
   lastStopDepth: number      // 3 (default) or 6 — depth of the last deco stop
+  showCeiling: boolean       // overlay the Bühlmann ceiling line + forbidden zone on the profile chart
   diveLevelsMap: Record<string, DivePlanLevel>
 }
 

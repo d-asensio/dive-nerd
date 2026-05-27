@@ -134,6 +134,8 @@ export default {
   "planner.settings.switch_at_mod_description": "Wymusza proceduralny przystanek przy MOD każdego gazu deko (np. EAN50 na 21 m, O₂ na 6 m), nawet jeśli Bühlmann nie wymaga tam przystanku.",
   "planner.settings.last_stop_at_6_label": "Ostatni przystanek na 6 m",
   "planner.settings.last_stop_at_6_description": "Zakończ fazę deko na 6 m zamiast na 3 m. Algorytm utrzymuje przystanek dłużej na 6 m, aby oczyścić sufit powierzchni, a następnie wynurza się bezpośrednio.",
+  "planner.settings.show_ceiling_label": "Pokaż linię sufitu",
+  "planner.settings.show_ceiling_description": "Nałóż sufit dekompresyjny Bühlmanna i strefę zakazaną nad nim na wykresie profilu nurkowania.",
   "planner.decompression.title": "Profil dekompresji",
   "planner.decompression.switch_gas_at": "Zmień gaz na {depth} m",
   "planner.decompression.no_deco_required": "Dekompresja nie jest wymagana",

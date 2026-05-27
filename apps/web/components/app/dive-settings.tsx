@@ -29,12 +29,14 @@ export function DiveSettings() {
   const gradientFactorHigh = useStore.use.gradientFactorHigh()
   const switchAtMod = useStore.use.switchAtMod()
   const lastStopDepth = useStore.use.lastStopDepth()
+  const showCeiling = useStore.use.showCeiling()
   const setDescentRate = useStore.use.setDescentRate()
   const setAscentRate = useStore.use.setAscentRate()
   const setGradientFactorLow = useStore.use.setGradientFactorLow()
   const setGradientFactorHigh = useStore.use.setGradientFactorHigh()
   const setSwitchAtMod = useStore.use.setSwitchAtMod()
   const setLastStopDepth = useStore.use.setLastStopDepth()
+  const setShowCeiling = useStore.use.setShowCeiling()
 
   const handleLastStopAt6Change = React.useCallback((checked: boolean) => {
     setLastStopDepth(checked ? 6 : 3)
@@ -135,6 +137,19 @@ export function DiveSettings() {
           <Label htmlFor="last_stop_at_6">{t('planner.settings.last_stop_at_6_label')}</Label>
           <p className="text-xs text-muted-foreground">
             {t('planner.settings.last_stop_at_6_description')}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-start gap-3 md:col-span-2">
+        <Switch
+          id="show_ceiling"
+          checked={showCeiling}
+          onCheckedChange={setShowCeiling}
+        />
+        <div className="grid gap-1">
+          <Label htmlFor="show_ceiling">{t('planner.settings.show_ceiling_label')}</Label>
+          <p className="text-xs text-muted-foreground">
+            {t('planner.settings.show_ceiling_description')}
           </p>
         </div>
       </div>

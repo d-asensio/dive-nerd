@@ -4,6 +4,7 @@ export function divePlanBuilder() {
   const builder = {
     withAscentRate,
     withDescentRate,
+    withShowCeiling,
     withLevels,
     withoutLevels,
     build
@@ -16,6 +17,7 @@ export function divePlanBuilder() {
     gradientFactorHigh: 0.85,
     switchAtMod: true,
     lastStopDepth: 6,
+    showCeiling: true,
     diveLevelsMap: {},
     diveLevelsIdList: []
   }
@@ -27,6 +29,11 @@ export function divePlanBuilder() {
 
   function withAscentRate(ascentRate: number) {
     divePlan.ascentRate = ascentRate
+    return builder
+  }
+
+  function withShowCeiling(showCeiling: boolean) {
+    divePlan.showCeiling = showCeiling
     return builder
   }
 

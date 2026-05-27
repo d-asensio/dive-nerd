@@ -17,6 +17,7 @@ export const initialDivePlan: DivePlanState = {
   gradientFactorHigh: 0.85,
   switchAtMod: true,
   lastStopDepth: 6,
+  showCeiling: true,
   diveLevelsMap,
   diveLevelsIdList: Object.keys(diveLevelsMap)
 }
