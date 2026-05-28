@@ -4,7 +4,6 @@ import {GasesState} from "@/state/dive-gases/types";
 
 export const bottomGasId = NIL
 export const deco21GasId = uuid()
-export const deco6GasId = uuid()
 
 export const initialGases: GasesState = {
   gasesMap: {
@@ -17,12 +16,7 @@ export const initialGases: GasesState = {
       isDecoGas: true,
       fO2: 0.50,
       fHe: 0
-    },
-    [deco6GasId]: {
-      isDecoGas: true,
-      fO2: 1,
-      fHe: 0
     }
   },
-  gasesIdList: [bottomGasId, deco21GasId, deco6GasId]
+  gasesIdList: [bottomGasId, deco21GasId]
 };

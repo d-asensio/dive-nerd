@@ -19,6 +19,7 @@ import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
 import {Gas} from "@/utils/types";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
+import {agencyGasPresets} from "@/utils/gas-presets";
 
 
 function StandardGasMenuItem({ gas }: { gas: Gas }) {
@@ -33,6 +34,29 @@ function StandardGasMenuItem({ gas }: { gas: Gas }) {
       <GasBadge gas={gas} className="mr-4"/>
       <DropdownMenuShortcut>{"≤"} {maximumOperatingDepth(gas)}m</DropdownMenuShortcut>
     </DropdownMenuItem>
+  );
+}
+
+function AgencyGasSubmenu({ agency, bottom, deco }: { agency: string; bottom: Gas[]; deco: Gas[] }) {
+  return (
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>
+        <DropdownMenuLabel>{agency}</DropdownMenuLabel>
+      </DropdownMenuSubTrigger>
+      <DropdownMenuPortal>
+        <DropdownMenuSubContent>
+          <DropdownMenuLabel className="text-xs text-muted-foreground">Bottom & travel</DropdownMenuLabel>
+          {bottom.map((gas, index) => (
+            <StandardGasMenuItem key={`${agency}-bottom-${index}`} gas={gas} />
+          ))}
+          <DropdownMenuSeparator/>
+          <DropdownMenuLabel className="text-xs text-muted-foreground">Deco</DropdownMenuLabel>
+          {deco.map((gas, index) => (
+            <StandardGasMenuItem key={`${agency}-deco-${index}`} gas={gas} />
+          ))}
+        </DropdownMenuSubContent>
+      </DropdownMenuPortal>
+    </DropdownMenuSub>
   );
 }
 
@@ -60,36 +84,14 @@ export function AddGasDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
         <DropdownMenuSeparator/>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <DropdownMenuLabel>Bottom gas</DropdownMenuLabel>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .32, fHe: 0}} />
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .25, fHe: .25}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .21, fHe: .35}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .18, fHe: .45}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .15, fHe: .55}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .12, fHe: .60}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .12, fHe: .65}}/>
-              <StandardGasMenuItem gas={{isDecoGas: false, fO2: .10, fHe: .70}}/>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <DropdownMenuLabel>Deco gas</DropdownMenuLabel>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <StandardGasMenuItem gas={{isDecoGas: true, fO2: 1, fHe: 0}}/>
-              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .5, fHe: 0}}/>
-              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .35, fHe: .25}}/>
-              <StandardGasMenuItem gas={{isDecoGas: true, fO2: .21, fHe: .35}}/>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
+        {agencyGasPresets.map(preset => (
+          <AgencyGasSubmenu
+            key={preset.agency}
+            agency={preset.agency}
+            bottom={preset.bottom}
+            deco={preset.deco}
+          />
+        ))}
         <DropdownMenuSeparator/>
         <DropdownMenuItem onClick={onAddGasButtonClick}>
           <Plus className="mr-2 h-4 w-4"/>
