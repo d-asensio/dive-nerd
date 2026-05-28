@@ -1,49 +1,45 @@
 "use client"
 
 import * as React from "react";
-import {PointTooltipProps, ResponsiveLine} from '@nivo/line'
+import {ResponsiveLine} from '@nivo/line'
+import {Clock} from "lucide-react";
 
 import {cn} from "@/lib/utils";
-import {Tooltip, TooltipContent, TooltipPortal, TooltipTrigger} from "@/components/ui/tooltip";
 import {useSelector} from "@/state/useSelector";
-import {diveProfileSamplesSelector} from "@/state/dive-plan/selectors";
+import {diveProfileSamplesSelector, diveIntervalsSelector} from "@/state/dive-plan/selectors";
+import {depthAtTime} from "@/utils/interpolate-depth-at-time";
+import {gasAtTime} from "@/utils/gas-at-time";
+import {GasBadge} from "@/components/app/gas-badge";
 import {useI18n} from "@/locales/client";
-
-type DiveProfileSeries = {
-  id: string
-  data: readonly { x: number; y: number }[]
-}
 
 const CEILING_STROKE = "#d97706"
 const FORBIDDEN_FILL = "#f59e0b"
+const SERIES_COLOR = "rgb(96, 165, 250)"
+const GUIDE_STROKE = "#94a3b8"
 
-const PointTooltip = ({ point }: PointTooltipProps<DiveProfileSeries>) => {
-  const t = useI18n()
-  return (
-    <Tooltip open delayDuration={0}>
-      <TooltipTrigger asChild>
-        <div className="w-0 h-0" />
-      </TooltipTrigger>
-      <TooltipPortal>
-        <TooltipContent asChild>
-          <div className='pointer-events-none'>
-            <p>
-              <span className="font-bold">{t('planner.chart.tooltip.depth')}:</span> {point.data.yFormatted} m
-            </p>
-            <p>
-              <span className="font-bold">{t('planner.chart.tooltip.time')}:</span> {point.data.xFormatted} min.
-            </p>
-          </div>
-        </TooltipContent>
-      </TooltipPortal>
-    </Tooltip>
-  )
+const MARGIN = {top: 12, right: 18, bottom: 62, left: 62}
+
+interface LinearScale {
+  (value: number): number
+  invert: (pixel: number) => number
 }
+
+interface Cursor {
+  x: number      // pixel, inner plot coordinates
+  y: number      // pixel, inner plot coordinates
+  time: number   // minutes — the cursor's time (xScale.invert), used to project onto the lines
+  flipX: boolean // render the tooltip to the left of the cursor (near the right edge)
+}
+
+const clamp = (value: number, min: number, max: number): number =>
+  Math.min(Math.max(value, min), max)
 
 export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const t = useI18n()
   const samples = useSelector(diveProfileSamplesSelector)
+  const intervals = useSelector(diveIntervalsSelector)
   const showCeiling = useSelector(state => state.showCeiling)
+  const [cursor, setCursor] = React.useState<Cursor | null>(null)
 
   const profileData = React.useMemo(
     () => samples.map(s => ({ x: s.x, y: s.depth })),
@@ -86,17 +82,97 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
     [ceilingData, showCeiling],
   )
 
+  // Captures the cursor over the plot area and projects it onto the profile:
+  // the tooltip reports the exact time/depth under the cursor, while the dot
+  // marks the diver's actual depth at the cursor's time (vertical projection).
+  const CursorLayer = React.useCallback(
+    ({ innerWidth, innerHeight, xScale, yScale }: {
+      innerWidth: number
+      innerHeight: number
+      // nivo types these as plain scale functions, but at runtime they are d3
+      // linear scales that also expose `invert` (used to map pixels → data).
+      xScale: (value: number) => number
+      yScale: (value: number) => number
+    }) => {
+      const xLinear = xScale as LinearScale
+
+      const onMouseMove = (event: React.MouseEvent<SVGRectElement>) => {
+        const bounds = event.currentTarget.getBoundingClientRect()
+        const localX = clamp(event.clientX - bounds.left, 0, innerWidth)
+        const localY = clamp(event.clientY - bounds.top, 0, innerHeight)
+        setCursor({
+          x: localX,
+          y: localY,
+          time: xLinear.invert(localX),
+          flipX: localX > innerWidth / 2,
+        })
+      }
+
+      const profileDepthY = cursor ? yScale(depthAtTime(profileData, cursor.time)) : 0
+      const showCeilingDot = cursor && showCeiling && ceilingData.length >= 2
+      const ceilingDepthY = showCeilingDot ? yScale(depthAtTime(ceilingData, cursor.time)) : 0
+
+      return (
+        <g>
+          {cursor && (
+            <>
+              <line
+                x1={cursor.x}
+                x2={cursor.x}
+                y1={0}
+                y2={innerHeight}
+                stroke={GUIDE_STROKE}
+                strokeWidth={1}
+                strokeDasharray="4,3"
+                pointerEvents="none"
+              />
+              {showCeilingDot && (
+                <circle
+                  cx={cursor.x}
+                  cy={ceilingDepthY}
+                  r={4}
+                  fill={CEILING_STROKE}
+                  stroke="#fff"
+                  strokeWidth={1.5}
+                  pointerEvents="none"
+                />
+              )}
+              <circle
+                cx={cursor.x}
+                cy={profileDepthY}
+                r={4}
+                fill={SERIES_COLOR}
+                stroke="#fff"
+                strokeWidth={1.5}
+                pointerEvents="none"
+              />
+            </>
+          )}
+          <rect
+            width={innerWidth}
+            height={innerHeight}
+            fill="transparent"
+            pointerEvents="all"
+            onMouseMove={onMouseMove}
+            onMouseLeave={() => setCursor(null)}
+          />
+        </g>
+      )
+    },
+    [cursor, profileData, ceilingData, showCeiling],
+  )
+
   return (
     <div
       className={cn('min-w-0 min-h-[400px] max-h-[800px] overflow-x-auto', className)}
       {...props}
     >
-      <div className="min-w-[600px] h-full">
+      <div className="relative min-w-[600px] h-full">
         <ResponsiveLine
           enablePoints={false}
           data={[{ id: "Dive Profile", data: profileData }]}
-          colors={["rgb(96, 165, 250)"]}
-          margin={{top: 12, right: 18, bottom: 62, left: 62}}
+          colors={[SERIES_COLOR]}
+          margin={MARGIN}
           xScale={{type: "linear"}}
           yScale={{
             type: "linear",
@@ -123,25 +199,57 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             legendOffset: -40,
             legendPosition: "start",
           }}
-          pointSize={5}
-          pointBorderWidth={1}
-          pointBorderColor={{from: "serieColor"}}
-          pointLabelYOffset={-12}
-          useMesh
-          tooltip={PointTooltip}
-          crosshairType="bottom"
+          isInteractive={false}
           layers={[
             "grid",
             "markers",
             "axes",
             CeilingLayer,
             "lines",
-            "slices",
-            "points",
-            "mesh",
-            "legends",
+            CursorLayer,
           ]}
         />
+        {cursor && (() => {
+          const profileDepth = depthAtTime(profileData, cursor.time)
+          const ceiling = depthAtTime(ceilingData, cursor.time)
+          const gas = gasAtTime(intervals, cursor.time)
+
+          return (
+            <div
+              className="pointer-events-none absolute z-50 w-max overflow-hidden whitespace-nowrap rounded-md border bg-popover text-xs text-popover-foreground shadow-md"
+              style={{
+                left: MARGIN.left + cursor.x,
+                top: MARGIN.top + cursor.y,
+                transform: `translate(${cursor.flipX ? 'calc(-100% - 12px)' : '12px'}, -50%)`,
+              }}
+            >
+              <div className="flex items-center gap-1.5 border-b bg-muted/50 px-3 py-1.5 font-medium">
+                <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+                {cursor.time.toFixed(1)} min
+              </div>
+              <div className="grid grid-cols-[auto_auto] items-center gap-x-6 gap-y-1 px-3 py-2">
+                <span className="text-muted-foreground">{t('planner.chart.tooltip.profile_depth')}</span>
+                <span className="text-right font-medium tabular-nums">{profileDepth.toFixed(1)} m</span>
+                {showCeiling && (
+                  <>
+                    <span className="flex items-center gap-1.5 font-medium text-amber-600">
+                      <span className="inline-block h-0.5 w-3 border-t-2 border-dashed border-amber-600" />
+                      {t('planner.chart.tooltip.ceiling')}
+                    </span>
+                    <span className="text-right font-semibold tabular-nums text-amber-600">
+                      {ceiling.toFixed(1)} m
+                    </span>
+                  </>
+                )}
+                {gas && (
+                  <span className="col-span-2 justify-self-end pt-1">
+                    <GasBadge gas={gas} />
+                  </span>
+                )}
+              </div>
+            </div>
+          )
+        })()}
       </div>
     </div>
   )
