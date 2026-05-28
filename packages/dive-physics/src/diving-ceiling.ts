@@ -53,3 +53,37 @@ export const divingCeilingAmbientPressure = ({
     Number.NEGATIVE_INFINITY
   )
 }
+
+/**
+ * The index of the compartment whose ceiling is highest — the "leading"
+ * compartment that dictates how deep the next decompression stop must be.
+ * Ties resolve to the first compartment encountered.
+ */
+export const divingCeilingLeadingCompartmentIndex = ({
+  compartmentLoads,
+  compartmentCoefficients,
+  gradientFactor
+}: {
+  compartmentLoads: CompartmentInertLoad[]
+  compartmentCoefficients: CompartmentBuhlmannCoefficients[]
+  gradientFactor: number
+}): number => {
+  if (compartmentLoads.length !== compartmentCoefficients.length) {
+    throw new Error(
+      `Compartment loads (${compartmentLoads.length}) and coefficients (${compartmentCoefficients.length}) must have the same length`
+    )
+  }
+
+  const ceilingAt = ceilingFor(gradientFactor)
+
+  let leadingIndex = 0
+  let maxCeiling = Number.NEGATIVE_INFINITY
+  for (let index = 0; index < compartmentLoads.length; index++) {
+    const ceiling = ceilingAt(compartmentLoads[index], compartmentCoefficients[index])
+    if (ceiling > maxCeiling) {
+      maxCeiling = ceiling
+      leadingIndex = index
+    }
+  }
+  return leadingIndex
+}
