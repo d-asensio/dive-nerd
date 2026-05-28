@@ -317,6 +317,68 @@ describe('Bühlmann ZH-L16C + GF — verification cases', () => {
         expect(firstStop!.isGasSwitch).toBe(false)
       }
     })
+
+    // Regression: with switchAtMod=true the forced "switch at MOD" stop must
+    // never be placed deeper than the diver actually went, which previously
+    // produced an ASCENT segment that descended back down to the gas MOD.
+    describe('forced switch at MOD never descends below the dive', () => {
+      const descendsDuringAscent = (intervals: DiveSegment[]) =>
+        intervals.some(s => s.type === DiveProfileIntervalType.ASCENT && s.finalDepth > s.initialDepth)
+
+      // Rule 1: a deco gas whose MOD (21 m for EAN50) is deeper than the
+      // dive's average (bottom-phase) depth (~17 m on an 18 m dive) is not a
+      // sensible staged-deco gas here — it is excluded entirely and the diver
+      // ascends on the back gas.
+      it('excludes a deco gas whose MOD is deeper than the average bottom depth', () => {
+        const algorithm = createBuhlmannZHL16Algorithm(
+          {},
+          {
+            ascentRate: 9,
+            gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+            availableGases: [ean50],
+            switchAtMod: true
+          }
+        )
+        const segments = buildSegments([{ depth: 18, duration: 30, gas: air }])
+        const profile = algorithm.calculateDiveProfileFromSegments(segments)
+
+        expect(descendsDuringAscent(profile.intervals)).toBe(false)
+        // EAN50 is excluded entirely: it is breathed on no segment.
+        expect(profile.intervals.every(s => s.gas !== ean50)).toBe(true)
+        // No stop is forced below the deepest depth the diver reached.
+        const deepest = Math.max(...profile.intervals.map(s => s.finalDepth))
+        expect(deepest).toBeLessThanOrEqual(18)
+      })
+
+      // Rule 2: a deco gas whose MOD (21 m) is shallower than the average
+      // bottom depth (~34 m on a 45 m→18 m multilevel) survives, but the dive
+      // ends at 18 m — shallower than the MOD — so the switch happens at 18 m,
+      // not at a stop forced down to 21 m.
+      it('switches at the last planned level depth when it is shallower than the MOD', () => {
+        const algorithm = createBuhlmannZHL16Algorithm(
+          {},
+          {
+            ascentRate: 9,
+            gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+            availableGases: [ean50],
+            switchAtMod: true
+          }
+        )
+        const segments = buildSegments([
+          { depth: 45, duration: 20, gas: air },
+          { depth: 18, duration: 10, gas: air }
+        ])
+        const profile = algorithm.calculateDiveProfileFromSegments(segments)
+
+        expect(descendsDuringAscent(profile.intervals)).toBe(false)
+        // EAN50 is still used (it is a sensible deco gas for this dive)...
+        const ean50Segments = profile.intervals.filter(s => s.gas === ean50)
+        expect(ean50Segments.length).toBeGreaterThan(0)
+        // ...and the switch to it never happens deeper than the last level (18 m).
+        const deepestEan50 = Math.max(...ean50Segments.map(s => s.finalDepth))
+        expect(deepestEan50).toBeLessThanOrEqual(18)
+      })
+    })
   })
 
   it('never emits two consecutive ASCENT segments on the same gas (merged)', () => {

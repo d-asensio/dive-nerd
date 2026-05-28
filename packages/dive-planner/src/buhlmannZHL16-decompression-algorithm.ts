@@ -24,7 +24,7 @@ import {
   createDepthPressureConverter,
   DepthPressureConverter
 } from './depth-pressure-conversion'
-import { roundUpToStopGrid, nextShallowerStop } from './stop-depth'
+import { roundUpToStopGrid, nextShallowerStop, roundDownToStopGrid } from './stop-depth'
 import { mergeConsecutiveAscents } from './merge-consecutive-ascents'
 import {
   BestDecoGasSelector,
@@ -120,11 +120,34 @@ export const createBuhlmannZHL16Algorithm = (
     dependencies.gasSwitchDepthCalculator ??
     createGasSwitchDepthCalculator({ depthPressureConverter })
 
-  const deepestGasSwitchDepth = (): number => {
-    const switchDepths = gasSwitchDepthCalculator.switchDepthsOf(availableGases)
+  const deepestGasSwitchDepth = (gases: Gas[]): number => {
+    const switchDepths = gasSwitchDepthCalculator.switchDepthsOf(gases)
     if (switchDepths.length === 0) return 0
     return Math.max(...switchDepths)
   }
+
+  /** Time-weighted average depth across the user's planned (pre-deco) segments. */
+  const averageDepthOf = (segments: DiveSegment[]): number => {
+    const totalTime = segments.reduce((sum, s) => sum + (s.finalTime - s.initialTime), 0)
+    if (totalTime <= 0) return 0
+    const weighted = segments.reduce(
+      (sum, s) => sum + ((s.initialDepth + s.finalDepth) / 2) * (s.finalTime - s.initialTime),
+      0
+    )
+    return weighted / totalTime
+  }
+
+  /**
+   * Rule 1 (only relevant under `switchAtMod`): a deco gas whose MOD is deeper
+   * than the dive's average bottom depth is not a sensible staged-deco gas for
+   * this profile — forcing a "switch at MOD" there would put the switch near
+   * (or below) where the diver actually spent the dive. Such gases are excluded
+   * from the deco phase entirely, so the diver ascends on the back gas.
+   */
+  const gasesAfterDeepMODExclusion = (averageBottomDepth: number): Gas[] =>
+    availableGases.filter(
+      gas => !(gas.isDecoGas && gasSwitchDepthCalculator.modDepthOf(gas) > averageBottomDepth)
+    )
 
   const integrateUserSegments = (segments: DiveSegment[]): AlgorithmRun =>
     segments.reduce<AlgorithmRun>(
@@ -278,16 +301,18 @@ export const createBuhlmannZHL16Algorithm = (
     stopDepth,
     nextStop,
     diveFirstStop,
-    backGas
+    backGas,
+    decoGases
   }: {
     run: AlgorithmRun
     stopDepth: number
     nextStop: number
     diveFirstStop: number
     backGas: Gas
+    decoGases: Gas[]
   }): AlgorithmRun => {
     const gas = decoGasSelector.select({
-      availableGases,
+      availableGases: decoGases,
       backGas,
       ambientPressure: depthPressureConverter.depthToAmbientPressure(stopDepth)
     })
@@ -331,11 +356,13 @@ export const createBuhlmannZHL16Algorithm = (
   const walkStops = ({
     runAfterFirstAscent,
     diveFirstStop,
-    backGas
+    backGas,
+    decoGases
   }: {
     runAfterFirstAscent: AlgorithmRun
     diveFirstStop: number
     backGas: Gas
+    decoGases: Gas[]
   }): AlgorithmRun => {
     let run = runAfterFirstAscent
     let stopDepth = diveFirstStop
@@ -344,7 +371,7 @@ export const createBuhlmannZHL16Algorithm = (
       // From the last stop we jump straight to the surface, skipping any
       // shallower 3 m grid stop. Everywhere else we step one grid stop up.
       const nextStop = stopDepth === lastStopDepth ? 0 : nextShallowerStop(stopDepth)
-      run = appendStop({ run, stopDepth, nextStop, diveFirstStop, backGas })
+      run = appendStop({ run, stopDepth, nextStop, diveFirstStop, backGas, decoGases })
       const ascendingGas = previousGasOf(run) ?? backGas
       run = appendAscentTo({ run, targetDepth: nextStop, gas: ascendingGas })
       stopDepth = nextStop
@@ -359,6 +386,14 @@ export const createBuhlmannZHL16Algorithm = (
     const userRun = integrateUserSegments(segments)
     const lastSegment = userRun.intervals[userRun.intervals.length - 1]
     const backGas = lastSegment.gas
+    const lastDepth = lastSegment.finalDepth
+
+    // Rule 1 (switchAtMod only): drop deco gases whose MOD is deeper than the
+    // dive's average bottom depth — they are not sensible staged-deco gases
+    // here, so the diver should ascend on the back gas rather than switch.
+    const decoGases = switchAtMod
+      ? gasesAfterDeepMODExclusion(averageDepthOf(userRun.intervals))
+      : availableGases
 
     // The first stop is the deeper of:
     //  (a) the natural Bühlmann ceiling rounded up to the 3 m grid, and
@@ -366,9 +401,17 @@ export const createBuhlmannZHL16Algorithm = (
     //      only when `switchAtMod` is enabled.
     // (b) is what produces the "switch to EAN50 at 21 m" stop even when
     // (a) would not naturally require a stop there.
+    //
+    // Rule 2 (switchAtMod only): the forced switch can never be placed deeper
+    // than the last planned level — you cannot stop deeper than where the
+    // ascent begins — so (b) is capped at the last depth (on the 3 m grid).
     const naturalFirstStop = firstStopDepth(userRun.loads)
+    const forcedSwitchDepth = Math.min(
+      deepestGasSwitchDepth(decoGases),
+      roundDownToStopGrid(lastDepth)
+    )
     const decoFirstStop = switchAtMod
-      ? Math.max(naturalFirstStop, deepestGasSwitchDepth())
+      ? Math.max(naturalFirstStop, forcedSwitchDepth)
       : naturalFirstStop
 
     if (decoFirstStop <= 0) {
@@ -395,7 +438,8 @@ export const createBuhlmannZHL16Algorithm = (
     const runAfterStops = walkStops({
       runAfterFirstAscent,
       diveFirstStop: firstStop,
-      backGas
+      backGas,
+      decoGases
     })
 
     return { intervals: mergeConsecutiveAscents(runAfterStops.intervals) }

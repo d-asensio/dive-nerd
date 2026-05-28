@@ -33,16 +33,18 @@ export const createGasSwitchDepthCalculator = ({
 }) => {
   const ppO2Max = options.ppO2Max ?? DEFAULT_PPO2_MAX
 
-  const switchDepthOf = (gas: Gas): number => {
+  /** The gas's true Maximum Operating Depth at `ppO2Max`, before grid snapping. */
+  const modDepthOf = (gas: Gas): number => {
     const modAmbientPressure = ppO2Max / gas.fO2
-    const modDepth = depthPressureConverter.ambientPressureToDepth(modAmbientPressure)
-    return Math.max(0, snapToGrid(modDepth))
+    return Math.max(0, depthPressureConverter.ambientPressureToDepth(modAmbientPressure))
   }
+
+  const switchDepthOf = (gas: Gas): number => Math.max(0, snapToGrid(modDepthOf(gas)))
 
   const switchDepthsOf = (availableGases: Gas[]): number[] =>
     availableGases.filter(gas => gas.isDecoGas).map(switchDepthOf)
 
-  return { switchDepthOf, switchDepthsOf }
+  return { modDepthOf, switchDepthOf, switchDepthsOf }
 }
 
 export type GasSwitchDepthCalculator = ReturnType<typeof createGasSwitchDepthCalculator>

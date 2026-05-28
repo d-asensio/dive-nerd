@@ -18,3 +18,13 @@ export const roundUpToStopGrid = (ceilingDepth: number): number => {
 
 export const nextShallowerStop = (currentStopDepth: number): number =>
   Math.max(0, currentStopDepth - STOP_GRID_METERS)
+
+/**
+ * Rounds a depth **down** to the deepest 3 m grid stop at or above it. Used to
+ * keep a stop at or shallower than a physical depth the diver actually reached
+ * (you cannot stop deeper than where you already are).
+ */
+export const roundDownToStopGrid = (depth: number): number => {
+  if (depth <= 0) return 0
+  return Math.floor(depth / STOP_GRID_METERS) * STOP_GRID_METERS
+}
