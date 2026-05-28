@@ -39,7 +39,15 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
   const samples = useSelector(diveProfileSamplesSelector)
   const intervals = useSelector(diveIntervalsSelector)
   const showCeiling = useSelector(state => state.showCeiling)
-  const [cursor, setCursor] = React.useState<Cursor | null>(null)
+  // `hover` tracks the live mouse position; `pinned` is fixed on click and
+  // takes precedence so the tooltip stays put anywhere along that vertical.
+  const [hover, setHover] = React.useState<Cursor | null>(null)
+  const [pinned, setPinned] = React.useState<Cursor | null>(null)
+  const cursor = pinned ?? hover
+
+  // A pin is anchored in pixel space, so drop it when the profile (and its
+  // scales) change to avoid stranding it off the line.
+  React.useEffect(() => setPinned(null), [samples])
 
   const profileData = React.useMemo(
     () => samples.map(s => ({ x: s.x, y: s.depth })),
@@ -96,16 +104,26 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
     }) => {
       const xLinear = xScale as LinearScale
 
-      const onMouseMove = (event: React.MouseEvent<SVGRectElement>) => {
+      const cursorFromEvent = (event: React.MouseEvent<SVGRectElement>): Cursor => {
         const bounds = event.currentTarget.getBoundingClientRect()
         const localX = clamp(event.clientX - bounds.left, 0, innerWidth)
         const localY = clamp(event.clientY - bounds.top, 0, innerHeight)
-        setCursor({
+        return {
           x: localX,
           y: localY,
           time: xLinear.invert(localX),
           flipX: localX > innerWidth / 2,
-        })
+        }
+      }
+
+      const onMouseMove = (event: React.MouseEvent<SVGRectElement>) => setHover(cursorFromEvent(event))
+      const onMouseLeave = () => setHover(null)
+      // Click toggles a pin: fix the tooltip to that vertical, or release it.
+      // Read the event synchronously — `currentTarget` is nulled out by the
+      // time the functional updater runs during reconciliation.
+      const onClick = (event: React.MouseEvent<SVGRectElement>) => {
+        const next = cursorFromEvent(event)
+        setPinned(prev => (prev ? null : next))
       }
 
       const profileDepthY = cursor ? yScale(depthAtTime(profileData, cursor.time)) : 0
@@ -122,8 +140,8 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
                 y1={0}
                 y2={innerHeight}
                 stroke={GUIDE_STROKE}
-                strokeWidth={1}
-                strokeDasharray="4,3"
+                strokeWidth={pinned ? 1.5 : 1}
+                strokeDasharray={pinned ? undefined : "4,3"}
                 pointerEvents="none"
               />
               {showCeilingDot && (
@@ -153,13 +171,15 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             height={innerHeight}
             fill="transparent"
             pointerEvents="all"
+            style={{ cursor: 'crosshair' }}
             onMouseMove={onMouseMove}
-            onMouseLeave={() => setCursor(null)}
+            onMouseLeave={onMouseLeave}
+            onClick={onClick}
           />
         </g>
       )
     },
-    [cursor, profileData, ceilingData, showCeiling],
+    [cursor, pinned, profileData, ceilingData, showCeiling],
   )
 
   return (
