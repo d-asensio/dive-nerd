@@ -37,9 +37,8 @@ export default async function Home() {
               <TabsTrigger value="compartments">{t('planner.tabs.compartments')}</TabsTrigger>
             </TabsList>
             <TabsContent value="profile">
-              <div className="grid w-full gap-4">
+              <div className="grid w-full">
                 <DiveProfileChart/>
-                <IndividualCompartmentCharts/>
               </div>
             </TabsContent>
             <TabsContent value="compartments">
@@ -48,6 +47,7 @@ export default async function Home() {
               </div>
             </TabsContent>
           </Tabs>
+          <IndividualCompartmentCharts/>
           <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>
             <div className="xl:col-span-2 min-w-0 space-y-4">
               <Card className="overflow-x-auto">

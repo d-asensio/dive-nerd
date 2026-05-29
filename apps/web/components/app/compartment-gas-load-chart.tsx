@@ -299,7 +299,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           tickRotation: 0,
           tickValues: [0, 1, 2, 3, 4, 5],
           legend: t('planner.chart.axis.ambient_pressure_bar'),
-          legendOffset: 42,
+          legendOffset: 34,
           legendPosition: "start"
         }}
         axisLeft={{
@@ -308,7 +308,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           tickRotation: 0,
           tickValues: [0, 1, 2, 3, 4, 5],
           legend: t('planner.chart.axis.inert_gas_load_bar'),
-          legendOffset: -45,
+          legendOffset: -35,
           legendPosition: "start"
         }}
         pointSize={5}
