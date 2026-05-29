@@ -110,6 +110,7 @@ export default {
   "planner.tanks.remove_tooltip": "Flasche entfernen",
   "planner.tabs.config": "Konfiguration",
   "planner.tabs.dive": "Tauchgang",
+  "planner.tabs.algorithm": "Algorithmus",
   "planner.chart.tooltip.depth": "Tiefe",
   "planner.chart.tooltip.time": "Zeit",
   "planner.chart.tooltip.profile_depth": "Profiltiefe",

@@ -110,6 +110,7 @@ export default {
   "planner.tanks.remove_tooltip": "Usuń butlę",
   "planner.tabs.config": "Konfiguracja",
   "planner.tabs.dive": "Nurkowanie",
+  "planner.tabs.algorithm": "Algorytm",
   "planner.chart.tooltip.depth": "Głębokość",
   "planner.chart.tooltip.time": "Czas",
   "planner.chart.tooltip.profile_depth": "Głębokość profilu",

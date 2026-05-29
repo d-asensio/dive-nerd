@@ -110,6 +110,7 @@ export default {
   "planner.tanks.remove_tooltip": "Remove tank",
   "planner.tabs.config": "Configuration",
   "planner.tabs.dive": "Dive",
+  "planner.tabs.algorithm": "Algorithm",
   "planner.chart.tooltip.depth": "Depth",
   "planner.chart.tooltip.time": "Time",
   "planner.chart.tooltip.profile_depth": "Profile depth",

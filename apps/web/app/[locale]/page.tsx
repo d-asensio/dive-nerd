@@ -9,6 +9,7 @@ import {TankTable} from "@/components/app/tank-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
 import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
 import {GasManagementSettingsPopover} from "@/components/app/gas-management-settings-popover";
+import {AlgorithmSettings} from "@/components/app/algorithm-settings";
 import {
   Card,
   CardContent,
@@ -75,6 +76,14 @@ export default async function Home() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <TankTable/>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('planner.tabs.algorithm')}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <AlgorithmSettings/>
                 </CardContent>
               </Card>
             </div>
