@@ -7,18 +7,22 @@ import {initialDivePlan} from "@/state/dive-plan/initial";
 import {createDiveGasesSlice, GasesSlice} from "@/state/dive-gases/slice";
 import {initialGases} from "@/state/dive-gases/initial";
 
+import {createUiSlice, UiSlice} from "@/state/ui/slice";
+
 import {createSelectors} from "@/state/createSelectors";
 
 setAutoFreeze(false);
 
 export type StoreState =
   DivePlanSlice &
-  GasesSlice
+  GasesSlice &
+  UiSlice
 
 export const useStore = createSelectors(
   create<StoreState>((...a) => ({
     ...createDivePlanSlice({ initialDivePlan })(...a),
-    ...createDiveGasesSlice({ initialGases })(...a)
+    ...createDiveGasesSlice({ initialGases })(...a),
+    ...createUiSlice()(...a)
   }))
 )
 

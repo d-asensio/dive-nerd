@@ -39,11 +39,20 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
   const samples = useSelector(diveProfileSamplesSelector)
   const intervals = useSelector(diveIntervalsSelector)
   const showCeiling = useSelector(state => state.showCeiling)
+  const setHoverTime = useSelector(state => state.setHoverTime)
   // `hover` tracks the live mouse position; `pinned` is fixed on click and
   // takes precedence so the tooltip stays put anywhere along that vertical.
   const [hover, setHover] = React.useState<Cursor | null>(null)
   const [pinned, setPinned] = React.useState<Cursor | null>(null)
   const cursor = pinned ?? hover
+
+  // Share the hovered/pinned time so the decompression table can highlight the
+  // matching step. Clear it when the chart unmounts (e.g. switching tabs).
+  const activeTime = cursor?.time ?? null
+  React.useEffect(() => {
+    setHoverTime(activeTime)
+  }, [activeTime, setHoverTime])
+  React.useEffect(() => () => setHoverTime(null), [setHoverTime])
 
   // A pin is anchored in pixel space, so drop it when the profile (and its
   // scales) change to avoid stranding it off the line.
