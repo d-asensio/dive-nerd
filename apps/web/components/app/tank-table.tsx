@@ -59,7 +59,7 @@ const TankRow = React.memo(function TankRow({ id }: { id: string }) {
 
   return (
     <TableRow>
-      <TableCell className="w-0">
+      <TableCell className="whitespace-nowrap">
         <TankIcon
           waterVolumeLiters={cylinderVolume}
           material={model.material}
@@ -153,7 +153,7 @@ export const TankTable = ({ className, ...props }: React.HTMLAttributes<HTMLDivE
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-0"/>
+            <TableHead/>
             <TableHead>{t('planner.tanks.model')}</TableHead>
             <TableHead className="w-[200px]">{t('planner.gases.gas')}</TableHead>
             <TableHead>{t('planner.tanks.pressure')}</TableHead>
