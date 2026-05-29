@@ -75,6 +75,14 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
     [profileData],
   )
 
+  // Depth grid + axis ticks every 10 m (within the dive's depth range).
+  const yGridValues = React.useMemo(() => {
+    if (maxDepth <= 0) return undefined
+    const values: number[] = []
+    for (let v = 0; v <= maxDepth; v += 10) values.push(v)
+    return values
+  }, [maxDepth])
+
   const ceilingData = React.useMemo(
     () => samples.map(s => ({ x: s.x, y: s.ceilingDepth })),
     [samples],
@@ -280,11 +288,22 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
+            tickValues: yGridValues,
             legend: t('planner.chart.axis.depth_meters'),
             legendOffset: -40,
             legendPosition: "start",
           }}
           isInteractive={false}
+          enableGridX={false}
+          gridYValues={yGridValues}
+          theme={{
+            grid: {
+              line: {
+                stroke: "#e2e8f0", // slate-200 — light depth bands, clearly visible
+                strokeWidth: 1,
+              },
+            },
+          }}
           enableArea
           // Baseline at the dive's deepest point — the area fills below the
           // line (the deep-water side), and the gradient maps cleanly to it.
