@@ -4,7 +4,7 @@ import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
-import {DiveSettings} from "@/components/app/dive-settings";
+import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {
   Card,
@@ -51,8 +51,9 @@ export default async function Home() {
           <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>
             <div className="xl:col-span-2 min-w-0 space-y-4">
               <Card className="overflow-x-auto">
-                <CardHeader>
-                  <CardTitle>{t('planner.tabs.levels')}</CardTitle>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0">
+                  <CardTitle>{t('planner.tabs.dive')}</CardTitle>
+                  <DiveSettingsPopover/>
                 </CardHeader>
                 <CardContent className="p-0">
                   <DivePlanTable/>
@@ -64,14 +65,6 @@ export default async function Home() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <GasTable/>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t('planner.tabs.config')}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <DiveSettings/>
                 </CardContent>
               </Card>
             </div>

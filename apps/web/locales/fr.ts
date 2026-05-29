@@ -103,6 +103,7 @@ export default {
   "planner.tabs.levels": "Paliers de fond",
   "planner.tabs.gases": "Gaz",
   "planner.tabs.config": "Configuration",
+  "planner.tabs.dive": "Plongée",
   "planner.chart.tooltip.depth": "Profondeur",
   "planner.chart.tooltip.time": "Temps",
   "planner.chart.tooltip.profile_depth": "Profondeur du profil",

@@ -103,6 +103,7 @@ export default {
   "planner.tabs.levels": "Tiefenstufen",
   "planner.tabs.gases": "Gase",
   "planner.tabs.config": "Konfiguration",
+  "planner.tabs.dive": "Tauchgang",
   "planner.chart.tooltip.depth": "Tiefe",
   "planner.chart.tooltip.time": "Zeit",
   "planner.chart.tooltip.profile_depth": "Profiltiefe",

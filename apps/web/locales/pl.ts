@@ -103,6 +103,7 @@ export default {
   "planner.tabs.levels": "Poziomy",
   "planner.tabs.gases": "Gazy",
   "planner.tabs.config": "Konfiguracja",
+  "planner.tabs.dive": "Nurkowanie",
   "planner.chart.tooltip.depth": "Głębokość",
   "planner.chart.tooltip.time": "Czas",
   "planner.chart.tooltip.profile_depth": "Głębokość profilu",

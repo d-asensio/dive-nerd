@@ -103,6 +103,7 @@ export default {
   "planner.tabs.levels": "Nivells",
   "planner.tabs.gases": "Gasos",
   "planner.tabs.config": "Configuració",
+  "planner.tabs.dive": "Immersió",
   "planner.chart.tooltip.depth": "Profunditat",
   "planner.chart.tooltip.time": "Temps",
   "planner.chart.tooltip.profile_depth": "Profunditat del perfil",
