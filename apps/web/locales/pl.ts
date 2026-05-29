@@ -143,6 +143,8 @@ export default {
   "planner.settings.show_ceiling_description": "Nałóż sufit dekompresyjny Bühlmanna i strefę zakazaną nad nim na wykresie profilu nurkowania.",
   "planner.settings.show_individual_compartments_label": "Pokaż poszczególne kompartmenty",
   "planner.settings.show_individual_compartments_description": "Wyświetl wykresy obciążenia gazem obojętnym dla każdego kompartmentu w siatce pod profilem nurkowania.",
+  "planner.settings.show_compartments_label": "Pokaż kompartmenty",
+  "planner.settings.show_compartments_description": "Wyświetl łączny wykres obciążenia gazem obojętnym kompartmentów.",
   "planner.decompression.title": "Profil dekompresji",
   "planner.decompression.switch_gas_at": "Zmień gaz na {depth} m",
   "planner.decompression.no_deco_required": "Dekompresja nie jest wymagana",

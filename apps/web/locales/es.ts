@@ -143,6 +143,8 @@ export default {
   "planner.settings.show_ceiling_description": "Superponer el techo de descompresión de Bühlmann y la zona prohibida sobre el perfil de inmersión.",
   "planner.settings.show_individual_compartments_label": "Mostrar compartimentos individuales",
   "planner.settings.show_individual_compartments_description": "Mostrar las gráficas de carga de gas inerte de cada compartimento en una cuadrícula bajo el perfil de inmersión.",
+  "planner.settings.show_compartments_label": "Mostrar compartimentos",
+  "planner.settings.show_compartments_description": "Mostrar la gráfica combinada de carga de gas inerte de los compartimentos.",
   "planner.decompression.title": "Perfil de descompresión",
   "planner.decompression.switch_gas_at": "Cambiar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sin descompresión requerida",

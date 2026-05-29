@@ -19,6 +19,7 @@ export const initialDivePlan: DivePlanState = {
   lastStopDepth: 6,
   showCeiling: true,
   showIndividualCompartments: false,
+  showCompartments: false,
   diveLevelsMap,
   diveLevelsIdList: Object.keys(diveLevelsMap)
 }

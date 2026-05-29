@@ -12,6 +12,7 @@ interface DivePlanActions {
   setLastStopDepth: (value: number) => void
   setShowCeiling: (value: boolean) => void
   setShowIndividualCompartments: (value: boolean) => void
+  setShowCompartments: (value: boolean) => void
   addDiveLevel: (levelId: string, level: DivePlanLevel) => void
   updateDiveLevel: (levelId: string, newProps: Partial<DivePlanLevel>) => void
   removeDiveLevel: (levelId: string) => void
@@ -63,6 +64,10 @@ export const createDivePlanSlice =
       setShowIndividualCompartments: value =>
         set(state => {
           state.showIndividualCompartments = value
+        }),
+      setShowCompartments: value =>
+        set(state => {
+          state.showCompartments = value
         }),
       addDiveLevel: (levelId, level) => {
         set(state => {

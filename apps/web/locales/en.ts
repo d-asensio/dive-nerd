@@ -143,6 +143,8 @@ export default {
   "planner.settings.show_ceiling_description": "Overlay the Bühlmann decompression ceiling and the forbidden zone above it on the dive profile chart.",
   "planner.settings.show_individual_compartments_label": "Show individual compartments",
   "planner.settings.show_individual_compartments_description": "Display the per-compartment inert-gas load charts in a grid below the dive profile chart.",
+  "planner.settings.show_compartments_label": "Show compartments",
+  "planner.settings.show_compartments_description": "Display the combined compartment inert-gas load profile chart.",
   "planner.decompression.title": "Decompression Profile",
   "planner.decompression.switch_gas_at": "Switch gas at {depth} m",
   "planner.decompression.no_deco_required": "No decompression required",

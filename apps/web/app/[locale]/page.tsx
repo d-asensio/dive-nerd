@@ -5,7 +5,6 @@ import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
 import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
-import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {
   Card,
   CardContent,
@@ -31,22 +30,10 @@ export default async function Home() {
       <div className="container p-6 space-y-4">
         <DivePlannerDisclaimerAlert />
         <div className="gap-6 flex flex-col-reverse lg:flex-col">
-          <Tabs defaultValue="profile">
-            <TabsList className="grid grid-cols-2 max-w-md">
-              <TabsTrigger value="profile">{t('planner.tabs.profile')}</TabsTrigger>
-              <TabsTrigger value="compartments">{t('planner.tabs.compartments')}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="profile">
-              <div className="grid w-full">
-                <DiveProfileChart/>
-              </div>
-            </TabsContent>
-            <TabsContent value="compartments">
-              <div className="grid w-full">
-                <CompartmentsProfileChart/>
-              </div>
-            </TabsContent>
-          </Tabs>
+          <div className="grid w-full">
+            <DiveProfileChart/>
+          </div>
+          <CompartmentsProfileChart/>
           <IndividualCompartmentCharts/>
           <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>
             <div className="xl:col-span-2 min-w-0 space-y-4">

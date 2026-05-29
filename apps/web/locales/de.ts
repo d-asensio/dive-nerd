@@ -143,6 +143,8 @@ export default {
   "planner.settings.show_ceiling_description": "Die Bühlmann-Dekompressionsdecke und die verbotene Zone darüber im Tauchprofil-Diagramm einblenden.",
   "planner.settings.show_individual_compartments_label": "Einzelne Kompartimente anzeigen",
   "planner.settings.show_individual_compartments_description": "Die Inertgas-Belastungsdiagramme je Kompartiment in einem Raster unter dem Tauchprofil anzeigen.",
+  "planner.settings.show_compartments_label": "Kompartimente anzeigen",
+  "planner.settings.show_compartments_description": "Das kombinierte Inertgas-Belastungsdiagramm der Kompartimente anzeigen.",
   "planner.decompression.title": "Dekompressionsprofil",
   "planner.decompression.switch_gas_at": "Gas bei {depth} m wechseln",
   "planner.decompression.no_deco_required": "Keine Dekompression erforderlich",

@@ -31,6 +31,7 @@ export function DiveSettings() {
   const lastStopDepth = useStore.use.lastStopDepth()
   const showCeiling = useStore.use.showCeiling()
   const showIndividualCompartments = useStore.use.showIndividualCompartments()
+  const showCompartments = useStore.use.showCompartments()
   const setDescentRate = useStore.use.setDescentRate()
   const setAscentRate = useStore.use.setAscentRate()
   const setGradientFactorLow = useStore.use.setGradientFactorLow()
@@ -39,6 +40,7 @@ export function DiveSettings() {
   const setLastStopDepth = useStore.use.setLastStopDepth()
   const setShowCeiling = useStore.use.setShowCeiling()
   const setShowIndividualCompartments = useStore.use.setShowIndividualCompartments()
+  const setShowCompartments = useStore.use.setShowCompartments()
 
   const handleLastStopAt6Change = React.useCallback((checked: boolean) => {
     setLastStopDepth(checked ? 6 : 3)
@@ -165,6 +167,19 @@ export function DiveSettings() {
           <Label htmlFor="show_individual_compartments">{t('planner.settings.show_individual_compartments_label')}</Label>
           <p className="text-xs text-muted-foreground">
             {t('planner.settings.show_individual_compartments_description')}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-start gap-3 md:col-span-2">
+        <Switch
+          id="show_compartments"
+          checked={showCompartments}
+          onCheckedChange={setShowCompartments}
+        />
+        <div className="grid gap-1">
+          <Label htmlFor="show_compartments">{t('planner.settings.show_compartments_label')}</Label>
+          <p className="text-xs text-muted-foreground">
+            {t('planner.settings.show_compartments_description')}
           </p>
         </div>
       </div>

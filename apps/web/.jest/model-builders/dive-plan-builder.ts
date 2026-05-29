@@ -19,6 +19,7 @@ export function divePlanBuilder() {
     lastStopDepth: 6,
     showCeiling: true,
     showIndividualCompartments: false,
+    showCompartments: false,
     diveLevelsMap: {},
     diveLevelsIdList: []
   }
