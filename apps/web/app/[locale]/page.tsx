@@ -9,7 +9,6 @@ import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -22,8 +21,7 @@ import {
 import {
   DivePlannerDisclaimerAlert
 } from "@/components/app/dive-planner-disclaimer-alert";
-import {DecompressionSummary} from "@/components/app/decompression-summary";
-import {DiveMetricsCards} from "@/components/app/dive-metrics-cards";
+import {DiveMetrics} from "@/components/app/dive-metrics";
 import {getI18n} from "@/locales/server";
 
 export default async function Home() {
@@ -33,7 +31,6 @@ export default async function Home() {
       <div className="container p-6 space-y-4">
         <DivePlannerDisclaimerAlert />
         <div className="gap-6 flex flex-col-reverse lg:flex-col">
-          <DiveMetricsCards/>
           <Tabs defaultValue="profile">
             <TabsList className="grid grid-cols-3 max-w-xl">
               <TabsTrigger value="profile">{t('planner.tabs.profile')}</TabsTrigger>
@@ -84,11 +81,9 @@ export default async function Home() {
             <Card className="overflow-x-auto">
               <CardHeader>
                 <CardTitle>{t('planner.decompression.title')}</CardTitle>
-                <CardDescription>
-                  <DecompressionSummary/>
-                </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
+                <DiveMetrics/>
                 <DecompressionTable/>
               </CardContent>
             </Card>
