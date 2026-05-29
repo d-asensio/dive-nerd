@@ -63,6 +63,13 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
     [samples],
   )
 
+  // Plot floor — anchors the area baseline and the yScale max so the depth tint
+  // gradient maps to the visible plot height, not an unbounded path bbox.
+  const maxDepth = React.useMemo(
+    () => profileData.reduce((acc, p) => Math.max(acc, p.y), 0),
+    [profileData],
+  )
+
   const ceilingData = React.useMemo(
     () => samples.map(s => ({ x: s.x, y: s.ceilingDepth })),
     [samples],
@@ -206,7 +213,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           yScale={{
             type: "linear",
             min: 0,
-            max: "auto",
+            max: maxDepth || "auto",
             stacked: false,
             reverse: true,
           }}
@@ -229,10 +236,30 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             legendPosition: "start",
           }}
           isInteractive={false}
+          enableArea
+          // Baseline at the dive's deepest point — the area fills below the
+          // line (the deep-water side), and the gradient maps cleanly to it.
+          areaBaselineValue={maxDepth}
+          areaOpacity={1}
+          defs={[
+            {
+              id: 'diveProfileTint',
+              type: 'linearGradient',
+              colors: [
+                // Stay transparent through most of the chart and ease in to a
+                // soft tint only near the bottom (the deep-water side).
+                { offset: 0, color: SERIES_COLOR, opacity: 0 },
+                { offset: 60, color: SERIES_COLOR, opacity: 0.04 },
+                { offset: 100, color: SERIES_COLOR, opacity: 0.18 },
+              ],
+            },
+          ]}
+          fill={[{ match: { id: 'Dive Profile' }, id: 'diveProfileTint' }]}
           layers={[
             "grid",
             "markers",
             "axes",
+            "areas",
             CeilingLayer,
             "lines",
             CursorLayer,
