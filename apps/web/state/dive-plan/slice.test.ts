@@ -78,6 +78,19 @@ describe('setShowIndividualCompartments', () => {
   })
 })
 
+describe('setSacRate', () => {
+  it('sets a SAC rate', () => {
+    const initialDivePlan = divePlanBuilder().build()
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
+
+    sliceStore.getState().setSacRate(18)
+
+    expect(sliceStore.getState().sacRate).toBe(18)
+  })
+})
+
 describe('setShowGasSwitches', () => {
   it('toggles the showGasSwitches flag', () => {
     const initialDivePlan = divePlanBuilder().build()

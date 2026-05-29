@@ -11,8 +11,9 @@ export function divePlanBuilder() {
   }
 
   let divePlan: DivePlanState = {
-    descentRate: 10,
+    descentRate: 20,
     ascentRate: 9,
+    sacRate: 20,
     gradientFactorLow: 0.3,
     gradientFactorHigh: 0.85,
     switchAtMod: true,

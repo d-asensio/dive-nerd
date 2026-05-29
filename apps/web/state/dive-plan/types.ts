@@ -7,6 +7,7 @@ interface DivePlanLevel {
 interface DivePlan {
   descentRate: number
   ascentRate: number
+  sacRate: number            // Surface Air Consumption rate, litres/minute at the surface
   gradientFactorLow: number  // 0..1
   gradientFactorHigh: number // 0..1
   switchAtMod: boolean       // force a procedural switch stop at each deco gas's MOD

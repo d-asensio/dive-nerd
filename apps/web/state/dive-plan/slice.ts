@@ -6,6 +6,7 @@ import {NIL} from "uuid";
 interface DivePlanActions {
   setDescentRate: (descentRate: number) => void
   setAscentRate: (ascentRate: number) => void
+  setSacRate: (value: number) => void
   setGradientFactorLow: (value: number) => void
   setGradientFactorHigh: (value: number) => void
   setSwitchAtMod: (value: boolean) => void
@@ -41,6 +42,10 @@ export const createDivePlanSlice =
       setAscentRate: ascentRate =>
         set(state => {
           state.ascentRate = ascentRate
+        }),
+      setSacRate: value =>
+        set(state => {
+          state.sacRate = value
         }),
       setGradientFactorLow: value =>
         set(state => {
