@@ -63,7 +63,7 @@ export function DiveSettings() {
   }, [setGradientFactorHigh])
 
   return (
-    <div className="grid md:grid-cols-2 gap-4 p-6">
+    <div className="grid md:grid-cols-2 gap-4">
       <div className="grid items-center gap-4">
         <Label htmlFor="descent_rate">{t('planner.settings.descent_rate')}</Label>
         <InputWithUnits

@@ -102,6 +102,7 @@ export default {
   "planner.tabs.individual_compartments": "Individual compartments",
   "planner.tabs.levels": "Levels",
   "planner.tabs.gases": "Gases",
+  "planner.tabs.config": "Configuration",
   "planner.chart.tooltip.depth": "Depth",
   "planner.chart.tooltip.time": "Time",
   "planner.chart.tooltip.profile_depth": "Profile depth",

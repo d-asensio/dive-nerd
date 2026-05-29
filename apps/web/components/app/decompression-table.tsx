@@ -46,7 +46,7 @@ const GasSwitchRow = ({segment}: {segment: DiveSegment}) => {
   )
 }
 
-export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
+export const DecompressionTable = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const t = useI18n()
   const diveIntervals = useSelector(diveIntervalsSelector)
   const hoverTime = useSelector(state => state.hoverTime)
@@ -58,7 +58,7 @@ export const DecompressionTable = (props: React.HTMLAttributes<HTMLDivElement>) 
     : diveIntervals.findIndex(segment => hoverTime <= segment.finalTime)
 
   return (
-    <div {...props}>
+    <div className={cn("[&_th]:px-2 [&_td]:px-2", className)} {...props}>
       <Table>
         <TableHeader>
           <TableRow>

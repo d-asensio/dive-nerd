@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {Settings} from "lucide-react";
 import {
   CompartmentsProfileChart
 } from "@/components/app/compartments-profile-chart";
@@ -55,25 +54,33 @@ export default async function Home() {
               <IndividualCompartmentCharts/>
             </TabsContent>
           </Tabs>
-          <div className='grid lg:grid-cols-2 xl:grid-cols-3'>
-            <Tabs defaultValue="levels" className="xl:col-span-2 min-w-0">
-              <TabsList className="grid grid-cols-3 max-w-lg mr-16 mb-4">
-                <TabsTrigger value="levels">{t('planner.tabs.levels')}</TabsTrigger>
-                <TabsTrigger value="gases">{t('planner.tabs.gases')}</TabsTrigger>
-                <TabsTrigger value="config">
-                  <Settings className="w-4 h-4"/>
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="levels">
-                <DivePlanTable/>
-              </TabsContent>
-              <TabsContent value="gases">
-                <GasTable/>
-              </TabsContent>
-              <TabsContent value="config">
-                <DiveSettings/>
-              </TabsContent>
-            </Tabs>
+          <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>
+            <div className="xl:col-span-2 min-w-0 space-y-4">
+              <Card className="overflow-x-auto">
+                <CardHeader>
+                  <CardTitle>{t('planner.tabs.levels')}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <DivePlanTable/>
+                </CardContent>
+              </Card>
+              <Card className="overflow-x-auto">
+                <CardHeader>
+                  <CardTitle>{t('planner.tabs.gases')}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <GasTable/>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('planner.tabs.config')}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <DiveSettings/>
+                </CardContent>
+              </Card>
+            </div>
             <Card className="overflow-x-auto">
               <CardHeader>
                 <CardTitle>{t('planner.decompression.title')}</CardTitle>
