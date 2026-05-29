@@ -13,6 +13,19 @@ import {useSelector} from "@/state/useSelector";
 import {diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {useI18n} from "@/locales/client";
 
+const LOAD_COLOR = "rgb(96, 165, 250)" // matches the dive profile line
+
+const colorBySeriesId: Record<string, string> = {
+  "Ambient pressure line": "black",
+  "Surface pressure line": "lightblue",
+  "M-Value line": "red",
+  "GF@Low line": "orange",
+  "GF@High line": "purple",
+  "GF@Ceiling line": "green",
+  "Load": LOAD_COLOR,
+  "Ceil": "lightblue",
+}
+
 const maxValueLineEq = ({ coefficientA: a, coefficientB: b, ambientPressure: Pa }: {
   coefficientA: number,
   coefficientB: number,
@@ -69,11 +82,23 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
   const diveIntervals = useSelector(diveIntervalsSelector)
   const gfLow = useSelector(state => state.gradientFactorLow)
   const gfHigh = useSelector(state => state.gradientFactorHigh)
-  const intervals = calculateDiveProfile(diveIntervals, {
-    gfLow,
-    gfHigh,
-    firstStopAmbientPressure: surfaceAmbientPressure, // placeholder — chart ignores ceiling
-  })
+  const hoverTime = useSelector(state => state.hoverTime)
+
+  const intervals = React.useMemo(
+    () => calculateDiveProfile(diveIntervals, {
+      gfLow,
+      gfHigh,
+      firstStopAmbientPressure: surfaceAmbientPressure, // placeholder — chart ignores ceiling
+    }),
+    [diveIntervals, gfLow, gfHigh],
+  )
+
+  // While hovering the dive profile, grow the compartment's load/ceiling
+  // trajectory only up to the hovered moment; show the whole dive otherwise.
+  const visibleIntervals = React.useMemo(
+    () => hoverTime == null ? intervals : intervals.filter(sample => sample.x <= hoverTime),
+    [intervals, hoverTime],
+  )
 
   const {N2} = buhlmannCompartments[compartmentId]
 
@@ -84,6 +109,33 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
   const highGradientFactor = 0.8
 
   const maxAmbientPressure = 5.530439123
+
+  const loadData = visibleIntervals.map(({compartmentInertGasLoads, ambientPressure}) => ({
+    x: ambientPressure,
+    y: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He,
+  }))
+
+  // A blurred under-stroke that makes the (blue) tissue-load line glow a little.
+  const LoadGlowLayer = ({ xScale, yScale }: {
+    xScale: (value: number) => number
+    yScale: (value: number) => number
+  }) => {
+    if (loadData.length < 2) return null
+    const points = loadData.map(p => `${xScale(p.x)},${yScale(p.y)}`).join(' ')
+    return (
+      <polyline
+        points={points}
+        fill="none"
+        stroke={LOAD_COLOR}
+        strokeWidth={6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity={0.4}
+        style={{ filter: 'blur(3px)' }}
+        pointerEvents="none"
+      />
+    )
+  }
 
   return (
     <div className="w-full min-w-0 h-[260px] overflow-x-auto" {...props}>
@@ -204,17 +256,11 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           },
           {
             id: "Load",
-            data: intervals.map(({
-                                   compartmentInertGasLoads,
-                                   ambientPressure
-                                 }) => ({
-              x: ambientPressure,
-              y: compartmentInertGasLoads[compartmentId].N2 + compartmentInertGasLoads[compartmentId].He
-            }))
+            data: loadData
           },
           {
             id: "Ceil",
-            data: intervals.map(({
+            data: visibleIntervals.map(({
                                    compartmentInertGasLoads,
                                    ambientPressure
                                  }) => ({
@@ -231,14 +277,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
             }))
           }
         ]}
-        colors={[
-          "black",
-          "lightblue",
-          "red",
-          "orange",
-          "purple",
-          "green"
-        ]}
+        colors={(serie) => colorBySeriesId[String(serie.id)] ?? "gray"}
         margin={{top: 4, right: 6, bottom: 62, left: 62}}
         xScale={{
           type: "linear",
@@ -258,16 +297,18 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          tickValues: [0, 1, 2, 3, 4, 5],
           legend: t('planner.chart.axis.ambient_pressure_bar'),
-          legendOffset: 30,
+          legendOffset: 42,
           legendPosition: "start"
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          tickValues: [0, 1, 2, 3, 4, 5],
           legend: t('planner.chart.axis.inert_gas_load_bar'),
-          legendOffset: -30,
+          legendOffset: -45,
           legendPosition: "start"
         }}
         pointSize={5}
@@ -277,6 +318,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
         useMesh
         tooltip={() => null}
         enableCrosshair={false}
+        layers={['grid', 'markers', 'axes', 'areas', 'crosshair', LoadGlowLayer, 'lines', 'slices', 'points', 'mesh', 'legends']}
       />
     </div>
   )
