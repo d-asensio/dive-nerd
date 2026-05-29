@@ -95,7 +95,7 @@ export function MinGasTable() {
                 {name}
               </TableCell>
               {depthLevels.map(depth => (
-                <TableCell key={volume} >
+                <TableCell key={depth} >
                   {minGas({
                     depth0: depth,
                     depth1: 0,
