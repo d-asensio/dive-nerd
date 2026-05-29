@@ -10,6 +10,12 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 
 import {InputWithUnits} from "@/components/app/input-with-units";
 import {Button} from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {cn} from "@/lib/utils";
 import {useStore} from "@/state/store";
 
@@ -149,19 +155,23 @@ const DivePlanTableBody = () => {
   )
 }
 
+const DEPTH_INCREMENTS_METERS = [5, 10, 20]
+
 export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const t = useI18n()
   const addDiveLevel = useStore.use.addDiveLevel()
 
-  const onAddLevelButtonClick = React.useCallback(() => {
-    addDiveLevel(
-      uuid(),
-      {
-        depth: 30,
-        duration: 20,
-        gasId: NIL
-      }
-    )
+  // Add a level deeper than the current last one by the chosen increment.
+  const addDeeperLevel = React.useCallback((deltaMeters: number) => {
+    const {diveLevelsIdList, diveLevelsMap} = useStore.getState()
+    const lastLevelId = diveLevelsIdList[diveLevelsIdList.length - 1]
+    const lastDepth = lastLevelId ? diveLevelsMap[lastLevelId].depth : 0
+
+    addDiveLevel(uuid(), {
+      depth: lastDepth + deltaMeters,
+      duration: 20,
+      gasId: NIL
+    })
   }, [addDiveLevel])
 
   return (
@@ -180,10 +190,21 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
       </Table>
       <Separator />
       <div className="text-right w-full p-4">
-        <Button variant="ghost" onClick={onAddLevelButtonClick}>
-          <Plus className="mr-2 h-4 w-4"/>
-          {t('planner.levels.add_button')}
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost">
+              <Plus className="mr-2 h-4 w-4"/>
+              {t('planner.levels.add_button')}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {DEPTH_INCREMENTS_METERS.map(deltaMeters => (
+              <DropdownMenuItem key={deltaMeters} onClick={() => addDeeperLevel(deltaMeters)}>
+                +{deltaMeters} m
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   )
