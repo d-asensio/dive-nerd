@@ -24,7 +24,9 @@ import {diveLevelByIdSelector, isFirstDiveLevelSelector} from "@/state/dive-plan
 import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
 import {BottomGasSelector} from "@/components/app/bottom-gas-selector";
-import {gasMODSelector} from "@/state/dive-gases/selectors";
+import {gasByIdSelector, gasMODSelector} from "@/state/dive-gases/selectors";
+import {fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
+import {surfaceAmbientPressure, waterDensity} from "@/utils/calculate-dive-profile";
 import {useI18n} from "@/locales/client";
 
 interface PlanLevelRow {
@@ -36,6 +38,17 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
   const isFirst = useSelector(isFirstDiveLevelSelector, id)
   const { depth, duration, gasId } = useSelector(diveLevelByIdSelector, id)
   const gasMOD = useSelector(gasMODSelector, gasId)
+  const gas = useSelector(gasByIdSelector, gasId)
+
+  // Gas density at this level's depth on the level's gas. Same GUE-style
+  // thresholds (≤5.2 ideal, ≤6.2 caution, >6.2 hard limit) as the chart tooltip.
+  const ambientPressure = fromDepthToHydrostaticPressure({ depth, surfaceAmbientPressure, waterDensity })
+  const density = gas ? gasDensity({ oxygenFraction: gas.fO2, heliumFraction: gas.fHe, ambientPressure }) : null
+  const densityColorClass = density == null
+    ? ""
+    : density > 6.2 ? "text-red-600"
+      : density > 5.2 ? "text-amber-600"
+        : "text-emerald-600"
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
   const updateDiveLevel = useStore.use.updateDiveLevel()
@@ -115,6 +128,9 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
           onValueChange={handleGasChange}
         />
       </TableCell>
+      <TableCell className={cn("whitespace-nowrap font-semibold tabular-nums", densityColorClass)}>
+        {density != null ? `${density.toFixed(1)} g/L` : "—"}
+      </TableCell>
       <TableCell>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -183,6 +199,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
             <TableHead>{t('planner.levels.duration')}</TableHead>
             <TableHead className="w-full"/>
             <TableHead className="w-[200px]">{t('planner.levels.gas')}</TableHead>
+            <TableHead className="whitespace-nowrap">{t('planner.chart.tooltip.density')}</TableHead>
             <TableHead className="w-0"/>
           </TableRow>
         </TableHeader>

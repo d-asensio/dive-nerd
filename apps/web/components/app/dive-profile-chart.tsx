@@ -3,6 +3,7 @@
 import * as React from "react";
 import {ResponsiveLine} from '@nivo/line'
 import {Clock} from "lucide-react";
+import {fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
 
 import {cn} from "@/lib/utils";
 import {useSelector} from "@/state/useSelector";
@@ -11,6 +12,7 @@ import {depthAtTime} from "@/utils/interpolate-depth-at-time";
 import {gasAtTime} from "@/utils/gas-at-time";
 import {gasFormatter} from "@/utils/gas-formatter";
 import {gasColorOf} from "@/utils/gas-color";
+import {surfaceAmbientPressure, waterDensity} from "@/utils/calculate-dive-profile";
 import {GasBadge} from "@/components/app/gas-badge";
 import {useI18n} from "@/locales/client";
 
@@ -27,10 +29,12 @@ interface LinearScale {
 }
 
 interface Cursor {
-  x: number      // pixel, inner plot coordinates
-  y: number      // pixel, inner plot coordinates
-  time: number   // minutes — the cursor's time (xScale.invert), used to project onto the lines
-  flipX: boolean // render the tooltip to the left of the cursor (near the right edge)
+  x: number       // pixel, inner plot coordinates
+  y: number       // pixel, inner plot coordinates
+  clientX: number // viewport pixel, used to position the tooltip outside the chart's overflow clip
+  clientY: number // viewport pixel
+  time: number    // minutes — the cursor's time (xScale.invert), used to project onto the lines
+  flipX: boolean  // render the tooltip to the left of the cursor (near the right edge)
 }
 
 const clamp = (value: number, min: number, max: number): number =>
@@ -171,6 +175,8 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
         return {
           x: localX,
           y: localY,
+          clientX: event.clientX,
+          clientY: event.clientY,
           time: xLinear.invert(localX),
           flipX: localX > innerWidth / 2,
         }
@@ -314,13 +320,27 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
           const profileDepth = depthAtTime(profileData, cursor.time)
           const ceiling = depthAtTime(ceilingData, cursor.time)
           const gas = gasAtTime(intervals, cursor.time)
+          const ambientPressure = fromDepthToHydrostaticPressure({
+            depth: profileDepth,
+            surfaceAmbientPressure,
+            waterDensity,
+          })
+          const density = gas
+            ? gasDensity({ oxygenFraction: gas.fO2, heliumFraction: gas.fHe, ambientPressure })
+            : null
+          // GUE-style density thresholds: ≤5.2 ideal, ≤6.2 caution, >6.2 hard limit.
+          const densityColorClass = density == null
+            ? ""
+            : density > 6.2 ? "text-red-600"
+              : density > 5.2 ? "text-amber-600"
+                : "text-emerald-600"
 
           return (
             <div
-              className="pointer-events-none absolute z-50 w-max overflow-hidden whitespace-nowrap rounded-md border bg-popover text-xs text-popover-foreground shadow-md"
+              className="pointer-events-none fixed z-50 w-max overflow-hidden whitespace-nowrap rounded-md border bg-popover text-xs text-popover-foreground shadow-md"
               style={{
-                left: MARGIN.left + cursor.x,
-                top: MARGIN.top + cursor.y,
+                left: cursor.clientX,
+                top: cursor.clientY,
                 transform: `translate(${cursor.flipX ? 'calc(-100% - 12px)' : '12px'}, -50%)`,
               }}
             >
@@ -342,12 +362,22 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
                     </span>
                   </>
                 )}
-                {gas && (
-                  <span className="col-span-2 justify-self-end pt-1">
+              </div>
+              {gas && (
+                <div className="grid grid-cols-[auto_auto] items-center gap-x-6 gap-y-1 border-t px-3 py-2">
+                  <span className="col-span-2 justify-self-start">
                     <GasBadge gas={gas} />
                   </span>
-                )}
-              </div>
+                  {density != null && (
+                    <>
+                      <span className="text-muted-foreground">{t('planner.chart.tooltip.density')}</span>
+                      <span className={cn("text-right font-semibold tabular-nums", densityColorClass)}>
+                        {density.toFixed(1)} g/L
+                      </span>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           )
         })()}

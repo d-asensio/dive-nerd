@@ -109,6 +109,7 @@ export default {
   "planner.chart.tooltip.profile_depth": "Profondeur du profil",
   "planner.chart.tooltip.ceiling": "Plafond",
   "planner.chart.tooltip.gas": "Gaz",
+  "planner.chart.tooltip.density": "Densité",
   "planner.chart.axis.time_minutes": "Temps (en minutes)",
   "planner.chart.axis.depth_meters": "Profondeur (en mètres)",
   "planner.chart.axis.pressure_bars": "Pression (en bars)",

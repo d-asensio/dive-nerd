@@ -5,6 +5,7 @@ export { gradientFactorAt } from './gradient-factor'
 export type { GradientFactorBounds } from './gradient-factor'
 export { compartmentCeilingAmbientPressure } from './compartment-ceiling'
 export { divingCeilingAmbientPressure } from './diving-ceiling'
+export { gasDensity } from './gas-density'
 
 /**
  * Gravitational acceleration in meters * second^2
