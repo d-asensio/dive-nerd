@@ -13,7 +13,6 @@ import {gasAtTime} from "@/utils/gas-at-time";
 import {gasFormatter} from "@/utils/gas-formatter";
 import {gasColorOf} from "@/utils/gas-color";
 import {surfaceAmbientPressure, waterDensity} from "@/utils/calculate-dive-profile";
-import {GasBadge} from "@/components/app/gas-badge";
 import {useI18n} from "@/locales/client";
 
 const CEILING_STROKE = "#d97706"
@@ -365,8 +364,12 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
               </div>
               {gas && (
                 <div className="grid grid-cols-[auto_auto] items-center gap-x-6 gap-y-1 border-t px-3 py-2">
-                  <span className="col-span-2 justify-self-start">
-                    <GasBadge gas={gas} />
+                  <span className="col-span-2 flex items-center gap-2 font-medium">
+                    <span
+                      className="inline-block h-3 w-3 shrink-0 rounded-full border-2 bg-white"
+                      style={{ borderColor: gasColorOf(gas) }}
+                    />
+                    {gasFormatter.format(gas)}
                   </span>
                   {density != null && (
                     <>
