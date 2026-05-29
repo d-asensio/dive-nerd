@@ -117,6 +117,8 @@ export default {
   "planner.chart.tooltip.gas": "Gas",
   "planner.chart.tooltip.density": "Dichte",
   "planner.chart.tooltip.end": "END",
+  "planner.chart.legend.profile": "Tauchprofil",
+  "planner.chart.legend.gas_switch": "Gaswechsel",
   "planner.chart.axis.time_minutes": "Zeit (in Minuten)",
   "planner.chart.axis.depth_meters": "Tiefe (in Metern)",
   "planner.chart.axis.pressure_bars": "Druck (in bar)",

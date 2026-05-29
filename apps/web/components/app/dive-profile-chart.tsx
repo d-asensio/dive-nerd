@@ -44,6 +44,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
   const samples = useSelector(diveProfileSamplesSelector)
   const intervals = useSelector(diveIntervalsSelector)
   const showCeiling = useSelector(state => state.showCeiling)
+  const showGasSwitches = useSelector(state => state.showGasSwitches)
   const setHoverTime = useSelector(state => state.setHoverTime)
   // `hover` tracks the live mouse position; `pinned` is fixed on click and
   // takes precedence so the tooltip stays put anywhere along that vertical.
@@ -124,6 +125,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
   // the new gas's name labelled above it.
   const GasSwitchLayer = React.useCallback(
     ({ xScale, yScale }: { xScale: (v: number) => number; yScale: (v: number) => number }) => {
+      if (!showGasSwitches) return null
       const switches = intervals.filter(segment => segment.isGasSwitch)
       if (switches.length === 0) return null
       return (
@@ -158,7 +160,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
         </g>
       )
     },
-    [intervals],
+    [intervals, showGasSwitches],
   )
 
   // Captures the cursor over the plot area and projects it onto the profile:

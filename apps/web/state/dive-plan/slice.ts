@@ -11,6 +11,7 @@ interface DivePlanActions {
   setSwitchAtMod: (value: boolean) => void
   setLastStopDepth: (value: number) => void
   setShowCeiling: (value: boolean) => void
+  setShowGasSwitches: (value: boolean) => void
   setShowIndividualCompartments: (value: boolean) => void
   setShowCompartments: (value: boolean) => void
   addDiveLevel: (levelId: string, level: DivePlanLevel) => void
@@ -60,6 +61,10 @@ export const createDivePlanSlice =
       setShowCeiling: value =>
         set(state => {
           state.showCeiling = value
+        }),
+      setShowGasSwitches: value =>
+        set(state => {
+          state.showGasSwitches = value
         }),
       setShowIndividualCompartments: value =>
         set(state => {

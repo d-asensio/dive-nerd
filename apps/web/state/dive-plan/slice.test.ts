@@ -78,6 +78,19 @@ describe('setShowIndividualCompartments', () => {
   })
 })
 
+describe('setShowGasSwitches', () => {
+  it('toggles the showGasSwitches flag', () => {
+    const initialDivePlan = divePlanBuilder().build()
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
+
+    sliceStore.getState().setShowGasSwitches(false)
+
+    expect(sliceStore.getState().showGasSwitches).toBe(false)
+  })
+})
+
 describe('setShowCompartments', () => {
   it('toggles the showCompartments flag', () => {
     const initialDivePlan = divePlanBuilder().build()

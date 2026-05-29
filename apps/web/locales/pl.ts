@@ -117,6 +117,8 @@ export default {
   "planner.chart.tooltip.gas": "Gaz",
   "planner.chart.tooltip.density": "Gęstość",
   "planner.chart.tooltip.end": "END",
+  "planner.chart.legend.profile": "Profil nurkowania",
+  "planner.chart.legend.gas_switch": "Zmiana gazu",
   "planner.chart.axis.time_minutes": "Czas (w minutach)",
   "planner.chart.axis.depth_meters": "Głębokość (w metrach)",
   "planner.chart.axis.pressure_bars": "Ciśnienie (w barach)",

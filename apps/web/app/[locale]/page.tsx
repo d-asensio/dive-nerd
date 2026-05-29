@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
+import {ChartLegend} from "@/components/app/chart-legend";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
 import {TankTable} from "@/components/app/tank-table";
@@ -31,9 +32,14 @@ export default async function Home() {
       <div className="container p-6 space-y-4">
         <DivePlannerDisclaimerAlert />
         <div className="gap-6 flex flex-col-reverse lg:flex-col">
-          <div className="grid w-full">
-            <DiveProfileChart/>
-          </div>
+          <Card>
+            <CardContent className="space-y-3 p-4">
+              <ChartLegend/>
+              <div className="grid w-full">
+                <DiveProfileChart/>
+              </div>
+            </CardContent>
+          </Card>
           <CompartmentsProfileChart/>
           <IndividualCompartmentCharts/>
           <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-5'>
