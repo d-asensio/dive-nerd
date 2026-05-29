@@ -35,8 +35,8 @@ export default async function Home() {
           </div>
           <CompartmentsProfileChart/>
           <IndividualCompartmentCharts/>
-          <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>
-            <div className="xl:col-span-2 min-w-0 space-y-4">
+          <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-5'>
+            <div className="xl:col-span-3 min-w-0 space-y-4">
               <Card className="overflow-x-auto">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0">
                   <CardTitle>{t('planner.tabs.dive')}</CardTitle>
@@ -55,7 +55,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
             </div>
-            <Card className="overflow-x-auto">
+            <Card className="overflow-x-auto xl:col-span-2">
               <CardHeader>
                 <CardTitle>{t('planner.decompression.title')}</CardTitle>
               </CardHeader>

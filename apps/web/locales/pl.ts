@@ -147,7 +147,7 @@ export default {
   "planner.settings.show_individual_compartments_description": "Wyświetl wykresy obciążenia gazem obojętnym dla każdego kompartmentu w siatce pod profilem nurkowania.",
   "planner.settings.show_compartments_label": "Pokaż kompartmenty",
   "planner.settings.show_compartments_description": "Wyświetl łączny wykres obciążenia gazem obojętnym kompartmentów.",
-  "planner.decompression.title": "Profil dekompresji",
+  "planner.decompression.title": "Czas całkowity",
   "planner.decompression.switch_gas_at": "Zmień gaz na {depth} m",
   "planner.decompression.no_deco_required": "Dekompresja nie jest wymagana",
   "planner.units.minutes_short": "{count} min",

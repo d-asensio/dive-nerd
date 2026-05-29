@@ -147,7 +147,7 @@ export default {
   "planner.settings.show_individual_compartments_description": "Mostra i grafici di carico di gas inerte di ogni compartimento in una griglia sotto il profilo dell'immersione.",
   "planner.settings.show_compartments_label": "Mostra i compartimenti",
   "planner.settings.show_compartments_description": "Mostra il grafico combinato di carico di gas inerte dei compartimenti.",
-  "planner.decompression.title": "Profilo di decompressione",
+  "planner.decompression.title": "Tempo totale",
   "planner.decompression.switch_gas_at": "Cambia gas a {depth} m",
   "planner.decompression.no_deco_required": "Nessuna decompressione richiesta",
   "planner.units.minutes_short": "{count} min",

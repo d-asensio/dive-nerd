@@ -147,7 +147,7 @@ export default {
   "planner.settings.show_individual_compartments_description": "Mostrar les gràfiques de càrrega de gas inert de cada compartiment en una graella sota el perfil d'immersió.",
   "planner.settings.show_compartments_label": "Mostrar compartiments",
   "planner.settings.show_compartments_description": "Mostrar la gràfica combinada de càrrega de gas inert dels compartiments.",
-  "planner.decompression.title": "Perfil de descompressió",
+  "planner.decompression.title": "Temps total",
   "planner.decompression.switch_gas_at": "Canviar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sense descompressió necessària",
   "planner.units.minutes_short": "{count} min",

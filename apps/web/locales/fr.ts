@@ -147,7 +147,7 @@ export default {
   "planner.settings.show_individual_compartments_description": "Afficher les graphiques de charge en gaz inerte de chaque compartiment dans une grille sous le profil de plongée.",
   "planner.settings.show_compartments_label": "Afficher les compartiments",
   "planner.settings.show_compartments_description": "Afficher le graphique combiné de charge en gaz inerte des compartiments.",
-  "planner.decompression.title": "Profil de décompression",
+  "planner.decompression.title": "Temps total",
   "planner.decompression.switch_gas_at": "Changer de gaz à {depth} m",
   "planner.decompression.no_deco_required": "Pas de décompression requise",
   "planner.units.minutes_short": "{count} min",
