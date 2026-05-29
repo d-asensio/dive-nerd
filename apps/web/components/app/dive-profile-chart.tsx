@@ -9,6 +9,8 @@ import {useSelector} from "@/state/useSelector";
 import {diveProfileSamplesSelector, diveIntervalsSelector} from "@/state/dive-plan/selectors";
 import {depthAtTime} from "@/utils/interpolate-depth-at-time";
 import {gasAtTime} from "@/utils/gas-at-time";
+import {gasFormatter} from "@/utils/gas-formatter";
+import {gasColorOf} from "@/utils/gas-color";
 import {GasBadge} from "@/components/app/gas-badge";
 import {useI18n} from "@/locales/client";
 
@@ -104,6 +106,48 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
       )
     },
     [ceilingData, showCeiling],
+  )
+
+  // Highlights the points where the breathing gas changes during the dive
+  // (deco gas switches). Each switch gets an outlined circle on the line and
+  // the new gas's name labelled above it.
+  const GasSwitchLayer = React.useCallback(
+    ({ xScale, yScale }: { xScale: (v: number) => number; yScale: (v: number) => number }) => {
+      const switches = intervals.filter(segment => segment.isGasSwitch)
+      if (switches.length === 0) return null
+      return (
+        <g pointerEvents="none">
+          {switches.map((segment, index) => {
+            const cx = xScale(segment.initialTime)
+            const cy = yScale(segment.initialDepth)
+            const color = gasColorOf(segment.gas)
+            return (
+              <g key={`gas-switch-${index}`}>
+                <text
+                  x={cx}
+                  y={cy - 12}
+                  textAnchor="middle"
+                  fontSize={11}
+                  fontWeight={600}
+                  fill={color}
+                >
+                  {gasFormatter.format(segment.gas)}
+                </text>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={5}
+                  fill="#fff"
+                  stroke={color}
+                  strokeWidth={2}
+                />
+              </g>
+            )
+          })}
+        </g>
+      )
+    },
+    [intervals],
   )
 
   // Captures the cursor over the plot area and projects it onto the profile:
@@ -262,6 +306,7 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             "areas",
             CeilingLayer,
             "lines",
+            GasSwitchLayer,
             CursorLayer,
           ]}
         />
