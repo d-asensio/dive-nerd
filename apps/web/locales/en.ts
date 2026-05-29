@@ -110,6 +110,7 @@ export default {
   "planner.chart.tooltip.ceiling": "Ceiling",
   "planner.chart.tooltip.gas": "Gas",
   "planner.chart.tooltip.density": "Density",
+  "planner.chart.tooltip.end": "END",
   "planner.chart.axis.time_minutes": "Time (in minutes)",
   "planner.chart.axis.depth_meters": "Depth (in meters)",
   "planner.chart.axis.pressure_bars": "Pressure (in bars)",

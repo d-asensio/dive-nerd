@@ -6,6 +6,7 @@ export type { GradientFactorBounds } from './gradient-factor'
 export { compartmentCeilingAmbientPressure } from './compartment-ceiling'
 export { divingCeilingAmbientPressure } from './diving-ceiling'
 export { gasDensity } from './gas-density'
+export { equivalentNarcoticDepth } from './equivalent-narcotic-depth'
 
 /**
  * Gravitational acceleration in meters * second^2

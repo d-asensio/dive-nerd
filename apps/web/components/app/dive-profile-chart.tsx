@@ -3,7 +3,7 @@
 import * as React from "react";
 import {ResponsiveLine} from '@nivo/line'
 import {Clock} from "lucide-react";
-import {fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
+import {equivalentNarcoticDepth, fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
 
 import {cn} from "@/lib/utils";
 import {useSelector} from "@/state/useSelector";
@@ -352,6 +352,15 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
             : density > 6.2 ? "text-red-600"
               : density > 5.2 ? "text-amber-600"
                 : "text-emerald-600"
+          const end = gas
+            ? equivalentNarcoticDepth({ heliumFraction: gas.fHe, ambientPressure, surfaceAmbientPressure, waterDensity })
+            : null
+          // 30 m / 40 m narcotic limits — GUE tech convention.
+          const endColorClass = end == null
+            ? ""
+            : end > 40 ? "text-red-600"
+              : end > 30 ? "text-amber-600"
+                : "text-emerald-600"
 
           return (
             <div
@@ -395,6 +404,14 @@ export function DiveProfileChart({className, ...props}: React.HTMLAttributes<HTM
                       <span className="text-muted-foreground">{t('planner.chart.tooltip.density')}</span>
                       <span className={cn("text-right font-semibold tabular-nums", densityColorClass)}>
                         {density.toFixed(1)} g/L
+                      </span>
+                    </>
+                  )}
+                  {end != null && (
+                    <>
+                      <span className="text-muted-foreground">{t('planner.chart.tooltip.end')}</span>
+                      <span className={cn("text-right font-semibold tabular-nums", endColorClass)}>
+                        {end.toFixed(0)} m
                       </span>
                     </>
                   )}

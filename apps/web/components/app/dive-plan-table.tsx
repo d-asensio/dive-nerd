@@ -25,7 +25,7 @@ import {Separator} from "@/components/ui/separator";
 import {useSelector} from "@/state/useSelector";
 import {BottomGasSelector} from "@/components/app/bottom-gas-selector";
 import {gasByIdSelector, gasMODSelector} from "@/state/dive-gases/selectors";
-import {fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
+import {equivalentNarcoticDepth, fromDepthToHydrostaticPressure, gasDensity} from "dive-physics";
 import {surfaceAmbientPressure, waterDensity} from "@/utils/calculate-dive-profile";
 import {useI18n} from "@/locales/client";
 
@@ -48,6 +48,15 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
     ? ""
     : density > 6.2 ? "text-red-600"
       : density > 5.2 ? "text-amber-600"
+        : "text-emerald-600"
+  // END: 30 m / 40 m narcotic thresholds (GUE tech convention).
+  const end = gas
+    ? equivalentNarcoticDepth({ heliumFraction: gas.fHe, ambientPressure, surfaceAmbientPressure, waterDensity })
+    : null
+  const endColorClass = end == null
+    ? ""
+    : end > 40 ? "text-red-600"
+      : end > 30 ? "text-amber-600"
         : "text-emerald-600"
 
   const removeDiveLevel = useStore.use.removeDiveLevel()
@@ -131,6 +140,9 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
       <TableCell className={cn("whitespace-nowrap font-semibold tabular-nums", densityColorClass)}>
         {density != null ? `${density.toFixed(1)} g/L` : "—"}
       </TableCell>
+      <TableCell className={cn("whitespace-nowrap font-semibold tabular-nums", endColorClass)}>
+        {end != null ? `${end.toFixed(0)} m` : "—"}
+      </TableCell>
       <TableCell>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -200,6 +212,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
             <TableHead className="w-full"/>
             <TableHead className="w-[200px]">{t('planner.levels.gas')}</TableHead>
             <TableHead className="whitespace-nowrap">{t('planner.chart.tooltip.density')}</TableHead>
+            <TableHead className="whitespace-nowrap">{t('planner.chart.tooltip.end')}</TableHead>
             <TableHead className="w-0"/>
           </TableRow>
         </TableHeader>
