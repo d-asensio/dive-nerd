@@ -3,6 +3,7 @@ import * as React from "react";
 import {DiveProfileChart} from "@/components/app/dive-profile-chart";
 import {DivePlanTable} from "@/components/app/dive-plan-table";
 import {GasTable} from "@/components/app/gas-table";
+import {TankTable} from "@/components/app/tank-table";
 import {DecompressionTable} from "@/components/app/decompression-table";
 import {DiveSettingsPopover} from "@/components/app/dive-settings-popover";
 import {
@@ -52,6 +53,14 @@ export default async function Home() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <GasTable/>
+                </CardContent>
+              </Card>
+              <Card className="overflow-x-auto">
+                <CardHeader>
+                  <CardTitle>{t('planner.tabs.tanks')}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <TankTable/>
                 </CardContent>
               </Card>
             </div>
