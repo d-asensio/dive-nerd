@@ -14,6 +14,7 @@ import {isFirstGasSelector, gasByIdSelector} from "@/state/dive-gases/selectors"
 import {ChangeEvent} from "react";
 import {useStore} from "@/state/store";
 import {GasBadge} from "@/components/app/gas-badge";
+import {ChangeGasDropdown} from "@/components/app/change-gas-dropdown";
 import {Separator} from "@/components/ui/separator";
 import {AddGasDropdown} from "@/components/app/add-gas-dropdown";
 import {maximumOperatingDepth} from "@/utils/maximum-operating-depth";
@@ -78,8 +79,8 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           />
         </div>
       </TableCell>
-      <TableCell>
-        <GasBadge gas={gas} />
+      <TableCell className='whitespace-nowrap'>
+        {maximumOperatingDepth(gas)} m
       </TableCell>
       <TableCell>
         <Tooltip>
@@ -101,8 +102,11 @@ const GasRow = React.memo(function GasRow({ id }: { id: string }) {
           </TooltipContent>
         </Tooltip>
       </TableCell>
-      <TableCell className='text-right whitespace-nowrap'>
-        {maximumOperatingDepth(gas)} m
+      <TableCell>
+        <div className='flex items-center justify-end gap-2'>
+          <ChangeGasDropdown id={id} />
+          <GasBadge gas={gas} />
+        </div>
       </TableCell>
       <TableCell>
         <Tooltip>
@@ -152,9 +156,9 @@ export const GasTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[300px]">{t('planner.gases.gas')}</TableHead>
-            <TableHead className="w-0"/>
+            <TableHead className='whitespace-nowrap'>{t('planner.gases.mod')}</TableHead>
             <TableHead className='w-full'>{t('planner.gases.is_deco_gas')}</TableHead>
-            <TableHead className='text-right'>{t('planner.gases.mod')}</TableHead>
+            <TableHead className="w-0"/>
             <TableHead className="w-0"/>
           </TableRow>
         </TableHeader>

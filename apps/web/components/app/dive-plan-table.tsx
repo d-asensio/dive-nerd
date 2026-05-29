@@ -102,6 +102,7 @@ const PlanLevelRow = React.memo(function PlanLevelRow({ id }: PlanLevelRow) {
           className="max-w-[150px] min-w-[120px]"
         />
       </TableCell>
+      <TableCell />
       <TableCell>
         <BottomGasSelector
           value={gasId}
@@ -170,6 +171,7 @@ export const DivePlanTable = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <TableRow>
             <TableHead>{t('planner.levels.depth')}</TableHead>
             <TableHead>{t('planner.levels.duration')}</TableHead>
+            <TableHead className="w-full"/>
             <TableHead className="w-[200px]">{t('planner.levels.gas')}</TableHead>
             <TableHead className="w-0"/>
           </TableRow>
