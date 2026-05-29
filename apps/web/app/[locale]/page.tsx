@@ -32,23 +32,20 @@ export default async function Home() {
         <DivePlannerDisclaimerAlert />
         <div className="gap-6 flex flex-col-reverse lg:flex-col">
           <Tabs defaultValue="profile">
-            <TabsList className="grid grid-cols-3 max-w-xl">
+            <TabsList className="grid grid-cols-2 max-w-md">
               <TabsTrigger value="profile">{t('planner.tabs.profile')}</TabsTrigger>
               <TabsTrigger value="compartments">{t('planner.tabs.compartments')}</TabsTrigger>
-              <TabsTrigger value="individual-compartments">{t('planner.tabs.individual_compartments')}</TabsTrigger>
             </TabsList>
             <TabsContent value="profile">
-              <div className="grid w-full">
+              <div className="grid w-full gap-4">
                 <DiveProfileChart/>
+                <IndividualCompartmentCharts/>
               </div>
             </TabsContent>
             <TabsContent value="compartments">
               <div className="grid w-full">
                 <CompartmentsProfileChart/>
               </div>
-            </TabsContent>
-            <TabsContent value="individual-compartments">
-              <IndividualCompartmentCharts/>
             </TabsContent>
           </Tabs>
           <div className='grid gap-4 lg:grid-cols-2 xl:grid-cols-3'>

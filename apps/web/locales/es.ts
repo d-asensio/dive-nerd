@@ -140,6 +140,8 @@ export default {
   "planner.settings.last_stop_at_6_description": "Finalizar la fase de deco a 6 m en lugar de 3 m. El algoritmo se mantiene más tiempo a 6 m para despejar el techo en superficie, luego asciende directamente.",
   "planner.settings.show_ceiling_label": "Mostrar línea de techo",
   "planner.settings.show_ceiling_description": "Superponer el techo de descompresión de Bühlmann y la zona prohibida sobre el perfil de inmersión.",
+  "planner.settings.show_individual_compartments_label": "Mostrar compartimentos individuales",
+  "planner.settings.show_individual_compartments_description": "Mostrar las gráficas de carga de gas inerte de cada compartimento en una cuadrícula bajo el perfil de inmersión.",
   "planner.decompression.title": "Perfil de descompresión",
   "planner.decompression.switch_gas_at": "Cambiar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sin descompresión requerida",

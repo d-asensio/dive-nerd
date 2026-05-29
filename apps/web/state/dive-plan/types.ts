@@ -12,6 +12,7 @@ interface DivePlan {
   switchAtMod: boolean       // force a procedural switch stop at each deco gas's MOD
   lastStopDepth: number      // 3 (default) or 6 — depth of the last deco stop
   showCeiling: boolean       // overlay the Bühlmann ceiling line + forbidden zone on the profile chart
+  showIndividualCompartments: boolean // render the per-compartment gas-load charts below the profile chart
   diveLevelsMap: Record<string, DivePlanLevel>
 }
 

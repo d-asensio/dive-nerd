@@ -65,6 +65,19 @@ describe('setShowCeiling', () => {
   })
 })
 
+describe('setShowIndividualCompartments', () => {
+  it('toggles the showIndividualCompartments flag', () => {
+    const initialDivePlan = divePlanBuilder().build()
+    const sliceStore = createStore(
+      createDivePlanSlice({ initialDivePlan })
+    )
+
+    sliceStore.getState().setShowIndividualCompartments(true)
+
+    expect(sliceStore.getState().showIndividualCompartments).toBe(true)
+  })
+})
+
 describe('addDiveLevel', () => {
   it('adds a level to an empty levels list', () => {
     const initialDivePlan = divePlanBuilder()

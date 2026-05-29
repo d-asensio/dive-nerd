@@ -140,6 +140,8 @@ export default {
   "planner.settings.last_stop_at_6_description": "Die Dekophase bei 6 m statt 3 m beenden. Der Algorithmus hält länger bei 6 m, um die Oberflächengrenze zu klären, und steigt dann direkt an die Oberfläche.",
   "planner.settings.show_ceiling_label": "Deckenlinie anzeigen",
   "planner.settings.show_ceiling_description": "Die Bühlmann-Dekompressionsdecke und die verbotene Zone darüber im Tauchprofil-Diagramm einblenden.",
+  "planner.settings.show_individual_compartments_label": "Einzelne Kompartimente anzeigen",
+  "planner.settings.show_individual_compartments_description": "Die Inertgas-Belastungsdiagramme je Kompartiment in einem Raster unter dem Tauchprofil anzeigen.",
   "planner.decompression.title": "Dekompressionsprofil",
   "planner.decompression.switch_gas_at": "Gas bei {depth} m wechseln",
   "planner.decompression.no_deco_required": "Keine Dekompression erforderlich",

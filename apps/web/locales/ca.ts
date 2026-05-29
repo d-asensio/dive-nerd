@@ -140,6 +140,8 @@ export default {
   "planner.settings.last_stop_at_6_description": "Finalitzar la fase de deco a 6 m en lloc de 3 m. L'algorisme es manté més estona a 6 m per descarregar el sostre en superfície, després ascendeix directament.",
   "planner.settings.show_ceiling_label": "Mostrar la línia de sostre",
   "planner.settings.show_ceiling_description": "Superposar el sostre de descompressió de Bühlmann i la zona prohibida sobre el perfil d'immersió.",
+  "planner.settings.show_individual_compartments_label": "Mostrar compartiments individuals",
+  "planner.settings.show_individual_compartments_description": "Mostrar les gràfiques de càrrega de gas inert de cada compartiment en una graella sota el perfil d'immersió.",
   "planner.decompression.title": "Perfil de descompressió",
   "planner.decompression.switch_gas_at": "Canviar gas a {depth} m",
   "planner.decompression.no_deco_required": "Sense descompressió necessària",

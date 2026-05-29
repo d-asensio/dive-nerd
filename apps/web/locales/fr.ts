@@ -140,6 +140,8 @@ export default {
   "planner.settings.last_stop_at_6_description": "Terminer la phase de déco à 6 m au lieu de 3 m. L'algorithme reste plus longtemps à 6 m pour purger le plafond de surface, puis remonte directement.",
   "planner.settings.show_ceiling_label": "Afficher la ligne de plafond",
   "planner.settings.show_ceiling_description": "Superposer le plafond de décompression de Bühlmann et la zone interdite sur le profil de plongée.",
+  "planner.settings.show_individual_compartments_label": "Afficher les compartiments individuels",
+  "planner.settings.show_individual_compartments_description": "Afficher les graphiques de charge en gaz inerte de chaque compartiment dans une grille sous le profil de plongée.",
   "planner.decompression.title": "Profil de décompression",
   "planner.decompression.switch_gas_at": "Changer de gaz à {depth} m",
   "planner.decompression.no_deco_required": "Pas de décompression requise",

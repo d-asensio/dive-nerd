@@ -86,7 +86,7 @@ export function CompartmentGasLoadChart({ compartmentId,  className,  ...props }
   const maxAmbientPressure = 5.530439123
 
   return (
-    <div className="w-full min-w-0 h-[600px] overflow-x-auto" {...props}>
+    <div className="w-full min-w-0 h-[260px] overflow-x-auto" {...props}>
       <ResponsiveLine
         enablePoints={false}
         data={[
