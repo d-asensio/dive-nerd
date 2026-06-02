@@ -462,4 +462,34 @@ describe('Bühlmann algorithm — CCR bottom phase', () => {
 
     expect(seeded.intervals).toEqual([])
   })
+
+  it('integrates the bottom phase on the loop at its tagged setpoint, not as open circuit', () => {
+    // Two otherwise-identical CCR dives whose ONLY difference is the bottom-phase
+    // setpoint tag. The ascent treatment (setpointHigh) is the same for both, so
+    // any difference in the resulting deco must come from the bottom-phase loop
+    // loading. If `integrateUserSegments` ignored the segment setpoint (the bug),
+    // both bottom phases would integrate as identical open-circuit air and the
+    // two schedules would be equal.
+    const bottomAt = (setpoint: number): DiveSegment[] => [
+      { type: DiveProfileIntervalType.DESCENT, initialDepth: 0, finalDepth: 40, initialTime: 0, finalTime: 2, gas: diluent, circuit: 'CCR', setpoint },
+      { type: DiveProfileIntervalType.NAVIGATION, initialDepth: 40, finalDepth: 40, initialTime: 2, finalTime: 30, gas: diluent, circuit: 'CCR', setpoint }
+    ]
+
+    const totalDecoOf = (segments: DiveSegment[]): number =>
+      createBuhlmannZHL16Algorithm({}, {
+        gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+        circuit: 'CCR',
+        setpointHigh: 1.3
+      })
+        .calculateDiveProfileFromSegments(segments)
+        .intervals.filter(s => s.type === DiveProfileIntervalType.DECO_STOP)
+        .reduce((sum, s) => sum + (s.finalTime - s.initialTime), 0)
+
+    const decoLowBottomSetpoint = totalDecoOf(bottomAt(0.7))
+    const decoHighBottomSetpoint = totalDecoOf(bottomAt(1.3))
+
+    // A lower bottom setpoint leaves more inert pressure in the loop, so more
+    // gas is on-gassed and more deco is required.
+    expect(decoLowBottomSetpoint).toBeGreaterThan(decoHighBottomSetpoint)
+  })
 })

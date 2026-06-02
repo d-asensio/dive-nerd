@@ -165,7 +165,9 @@ export const createBuhlmannZHL16Algorithm = (
             initialDepth: segment.initialDepth,
             finalDepth: segment.finalDepth,
             duration: segment.finalTime - segment.initialTime,
-            gas: segment.gas
+            gas: segment.gas,
+            circuit: segment.circuit,
+            setpoint: segment.setpoint
           }
         }),
         intervals: [...run.intervals, segment],
