@@ -11,6 +11,10 @@ interface DivePlanActions {
   setGradientFactorHigh: (value: number) => void
   setSwitchAtMod: (value: boolean) => void
   setLastStopDepth: (value: number) => void
+  setCircuit: (value: 'OC' | 'CCR') => void
+  setSetpointLow: (value: number) => void
+  setSetpointHigh: (value: number) => void
+  setDiluentGasId: (value: string) => void
   setShowCeiling: (value: boolean) => void
   setShowGasSwitches: (value: boolean) => void
   setShowIndividualCompartments: (value: boolean) => void
@@ -62,6 +66,22 @@ export const createDivePlanSlice =
       setLastStopDepth: value =>
         set(state => {
           state.lastStopDepth = value
+        }),
+      setCircuit: value =>
+        set(state => {
+          state.circuit = value
+        }),
+      setSetpointLow: value =>
+        set(state => {
+          state.setpointLow = value
+        }),
+      setSetpointHigh: value =>
+        set(state => {
+          state.setpointHigh = value
+        }),
+      setDiluentGasId: value =>
+        set(state => {
+          state.diluentGasId = value
         }),
       setShowCeiling: value =>
         set(state => {
