@@ -1,5 +1,4 @@
 import {
-  alveolarInertGasPartialPressure,
   alveolarWaterVaporPressure,
   buhlmannCompartments,
   CompartmentInertGasLoad,
@@ -8,7 +7,7 @@ import {
   getSurfaceSaturatedCompartmentInertGasLoads,
   gradientFactorAt,
   inertGasTimeConstant,
-  inspiredGasChangeRate,
+  inspiredInertGas,
   schreinerEquation
 } from "dive-physics";
 import {DiveSegment} from "dive-planner";
@@ -42,7 +41,9 @@ const interpolateIntervals = (intervals: DiveSegment[]) =>
         finalTime: interval.initialTime + (timeDelta * (i + 1)),
         initialDepth: interval.initialDepth + (depthDelta * i),
         finalDepth: interval.initialDepth + (depthDelta * (i + 1)),
-        gas: interval.gas
+        gas: interval.gas,
+        circuit: interval.circuit,
+        setpoint: interval.setpoint
       }))
     ]
   }, []);
@@ -60,6 +61,8 @@ interface DiveProfileIntervalWithAlveolarInertGasPressures extends DiveProfileIn
   startAlveolarInertGasPressures: {
     N2: number
     He: number
+    N2ChangeRateFactor: number
+    HeChangeRateFactor: number
   }
 }
 
@@ -83,21 +86,24 @@ const calculateDescentRate: (interval: DiveProfileIntervalWithAmbientPressure) =
     descentRate: (interval.finalAmbientPressure - interval.initialAmbientPressure) / (interval.finalTime - interval.initialTime)
   })
 const calculateAlveolarInertGasPressures: (interval: DiveProfileIntervalWithDescentRate) => DiveProfileIntervalWithAlveolarInertGasPressures =
-  interval => ({
-    ...interval,
-    startAlveolarInertGasPressures: {
-      N2: alveolarInertGasPartialPressure({
-        ambientPressure: interval.initialAmbientPressure,
-        waterVaporPressure,
-        inertGasFraction: 0.79
-      }),
-      He: alveolarInertGasPartialPressure({
-        ambientPressure: interval.initialAmbientPressure,
-        waterVaporPressure,
-        inertGasFraction: 0
-      })
+  interval => {
+    const inspired = inspiredInertGas({
+      circuit: interval.circuit ?? 'OC',
+      ambientPressure: interval.initialAmbientPressure,
+      waterVaporPressure,
+      gas: interval.gas,
+      setpoint: interval.setpoint
+    })
+    return {
+      ...interval,
+      startAlveolarInertGasPressures: {
+        N2: inspired.nitrogen,
+        He: inspired.helium,
+        N2ChangeRateFactor: inspired.nitrogenChangeRateFactor,
+        HeChangeRateFactor: inspired.heliumChangeRateFactor
+      }
     }
-  })
+  }
 const calculateInterval: (interval: DiveSegment) => DiveProfileIntervalWithAlveolarInertGasPressures =
   pipe(
     calculateAmbientPressure,
@@ -142,10 +148,7 @@ const calculateCompartmentInertGasLoad = (
           N2: schreinerEquation({
             initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.N2,
             initialCompartmentGasPartialPressure: compartmentInertGasLoads.N2,
-            gasChangeRate: inspiredGasChangeRate({
-              descentRate: interval.descentRate,
-              inertGasFraction: 0.79,
-            }),
+            gasChangeRate: interval.descentRate * interval.startAlveolarInertGasPressures.N2ChangeRateFactor,
             gasTimeConstant: inertGasTimeConstant({
               inertGasHalfTime: buhlmannCompartments[compartmentId].N2.halfTime,
             }),
@@ -154,10 +157,7 @@ const calculateCompartmentInertGasLoad = (
           He: schreinerEquation({
             initialAlveolarGasPartialPressure: interval.startAlveolarInertGasPressures.He,
             initialCompartmentGasPartialPressure: compartmentInertGasLoads.He,
-            gasChangeRate: inspiredGasChangeRate({
-              descentRate: interval.descentRate,
-              inertGasFraction: 0,
-            }),
+            gasChangeRate: interval.descentRate * interval.startAlveolarInertGasPressures.HeChangeRateFactor,
             gasTimeConstant: inertGasTimeConstant({
               inertGasHalfTime: buhlmannCompartments[compartmentId].He.halfTime,
             }),
