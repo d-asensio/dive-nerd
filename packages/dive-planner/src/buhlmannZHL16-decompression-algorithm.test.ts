@@ -417,3 +417,79 @@ describe('Bühlmann ZH-L16C + GF — verification cases', () => {
     expect(totalAscentTimeAfterBottom(profile.intervals)).toBeGreaterThan(0)
   })
 })
+
+describe('Bühlmann algorithm — CCR bottom phase', () => {
+  const diluent: Gas = { fO2: 0.21, fHe: 0, isDecoGas: false }
+
+  const ccrBottom: DiveSegment[] = [
+    { type: DiveProfileIntervalType.DESCENT, initialDepth: 0, finalDepth: 40, initialTime: 0, finalTime: 2, gas: diluent, circuit: 'CCR', setpoint: 0.7 },
+    { type: DiveProfileIntervalType.NAVIGATION, initialDepth: 40, finalDepth: 40, initialTime: 2, finalTime: 30, gas: diluent, circuit: 'CCR', setpoint: 0.7 }
+  ]
+
+  it('keeps the diluent on the loop at the high setpoint through ascent/deco (no gas switches)', () => {
+    const algorithm = createBuhlmannZHL16Algorithm({}, {
+      gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+      circuit: 'CCR',
+      setpointHigh: 1.3,
+      // deco gases present but must be ignored in CCR mode
+      availableGases: [{ fO2: 0.5, fHe: 0, isDecoGas: true }]
+    })
+
+    const profile = algorithm.calculateDiveProfileFromSegments(ccrBottom)
+    const generated = profile.intervals.filter(
+      s => s.type === DiveProfileIntervalType.ASCENT || s.type === DiveProfileIntervalType.DECO_STOP
+    )
+
+    expect(generated.length).toBeGreaterThan(0)
+    expect(generated.every(s => s.gas === diluent)).toBe(true)
+    expect(generated.every(s => s.circuit === 'CCR' && s.setpoint === 1.3)).toBe(true)
+    expect(generated.some(s => s.isGasSwitch)).toBe(false)
+  })
+
+  it('decompressFromState runs an OC ascent from seeded loads', () => {
+    const algorithm = createBuhlmannZHL16Algorithm({}, {
+      gradientFactors: { gfLow: 0.3, gfHigh: 0.85 }
+    })
+
+    // Seed with surface-saturated loads at depth 0 → no deco required.
+    const seeded = algorithm.decompressFromState({
+      loads: algorithm.surfaceSaturatedLoads(),
+      depth: 0,
+      time: 0,
+      backGas: { fO2: 0.21, fHe: 0, isDecoGas: false },
+      decoGases: []
+    })
+
+    expect(seeded.intervals).toEqual([])
+  })
+
+  it('integrates the bottom phase on the loop at its tagged setpoint, not as open circuit', () => {
+    // Two otherwise-identical CCR dives whose ONLY difference is the bottom-phase
+    // setpoint tag. The ascent treatment (setpointHigh) is the same for both, so
+    // any difference in the resulting deco must come from the bottom-phase loop
+    // loading. If `integrateUserSegments` ignored the segment setpoint (the bug),
+    // both bottom phases would integrate as identical open-circuit air and the
+    // two schedules would be equal.
+    const bottomAt = (setpoint: number): DiveSegment[] => [
+      { type: DiveProfileIntervalType.DESCENT, initialDepth: 0, finalDepth: 40, initialTime: 0, finalTime: 2, gas: diluent, circuit: 'CCR', setpoint },
+      { type: DiveProfileIntervalType.NAVIGATION, initialDepth: 40, finalDepth: 40, initialTime: 2, finalTime: 30, gas: diluent, circuit: 'CCR', setpoint }
+    ]
+
+    const totalDecoOf = (segments: DiveSegment[]): number =>
+      createBuhlmannZHL16Algorithm({}, {
+        gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+        circuit: 'CCR',
+        setpointHigh: 1.3
+      })
+        .calculateDiveProfileFromSegments(segments)
+        .intervals.filter(s => s.type === DiveProfileIntervalType.DECO_STOP)
+        .reduce((sum, s) => sum + (s.finalTime - s.initialTime), 0)
+
+    const decoLowBottomSetpoint = totalDecoOf(bottomAt(0.7))
+    const decoHighBottomSetpoint = totalDecoOf(bottomAt(1.3))
+
+    // A lower bottom setpoint leaves more inert pressure in the loop, so more
+    // gas is on-gassed and more deco is required.
+    expect(decoLowBottomSetpoint).toBeGreaterThan(decoHighBottomSetpoint)
+  })
+})

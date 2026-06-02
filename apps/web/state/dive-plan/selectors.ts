@@ -26,6 +26,10 @@ export const diveIntervalsSelector = memoize<StoreState, DiveSegment[]>(
     gradientFactorHigh,
     switchAtMod,
     lastStopDepth,
+    circuit,
+    setpointLow,
+    setpointHigh,
+    diluentGasId,
     diveLevelsMap,
     gasesMap,
     gasesIdList
@@ -37,6 +41,10 @@ export const diveIntervalsSelector = memoize<StoreState, DiveSegment[]>(
       gradientFactorHigh,
       switchAtMod,
       lastStopDepth,
+      circuit,
+      setpointLow,
+      setpointHigh,
+      diluent: gasesMap[diluentGasId],
       availableGases: gasesIdList.map(id => gasesMap[id]).filter(Boolean),
       levels:
         Object.values(diveLevelsMap)
@@ -45,6 +53,43 @@ export const diveIntervalsSelector = memoize<StoreState, DiveSegment[]>(
           gas: gasesMap[gasId]
         }))
     }).intervals
+)
+
+export const bailoutIntervalsSelector = memoize<StoreState, DiveSegment[]>(
+  ({
+    descentRate,
+    ascentRate,
+    gradientFactorLow,
+    gradientFactorHigh,
+    switchAtMod,
+    lastStopDepth,
+    circuit,
+    setpointLow,
+    setpointHigh,
+    diluentGasId,
+    diveLevelsMap,
+    gasesMap,
+    gasesIdList
+  }: StoreState) =>
+    divePlanner.calculateDiveProfileFromPlan({
+      descentRate,
+      ascentRate,
+      gradientFactorLow,
+      gradientFactorHigh,
+      switchAtMod,
+      lastStopDepth,
+      circuit,
+      setpointLow,
+      setpointHigh,
+      diluent: gasesMap[diluentGasId],
+      availableGases: gasesIdList.map(id => gasesMap[id]).filter(Boolean),
+      levels:
+        Object.values(diveLevelsMap)
+          .map(({gasId, ...diveLevel}) => ({
+          ...diveLevel,
+          gas: gasesMap[gasId]
+        }))
+    }).bailout?.intervals ?? []
 )
 
 export const totalDecoMinutesSelector = memoize<StoreState, number>(
