@@ -12,6 +12,10 @@ interface DivePlan {
   gradientFactorHigh: number // 0..1
   switchAtMod: boolean       // force a procedural switch stop at each deco gas's MOD
   lastStopDepth: number      // 3 (default) or 6 — depth of the last deco stop
+  circuit: 'OC' | 'CCR'      // breathing circuit; 'OC' is the default
+  setpointLow: number        // CCR pO₂ setpoint (bar) on descent + bottom
+  setpointHigh: number       // CCR pO₂ setpoint (bar) on ascent + deco
+  diluentGasId: string       // id (into gasesMap) of the CCR diluent gas
   showCeiling: boolean       // overlay the Bühlmann ceiling line + forbidden zone on the profile chart
   showGasSwitches: boolean   // draw the gas-switch markers on the dive profile line
   showIndividualCompartments: boolean // render the per-compartment gas-load charts below the profile chart

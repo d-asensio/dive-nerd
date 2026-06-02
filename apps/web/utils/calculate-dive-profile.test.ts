@@ -1,4 +1,4 @@
-import divePlanner, { DiveProfileIntervalType, type DivePlan } from 'dive-planner'
+import divePlanner, { DiveProfileIntervalType, type DivePlan, type DiveSegment } from 'dive-planner'
 
 import { calculateDiveProfile, fromAmbientPressureToDepth } from './calculate-dive-profile'
 
@@ -178,5 +178,42 @@ describe('ceilingDepth field', () => {
     // (Tolerance accounts for the 0.5 s integration step and the 3 m stop-grid rounding
     //  the planner applies; both are documented and stable.)
     expect(Math.abs(maxCeiling - firstStop.finalDepth)).toBeLessThan(3)
+  })
+})
+
+describe('calculateDiveProfile — gas-aware loading', () => {
+  const trimix = { fO2: 0.18, fHe: 0.45, isDecoGas: false }
+
+  const segment: DiveSegment = {
+    type: DiveProfileIntervalType.NAVIGATION,
+    initialDepth: 40,
+    finalDepth: 40,
+    initialTime: 0,
+    finalTime: 20,
+    gas: trimix
+  }
+
+  it('loads helium on a trimix segment (not hardcoded to air)', () => {
+    const samples = calculateDiveProfile([segment], {
+      gfLow: 0.3,
+      gfHigh: 0.85,
+      firstStopAmbientPressure: 2.8
+    })
+
+    const last = samples[samples.length - 1]
+    expect(last.compartmentInertGasLoads[0].He).toBeGreaterThan(0)
+  })
+
+  it('on a CCR segment loads less nitrogen than the same depth on OC air', () => {
+    const air = { fO2: 0.21, fHe: 0, isDecoGas: false }
+    const ocSeg: DiveSegment = { ...segment, gas: air }
+    const ccrSeg: DiveSegment = { ...segment, gas: air, circuit: 'CCR', setpoint: 1.3 }
+
+    const oc = calculateDiveProfile([ocSeg], { gfLow: 0.3, gfHigh: 0.85, firstStopAmbientPressure: 2.8 })
+    const ccr = calculateDiveProfile([ccrSeg], { gfLow: 0.3, gfHigh: 0.85, firstStopAmbientPressure: 2.8 })
+
+    const ocLast = oc[oc.length - 1].compartmentInertGasLoads[0].N2
+    const ccrLast = ccr[ccr.length - 1].compartmentInertGasLoads[0].N2
+    expect(ccrLast).toBeLessThan(ocLast)
   })
 })

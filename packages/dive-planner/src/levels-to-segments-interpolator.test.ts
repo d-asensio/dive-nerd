@@ -270,3 +270,48 @@ describe('interpolate', () => {
     ])
   })
 })
+
+describe('interpolate — CCR', () => {
+  const diluent = { fO2: 0.21, fHe: 0, isDecoGas: false }
+  const bottomGas = { fO2: 0.21, fHe: 0.35, isDecoGas: false }
+
+  it('uses the diluent and tags descent with low setpoint and ascent with high setpoint', () => {
+    const interpolator = createLevelsToSegmentsInterpolator()
+    const segments = interpolator.interpolate(
+      [
+        { depth: 40, duration: 20, gas: bottomGas },
+        { depth: 20, duration: 10, gas: bottomGas }
+      ],
+      {
+        descentRate: 20,
+        ascentRate: 9,
+        circuit: 'CCR',
+        diluent,
+        setpointLow: 0.7,
+        setpointHigh: 1.3
+      }
+    )
+
+    const descent = segments.find(s => s.type === DiveProfileIntervalType.DESCENT)!
+    const navigation = segments.find(s => s.type === DiveProfileIntervalType.NAVIGATION)!
+    const ascent = segments.find(s => s.type === DiveProfileIntervalType.ASCENT)!
+
+    expect(descent.gas).toBe(diluent)
+    expect(descent.circuit).toBe('CCR')
+    expect(descent.setpoint).toBe(0.7)
+    expect(navigation.setpoint).toBe(0.7)
+    expect(ascent.setpoint).toBe(1.3)
+  })
+
+  it('leaves segments untouched (OC, no setpoint) when circuit is omitted', () => {
+    const interpolator = createLevelsToSegmentsInterpolator()
+    const segments = interpolator.interpolate(
+      [{ depth: 40, duration: 20, gas: bottomGas }],
+      { descentRate: 20, ascentRate: 9 }
+    )
+
+    expect(segments[0].circuit).toBeUndefined()
+    expect(segments[0].setpoint).toBeUndefined()
+    expect(segments[0].gas).toBe(bottomGas)
+  })
+})

@@ -47,10 +47,22 @@ export interface DivePlanEnvironmentOptions {
   waterVaporPressure: number     // bar
 }
 
+export interface DivePlanCircuitOptions {
+  /** `'OC'` (default) for open circuit, `'CCR'` for a constant-setpoint rebreather. */
+  circuit: 'OC' | 'CCR'
+  /** Diluent gas used on the loop in CCR mode. Ignored for OC. */
+  diluent: Gas
+  /** pO₂ setpoint (bar) held on descent + bottom in CCR mode. */
+  setpointLow: number
+  /** pO₂ setpoint (bar) held on ascent + deco in CCR mode. */
+  setpointHigh: number
+}
+
 export type DivePlanOptions =
   DivePlanSpeedOptions
   & Partial<DivePlanAlgorithmOptions>
   & Partial<DivePlanEnvironmentOptions>
+  & Partial<DivePlanCircuitOptions>
 
 export interface DivePlan extends DivePlanOptions {
   levels: DivePlanLevel[]
@@ -84,6 +96,11 @@ interface DiveProfileInterval {
 
 export interface DiveProfile {
   intervals: DiveSegment[]
+  /**
+   * For CCR plans, the open-circuit bailout schedule computed from the end of
+   * bottom time. Absent for OC plans.
+   */
+  bailout?: DiveProfile
 }
 
 export interface DiveSegment {
@@ -93,6 +110,10 @@ export interface DiveSegment {
   initialTime: number
   finalTime: number
   gas: Gas
+  /** Circuit in force for this segment. Defaults to `'OC'` when absent. */
+  circuit?: 'OC' | 'CCR'
+  /** pO₂ setpoint (bar) for this segment. Only meaningful when `circuit === 'CCR'`. */
+  setpoint?: number
   /**
    * `true` if this segment starts with a gas switch (the breathing gas
    * differs from the previous segment's gas). The user-supplied segments

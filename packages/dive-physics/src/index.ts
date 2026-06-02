@@ -7,6 +7,8 @@ export { compartmentCeilingAmbientPressure } from './compartment-ceiling'
 export { divingCeilingAmbientPressure, divingCeilingLeadingCompartmentIndex } from './diving-ceiling'
 export { gasDensity } from './gas-density'
 export { equivalentNarcoticDepth } from './equivalent-narcotic-depth'
+export { inspiredInertGas } from './breathing-source'
+export type { Circuit } from './breathing-source'
 
 /**
  * Gravitational acceleration in meters * second^2
