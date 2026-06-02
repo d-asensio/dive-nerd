@@ -12,11 +12,11 @@
  * compartment collection.
  */
 import {
-  alveolarInertGasPartialPressure,
   buhlmannCompartments,
+  Circuit,
   fromDepthToHydrostaticPressure,
   inertGasTimeConstant,
-  inspiredGasChangeRate,
+  inspiredInertGas,
   schreinerEquation
 } from 'dive-physics'
 
@@ -38,12 +38,9 @@ interface SegmentToIntegrate {
   finalDepth: number // m
   duration: number // min
   gas: Gas
+  circuit?: Circuit
+  setpoint?: number
 }
-
-const inertGasFractionOf = ({ fO2, fHe }: Gas) => ({
-  nitrogen: 1 - fO2 - fHe,
-  helium: fHe
-})
 
 const ambientPressureAt = (depth: number, environment: EnvironmentOptions): number =>
   fromDepthToHydrostaticPressure({
@@ -86,19 +83,15 @@ export const createCompartmentIntegrator = (environment: EnvironmentOptions) => 
     compartmentLoads: CompartmentInertLoad[]
     segment: SegmentToIntegrate
   }): CompartmentInertLoad[] => {
-    const { initialDepth, finalDepth, duration, gas } = segment
-    const inertFraction = inertGasFractionOf(gas)
+    const { initialDepth, finalDepth, duration, gas, circuit = 'OC', setpoint } = segment
     const initialAmbientPressure = ambientPressureAt(initialDepth, environment)
 
-    const initialAlveolarNitrogen = alveolarInertGasPartialPressure({
+    const inspired = inspiredInertGas({
+      circuit,
       ambientPressure: initialAmbientPressure,
       waterVaporPressure: environment.waterVaporPressure,
-      inertGasFraction: inertFraction.nitrogen
-    })
-    const initialAlveolarHelium = alveolarInertGasPartialPressure({
-      ambientPressure: initialAmbientPressure,
-      waterVaporPressure: environment.waterVaporPressure,
-      inertGasFraction: inertFraction.helium
+      gas,
+      setpoint
     })
 
     const pressureChangeRate = ambientPressureChangeRate({
@@ -107,18 +100,12 @@ export const createCompartmentIntegrator = (environment: EnvironmentOptions) => 
       duration,
       environment
     })
-    const nitrogenChangeRate = inspiredGasChangeRate({
-      descentRate: pressureChangeRate,
-      inertGasFraction: inertFraction.nitrogen
-    })
-    const heliumChangeRate = inspiredGasChangeRate({
-      descentRate: pressureChangeRate,
-      inertGasFraction: inertFraction.helium
-    })
+    const nitrogenChangeRate = pressureChangeRate * inspired.nitrogenChangeRateFactor
+    const heliumChangeRate = pressureChangeRate * inspired.heliumChangeRateFactor
 
     return compartmentLoads.map((load, index) => ({
       nitrogenPartialPressure: schreinerEquation({
-        initialAlveolarGasPartialPressure: initialAlveolarNitrogen,
+        initialAlveolarGasPartialPressure: inspired.nitrogen,
         initialCompartmentGasPartialPressure: load.nitrogenPartialPressure,
         gasChangeRate: nitrogenChangeRate,
         gasTimeConstant: inertGasTimeConstant({
@@ -127,7 +114,7 @@ export const createCompartmentIntegrator = (environment: EnvironmentOptions) => 
         intervalTime: duration
       }),
       heliumPartialPressure: schreinerEquation({
-        initialAlveolarGasPartialPressure: initialAlveolarHelium,
+        initialAlveolarGasPartialPressure: inspired.helium,
         initialCompartmentGasPartialPressure: load.heliumPartialPressure,
         gasChangeRate: heliumChangeRate,
         gasTimeConstant: inertGasTimeConstant({
