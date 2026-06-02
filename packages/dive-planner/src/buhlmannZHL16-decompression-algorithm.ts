@@ -82,6 +82,11 @@ interface AlgorithmOptions {
    * 6 m until the surface ceiling clears.
    */
   lastStopDepth?: number
+  /** `'CCR'` keeps the diluent on the loop at `setpointHigh` for the whole
+   *  ascent and bypasses the OC deco-gas machinery. Defaults to `'OC'`. */
+  circuit?: 'OC' | 'CCR'
+  /** pO₂ setpoint (bar) held on ascent + deco in CCR mode. */
+  setpointHigh?: number
 }
 
 interface AlgorithmInput {
@@ -110,6 +115,8 @@ export const createBuhlmannZHL16Algorithm = (
   const availableGases = options.availableGases ?? []
   const switchAtMod = options.switchAtMod ?? true
   const lastStopDepth = options.lastStopDepth ?? 3
+  const circuit = options.circuit ?? 'OC'
+  const setpointHigh = options.setpointHigh
 
   const compartmentIntegrator =
     dependencies.compartmentIntegrator ?? createCompartmentIntegrator(environment)
@@ -234,7 +241,8 @@ export const createBuhlmannZHL16Algorithm = (
       initialTime: run.runTime,
       finalTime: run.runTime + duration,
       gas,
-      isGasSwitch: isSwitchFromPrevious(run, gas)
+      isGasSwitch: isSwitchFromPrevious(run, gas),
+      ...(circuit === 'CCR' ? { circuit, setpoint: setpointHigh } : {})
     }
 
     return {
@@ -244,7 +252,9 @@ export const createBuhlmannZHL16Algorithm = (
           initialDepth: startDepth,
           finalDepth: targetDepth,
           duration,
-          gas
+          gas,
+          circuit,
+          setpoint: setpointHigh
         }
       }),
       intervals: [...run.intervals, ascentSegment],
@@ -272,7 +282,9 @@ export const createBuhlmannZHL16Algorithm = (
       initialDepth: stopDepth,
       finalDepth: stopDepth,
       duration: stopTimeStep,
-      gas
+      gas,
+      circuit,
+      setpoint: setpointHigh
     }
 
     let currentLoads = loads
@@ -311,11 +323,13 @@ export const createBuhlmannZHL16Algorithm = (
     backGas: Gas
     decoGases: Gas[]
   }): AlgorithmRun => {
-    const gas = decoGasSelector.select({
-      availableGases: decoGases,
-      backGas,
-      ambientPressure: depthPressureConverter.depthToAmbientPressure(stopDepth)
-    })
+    const gas = circuit === 'CCR'
+      ? backGas
+      : decoGasSelector.select({
+          availableGases: decoGases,
+          backGas,
+          ambientPressure: depthPressureConverter.depthToAmbientPressure(stopDepth)
+        })
 
     // A stop where the breathing gas changes always gets at least a 1-min
     // hold so the diver has time to physically switch regulators — even if
@@ -343,7 +357,8 @@ export const createBuhlmannZHL16Algorithm = (
       initialTime: run.runTime,
       finalTime: run.runTime + duration,
       gas,
-      isGasSwitch: isSwitchFromPrevious(run, gas)
+      isGasSwitch: isSwitchFromPrevious(run, gas),
+      ...(circuit === 'CCR' ? { circuit, setpoint: setpointHigh } : {})
     }
 
     return {
@@ -380,6 +395,68 @@ export const createBuhlmannZHL16Algorithm = (
     return run
   }
 
+  /**
+   * Runs the deco phase (ascent + stops down to the surface) from an arbitrary
+   * seeded tissue state at a given depth/time. The user's bottom phase is *not*
+   * included in the result — only the generated ascent/stop segments are
+   * returned. This is the shared core behind both the normal plan and the CCR
+   * bailout schedule (seeded with the loads captured at end of bottom time).
+   *
+   * A zero-length `NAVIGATION` seed marker is prepended so `appendAscentTo`
+   * knows the starting depth/time and `isSwitchFromPrevious` has a previous gas;
+   * it is sliced back off before returning.
+   */
+  const decompressFromState = ({
+    loads,
+    depth,
+    time,
+    backGas,
+    decoGases
+  }: {
+    loads: CompartmentInertLoad[]
+    depth: number
+    time: number
+    backGas: Gas
+    decoGases: Gas[]
+  }): DiveProfile => {
+    const seededRun: AlgorithmRun = {
+      loads,
+      intervals: [{
+        type: DiveProfileIntervalType.NAVIGATION,
+        initialDepth: depth,
+        finalDepth: depth,
+        initialTime: time,
+        finalTime: time,
+        gas: backGas,
+        ...(circuit === 'CCR' ? { circuit, setpoint: setpointHigh } : {})
+      }],
+      runTime: time
+    }
+
+    // The forced "switch at MOD" first stop is an open-circuit concept; on a
+    // closed loop the diluent never switches, so it is disabled in CCR mode.
+    const useSwitchAtMod = switchAtMod && circuit === 'OC'
+    const naturalFirstStop = firstStopDepth(loads)
+    const forcedSwitchDepth = Math.min(
+      deepestGasSwitchDepth(decoGases),
+      roundDownToStopGrid(depth)
+    )
+    const decoFirstStop = useSwitchAtMod
+      ? Math.max(naturalFirstStop, forcedSwitchDepth)
+      : naturalFirstStop
+
+    if (decoFirstStop <= 0) {
+      const surfaceRun = appendAscentTo({ run: seededRun, targetDepth: 0, gas: backGas })
+      return { intervals: mergeConsecutiveAscents(surfaceRun.intervals.slice(1)) }
+    }
+
+    const firstStop = Math.max(decoFirstStop, lastStopDepth)
+    const runAfterFirstAscent = appendAscentTo({ run: seededRun, targetDepth: firstStop, gas: backGas })
+    const runAfterStops = walkStops({ runAfterFirstAscent, diveFirstStop: firstStop, backGas, decoGases })
+
+    return { intervals: mergeConsecutiveAscents(runAfterStops.intervals.slice(1)) }
+  }
+
   const calculateDiveProfileFromSegments = ({ segments }: AlgorithmInput): DiveProfile => {
     if (segments.length === 0) return { intervals: [] }
 
@@ -388,68 +465,35 @@ export const createBuhlmannZHL16Algorithm = (
     const backGas = lastSegment.gas
     const lastDepth = lastSegment.finalDepth
 
-    // Rule 1 (switchAtMod only): drop deco gases whose MOD is deeper than the
+    // Rule 1 (OC switchAtMod only): drop deco gases whose MOD is deeper than the
     // dive's average bottom depth — they are not sensible staged-deco gases
-    // here, so the diver should ascend on the back gas rather than switch.
-    const decoGases = switchAtMod
+    // here, so the diver should ascend on the back gas rather than switch. In
+    // CCR mode there is no open-circuit deco-gas switching at all.
+    const useSwitchAtMod = switchAtMod && circuit === 'OC'
+    const decoGases = useSwitchAtMod
       ? gasesAfterDeepMODExclusion(averageDepthOf(userRun.intervals))
-      : availableGases
+      : circuit === 'CCR' ? [] : availableGases
 
-    // The first stop is the deeper of:
-    //  (a) the natural Bühlmann ceiling rounded up to the 3 m grid, and
-    //  (b) the deepest deco-gas switch depth (its MOD on the grid) —
-    //      only when `switchAtMod` is enabled.
-    // (b) is what produces the "switch to EAN50 at 21 m" stop even when
-    // (a) would not naturally require a stop there.
-    //
-    // Rule 2 (switchAtMod only): the forced switch can never be placed deeper
-    // than the last planned level — you cannot stop deeper than where the
-    // ascent begins — so (b) is capped at the last depth (on the 3 m grid).
-    const naturalFirstStop = firstStopDepth(userRun.loads)
-    const forcedSwitchDepth = Math.min(
-      deepestGasSwitchDepth(decoGases),
-      roundDownToStopGrid(lastDepth)
-    )
-    const decoFirstStop = switchAtMod
-      ? Math.max(naturalFirstStop, forcedSwitchDepth)
-      : naturalFirstStop
-
-    if (decoFirstStop <= 0) {
-      const surfaceRun = appendAscentTo({ run: userRun, targetDepth: 0, gas: backGas })
-      return { intervals: mergeConsecutiveAscents(surfaceRun.intervals) }
-    }
-
-    // If decompression is required, the first stop is never shallower than
-    // the configured `lastStopDepth` — otherwise the deco phase would emit
-    // no stops at all (a natural 3 m stop would be skipped by walkStops
-    // when lastStopDepth = 6).
-    const firstStop = Math.max(decoFirstStop, lastStopDepth)
-
-    // The ascent from the bottom to the first deco stop stays on the back
-    // gas. The gas switch to the richest safe deco gas happens AT the first
-    // stop (and at any subsequent stop where a richer gas becomes safe).
-    // Using the deco gas during this ascent would breathe a hyperoxic mix at
-    // depth — a real-world fatal mistake.
-    const runAfterFirstAscent = appendAscentTo({
-      run: userRun,
-      targetDepth: firstStop,
-      gas: backGas
-    })
-    const runAfterStops = walkStops({
-      runAfterFirstAscent,
-      diveFirstStop: firstStop,
+    const deco = decompressFromState({
+      loads: userRun.loads,
+      depth: lastDepth,
+      time: userRun.runTime,
       backGas,
       decoGases
     })
 
-    return { intervals: mergeConsecutiveAscents(runAfterStops.intervals) }
+    return { intervals: mergeConsecutiveAscents([...userRun.intervals, ...deco.intervals]) }
   }
 
   // Legacy adapter: previous callers passed a bare `DiveSegment[]`.
   const fromSegments = (segments: DiveSegment[]): DiveProfile =>
     calculateDiveProfileFromSegments({ segments })
 
-  return { calculateDiveProfileFromSegments: fromSegments }
+  return {
+    calculateDiveProfileFromSegments: fromSegments,
+    decompressFromState,
+    surfaceSaturatedLoads: compartmentIntegrator.initialCompartmentLoads
+  }
 }
 
 export default createBuhlmannZHL16Algorithm()

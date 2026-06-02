@@ -417,3 +417,49 @@ describe('Bühlmann ZH-L16C + GF — verification cases', () => {
     expect(totalAscentTimeAfterBottom(profile.intervals)).toBeGreaterThan(0)
   })
 })
+
+describe('Bühlmann algorithm — CCR bottom phase', () => {
+  const diluent: Gas = { fO2: 0.21, fHe: 0, isDecoGas: false }
+
+  const ccrBottom: DiveSegment[] = [
+    { type: DiveProfileIntervalType.DESCENT, initialDepth: 0, finalDepth: 40, initialTime: 0, finalTime: 2, gas: diluent, circuit: 'CCR', setpoint: 0.7 },
+    { type: DiveProfileIntervalType.NAVIGATION, initialDepth: 40, finalDepth: 40, initialTime: 2, finalTime: 30, gas: diluent, circuit: 'CCR', setpoint: 0.7 }
+  ]
+
+  it('keeps the diluent on the loop at the high setpoint through ascent/deco (no gas switches)', () => {
+    const algorithm = createBuhlmannZHL16Algorithm({}, {
+      gradientFactors: { gfLow: 0.3, gfHigh: 0.85 },
+      circuit: 'CCR',
+      setpointHigh: 1.3,
+      // deco gases present but must be ignored in CCR mode
+      availableGases: [{ fO2: 0.5, fHe: 0, isDecoGas: true }]
+    })
+
+    const profile = algorithm.calculateDiveProfileFromSegments(ccrBottom)
+    const generated = profile.intervals.filter(
+      s => s.type === DiveProfileIntervalType.ASCENT || s.type === DiveProfileIntervalType.DECO_STOP
+    )
+
+    expect(generated.length).toBeGreaterThan(0)
+    expect(generated.every(s => s.gas === diluent)).toBe(true)
+    expect(generated.every(s => s.circuit === 'CCR' && s.setpoint === 1.3)).toBe(true)
+    expect(generated.some(s => s.isGasSwitch)).toBe(false)
+  })
+
+  it('decompressFromState runs an OC ascent from seeded loads', () => {
+    const algorithm = createBuhlmannZHL16Algorithm({}, {
+      gradientFactors: { gfLow: 0.3, gfHigh: 0.85 }
+    })
+
+    // Seed with surface-saturated loads at depth 0 → no deco required.
+    const seeded = algorithm.decompressFromState({
+      loads: algorithm.surfaceSaturatedLoads(),
+      depth: 0,
+      time: 0,
+      backGas: { fO2: 0.21, fHe: 0, isDecoGas: false },
+      decoGases: []
+    })
+
+    expect(seeded.intervals).toEqual([])
+  })
+})
